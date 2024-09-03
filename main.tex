@@ -1,5 +1,5 @@
 %% Package and Class "uiucthesis2014" for use with LaTeX2e.
-\documentclass[edeposit,fullpage]{uiucthesis2018}
+\documentclass[edeposit,fullpage,hidelinks]{uiucthesis2018}
 
 
 \usepackage[acronym,toc]{glossaries}
@@ -7,6 +7,12 @@
 
 \usepackage{xspace}
 \usepackage{graphics}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+
+
 \newcommand{\Cycamore}{\textsc{Cycamore}\xspace}
 \newcommand{\Cyclus}{\textsc{Cyclus}\xspace}
 
@@ -74,14 +80,14 @@
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
 
-\title{Example Template}
-\author{Charles Bae}
+\title{Tabulated Delayed Neutron Group Parameters for Molten Salt Reactors}
+\author{Luke Seifert}
 \department{Nuclear, Plasma, Radiological Engineering}
 \schools{B.S., University of Illinois - Urbana Champaign, 2017}
-\msthesis
+\phdthesis
 \advisor{Kathryn D. Huff}
-\degreeyear{2018}
-\committee{Assistant Professor Kathryn D. Huff, Adviser \\ Professor Segundo Lector }
+\degreeyear{2025}
+\committee{Professor Kathryn D. Huff, Advisor \\ More }
 
 
 \begin{document}
@@ -92,13 +98,13 @@
 %% Note that ProQuest truncates their abstracts at 350 words.
 \begin{abstract}
 
-Abstract.
+\input{chapters/abstract}
 
 \end{abstract}
 
 \chapter*{Acknowledgments}
 
-Acks.
+\input{acks}
 
 %% The thesis format requires the Table of Contents to come
 %% before any other major sections, all of these sections after
@@ -125,11 +131,136 @@ Acks.
 \pagebreak
 \mainmatter
 
-\chapter{Introduction}
-\input{introduction}
 
-\chapter*{Appendix}
-\input{appendix}
+
+\chapter{Introduction}
+\input{chapters/introduction}
+
+
+\chapter{Background and Motivation}
+\input{chapters/background/background}
+
+
+\section{Nuclear Safeguards}
+\input{chapters/background/safeguards}
+
+\section{Safety-Related Reactor Transients}
+\input{chapters/background/safety/safety}
+
+\subsection{Transient Analysis Methods}
+\label{sec:bg-trans-analysis-methods}
+\input{chapters/background/safety/transientanalysis}
+
+\section{Delayed Neutron Precursors}
+
+\subsection{Overview}
+\input{chapters/background/dnps/dnps}
+
+\subsection{Group and Kinetics Parameters}
+\label{sec:gandkparams}
+\input{chapters/background/dnps/groupparam}
+
+
+
+\section{Molten Salt Reactor Depletion}
+\subsection{Overview}
+\input{chapters/background/msrs/msrs}
+
+\subsection{Depletion Simulations}
+\input{chapters/background/msrs/depletionsims}
+
+
+
+
+\chapter{Tools}
+
+\section{Data}
+
+JANIS and IAEA
+
+\section{OpenMC}
+
+\subsection{Data}
+
+\section{MOOSE Apps}
+
+\subsection{Griffin}
+
+\subsection{ISOXML}
+
+\subsection{Pronghorn}
+
+\chapter{Methodology}
+
+\section{Flow Tabulation Simplification}
+
+Discuss how the flow can be represented as residence times and mix rates, generically.
+
+\section{Resolved Delayed Neutron Counts}
+
+Sample needs to be as small as possible to minimize self-multiplication \cite{keepin1957delayed}.
+
+\subsection{Delayed Neutron Precursor Concentrations}
+
+\subsection{Emission Probability and Decay Data}
+
+\section{Delayed Neutron Precursor Group Reconstruction}
+
+\subsection{Group Parameters from Counts}
+
+Split up into pulse and saturation irradiation (going to need to find more information on how to do this) (two groups of 4 then renormalization?)
+
+Non-linear least-squares problem (this is for getting group params)
+
+\subsection{Group Concentrations from Nuclides}
+
+Fractional fitting (this is for running next Griffin/Pronghorn step)
+
+\section{Simulated Scenarios}
+
+\subsection{Simplified Model Verification}
+
+\subsection{Safeguards}
+
+\subsection{Safety}
+
+
+
+\chapter{Preliminary Results}
+
+\section{Group Parameter Comparisons}
+
+\section{Spatially Resolved Depletion Effects on Precursors}
+
+Net delayed neutron yield; group abundances; group decays; comparison of most impactful nuclides (?)
+
+\section{Verification}
+
+\subsection{Simplified Model}
+
+\subsection{No Molten Properties Comparisons}
+
+No flow, reprocessing, thermochemistry, spatial depletion should equal expected results.
+
+\subsection{Literature Comparison}
+
+Should match other Griffin/Pronghorn results
+
+\section{INL work}
+
+This work uses Griffin/Pronghorn/Thermochimica to simulate safeguards diversion while tracking all DNPs (but doesn't update DNP groups, only concentrations).
+
+\chapter{Proposed Work}
+
+\section{Resolve DNP spectra}
+\cite{das1993importance} discusses why it's important in section 6.
+
+\section{Uncertainty Quantification}
+
+\section{Finish this work}
+
+
+
 
 \backmatter
 

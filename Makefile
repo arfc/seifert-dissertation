@@ -2,7 +2,14 @@ manuscript = main
 references = $(wildcard *.bib)
 latexopt   = -halt-on-error -file-line-error
 
-all: all-via-pdf
+all: update-glossary all-via-pdf
+
+update-glossary: 
+	find . -type f -name "*.tex" -exec sed -i 's/\\Acp/\\Glspl/g' {} +
+	find . -type f -name "*.tex" -exec sed -i 's/\\acp/\\glspl/g' {} +
+	find . -type f -name "*.tex" -exec sed -i 's/\\Ac/\\Gls/g' {} +
+	find . -type f -name "*.tex" -exec sed -i 's/\\ac/\\gls/g' {} +
+
 
 all-via-pdf: $(manuscript).tex $(references)
 	pdflatex $(latexopt) --shell-escape $<
@@ -24,7 +31,7 @@ epub:
 	ebook-convert $(manuscript).html $(manuscript).epub
 
 clean:
-	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip *.acn *.glo *.ist *.epub
+	rm -f *.pdf *.dvi *.toc *.aux *.out *.log *.bbl *.blg *.log *.spl *~ *.spl *.zip *.acn *.glo *.ist *.epub *.lof *.lot
 
 realclean: clean
 	rm -rf $(manuscript).dvi
