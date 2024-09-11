@@ -52,7 +52,7 @@ For example, areas further from the center of the core are less important than t
 
 The calculation of the kinetics parameters depend on the \gls{DNP} group parameters, which themselves are typically formulated based on experimental data as previously discussed.
 
-Equation \eqref{eq:delnu-exact} shows the exact formulation for the delayed neutron counts as a function of time measured by a detector for $I$ individual \glspl{DNP}.
+Equation \eqref{eq:delnu-exact} shows the exact formulation for the delayed neutron counts as a function of time measured by a detector for $I$ individual \glspl{DNP} for any number of fissile nuclides.
 
 \begin{equation}
 n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
@@ -61,8 +61,10 @@ n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
 
 Equation \eqref{eq:delnu-fit} instead shows the $n$ group \gls{DNP} fit measured by the same detector for a pulse irradiation.
 For an infinite, or saturation, irradiation, Equation \eqref{eq:delnu-fit-sat} is used \cite{brady1988evaluation}. 
+These equations are specifically for a single fissile nuclide, and the derivation can be found in the work of Wilson and England \cite{wilson2002delayed}.
 To make this equation generic, the $a_i \lambda_i$ term and $a_i$ term can instead be written as $A_i$.
 Additionally, the fission term can be written as $\tilde{F}_s$, to represent either a fission rate or a net number of fissions.
+These equations are simplifications, as they do not account for decay chain daughter products \cite{conant1971measurement}.
 
 \begin{equation}
 n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}
@@ -87,6 +89,21 @@ The terms in Equation \eqref{eq:delnu-exact}, \eqref{eq:delnu-fit}, and \eqref{e
     \item $\dot{F}_s$ is the fission rate for a saturation irradiation
     \item $a_i$ is the $i$th group yield, or group abundance
 \end{description}
+
+The pulse irradiation approach gives better statistics on the short lives \glspl{DNP}, while the longer lived \glspl{DNP} are better represented by saturation irradiation.
+Brady discusses this, and uses both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
+Specifically, Brady uses "...determination of four long-period groups from the infinite irradiation data and
+four short-period groups from the prompt [pulse] data, later renormalizing the two sets
+of yields at the second delayed neutron group."
+
+Another benefit of including saturation irradiation data is that it can be used to get the average number of neutrons, prompt and delayed, per fission \cite{conant1971measurement}.
+This is shown in Equation \eqref{eq:delnu-init}.
+
+\begin{equation}
+n_d(0) = \epsilon \dot{F}_s \bar{\nu}
+\label{eq:delnu-init}
+\end{equation}
+
 
 Once the delayed neutron counts are acquired, an over-determined non-linear least squares approach is used to calculate the group abundances and decays.
 For example, Brady used STEPIT to handle the non-linear least-squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.

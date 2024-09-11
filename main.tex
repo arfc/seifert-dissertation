@@ -7,6 +7,7 @@
 
 \usepackage{xspace}
 \usepackage{graphics}
+\usepackage{comment}
 
 \usepackage{graphicx}
 \usepackage{float}
@@ -83,7 +84,7 @@
 \title{Tabulated Delayed Neutron Group Parameters for Molten Salt Reactors}
 \author{Luke Seifert}
 \department{Nuclear, Plasma, Radiological Engineering}
-\schools{B.S., University of Illinois - Urbana Champaign, 2017}
+%\schools{B.S., University of Illinois - Urbana Champaign, 2017}
 \phdthesis
 \advisor{Kathryn D. Huff}
 \degreeyear{2025}
@@ -174,6 +175,10 @@
 
 \chapter{Tools}
 
+\section{Kinetics}
+
+\subsection{PyRK}
+
 \section{Data}
 
 JANIS and IAEA
@@ -186,15 +191,25 @@ JANIS and IAEA
 
 \subsection{Griffin}
 
-\subsection{ISOXML}
+\subsubsection{ISOXML}
 
 \subsection{Pronghorn}
+
+\subsection{Moltres}
 
 \chapter{Methodology}
 
 \section{Flow Tabulation Simplification}
+\input{chapters/methodology/simplification}
 
-Discuss how the flow can be represented as residence times and mix rates, generically.
+\subsection{Generating Tabulated Parameters}
+\input{chapters/methodology/simplification/gen}
+
+\section{Models}
+\subsection{Simplified Model Approach}
+\input{chapters/methodology/models/approach}
+
+
 
 \section{Resolved Delayed Neutron Counts}
 
@@ -205,6 +220,8 @@ Sample needs to be as small as possible to minimize self-multiplication \cite{ke
 \subsection{Emission Probability and Decay Data}
 
 \section{Delayed Neutron Precursor Group Reconstruction}
+
+\input{chapters/methodology/dnpgrouprecon}
 
 \subsection{Group Parameters from Counts}
 
@@ -252,12 +269,22 @@ This work uses Griffin/Pronghorn/Thermochimica to simulate safeguards diversion 
 
 \chapter{Proposed Work}
 
+\section{Resolved Flow}
+
+\subsection{Least-Squares Fission History}
+
+This will probably need numerical evaluation of integral with a polynomial fit afterwards.
+Could also include R(t) using N(t) rather than assuming exponential decay.
+
 \section{Resolve DNP spectra}
 \cite{das1993importance} discusses why it's important in section 6.
 
 \section{Uncertainty Quantification}
 
-\section{Finish this work}
+
+\appendix
+\chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
+\input{chapters/appendices/appendixA}
 
 
 
