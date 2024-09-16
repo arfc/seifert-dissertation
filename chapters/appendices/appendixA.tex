@@ -1,0 +1,243 @@
+\renewcommand{\theequation}{A\thechapter.\arabic{equation}}
+\label{ref:appendixA}
+
+This derivation begins with the Equations \eqref{eq:wilson-R} and \eqref{eq:wilson-n} provided by Wilson and England \cite{wilson2002delayed}:
+
+\begin{equation}
+    R(t) = \sum_{i=1}^{I} a_i \lambda_i e^{-\lambda_i t}
+    \label{eq:wilson-R}
+\end{equation}
+
+\begin{equation}
+    n_d(T, t) = \bar{\nu}_d \int_{0}^{T} F(\tau) R(T-\tau+t) d\tau
+    \label{eq:wilson-n}
+\end{equation}
+
+The terms in Equation \eqref{eq:wilson-R} are discussed in Section \ref{ref:calc-group-param}, and the terms not discussed in the text in Equation \eqref{eq:wilson-n} are defined as follows:
+\begin{itemize}
+    \setlength\itemsep{-0.25em}
+    \item $T$ is the length of the fission history
+    \item $t$ is the decay time from the end of the fission history
+    \item $F(\tau)$ is the fission history (in fissions per second)
+    \end{itemize}
+
+Because the results are normalized to a single delayed neutron, the $\bar{\nu}_d$ term is divided out.
+
+To derive an analytical solution to this problem for the simplified approach where the in-core and ex-core residence times, $\tau_{in}$ and $\tau_{ex}$, are equivalent, an approximation of the fission history must be made.
+For this derivation, $\tau_{res}$ will be used to represent both the in-core and ex-core residence times.
+First, the fission history is split into a shape and amplitude function, shown in Equation \eqref{eq:split-fiss}.
+This essentially just simplifies any further equations such that only the shape needs to be considered.
+
+\begin{equation}
+    F(t) = F_0 \psi(t)
+    \label{eq:split-fiss}
+\end{equation}
+
+Because the simplified model's fission history is a positive square wave, analytical integration is not feasible.
+Instead, a Fourier decomposition of the square wave into a sum of sine waves makes the problem far more approachable.
+For numerical integration this is not an issue, but an analytical solution is useful for setting up the least squares matrices.
+
+\begin{equation}
+    \psi(t) = \frac{1}{2} + \frac{2}{\pi} \left(sin \left(\frac{\pi t}{\tau_{res}} \right) + \frac{1}{3} sin \left(\frac{3 \pi t}{\tau_{res}} \right) + \dots  \right)
+    \label{eq:pos-square}
+\end{equation}
+
+Plugging this in and separating the integral gives Equation \eqref{eq:split-integral} for group $i$ and for $k$ Fourier terms.
+
+\begin{equation}
+\begin{split}
+    n_{d, i}(T, t) =& \; \frac{F_0 a_i \lambda_i}{2} \int_{0}^{T} e^{-\lambda_i \left( T-\tau + t \right)} d\tau\\
+    & + \frac{2 F_0 a_i \lambda_i}{\pi} \int_{0}^{T} sin \left( \frac{\pi \tau}{\tau_{res}}  \right) e^{-\lambda_i \left( T-\tau + t \right)} d\tau\\
+    & + \dots\\
+    & + \frac{2 F_0 a_i \lambda_i}{(2k+1) \pi} \int_{0}^{T} sin \left( \frac{(2k+1) \pi \tau}{\tau_{res}}  \right) e^{-\lambda_i \left( T-\tau + t \right)} d\tau
+    \label{eq:split-integral}
+\end{split}
+\end{equation}
+
+Solving the integrals and simplifying yields Equation \eqref{eq:split-integral-solved}, where each integrated Fourier term generates four terms added to the sum.
+
+\begin{equation}
+\begin{split}
+    n_{d, i}(T, t) =& \; \frac{F_0 a_i e^{-\lambda_i t} \left( 1 - e^{-\lambda_i T} \right)}{2}\\
+    & + \dots\\
+    & + \frac{2 F_0 a_i \lambda_i^2 \tau_{res}^2 e^{-\lambda_i t} }{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)\\
+    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} cos\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)  \\
+    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} 2 \pi k  \\
+    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} \pi  \\
+    \label{eq:split-integral-solved}
+\end{split}
+\end{equation}
+
+
+Similar to \cite{wilson2002delayed}, the irradiation time is taken to the limit as it approaches infinity, though only for the non-periodic terms.
+By irradiating for several half-lives of time for each \gls{DNP}, where the longest half-life is roughly one minute, then the irradiation time can be taken as infinite. 
+There are two reasons this limit is taken.
+Firstly, a pulse irradiation with circulation will not provide any unique results when compared to traditional data which already exists.
+Additionally, this allows the equation to be simplified, as shown in Equation \eqref{eq:split-integral-solved-reduced}.
+Only the sine term does not go to zero as the irradiation time goes to infinity, so it is the only term significant for saturation irradiation in the simplified model.
+
+
+\begin{equation}
+\begin{split}
+    n_{d, i}(T, t) =& \; \frac{F_0 a_i e^{-\lambda_i t}}{2}\\
+    & + \dots\\
+    & + \frac{2 F_0 a_i \lambda_i^2 \tau_{res}^2 e^{-\lambda_i t} }{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)\\
+    \label{eq:split-integral-solved-reduced}
+\end{split}
+\end{equation}
+
+The final assumption to make is that the irradiation time, $T$, is an integer multiple of the residence times, $\tau_{res}$.
+This assumption makes the sine term 0 for every value of $k$, which means that the result simplifies to \eqref{eq:fully-resolved-flow-irrad}.
+
+
+
+\begin{equation}
+    n_{d}(t) = \frac{F_0}{2} \sum_{i=1}^{I} a_i e^{-\lambda_i t}
+    \label{eq:fully-resolved-flow-irrad}
+\end{equation}
+
+This is very similar to the saturation irradiation delayed neutron count equation, shown in Equation \eqref{eq:saturation-count-eqn}.
+
+\begin{equation}
+    n_{d}(t) = F_0 \sum_{i=1}^{I} a_i e^{-\lambda_i t}
+    \label{eq:saturation-count-eqn}
+\end{equation}
+
+Because of the initial assumption made, which was that half the time is in-core and half ex-core, the average fission rate is half of the fission rate scaling term, $F_0$.
+For both of the cases of constant irradiation and half in-core and half ex-core, the fission term in front is simply the average fission rate over the irradiation time.
+
+\begin{comment}
+
+An additional challenge is the fact that the square wave needs to vary from 0 to 1, rather than -1 to 1.
+However, this can be accounted for by making the substitution shown in Equation \eqref{eq:pos_sin}.
+By replacing the sine functions with this form, the values will either be positive, or 0 where they would have been negative.
+
+\begin{equation}
+    sin_+(x) = \frac{sin(x) + |sin(x)|}{2}
+    \label{eq:pos_sin}
+\end{equation}
+
+%The final hurdle for this derivation is the variation in the in-core and ex-core residence times.
+%This means the fission history shape function needs to vary the sine period based on if it is in-core or ex-core.
+%One way to account for this is to include a Heaviside function that takes in the sine function as an argument.
+%This is shown in Equation \eqref{eq:first_term}, which shows the first term in the Fourier composition of the square wave.
+
+%\begin{equation}
+%    \psi(t) = sin_+\left(\frac{\pi}{\tau} t \right) H\left(sin_+\left(\frac{\pi}{\tau} t\right) \right)
+%    \label{eq:first_term}
+%\end{equation}
+
+Another issue arises when constructing the square wave, which is that non-zero terms begin appearing in the ex-core residence time sections.
+One way to account for this is to include a Heaviside function that takes in the sine function as an argument.
+This is shown in Equation \eqref{eq:first_term}, which shows the first two terms in the Fourier composition of the square wave.
+
+\begin{equation}
+\begin{split}
+    \psi(t) = & \; sin_+\left(\frac{\pi t}{\tau_{res}} \right) H\left[sin\left(\frac{\pi t}{\tau_{res}} \right) \right] + \\
+    & \; \frac{1}{3} sin_+\left(\frac{\pi t}{3 \tau_{res}} \right) H\left[sin\left(\frac{\pi t}{\tau_{res}} \right) \right]
+    \label{eq:first_term}
+\end{split}
+\end{equation}
+
+The Heaviside function can be pulled out and moved to the front, yielding Equation \eqref{eq:simplified_term}:
+
+\begin{equation}
+    \psi(t) = H\left[sin\left(\frac{\pi t} {\tau_{res}} \right) \right] \left( sin_+\left(\frac{\pi t}{\tau_{res}} \right) + \frac{1}{3} sin_+\left(\frac{\pi t}{3 \tau_{res}} \right) + \dots \right)
+    \label{eq:simplified_term}
+\end{equation}
+
+This can be plugged back into the fission history term, which can then be used in Equation \eqref{eq:wilson-n}.
+To start, group $i$ is considered and only the first Fourier series term is considered.
+
+\begin{equation}
+    n_d(T, t) = F_0 \int_{0}^{T} H\left[sin\left(\frac{\pi \tau} {\tau_{res}} \right) \right] \left( sin_+\left(\frac{\pi \tau}{\tau_{res}} \right) \right) a_i \lambda_i e^{-\lambda_i (T-\tau +t)} d\tau
+    \label{eq:wilson-n}
+\end{equation}
+
+Based on the definition of $sin_+(x)$, the integral can be split into two separate integrals for the absolute and non-absolute forms of sine.
+The two integrals are given in Equations \eqref{eq:non-abs} and \eqref{eq:abs}.
+
+\begin{equation}
+    \frac{1}{2} \int_0^T  H\left[sin\left(\frac{\pi \tau} {\tau_{res}} \right) \right] sin\left(\frac{\pi \tau} {\tau_{res}}\right) a_i \lambda_i e^{-\lambda_i (T-\tau +t)} d\tau
+    \label{eq:non-abs}
+\end{equation}
+
+\begin{equation}
+    \frac{1}{2} \int_0^T  H\left[sin\left(\frac{\pi \tau} {\tau_{res}} \right) \right] \left|sin\left(\frac{\pi \tau} {\tau_{res}}\right)\right| a_i \lambda_i e^{-\lambda_i (T-\tau +t)} d\tau
+    \label{eq:abs}
+\end{equation}
+
+To solve these equations, only the regions in which the Heaviside function is non-zero are considered.
+This provides bounds, where $\tau$ is between $2 \tau_{res} k$ and $\tau_{res} (2 k + 1) $.
+The value of $k$ is an integer which starts at 0 and increases until the irradiation time, $T$, is met by $\tau$.
+This occurs at the value of $k$ shown in Equation \eqref{eq:k-time-done}, assuming that each full irradiation period occurs an integer number of times.
+
+\begin{equation}
+    k = \frac{T - 2 \tau_{res}}{2 \tau_{res}}
+    \label{eq:k-time-done}
+\end{equation}
+
+
+
+
+
+
+\hline
+
+
+
+
+
+
+
+This means that a single period can be evaluated, and then all that is required is a scaling factor based on the total irradiation time of the sample relative to the period.
+Evaluating over the period yields a positive portion of the sine profile followed by a zero portion due to the Heaviside function.
+This means that the absolute value of sine will yield the same result as the sine, meaning only a single integral needs to be solved.
+This can be seen in Equation \eqref{eq:reduced-eqn}.
+
+\begin{equation}
+    \int_0^{\tau_{res}} sin\left(\frac{\pi \tau} {\tau_{res}}\right) a_i \lambda_i e^{-\lambda_i (T-\tau +t)} d\tau
+    \label{eq:reduced-eqn}
+\end{equation}
+
+Solving this equation yields Equation \eqref{eq:first-term-full}, which shows the full form of the delayed neutron count rate for group $i$ as a function of irradiation time and time after irradiation for the first Fourier component of the square wave.
+
+\begin{equation}
+    n_{d, 1}(T, t) = F_0 a_i \lambda_i \left( \frac{\pi \tau_{res} (e^{-\lambda_i \tau_{res}} + 1) e^{-\lambda_i T} e^{-\lambda_i t}}{\lambda_i^2 \tau_{res}^2 + \pi^2} \right)
+    \label{eq:first-term-full}
+\end{equation}
+
+Similar to \cite{wilson2002delayed}, the irradiation time is taken to the limit as it approaches infinity.
+There are three reasons for this.
+Firstly, a pulse irradiation with circulation will not provide any unique results when compared to traditional data which already exists.
+Secondly, by irradiating for several half-lives of time for each \gls{DNP}, roughly 5 minutes, then the irradiation time can be taken as infinite.
+Finally, this allows the equation to be simplified even further, though only slightly.
+
+\begin{equation}
+    n_{d, 1, i}(T, t) = F_0 a_i \lambda_i \left( \frac{\pi \tau_{res} (e^{-\lambda_i \tau_{res}} + 1)}{\lambda_i^2 \tau_{res}^2 + \pi^2} \right) e^{-\lambda_i t}
+    \label{eq:first-term-full-final}
+\end{equation}
+
+To simplify, this term due to the fission history square wave shape for group $i$ for the first Fourier component will be captured by the $\eta_{1, i}$ term, as shown in Equation \eqref{eq:eta-first}.
+
+\begin{equation}
+    \eta_{1, i} = \left( \frac{\pi \tau_{res} (e^{-\lambda_i \tau_{res}} + 1)}{\lambda_i^2 \tau_{res}^2 + \pi^2} \right)
+    \label{eq:eta-first}
+\end{equation}
+
+Equation \eqref{eq:kth-term-full} shows how to calculate the $\eta_{k, i}$ where $k$ is the $k^{th}$ term of the square wave.
+
+\begin{equation}
+    \eta_{k, i} = \left( \frac{k \tau_{res} e^{-\lambda_i t} \left( e^{\lambda_i \tau_{res}} \left( k \lambda_i \tau_{res} sin\left(  \frac{\pi}{k}  \right) - \pi cos \left( \frac{\pi}{k}   \right)    \right) + \pi \right)}{k^2 \lambda_i^2 \tau_{res}^2 + \pi^2} \right)
+    \label{eq:kth-term-full}
+\end{equation}
+
+Because the Fourier series terms are summed, the integrals can be summed separately.
+This yields the general equation, shown in Equation \eqref{eq:full-equation-delnugroup} for the delayed neutron count group fit, where $\kappa$ is a number of sine waves such that the square wave is sufficiently well represented.
+
+\begin{equation}
+    n_d(t) = F_0 \sum^{I}_{i=1} \left( a_i \lambda_i e^{-\lambda_i t} \sum^{\kappa}_{k=1} \eta_{k, i} \right)
+    \label{eq:full-equation-delnugroup}
+\end{equation}
+
+\end{comment}

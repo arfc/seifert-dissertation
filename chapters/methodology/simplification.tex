@@ -1,0 +1,8 @@
+To create tabulated \gls{DNP} group parameter data in a reactor agnostic manner, the manner of tabulation needs to be reactor agnostic as well.
+At the same time, a large number of tabulation parameters to fully detail the flow regime is not computationally feasible, and is not necessary to capture the effects of flow.
+Instead, the tabulation uses only three parameters: a mixing rate ($\lambda_{mix}$), an in-core average residence time ($\tau_{in}$), and an ex-core residence time ($\tau_{ex}$).
+
+This approach captures the advection of the fuel salt around the primary loop as well as turbulent and diffusive mixing.
+The terms are based on the averaged behavior from a control volume of fuel salt, so thermal-hydraulic effects such as vortices would be treated as changes in residence times and mixing rate.
+This method thus allows an approximate fitting for any circulating fuel reactor geometry, where all that is required is generating the relevant parameters for accessing the tabulated data.
+
