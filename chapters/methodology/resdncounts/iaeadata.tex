@@ -1,0 +1,24 @@
+After receiving the concentrations from OpenMC, the concentrations of each nuclide as a function of time for the measurement period can be determined.
+The concentrations are calculated as a function of half life, as shown in Equation \eqref{eq:radiodec}.
+
+\begin{equation}
+    N(t) = N_0 e^{-\lambda t}
+    \label{eq:radiodec}
+\end{equation}
+
+This is a simple equation which does not take into account decay chains between nuclides.
+An alternative approach which does account for these decay chains is to use repeated decay simulations of OpenMC in order to generate concentrations as a function of time.
+These concentrations can be used at coarse time steps and linearly interpolated using SciPy, enabling the scripts to access these more accurate concentrations at any time after irradiation of the sample \cite{virtanen2020scipy}.
+This approach does not account for particles generated during decay, as it is considered beyond the scope of this work \cite{chen2002rigorous}.
+A comparison of these two approaches is investigated in Section \ref{sec:decaychaindaughters}.
+
+The concentrations are combined with Equation \eqref{eq:delnu-exact}, recreated here as Equation \eqref{eq:delnu-exact-2}.
+The efficiency term, $\epsilon$, is set to 1 in this work, since the simulated method provides a count rate that includes every produced delayed neutron.
+
+\begin{equation}
+n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
+\label{eq:delnu-exact-2}
+\end{equation}
+
+Each nuclide in the \gls{IAEA} beta-delayed neutron emitter database is iterated through \cite{DIMITRIOU2021144}.
+The delayed neutron count contribution over time is summed for each nuclide, generating the delayed neutron count rate.
