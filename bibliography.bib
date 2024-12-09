@@ -1,28 +1,1836 @@
+@techreport{das1993importance,
+  title={Importance of delayed neutrons in nuclear research},
+  author={Das, S},
+  year={1993},
+  institution={Bhabha Atomic Research Centre}
+}
 
-@inproceedings{huff_extensions_2014,
-	address = {Anaheim, CA, United States},
-	title = {Extensions to the {Cyclus} {Ecosystem} {In} {Support} of {Market}-{Driven} {Transition} {Capability}},
-	abstract = {The C YCLUS Fuel Cycle Simulator [1] is a framework
-for assessment of nuclear fuel cycle options. While C Y -
-CLUS has previously been capable of system transitions
-from the current fuel cycle strategy to a future option, those
-transitions have never previously been driven by market
-forces in the simulation. This summary describes a set
-of libraries [2] that have been contibuted to the C YCLUS
-framework to enable a market-driven transition analysis.
-This simulation framework is incomplete without a suite
-of dynamically loadable libraries representing the process
-physics of the nuclear fuel cycle (i.e. mining, fuel fabri-
-cation, chemical processing, transmutation, reprocessing,
-etc.). Within Cycamore [3], the additional modules reposi-
-tory within the C YCLUS ecosystem, provides some basic li-
-braries to represent these processes. However, extension of
-C YCLUS with new capabilities is community-driven, rely-
-ing on contributions by user-developers. The libraries con-
-tributed in this work are examples of such contributions.},
-	booktitle = {Transactions of the {American} {Nuclear} {Society}},
-	publisher = {American Nuclear Society},
-	author = {Huff, Kathryn D. and Fratoni, Massimiliano and Greenberg, Harris},
-	month = nov,
-	year = {2014}
+@phdthesis{brady1988evaluation,
+    author ={Brady, Michaele Clarice},
+    title = {Evaluation and application of delayed neutron precursor data},
+    school ={Texas A\&M University},
+    year ={1988}
+}
+
+
+@article{walker2023depletion,
+title = {Depletion-driven thermochemistry of molten salt reactors: review, method, and analysis},
+author = {Walker, Samuel A. and Tano, Mauricio E. and Abou-Jaoude, Abdalla and Calvin, Olin},
+abstractNote = {Molten salt reactors (MSRs) are innovative advanced nuclear reactors that utilize nuclear fuel by dissolving it in a high-temperature liquid salt. This unique feature differentiates MSRs from other types of reactors and allows for enhanced safety and economic performance. The liquid fuel also entails several multiphysics effects that can complicate reactor design and operation. One primary effect termed here as depletion-driven thermochemistry is a driving force in altering the multiphysics behavior of the reactor. Essentially, depletion-driven thermochemistry is the effect that fuel depletion has on changing the chemical redox potential of the fuel salt over time. As the fuel is consumed, the redox potential shifts toward a more oxidizing state. Without active control, the changing chemistry due to depletion increases corrosion thereby limiting reactor component lifetimes. Additionally, the changing redox potential of the fuel salt alters the vapor pressures of chemical species dissolved in the fuel salt. Changing vapor pressures of species in the fuel salt is an important parameter to understand when off-gassing volatile species during normal reactor operation, and for source term characterization during accident scenario transients. The present work represents a fundamental step toward modeling and coupling the driving physics (i.e., neutronics and chemistry) involved in altering the redox potential in an MSR. Here, the neutronic code Griffin models the depletion of the fuel-salt system, while the chemical equilibrium code Thermochimica calculates the thermochemical state of the isotopic inventory, using the Molten Salt Thermodynamic Database - Thermochemical (MSTDB-TC). These two codes are tightly coupled to predict the impact of fuel depletion in altering the chemistry in MSR systems. Redox potential control methods are discussed and can be modeled using this multiphysics approach. The vapor pressures of chemical species that could be extracted to an off-gas system, as determined by the reactor’s thermochemical state, are examined. The neutronics-chemistry coupling developed in this work is expected to have potential application for analyzing corrosion, source term evolution, and material safeguards in MSR systems. Lastly, suggestions for areas of further improvements of the models to expand these capabilities by incorporating other coupled physics effects is provided.},
+doi = {10.3389/fnuen.2023.1214727},
+url = {https://www.osti.gov/biblio/1985935},
+journal = {Frontiers in Nuclear Engineering},
+issn = {2813-3412},
+volume = 2,
+place = {Switzerland},
+year = {2023},
+month = {6}
+}
+
+@inproceedings{worrall2019molten,
+  title={Molten Salt Reactor Safeguards: The Necessity of Advanced Modeling and Simulations to Inform on Fundamental Signatures},
+  author={Worrall, A and Bae, JW and Betzler, BR and Greenwood, MS and Worrall, LG},
+  booktitle={Proceedings from 60th INMM Meeting, INMM},
+  year={2019}
+}
+
+@article{protection2011evaluation,
+  title={Evaluation Methodology for Proliferation Resistance and Physical Protection of Generation IV Nuclear Energy Systems},
+  author={Protection, Physical},
+  year={2011}
+}
+
+@techreport{dion2021material,
+  title={Material Control \& Accountancy for Molten Salt Reactors (FY2021 Report)},
+  author={Dion, Michael P and Greenwood, Michael Scott and Hogue, Karen K and O'Brien, Sean E and Scott, Logan M and Westphal, Greg T},
+  year={2021},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@article{lines2021line,
+  title={On-line Monitoring for Molten Salt Reactor MC\&A: Optical Spectroscopy-Based Approaches},
+  author={Lines, AM and Bryan, SA and Felmy, HM and Branch, SD},
+  journal={Pacific Northwest National Laboratories, PNNL-31955 (September 2021)},
+  year={2021}
+}
+
+@techreport{dion2021molten,
+  title={Molten salt reactor signatures and modeling study},
+  author={Dion, Michael P and Worrall, Louise G and Croft, Stephen and Scott, Logan M},
+  year={2021},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+
+@article{osti_1845956,
+title = {Griffin Software Development Plan},
+author = {Lee, Changho and Jung, Yeon Sang and Park, Hansol and Shemon, Emily R. and Ortensi, Javier and Wang, Yaqi and Laboure, Vincent M. and Prince, Zachary M.},
+abstractNote = {Griffin is a MOOSE-based reactor physics application for advanced reactor multiphysics modeling and simulation. The application is developed in a consistent multiphysics environment with strong software quality assurance. Griffin inherited most of the capabilities of MAMMOTH/Rattlesnake and is adopting the capabilities from PROTEUS that are needed in the code. The toolset includes a variety of deterministic radiation transport solvers for fixed source, k-eigenvalue, ad-joint, and subcritical multiplication, as well as transient solvers for point-kinetics, improved quasi-static, and spatial dynamics. The code contains the cross-section preparation capabilities applicable to fast and thermal reactors, including TRISO-fueled reactors. Core management capabilities include core performance, fuel depletion and shuffling, equilibrium core calculation, pebble-bed reactor run-in and equilibrium core, molten-salt reactor delayed neutron precursor drift, and control rod and drum movement with cusping correction. This software development plan presents the current and future capabilities and features in Griffin for the design and analysis of non-light-water reactor systems in steady-state and transient conditions.},
+doi = {10.2172/1845956},
+url = {https://www.osti.gov/biblio/1845956},
+journal = {},
+place = {United States},
+year = {2021},
+month = {6}
+}
+
+@techreport{walker2023application,
+  title={Application of NEAMS Multiphysics Framework for Species Tracking in Molten Salt Reactors},
+  author={Walker, Samuel Austin and Tano Retamales, Mauricio Eduardo and Abou Jaoude, Abdalla},
+  year={2023},
+  doi = {10.2172/2201960},
+  institution={Idaho National Laboratory (INL), Idaho Falls, ID (United States)}
+}
+
+@techreport{mcmurray2018multi,
+  title={Multi-physics simulations for molten salt reactor evaluation: Chemistry modeling and database development},
+  author={Mcmurray, Jake W and Besmann, Theodore M and Ard, Johnathan and FItzpatrick, Bernie and Piro, Markus and Jerden, Jim and Williamson, Mark and Collins, Benjamin S and Betzler, Benjamin R and Qualls, Arthur L},
+  year={2018},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@techreport{thoma1971chemical,
+  title={CHEMICAL ASPECTS OF MSRE OPERATIONS.},
+  author={Thoma, Roy E},
+  year={1971},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@techreport{lee2021griffin,
+  title={Griffin software development plan},
+  author={Lee, Changho and Jung, Yeon Sang and Park, Hansol and Shemon, Emily R and Ortensi, Javier and Wang, Yaqi and Labour{\'e}, Vincent M and Prince, Zachary M},
+  year={2021},
+  institution={Idaho National Lab.(INL), Idaho Falls, ID (United States); Argonne National~…}
+}
+
+@article{permann2020moose,
+  title={MOOSE: Enabling massively parallel multiphysics simulation},
+  author={Permann, Cody J and Gaston, Derek R and Andr{\v{s}}, David and Carlsen, Robert W and Kong, Fande and Lindsay, Alexander D and Miller, Jason M and Peterson, John W and Slaughter, Andrew E and Stogner, Roy H and others},
+  journal={SoftwareX},
+  volume={11},
+  pages={100430},
+  year={2020},
+  publisher={Elsevier}
+}
+
+@article{balestra2020coupled,
+  title={Coupled multiphysics simulation of pool-type molten salt reactors using griffin/pronghorn},
+  author={Balestra, Paolo and Abou-Jaoude, Abdalla and Schunert, Sebastian and Hermosillo, Andrew and Wang, Yaqi and Martin, Nicolas},
+  journal={Transactions of the American Nuclear Society},
+  volume={123},
+  number={1},
+  pages={1587--1590},
+  year={2020}
+}
+
+@techreport{fang2020sam,
+  title={SAM Enhancements and Model Developments for Molten-Salt-Fueled Reactors},
+  author={Fang, Jun and Hu, Rui and Gorman, Michael and Zou, Ling and Hu, Guojun and Hua, Thanh},
+  year={2020},
+  institution={Argonne National Lab.(ANL), Argonne, IL (United States)}
+}
+
+@article{piro2013thermochemistry,
+  title={The thermochemistry library Thermochimica},
+  author={Piro, MHA and Simunovic, Srdjan and Besmann, Theodore M and Lewis, BJ and Thompson, WT},
+  journal={Computational Materials Science},
+  volume={67},
+  pages={266--272},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@article{ard2022development,
+  title={Development of the molten salt thermal properties database- thermochemical (MSTDB- TC), example applications, and LiCl- RbCl and UF3- UF4 system assessments},
+  author={Ard, Johnathon C and Yingling, Jacob A and Johnson, Kaitlin E and Schorne-Pinto, Juliano and Aziziha, Mina and Dixon, Clara M and Christian, Matthew S and McMurray, Jacob W and Besmann, Theodore M},
+  journal={Journal of Nuclear Materials},
+  volume={563},
+  pages={153631},
+  year={2022},
+  publisher={Elsevier}
+}
+
+@article{poschmann2021recent,
+  title={Recent developments for molten salt systems in Thermochimica},
+  author={Poschmann, Max and Bajpai, Parikshit and Fitzpatrick, Bernard WN and Piro, Markus HA},
+  journal={Calphad},
+  volume={75},
+  pages={102341},
+  year={2021},
+  publisher={Elsevier}
+}
+
+@techreport{skutnik2022source,
+  title={SOURCE TERM AND DEPLETION COUPLING WITH DYNAMIC SYSTEM MODELING SOLUTIONS FOR FUEL CYCLE OPERATIONS},
+  author={Skutnik, Steve and Betzler, Benjamin and Dion, Mike and Greenwood, Michael},
+  year={2022},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@article{greenwood2020demonstration,
+  title={Demonstration of the advanced dynamic system modeling tool TRANSFORM in a molten salt reactor application via a model of the molten salt demonstration reactor},
+  author={Greenwood, M Scott and Betzler, Benjamin R and Qualls, A Lou and Yoo, Junsoo and Rabiti, Cristian},
+  journal={Nuclear Technology},
+  volume={206},
+  number={3},
+  pages={478--504},
+  year={2020},
+  publisher={Taylor \& Francis}
+}
+
+@article{greenwood2019modified,
+  title={Modified point-kinetics model for neutron precursors and fission product behavior for fluid-fueled molten salt reactors},
+  author={Greenwood, M Scott and Betzler, Ben},
+  journal={Nuclear Science and Engineering},
+  volume={193},
+  number={4},
+  pages={417--430},
+  year={2019},
+  publisher={Taylor \& Francis}
+}
+
+
+@misc{transformsoft,
+title = {TRANSFORM - TRANsient Simulation Framework of Reconfigurable Models},
+author = {Greenwood, Michael S. and Hale, Richard and Qualls, Lou and Cetiner, Sacit and Fugate, David and Harrison, Thomas and USDOE},
+abstractNote = {A Modelica based library for modeling thermal hydraulic energy systems and other multi-physics systems. Existing development tools for early stage design and scoping of energy systems are often time consuming to use, proprietary, and do not contain the necessary function to model complete systems (i.e., controls, primary, and secondary systems) in a common platform. The Modelica programming language based TRANSFORM tool (1) provides a standardized, common simulation environment for early design of energy systems (i.e., power plants), (2) provides a library of baseline component modules to be assembled into full plant models using available geometry, design, and thermal-hydraulic data, (3) defines modeling conventions for interconnecting component models, and (4) establishes user interfaces and support tools to facilitate simulation development (i.e., configuration and parameterization), execution, and results display and capture.},
+url = {https://www.osti.gov//servlets/purl/1503596},
+doi = {10.11578/dc.20171025.2022},
+url = {https://www.osti.gov/biblio/1503596}, year = {2017},
+month = {9}
+}
+
+@techreport{greenwood2019dynamic,
+  title={Dynamic System Models for Informing Licensing and Safeguards Investigations of Molten Salt Reactors (Revision 1)},
+  author={Greenwood, Michael Scott and Betzler, Benjamin R and Qualls, AL and Bae, Jin Whan and Worrall, Louise G},
+  year={2019},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@article{betzler2017molten,
+  title={Molten salt reactor neutronics and fuel cycle modeling and simulation with SCALE},
+  author={Betzler, Benjamin R and Powers, Jeffrey J and Worrall, Andrew},
+  journal={Annals of Nuclear Energy},
+  volume={101},
+  pages={489--503},
+  year={2017},
+  publisher={Elsevier}
+}
+
+@techreport{fei2022validation,
+  title={Validation of NEAMS Tools Using MSRE Data},
+  author={Fei, T and Shahbazi, S and Fang, J and Shaver, D},
+  year={2022},
+  institution={Argonne National Lab.(ANL), Argonne, IL (United States)}
+}
+
+@article{serp2014molten,
+  title={The molten salt reactor (MSR) in generation IV: overview and perspectives},
+  author={Serp, J{\'e}r{\^o}me and Allibert, Michel and Bene{\v{s}}, Ond{\v{r}}ej and Delpech, Sylvie and Feynberg, Olga and Ghetta, V{\'e}ronique and Heuer, Daniel and Holcomb, David and Ignatiev, Victor and Kloosterman, Jan Leen and others},
+  journal={Progress in Nuclear Energy},
+  volume={77},
+  pages={308--319},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@inproceedings{IAEA2002Proliferation,
+  author = {{International Atomic Energy Agency}},
+  title = {Proliferation Resistance Fundamentals for Future Nuclear Energy Systems},
+  booktitle = {Proceedings of the IAEA International Workshop on Future Nuclear Energy Systems},
+  year = {2002},
+  organization = {IAEA Department of Safeguards},
+  address = {Vienna, Austria},
+  note = {Technical Report}
+}
+
+@article{WILLIAMSON2012149,
+    author = "Williamson, R.L. and Hales, J.D. and Novascone, S.R. and Tonks, M.R. and Gaston, D.R. and Permann, C.J. and Andrs, D. and Martineau, R.C.",
+    title = "Multidimensional multiphysics simulation of nuclear fuel behavior",
+    journal = "Journal of Nuclear Materials",
+    volume = "423",
+    number = "1",
+    pages = "149-163",
+    year = "2012",
+    issn = "0022-3115",
+    doi = "10.1016/j.jnucmat.2012.01.012"
+}
+
+@article{piro2016global,
+  title={Global optimization algorithms to compute thermodynamic equilibria in large complex systems with performance considerations},
+  author={Piro, MHA and Simunovic, Srdjan},
+  journal={Computational Materials Science},
+  volume={118},
+  pages={87--96},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@article{novak2021pronghorn,
+  title={Pronghorn: A multidimensional coarse-mesh application for advanced reactor thermal hydraulics},
+  author={Novak, AJ and Carlsen, Robert W and Schunert, Sebastian and Balestra, Paolo and Reger, D and Slaybaugh, RN and Martineau, RC},
+  journal={Nuclear Technology},
+  volume={207},
+  number={7},
+  pages={1015--1046},
+  year={2021},
+  publisher={Taylor \& Francis}
+}
+
+@article{martineau2020multiphysics,
+  title={Multiphysics for nuclear energy applications using a cohesive computational framework},
+  author={Martineau, R and Andrs, D and Carlsen, R and Gaston, D and Hansel, J and Kong, F and Lindsay, A and Permann, Cody and Slaughter, A and Merzari, E and others},
+  journal={Nuclear Engineering and Design},
+  volume={367},
+  pages={110751},
+  year={2020},
+  publisher={Elsevier}
+}
+
+@misc{holmer2024doe, title={Doe O 474.2A, nuclear material control and Accountability}, url={https://www.directives.doe.gov/directives-documents/400-series/0474.2-BOrder-a}, journal={Nuclear Material Control and Accountability - DOE Directives, Guidance, and Delegations}, publisher={Office of Environment, Health, Safety and Security}, author={Holmer, Debarah}, year={2024}, month={Apr}} 
+
+@book{
+  international2022iaea,
+  title={IAEA Safeguards Glossary},
+  series={International Nuclear Verification Series},
+  number={3 (Rev. 1)},
+  year={2022},
+  isbn={978-92-0-122122-3},
+  url={https://www.iaea.org/publications/15176/iaea-safeguards-glossary},
+  publisher={INTERNATIONAL ATOMIC ENERGY AGENCY},
+  address={Vienna}
+}
+
+@article{bathke2012attractive,
+author = {Charles G. Bathke and Bartley B. Ebbinghaus and Brian A. Collins and Brad W. Sleaford and Kevin R. Hase and Martin Robel and Richard K. Wallace and Keith S. Bradley and John R. Ireland and Gordon D. Jarvinen and M. W. Johnson and Andrew W. Prichard and Brian W. Smith},
+title = {The Attractiveness of Materials in Advanced Nuclear Fuel Cycles for Various Proliferation and Theft Scenarios},
+journal = {Nuclear Technology},
+volume = {179},
+number = {1},
+pages = {5--30},
+year = {2012},
+publisher = {Taylor \& Francis},
+doi = {10.13182/NT10-203},
+URL = { https://doi.org/10.13182/NT10-203},
+eprint = {https://doi.org/10.13182/NT10-203}
+}
+
+@article{SILVANETO20171711,
+title = {Production of uranium tetrafluoride from the effluent generated in the reconversion via ammonium uranyl carbonate},
+journal = {Nuclear Engineering and Technology},
+volume = {49},
+number = {8},
+pages = {1711-1716},
+year = {2017},
+issn = {1738-5733},
+doi = {https://doi.org/10.1016/j.net.2017.07.019},
+url = {https://www.sciencedirect.com/science/article/pii/S1738573317301973},
+author = {João Batista {Silva Neto} and Elita Fontenele {Urano de Carvalho} and Rafael Henrique Lazzari Garcia and Adonis Marcelo Saliba-Silva and Humberto Gracher Riella and Michelangelo Durazzo},
+keywords = {Ammonium Bifluoride, APOFU, Effluent Treatment, Fuel Fabrication, UF, Uranium Recovery},
+abstract = {Uranium tetrafluoride (UF4) is the most used nuclear material for producing metallic uranium by reduction with Ca or Mg. Metallic uranium is a raw material for the manufacture of uranium silicide, U3Si2, which is the most suitable uranium compound for use as nuclear fuel for research reactors. By contrast, ammonium uranyl carbonate is a traditional uranium compound used for manufacturing uranium dioxide UO2 fuel for nuclear power reactors or U3O8-Al dispersion fuel for nuclear research reactors. This work describes a procedure for recovering uranium and ammonium fluoride (NH4F) from a liquid residue generated during the production routine of ammonium uranyl carbonate, ending with UF4 as a final product. The residue, consisting of a solution containing high concentrations of ammonium (NH4+), fluoride (F−), and carbonate (CO32−), has significant concentrations of uranium as UO22+. From this residue, the proposed procedure consists of precipitating ammonium peroxide fluorouranate (APOFU) and NH4F, while recovering the major part of uranium. Further, the remaining solution is concentrated by heating, and ammonium bifluoride (NH4HF2) is precipitated. As a final step, NH4HF2 is added to UO2, inducing fluoridation and decomposition, resulting in UF4 with adequate properties for metallic uranium manufacture.}
+}
+
+@misc{patent3976750,
+ title     = "Process for the production of uranium trifluoride",
+ note    = "patent U.S. \#3976750",
+ author    = "Tagawa, Hiroaki",
+ year      = "1976",
+ nationality = "United States",
+ month     = "August"
+}
+
+@article{sona2014high,
+  title={High temperature corrosion studies in molten salt-FLiNaK},
+  author={Sona, CS and Gajbhiye, BD and Hule, PV and Patwardhan, AW and Mathpati, CS and Borgohain, A and Maheshwari, NK},
+  journal={Corrosion engineering, science and technology},
+  volume={49},
+  number={4},
+  pages={287--295},
+  year={2014},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+
+@techreport{hu2021sam,
+  title={SAM theory manual},
+  author={Hu, Rui and Zou, Ling and Hu, Guojun and Nunez, Daniel and Mui, Travis and Fei, Tingzhou},
+  year={2021},
+  institution={Argonne National Lab.(ANL), Argonne, IL (United States)}
+}
+
+@article{piro2011computation,
+  title={Computation of thermodynamic equilibria of nuclear materials in multi-physics codes},
+  author={Piro, MH and Lewis, BJ and Thompson, WT and Simunovic, S and Besmann, TM},
+  year={2011}
+}
+
+@article{saphier1977evaluated,
+  title={Evaluated delayed neutron spectra and their importance in reactor calculations},
+  author={Saphier, D and Ilberg, D and Shalev, S and Yiftah, S},
+  journal={Nuclear Science and Engineering},
+  volume={62},
+  number={4},
+  pages={660--694},
+  year={1977},
+  publisher={Taylor \& Francis}
+}
+
+@article{keepin1957delayed,
+  title={Delayed neutrons from fissionable isotopes of uranium, plutonium and thorium},
+  author={Keepin, George Robert and Wimett, TF and Zeigler, RK},
+  journal={Journal of Nuclear Energy (1954)},
+  volume={6},
+  number={1-2},
+  pages={IN2--21},
+  year={1957},
+  publisher={Elsevier}
+}
+
+@article{gremyachkin2015verification,
+  title={Verification of the evaluated fission product yields data from the neutron induced fission of 235U, 238U and 239Pu based on the delayed neutron characteristics},
+  author={Gremyachkin, DE and Piksaikin, VM and Mitrofanov, KV and Egorov, AS},
+  journal={Progress in Nuclear Energy},
+  volume={83},
+  pages={13--25},
+  year={2015},
+  publisher={Elsevier}
+}
+
+@article{dangelo2002conclusions,
+  title={Conclusions concerning the delayed neutron data for the major actinides},
+  author={D'Angelo, Antonio and Rowlands, John L},
+  journal={Progress in Nuclear Energy},
+  volume={41},
+  number={1-4},
+  pages={391--412},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@article{blachot1997jef,
+  title={JEF-2 delayed neutron yields for 39 fissioning systems},
+  author={Blachot, J and Chung, C and Storrer, F},
+  journal={Annals of Nuclear Energy},
+  volume={24},
+  number={6},
+  pages={489--504},
+  year={1997},
+  publisher={Elsevier}
+}
+
+@article{DIMITRIOU2021144,
+title = {Development of a Reference Database for Beta-Delayed Neutron Emission},
+journal = {Nuclear Data Sheets},
+volume = {173},
+pages = {144-238},
+year = {2021},
+note = {Special Issue on Nuclear Reaction Data},
+issn = {0090-3752},
+doi = {https://doi.org/10.1016/j.nds.2021.04.006},
+url = {https://www.sciencedirect.com/science/article/pii/S0090375221000168},
+author = {P. Dimitriou and I. Dillmann and B. Singh and V. Piksaikin and K.P. Rykaczewski and J.L. Tain and A. Algora and K. Banerjee and I.N. Borzov and D. Cano-Ott and S. Chiba and M. Fallot and D. Foligno and R. Grzywacz and X. Huang and T. Marketin and F. Minato and G. Mukherjee and B.C. Rasco and A. Sonzogni and M. Verpelli and A. Egorov and M. Estienne and L. Giot and D. Gremyachkin and M. Madurga and E.A. McCutchan and E. Mendoza and K.V. Mitrofanov and M. Narbonne and P. Romojaro and A. Sanchez-Caballero and N.D. Scielzo},
+abstract = {Beta-delayed neutron emission is important for nuclear structure and astrophysics as well as for reactor applications. Significant advances in nuclear experimental techniques in the past two decades have led to a wealth of new measurements that remain to be incorporated in the databases. We report on a coordinated effort to compile and evaluate all the available β-delayed neutron emission data. The different measurement techniques have been assessed and the data have been compared with semi-microscopic and microscopic-macroscopic models. The new microscopic database has been tested against aggregate total delayed neutron yields, time-dependent group parameters in 6-and 8-group re-presentation, and aggregate delayed neutron spectra. New recommendations of macroscopic delayed-neutron data for fissile materials of interest to applications are also presented. The new Reference Database for Beta-Delayed Neutron Emission Data is available online at: http://www-nds.iaea.org/beta-delayed-neutron/database.html.}
+}
+
+@article{SOPPERA2014294,
+title = {JANIS 4: An Improved Version of the NEA Java-based Nuclear Data Information System},
+journal = {Nuclear Data Sheets},
+volume = {120},
+pages = {294-296},
+year = {2014},
+issn = {0090-3752},
+doi = {https://doi.org/10.1016/j.nds.2014.07.071},
+url = {https://www.sciencedirect.com/science/article/pii/S0090375214005237},
+author = {N. Soppera and M. Bossant and E. Dupont},
+abstract = {JANIS is software developed to facilitate the visualization and manipulation of nuclear data, giving access to evaluated data libraries, and to the EXFOR and CINDA databases. It is stand-alone Java software, downloadable from the web and distributed on DVD. Used offline, the system also makes use of an internet connection to access the NEA Data Bank database. It is now also offered as a full web application, only requiring a browser. The features added in the latest version of the software and this new web interface are described.}
+}
+
+@article{england1983aggregate,
+  title={Aggregate delayed neutron intensities and spectra using augmented ENDF/BV precursor data},
+  author={England, TR and Wilson, WB and Schenter, RE and Mann, FM},
+  journal={Nuclear Science and Engineering},
+  volume={85},
+  number={2},
+  pages={139--155},
+  year={1983},
+  publisher={Taylor \& Francis}
+}
+
+@article{rudstam1982six,
+  title={Six-group representation of the energy spectra of delayed neutrons from fission},
+  author={Rudstam, G},
+  journal={Nuclear Science and Engineering},
+  volume={80},
+  number={2},
+  pages={238--255},
+  year={1982},
+  publisher={Taylor \& Francis}
+}
+
+@article{Brown20181,
+title = "{ENDF/B-VIII.0}: The {8$^{th}$} Major Release of the Nuclear Reaction Data Library with {CIELO}-project Cross Sections, New Standards and Thermal Scattering Data",
+journal = "Nuclear Data Sheets",
+volume = "148",
+number = "",
+pages = "1 - 142",
+year = "2018",
+note = " Special Issue on Nuclear Reaction Data ",
+issn = "0090-3752",
+doi = "https://doi.org/10.1016/j.nds.2018.02.001",
+url = "https://www.sciencedirect.com/science/article/pii/S0090375218300206",
+author = "D.A. Brown and M.B. Chadwick and R. Capote and A.C. Kahler and A. Trkov and M.W. Herman and A.A. Sonzogni and Y. Danon and A.D. Carlson and M. Dunn and D.L. Smith and G.M. Hale and G. Arbanas and R. Arcilla and C.R. Bates and B. Beck and B. Becker and F. Brown and R.J. Casperson and J. Conlin and D.E. Cullen and M.-A. Descalle and R. Firestone and T. Gaines and K.H. Guber and A.I. Hawari and J. Holmes and T.D. Johnson and T. Kawano and B.C. Kiedrowski and A.J. Koning and S. Kopecky and L. Leal and J.P. Lestone and C. Lubitz and J.I. M{\'a}rquez Dami{\'a}n and C.M. Mattoon and E.A. McCutchan and S. Mughabghab and P. Navratil and D. Neudecker and G.P.A. Nobre and G. Noguere and M. Paris and M.T. Pigni and A.J. Plompen and B. Pritychenko and V.G. Pronyaev and D. Roubtsov and D. Rochman and P. Romano and P. Schillebeeckx and S. Simakov and M. Sin and I. Sirakov and B. Sleaford and V. Sobes and E.S. Soukhovitskii and I. Stetcu and P. Talou and I. Thompson and S. van der Marck and L. Welser-Sherrill and D. Wiarda and M. White and J.L. Wormald and R.Q. Wright and M. Zerkle and G. \v{Z}erovnik and Y. Zhu" }
+
+@article{mathieu2009possible,
+  title={Possible configurations for the thorium molten salt reactor and advantages of the fast nonmoderated version},
+  author={Mathieu, Ludovic and Heuer, Daniel and Merle-Lucotte, Elsa and Brissot, R and Le Brun, C and Liatard, E and Loiseaux, J-M and M{\'e}plan, O and Nuttin, A and Lecarpentier, D},
+  journal={Nuclear Science and Engineering},
+  volume={161},
+  number={1},
+  pages={78--89},
+  year={2009},
+  publisher={Taylor \& Francis}
+}
+
+@article{merle2012preliminary,
+  title={Preliminary design assessment of the molten salt fast reactor},
+  author={Merle-Lucotte, E and Heuer, D and Allibert, M and Brovchenko, M and Ghetta, V and Laureau, A and Rubiolo, P},
+  journal={Proceedings of the ENC2012-Advanced Reactors},
+  pages={17--26},
+  year={2012}
+}
+
+@article{brovchenko2019neutronic,
+  title={Neutronic benchmark of the molten salt fast reactor in the frame of the EVOL and MARS collaborative projects},
+  author={Brovchenko, Mariya and Kloosterman, Jan-Leen and Luzzi, Lelio and Merle, Elsa and Heuer, Daniel and Laureau, Axel and Feynberg, Olga and Ignatiev, Victor and Aufiero, Manuele and Cammi, Antonio and others},
+  journal={EPJ N-Nuclear Sciences \& Technologies},
+  volume={5},
+  pages={2},
+  year={2019}
+}
+
+@incollection{allibert2016molten,
+  title={Molten salt fast reactors},
+  author={Allibert, Michel and Aufiero, Manuele and Brovchenko, Mariya and Delpech, Sylvie and Ghetta, V{\'e}ronique and Heuer, Daniel and Laureau, A and Merle-Lucotte, Elsa},
+  booktitle={Handbook of Generation IV Nuclear Reactors},
+  pages={157--188},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@article{nasr2023neutronic,
+  title={Neutronic and fuel cycle performance analysis of fluoride and chloride fuels in Molten Salt Fast Reactor (MSFR)},
+  author={Nasr, M Aghili and Zolfaghari, A and Akbari, R and Cammi, A and Amirkhosravi, S},
+  journal={Nuclear Engineering and Design},
+  volume={413},
+  pages={112506},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@inproceedings{ignatiev2012progress,
+  title={Progress in development of MOSART concept with Th support},
+  author={Ignatiev, Victor and Feynberg, Olga and Merzlyakov, Aleksandr and Surenkov, Aleksandr and Zagnitko, Aleksandr and Afonichkin, Valery and Bovet, Andrei and Khokhlov, Vladimir and Subbotin, Vladimir and Fazilov, Rustam and others},
+  booktitle={Proceedings of ICAPP},
+  volume={12394},
+  year={2012}
+}
+
+@article{li2015transient,
+  title={Transient analyses for a molten salt fast reactor with optimized core geometry},
+  author={Li, R and Wang, S and Rineiski, A and Zhang, D and Merle-Lucotte, E},
+  journal={Nuclear Engineering and Design},
+  volume={292},
+  pages={164--176},
+  year={2015},
+  publisher={Elsevier}
+}
+
+@article{brovchenko2013design,
+  title={Design-related studies for the preliminary safety assessment of the molten salt fast reactor},
+  author={Brovchenko, M and Heuer, D and Merle-Lucotte, E and Allibert, M and Ghetta, V and Laureau, A and Rubiolo, P},
+  journal={Nuclear Science and Engineering},
+  volume={175},
+  number={3},
+  pages={329--339},
+  year={2013},
+  publisher={Taylor \& Francis}
+}
+
+@article{guo2013simulations,
+  title={Simulations of unprotected loss of heat sink and combination of events accidents for a molten salt reactor},
+  author={Guo, Zhangpeng and Zhang, Dalin and Xiao, Yao and Tian, Wenxi and Su, Guanghui and Qiu, Suizheng},
+  journal={Annals of Nuclear Energy},
+  volume={53},
+  pages={309--319},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@article{daher2022improvement,
+  title={Improvement of a design of the molten salt fast reactor},
+  author={Daher, DH and Kotb, M and Khalaf, AM and El-Koliel, Moustafa S and Soliman, Abdelfattah Y},
+  journal={International Journal of Advanced Nuclear Reactor Design and Technology},
+  volume={4},
+  number={2},
+  pages={87--100},
+  year={2022},
+  publisher={Elsevier}
+}
+
+@techreport{betzler2021liquid,
+	title = {Liquid-fueled {Molten} {Salt} {Reactor} {Depletion} {Modeling}},
+	url = {https://www.osti.gov/biblio/1809981},
+	abstract = {The U.S. Department of Energy's Office of Scientific and Technical Information},
+	language = {English},
+	urldate = {2023-12-12},
+	institution = {Oak Ridge National Lab. (ORNL), Oak Ridge, TN (United States)},
+	author = {Betzler, Benjamin},
+	month = jun,
+	year = {2021},
+	note = {2},
+}
+
+@conference{tano2023coupled,
+    author = {Tano, M and Walker, S A and Abou-Jaoude, A},
+    booktitle = {American Nuclear Society Mathematics \& Computation},
+    title = {A {Coupled} {Griffin} and {Pronghorn} {Method} for {Spatially} {Resolved} {Depletion} {Analysis} of {Molten} {Salt} {Reactors}},
+    year = 2023
+}
+
+@article{fiorina2015gen,
+  title={GeN-Foam: a novel OpenFOAM{\textregistered} based multi-physics solver for 2D/3D transient analysis of nuclear reactors},
+  author={Fiorina, Carlo and Clifford, Ivor and Aufiero, Manuele and Mikityuk, Konstantin},
+  journal={Nuclear Engineering and Design},
+  volume={294},
+  pages={24--37},
+  year={2015},
+  publisher={Elsevier}
+}
+
+@article{wooten2018review,
+  title={A review of molten salt reactor kinetics models},
+  author={Wooten, Daniel and Powers, Jeffrey J},
+  journal={Nuclear Science and Engineering},
+  volume={191},
+  number={3},
+  pages={203--230},
+  year={2018},
+  publisher={Taylor \& Francis}
+}
+
+@article{kvrepel2007dyn3d,
+  title={DYN3D-MSR spatial dynamics code for molten salt reactors},
+  author={K{\v{r}}epel, Ji{\v{r}}{\'\i} and Rohde, Ulrich and Grundmann, Ulrich and Weiss, Frank-Peter},
+  journal={Annals of Nuclear Energy},
+  volume={34},
+  number={6},
+  pages={449--462},
+  year={2007},
+  publisher={Elsevier}
+}
+
+@article{fiorina2014modelling,
+  title={Modelling and analysis of the MSFR transient behaviour},
+  author={Fiorina, Carlo and Lathouwers, Danny and Aufiero, Manuele and Cammi, Antonio and Guerrieri, Claudia and Kloosterman, Jan Leen and Luzzi, Lelio and Ricotti, Marco Enrico},
+  journal={Annals of Nuclear Energy},
+  volume={64},
+  pages={485--498},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{kophazi2009development,
+  title={Development of a three-dimensional time-dependent calculation scheme for molten salt reactors and validation of the measurement data of the molten salt reactor experiment},
+  author={K{\'o}ph{\'a}zi, J and Lathouwers, D and Kloosterman, JL},
+  journal={Nuclear science and engineering},
+  volume={163},
+  number={2},
+  pages={118--131},
+  year={2009},
+  publisher={Taylor \& Francis}
+}
+
+@inproceedings{merle2015physical,
+  title={Physical assessment of the load following and starting procedures for the Molten Salt Fast Reactor},
+  author={Merle-Lucotte, Elsa and Heuer, Daniel and Laureau, Axel and Brovchenko, Mariya and Allibert, Michel and Aufiero, Manuele and Rubiolo, P},
+  booktitle={International Congress on Advances in Nuclear Power Plants (ICAPP2015)},
+  number={15450},
+  pages={901--909},
+  year={2015}
+}
+
+@article{shi2016development,
+  title={Development and application of a system analysis code for liquid fueled molten salt reactors based on RELAP5 code},
+  author={Shi, Chengbin and Cheng, Maosong and Liu, Guimin},
+  journal={Nuclear Engineering and Design},
+  volume={305},
+  pages={378--388},
+  year={2016},
+  publisher={Elsevier}
+}
+
+@inproceedings{zanetti2015extension,
+  title={Extension of the FAST code system for the modelling and simulation of MSR dynamics},
+  author={Zanetti, Matteo and Cammi, Antonio and Luzzi, Lelio and Krepel, J and Mikityuk, Konstantin and others},
+  booktitle={Proceedings of ICAPP},
+  pages={03--06},
+  year={2015}
+}
+
+@article{rineiski2005kinetics,
+  title={Kinetics and cross-section developments for analyses of reactor transmutation concepts with simmer},
+  author={Rineiski, A and Sinitsa, V and Maschek, W and Wang, S},
+  journal={Proc. Mathematics and Computation, Supercomputing, Reactor Physics and Nuclear and Biological Applications, Avignon, France},
+  year={2005}
+}
+
+@techreport{alcouffe1995dantsys,
+  title={DANTSYS: a diffusion accelerated neutral particle transport code system},
+  author={Alcouffe, Ray E and Baker, Randal S and Brinkley, Forrest W and Marr, Duane R and ODell, R Douglas and Walters, Wallace F},
+  year={1995},
+  institution={Los Alamos National Lab.(LANL), Los Alamos, NM (United States)}
+}
+
+@inproceedings{laureau2015coupled,
+  title={Coupled neutronics and thermal-hydraulics transient calculations based on a fission matrix approach: application to the Molten Salt Fast Reactor},
+  author={Laureau, A and Aufiero, M and Rubiolo, P and Merle-Lucotte, E and Heuer, D},
+  booktitle={Joint International Conference on Mathematics and Computation, Supercomputing in Nuclear Applications and the Monte Carlo Method (M\&C+ SNA+ MC 2015), Nashville, USA},
+  year={2015}
+}
+
+@article{dulla2007interactions,
+author = {S. Dulla and P. Ravetto},
+title = {Interactions between Fluid-Dynamics and Neutronic Phenomena in the Physics of Molten-Salt Systems},
+journal = {Nuclear Science and Engineering},
+volume = {155},
+number = {3},
+pages = {475--488},
+year = {2007},
+publisher = {Taylor \& Francis},
+doi = {10.13182/NSE07-A2678},
+URL = {https://doi.org/10.13182/NSE07-A2678},
+eprint = {https://doi.org/10.13182/NSE07-A2678}
+}
+
+@article{dulla2004neutron,
+  title={Neutron kinetics of fluid--fuel systems by the quasi-static method},
+  author={Dulla, Sandra and Ravetto, Piero and Rostagno, MM},
+  journal={Annals of Nuclear Energy},
+  volume={31},
+  number={15},
+  pages={1709--1733},
+  year={2004},
+  publisher={Elsevier}
+}
+
+@article{henry1958application,
+  title={The application of reactor kinetics to the analysis of experiments},
+  author={Henry, Allan F},
+  journal={Nuclear Science and Engineering},
+  volume={3},
+  number={1},
+  pages={52--70},
+  year={1958},
+  publisher={Taylor \& Francis}
+}
+
+@article{devooght1980quasistatic,
+  title={Quasistatic solutions of reactor kinetics},
+  author={Devooght, Jacques},
+  journal={Annals of Nuclear Energy},
+  volume={7},
+  number={1},
+  pages={47--58},
+  year={1980},
+  publisher={Elsevier}
+}
+
+@article{cheng2014development,
+  title={Development of a three dimension multi-physics code for molten salt fast reactor},
+  author={Cheng, Mao-Song and Dai, Zhi-Min and others},
+  journal={Nucl. Sci. Tech.},
+  volume={25},
+  pages={010601},
+  year={2014}
+}
+
+@article{zhang2009analysis,
+  title={Analysis on the neutron kinetics for a molten salt reactor},
+  author={Zhang, DL and Qiu, SZ and Su, GH and Liu, CL and Qian, LB},
+  journal={Progress in nuclear energy},
+  volume={51},
+  number={4-5},
+  pages={624--636},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@article{becker1968generalized,
+  title={A generalized formulation of point nuclear reactor kinetics equations},
+  author={Becker, Martin},
+  journal={Nuclear Science and Engineering},
+  volume={31},
+  number={3},
+  pages={458--464},
+  year={1968},
+  publisher={Taylor \& Francis}
+}
+
+@article{hurwitz1953multigroup,
+  title={Multigroup Methods},
+  author={Hurwitz Jr, H and Ehrlich, R},
+  journal={AND TECHNOLOGY},
+  pages={81},
+  year={1953}
+}
+
+@article{yamamoto2006transient,
+  title={Transient characteristics of small molten salt reactor during blockage accident},
+  author={Yamamoto, Takahisa and Mitachi, Koshi and Ikeuchi, Koji and Suzuki, Takashi},
+  journal={Heat Transfer—Asian Research: Co-sponsored by the Society of Chemical Engineers of Japan and the Heat Transfer Division of ASME},
+  volume={35},
+  number={6},
+  pages={434--450},
+  year={2006},
+  publisher={Wiley Online Library}
+}
+
+@article{krepel2007dyn3d,
+  title={DYN3D-MSR spatial dynamics code for molten salt reactors},
+  author={K{\v{r}}epel, Ji{\v{r}}{\'\i} and Rohde, Ulrich and Grundmann, Ulrich and Weiss, Frank-Peter},
+  journal={Annals of Nuclear Energy},
+  volume={34},
+  number={6},
+  pages={449--462},
+  year={2007},
+  publisher={Elsevier}
+}
+
+@article{nicolino2008coupled,
+  title={Coupled dynamics in the physics of molten salt reactors},
+  author={Nicolino, Claudio and Lapenta, Giovanni and Dulla, Sandra and Ravetto, Piero},
+  journal={Annals of Nuclear Energy},
+  volume={35},
+  number={2},
+  pages={314--322},
+  year={2008},
+  publisher={Elsevier}
+}
+
+@article{lapenta2001point,
+  title={Point kinetic model for fluid fuel systems},
+  author={Lapenta, G and Mattioda, F and Ravetto, Piero},
+  journal={Annals of Nuclear Energy},
+  volume={28},
+  number={17},
+  pages={1759--1772},
+  year={2001},
+  publisher={Elsevier}
+}
+
+@article{lapenta2000basic,
+  title={Basic reactor physics problems in fluid-fuel recirculated reactors},
+  author={Lapenta, Giovanni and Ravetto, Piero and others},
+  journal={KERNTECHNIK-BILINGUAL EDITION-},
+  volume={65},
+  number={5/6},
+  pages={250--253},
+  year={2000},
+  publisher={CARL HANSER VERLAG}
+}
+
+@techreport{haubenreich1962prediction,
+  title={Prediction of effective yields of delayed neutrons in MSRE},
+  author={Haubenreich, PN},
+  year={1962},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+@article{suzuki2008reactivity,
+  title={Reactivity-initiated-accident analysis without scram of a molten salt reactor},
+  author={Suzuki, Nobuhide and Shimazu, Yoichiro},
+  journal={Journal of nuclear science and technology},
+  volume={45},
+  number={6},
+  pages={575--581},
+  year={2008},
+  publisher={Taylor \& Francis}
+}
+
+@book{
+  international2000iaea,
+  title={Safety of Nuclear Power Plants: Design},
+  series={Safety Standards Series},
+  number={NS-R-1},
+  year={2000},
+  isbn={92-0-101900-9},
+  url={https://www.iaea.org/publications/6002/safety-of-nuclear-power-plants-design},
+  publisher={INTERNATIONAL ATOMIC ENERGY AGENCY},
+  address={Vienna}
+}
+
+@book{
+  international2016iaea,
+  title={Safety of Nuclear Power Plants: Design},
+  series={Specific Safety Requirements},
+  number={SSR-2/1 (Rev. 1)},
+  year={2016},
+  isbn={978-92-0-109315-8},
+  url={https://www.iaea.org/publications/10885/safety-of-nuclear-power-plants-design},
+  publisher={INTERNATIONAL ATOMIC ENERGY AGENCY},
+  address={Vienna}
+}
+
+@misc{bank2000jef,
+  title={The {JEF}-2.2 Nuclear Data Library. {JEFF} Report 17},
+  author={Bank, NEA Data},
+  year={2000},
+  publisher={OECD/NEA}
+}
+
+@article{roberts1939further,
+  title={Further observations on the splitting of uranium and thorium},
+  author={Roberts, RB and Meyer, RC and Wang, P},
+  journal={Physical Review},
+  volume={55},
+  number={5},
+  pages={510},
+  year={1939},
+  publisher={APS}
+}
+
+@techreport{das1977kinetics,
+  title={Kinetics of zero energy fast reactor PURNIMA},
+  author={Das, S and Srinivasan, M},
+  year={1977},
+  institution={Bhabha Atomic Research Centre}
+}
+
+@article{dickens1991analysis,
+  title={Analysis of beta-ray data important to decay heat predictions},
+  author={Dickens, JK},
+  journal={Nuclear Science and Engineering},
+  volume={109},
+  number={1},
+  pages={92--102},
+  year={1991},
+  publisher={Taylor \& Francis}
+}
+
+@book{lane1958fluid,
+  title={Fluid fuel reactors: Molten salt reactors, aqueous homogeneous reactors, fluoride reactors, chloride reactors, liquid metal reactors and why liquid fission},
+  author={Lane, James A and MacPherson, Herbert G and Maslan, Frank},
+  year={1958},
+  publisher={Addison-Wesley Pub. Co.}
+}
+
+@article{perry1986application,
+  title={Application of evaluated fission-product delayed-neutron precursor data in reactor kinetics calculations},
+  author={Perry, Robert T and Wilson, William B and England, Talmadge R and Brady, Michaele C},
+  journal={Radiation Effects},
+  volume={94},
+  number={1-4},
+  pages={43--47},
+  year={1986},
+  publisher={Taylor \& Francis}
+}
+
+@article{brady1989delayed,
+  title={Delayed neutron data and group parameters for 43 fissioning systems},
+  author={Brady, MC and England, TR},
+  journal={Nuclear Science and Engineering},
+  volume={103},
+  number={2},
+  pages={129--149},
+  year={1989},
+  publisher={Taylor \& Francis}
+}
+
+@article{waldo1981delayed,
+  title={Delayed neutron yields: Time dependent measurements and a predictive model},
+  author={Waldo, RW and Karam, RA and Meyer, RA},
+  journal={Physical Review C},
+  volume={23},
+  number={3},
+  pages={1113},
+  year={1981},
+  publisher={APS}
+}
+
+@article{tuttle1975delayed,
+  title={Delayed-neutron data for reactor-physics analysis},
+  author={Tuttle, RJ},
+  journal={Nuclear Science and Engineering},
+  volume={56},
+  number={1},
+  pages={37--71},
+  year={1975},
+  publisher={Taylor \& Francis}
+}
+
+@article{manero1972status,
+  title={Status of the energy-dependent average $\nu$-values for the heavy isotopes (Z> 90) from thermal to 15 MeV and of $\nu$-values for spontaneous fission},
+  author={Manero, F and Konshin, VA},
+  journal={Atomic Energy Review},
+  volume={10},
+  number={4},
+  pages={637--756},
+  year={1972}
+}
+
+@article{benedetti1982delayed,
+  title={Delayed neutron yields from fission of uranium-233, neptunium-237, plutonium-238,-240,-241, and americium-241},
+  author={Benedetti, G and Cesana, A and Sangiust, V and Terrani, M and Sandrelli, G},
+  journal={Nuclear Science and Engineering},
+  volume={80},
+  number={3},
+  pages={379--387},
+  year={1982},
+  publisher={Taylor \& Francis}
+}
+
+@article{hughes1948delayed,
+  title={Delayed neutrons from fission of U 235},
+  author={Hughes, DJ and Dabbs, J and Cahn, A and Hall, D},
+  journal={Physical Review},
+  volume={73},
+  number={2},
+  pages={111},
+  year={1948},
+  publisher={APS}
+}
+
+@article{loaiza1998measurements,
+  title={Measurements of absolute delayed neutron yield and group constants in the fast fission of 235U and 237Np},
+  author={Loaiza, David J and Brunson, Glenn and Sanchez, Rene and Butterfield, Ken},
+  journal={Nuclear science and engineering},
+  volume={128},
+  number={3},
+  pages={270--277},
+  year={1998},
+  publisher={Taylor \& Francis}
+}
+
+@article{loaiza2000dominant,
+  title={Dominant delayed neutron precursors to model reactivity predictions for multiple fissioning nuclides},
+  author={Loaiza, David J and Haskin, F Eric},
+  journal={Nuclear science and engineering},
+  volume={134},
+  number={1},
+  pages={22--36},
+  year={2000},
+  publisher={Taylor \& Francis}
+}
+
+@book{burgy1946energies,
+  title={Energies of the Delayed Neutrons from U235 Fission Products},
+  author={Burgy, M and Pardue, LA and Willard, HB and Wollan, EO},
+  volume={16},
+  year={1946},
+  publisher={Technical Information Division, Atomic Energy Commission}
+}
+
+@article{chulick1971energy,
+  title={Energy spectrum of delayed neutrons from the spontaneous fission of 252Cf},
+  author={Chulick, ET and Reeder, PL and Bemis Jr, CE and Eichler, E},
+  journal={Nuclear Physics A},
+  volume={168},
+  number={2},
+  pages={250--258},
+  year={1971},
+  publisher={Elsevier}
+}
+
+@article{garcia2012monster,
+  title={MONSTER: a time of flight spectrometer for $\beta$-delayed neutron emission measurements},
+  author={Garcia, AR and Mart{\'\i}nez, T and Cano-Ott, D and Castilla, J and Guerrero, C and Mar{\'\i}n, J and Mart{\'\i}nez, G and Mendoza, E and Ovejero, MC and Reillo, EM and others},
+  journal={Journal of Instrumentation},
+  volume={7},
+  number={05},
+  pages={C05012},
+  year={2012},
+  publisher={IOP Publishing}
+}
+
+@article{chrysochoides1971measurement,
+  title={Measurement of the low energy spectrum of delayed neutrons from 87Br and 88Br precursors},
+  author={Chrysochoides, NG and Anoussis, JN and Mitsonias, CA and Perricos, DC},
+  journal={Journal of Nuclear Energy},
+  volume={25},
+  number={11},
+  pages={551--556},
+  year={1971},
+  publisher={Elsevier}
+}
+
+@article{shalev1972delayed,
+  title={Delayed Neutron Emission from I 137},
+  author={Shalev, S and Rudstam, G},
+  journal={Physical Review Letters},
+  volume={28},
+  number={11},
+  pages={687},
+  year={1972},
+  publisher={APS}
+}
+
+@article{beyer2007proton,
+  title={Proton-recoil detectors for time-of-flight measurements of neutrons with kinetic energies from some tens of keV to a few MeV},
+  author={Beyer, Roland and Grosse, E and Heidel, K and Hutsch, J and Junghans, AR and Klug, J and Legrady, D and Nolte, R and R{\"o}ttger, S and Sobiella, M and others},
+  journal={Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated Equipment},
+  volume={575},
+  number={3},
+  pages={449--455},
+  year={2007},
+  publisher={Elsevier}
+}
+
+@techreport{dillmann2015summary,
+  title={Summary Report of 2nd Research Coordination Meeting on Development of a Reference Database for Beta-Delayed Neutron Emission},
+  author={Dillmann, Iris and Dimitriou, Paraskevi and Singh, Balraj},
+  year={2015},
+  institution={International Atomic Energy Agency}
+}
+
+@article{romero2022calculation,
+  title={Calculation of kinetic parameters $\beta$eff and $\Lambda$ with modified open source Monte Carlo code OpenMC (TD)},
+  author={Romero-Barrientos, J and Dami{\'a}n, JI M{\'a}rquez and Molina, F and Zambra, M and Aguilera, P and L{\'o}pez-Usquiano, F and Parra, B and Ruiz, A},
+  journal={Nuclear Engineering and Technology},
+  volume={54},
+  number={3},
+  pages={811--816},
+  year={2022},
+  publisher={Elsevier}
+}
+
+@article{meulekamp2006calculating,
+  title={Calculating the effective delayed neutron fraction with Monte Carlo},
+  author={Meulekamp, Robin Klein and Van Der Marck, Steven C},
+  journal={Nuclear science and engineering},
+  volume={152},
+  number={2},
+  pages={142--148},
+  year={2006},
+  publisher={Taylor \& Francis}
+}
+
+@article{verboomen2006monte,
+  title={Monte Carlo calculation of the effective neutron generation time},
+  author={Verboomen, B and Haeck, W and Baeten, Peter},
+  journal={Annals of nuclear energy},
+  volume={33},
+  number={10},
+  pages={911--916},
+  year={2006},
+  publisher={Elsevier}
+}
+
+@article{aufiero2014calculating,
+  title={Calculating the effective delayed neutron fraction in the Molten Salt Fast Reactor: Analytical, deterministic and Monte Carlo approaches},
+  author={Aufiero, Manuele and Brovchenko, Mariya and Cammi, Antonio and Clifford, Ivor and Geoffroy, Olivier and Heuer, Daniel and Laureau, Axel and Losa, Mario and Luzzi, Lelio and Merle-Lucotte, Elsa and others},
+  journal={Annals of Nuclear Energy},
+  volume={65},
+  pages={78--90},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@book{keepin1965physics,
+author="Keepin, G. Robert (George Robert)",
+title="Physics of nuclear kinetics",
+publisher="Addison-Wesley",
+year="1965",
+series="Addison-Wesley series in nuclear science and engineering",
+URL="https://cir.nii.ac.jp/crid/1130282269657621248"
+}
+
+@article{bohl1964computation,
+  title={Computation of parameters in the kinetics equations},
+  author={Bohl, L and Margolis, SG and Radkowsky, A},
+  journal={Naval Reactors Physics Handbook},
+  volume={1},
+  pages={873--877},
+  year={1964},
+  publisher={US Atomic Energy Commission Division of Reactor Development, Naval Reactors~…}
+}
+
+@techreport{robertson1971conceptual,
+  title={CONCEPTUAL DESIGN STUDY OF A SINGLE-FLUID MOLTEN-SALT BREEDER REACTOR},
+  author={Robertson, Roy C},
+  year={1971},
+  institution={comp.; Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+
+@techreport{robertson1965msre,
+  title={MSRE Design \& Operations Report Part 1 Description of Reactor Design},
+  author={Robertson, Roy C},
+  year={1965},
+  institution={Oak Ridge National Lab.(ORNL), Oak Ridge, TN (United States)}
+}
+
+
+@article{furukawa1990thorium,
+  title={Thorium molten-salt nuclear energy synergetics},
+  author={Furukawa, Kazuo and Lecocq, Alfred and Kato, Yoshio and Mitachi, Kohshi},
+  journal={Journal of nuclear science and technology},
+  volume={27},
+  number={12},
+  pages={1157--1178},
+  year={1990},
+  publisher={Taylor \& Francis}
+}
+
+@article{vergnes2002amster,
+  title={The AMSTER concept (actinides molten salt transmutER)},
+  author={Vergnes, Jean and Lecarpentier, David},
+  journal={Nuclear engineering and design},
+  volume={216},
+  number={1-3},
+  pages={43--67},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@inproceedings{ignatiev2007progress,
+  title={Progress in development of Li, Be, Na/F molten salt actinide recycler \& transmuter concept},
+  author={Ignatiev, Victor and Feynberg, Olga and Gnidoi, Ivan and Merzlyakov, Aleksandr and Smirnov, Vladimir and Surenkov, Aleksandr and Tretiakov, Igor and Zakirov, Raul and Afonichkin, Valery and Bovet, Andrei and others},
+  booktitle={Proceedings of ICAPP},
+  volume={7},
+  pages={13--18},
+  year={2007}
+}
+
+@article{holcomb2011fast,
+  title={Fast spectrum molten salt reactor options},
+  author={Holcomb, DE and Flanagan, GF and Patton, BW and Gehin, JC and Howard, RL and Harrison, TJ},
+  journal={ORNL/TM-2011/105},
+  year={2011},
+  publisher={Oak Ridge National Laboratory}
+}
+
+@inproceedings{merle2008introduction,
+  title={Introduction to the physics of molten salt reactors},
+  author={Merle-Lucotte, E and Heuer, D and Allibert, M and Ghetta, V{\'e}ronique and Le Brun, C},
+  booktitle={Materials Issues for Generation IV Systems: Status, Open Questions and Challenges},
+  pages={501--521},
+  year={2008},
+  organization={Springer}
+}
+
+@article{casino2007small,
+  title={A Small Mobile Molten Salt Reactor (SM-MSR) for Underdeveloped Countries and Remote Locations},
+  author={CASINO, William and Sorensen, Kirk and Whitener, Christopher A},
+  journal={Transactions of the American Nuclear Society},
+  volume={97},
+  pages={907--908},
+  year={2007},
+  publisher={American> Nuclear Society}
+}
+
+@phdthesis{seifert2023analysis,
+  title={Analysis of and comparison between reprocessing methods in the molten salt breeder reactor},
+  author={Seifert, Luke},
+  year={2023},
+  school={University of Illinois at Urbana-Champaign}
+}
+
+@techreport{jr_vicente_valdez_modeling_2020,
+	title = {Modeling {Molten} {Salt} {Reactor} {Fission} {Product} {Removal} with {SCALE}},
+	url = {https://www.osti.gov/servlets/purl/1608211/},
+	language = {en},
+	number = {ORNL/TM--2019/1418, 1608211},
+	urldate = {2022-01-17},
+	institution = {ORNl},
+	author = {Jr. Vicente Valdez, Pedro and Betzler, Benjamin and Wieselquist, William and Fratoni, Massimilliano},
+	month = feb,
+	year = {2020},
+	doi = {10.2172/1608211},
+	pages = {ORNL/TM--2019/1418, 1608211},
+	file = {Jr. Vicente Valdez et al. - 2020 - Modeling Molten Salt Reactor Fission Product Remov.pdf:C\:\\Users\\Luke\\Zotero\\storage\\23EFQXCA\\Jr. Vicente Valdez et al. - 2020 - Modeling Molten Salt Reactor Fission Product Remov.pdf:application/pdf},
+}
+
+@article{zhuang_extended_2020,
+	title = {Extended development of a {Monte} {Carlo} code {OpenMC} for fuel cycle simulation of molten salt reactor},
+	volume = {118},
+	issn = {01491970},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0149197019302161},
+	doi = {10.1016/j.pnucene.2019.103115},
+	abstract = {Adopting liquid fuel and on-line reprocessing scenario are the unique features of molten salt reactor (MSR). Considering lattice code for thermal reactor is not suitable for MSR calculation, batch-wise fuel salt reprocessing scheme and “two-step” deterministic calculations cause some approximations in simulation of MSR on-line continuous fuel reprocessing, this study focuses on the development of a direct calculation method for MSR fuel cycle simulation based on an open source Monte Carlo code OpenMC. A ﬁctitious decay constant and an external source term were introduced into traditional burnup equation for accurate simulation of on-line fuel reprocessing. Finally, a MSR fuel cycle simulation code OpenMCB-MSR was developed by coupling OpenMC and burnup code with Python script. Two pressurized water reactor (PWR) pin cell benchmarks without considering fuel online reprocessing, and one actual MSFR fuel cycle benchmark considering fuel on-line reprocessing were used for veriﬁcation of OpenMCB-MSR. By comparison with reference results, the maximum diﬀerences of kinf calculated by OpenMCB-MSR are no more than 400 pcm both for two PWR pin cell benchmarks. Moreover, apart from isotopes with small absolute nuclide number density, all the other isotopes' nuclide number densities show a diﬀerence of less than 10\%. For MSFR benchmark, the reactivity coeﬃcients, isotope mass evolutions during fuel cycle process, mass evolution of ﬁssion products in core and breeding ratio calculated by OpenMCB-MSR show a good agreement with reference results. At equilibrium state, apart from isotopes with very small absolute mass, the diﬀerences of other isotopes' mass are no more than 5.0\% in comparison with reference results. Benchmark veriﬁcation results indicate that the method of MSR fuel cycle simulation based on OpenMC code is correct, and OpenMCB-MSR has capability of MSR fuel cycle analysis.},
+	language = {en},
+	urldate = {2022-02-22},
+	journal = {Progress in Nuclear Energy},
+	author = {Zhuang, Kun and Li, Ting and Zhang, Qian and He, Qinghua and Zhang, Tengfei},
+	month = jan,
+	year = {2020},
+	pages = {103115},
+	file = {Zhuang et al. - 2020 - Extended development of a Monte Carlo code OpenMC .pdf:C\:\\Users\\Luke\\Zotero\\storage\\68L8NUTF\\Zhuang et al. - 2020 - Extended development of a Monte Carlo code OpenMC .pdf:application/pdf},
+}
+
+@article{xia_development_2019,
+	title = {Development of a {Molten} {Salt} {Reactor} specific depletion code {MODEC}},
+	volume = {124},
+	issn = {0306-4549},
+	url = {https://www.sciencedirect.com/science/article/pii/S0306454918305139},
+	doi = {10.1016/j.anucene.2018.09.032},
+	abstract = {Molten Salt Reactor (MSR) has the characteristics of on-line reprocessing and continuously refueling, which bring significant differences from traditional reactors in burnup calculations. To handle its specific burnup characteristics, a Molten Salt Reactor specific depletion code - MODEC has been newly developed. MODEC implements two depletion algorithms to solve the basic burnup equations: the transmutation trajectory analysis (TTA) and the Chebyshev rational approximation method (CRAM). To simulate the on-line reprocessing, the fictive decay constant method is applied. And three different methods are implemented in MODEC to solve the nonhomogeneous burnup equations in the continuously refueling problems. Moreover, it can trace in real time the evolution of the in-stockpile nuclides which is extracted by on-line reprocessing. MODEC has three calculating modes for decay, constant flux and constant power calculations. By comparing with ORIGEN-S, the validity of performance of MODEC in conventional burnup calculations, burnup calculations with on-line reprocessing and burnup calculations with continuously refueling is proved. And a comparison of the three methods of solving nonhomogeneous burnup equations is presented and discussed. Additionally, a detailed analysis of error sources in ORIGEN-S is applied and an unpublished error source is found. Finally, a specific Monte Carlo burnup procedure for actual MSR burnup calculations is developed by coupling KENO-VI with MODEC, and the burnup benchmark of Molten Salt Fast Reactor (MSFR) is calculated to validate the specific Monte Carlo burnup procedure.},
+	language = {en},
+	urldate = {2022-03-16},
+	journal = {Annals of Nuclear Energy},
+	author = {Xia, Shaopeng and Chen, Jingen and Guo, Wei and Cui, Deyang and Han, Jianlong and Wu, Jianhui and Cai, Xiangzhou},
+	month = feb,
+	year = {2019},
+	keywords = {Burnup calculation, Molten Salt Reactor, CRAM, Error analysis of ORIGEN-S, Nonhomogeneous term, TTA},
+	pages = {88--97},
+	file = {ScienceDirect Snapshot:C\:\\Users\\Luke\\Zotero\\storage\\KLBNB39T\\S0306454918305139.html:text/html},
+}
+
+@article{zhou_fuel_2018,
+	title = {Fuel cycle analysis of molten salt reactors based on coupled neutronics and thermal-hydraulics calculations},
+	volume = {114},
+	issn = {03064549},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454917303754},
+	doi = {10.1016/j.anucene.2017.10.040},
+	abstract = {A new fuel cycle analysis code named FAMOS was developed for molten salt reactor (MSR) applications by extending the DIF3D code to model the transport of delayed neutron precursors and by coupling the extended DIF3D code with an in-house multi-channel thermal-hydraulics solver and an in-house nuclide depletion solver for the simulation of fuel depletion, reprocessing and feeding. FAMOS can also calculate the effective delayed neutron fraction accounting for the motion of fuel salt, the neutron generation time and the reactivity feedback coefﬁcients. In order to verify the FAMOS code, the molten salt fast reactor (MSFR) proposed in the EVOL (Evaluation and Viability of Liquid Fuel Fast Reactor System) project was analyzed using FAMOS and the calculation results were compared with the reported results. The numerical results indicate that FAMOS is capable of simulating the fuel cycle process of MSRs with good accuracy. FAMOS was applied to the fuel cycle analysis of the molten salt breeder reactor (MSBR) as well. The effects of the temperature distribution and the drift of delayed neutron precursors on the neutronics characteristics and fuel cycle performances of MSBR were evaluated using three different calculation models. The drift of delayed neutron precursors and the temperature distribution shift the axial power distribution upward and downward, respectively, and the latter effect is stronger than the former one. However, the impacts of the temperature distribution and the drift of delayed neutron precursors on the depletion and buildup behaviors of actinides and ﬁssion products in MSRs are negligible. It is also possible to achieve a 233U conversion ratio larger than 1.0 without protactinium removal and thus to operate the MSBR by only feeding 232Th, except for the initial start-up stage.},
+	language = {en},
+	urldate = {2022-02-24},
+	journal = {Annals of Nuclear Energy},
+	author = {Zhou, Shengcheng and Yang, Won Sik and Park, Tongkyu and Wu, Hongchun},
+	month = apr,
+	year = {2018},
+	pages = {369--383},
+	file = {Zhou et al. - 2018 - Fuel cycle analysis of molten salt reactors based .pdf:C\:\\Users\\Luke\\Zotero\\storage\\QUJDZF9Y\\Zhou et al. - 2018 - Fuel cycle analysis of molten salt reactors based .pdf:application/pdf},
+}
+
+@article{aufiero_extended_2013,
+	title = {An extended version of the {SERPENT}-2 code to investigate fuel burn-up and core material evolution of the {Molten} {Salt} {Fast} {Reactor}},
+	volume = {441},
+	issn = {00223115},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0022311513008507},
+	doi = {10.1016/j.jnucmat.2013.06.026},
+	abstract = {In this work, the Monte Carlo burn-up code SERPENT-2 has been extended and employed to study the material isotopic evolution of the Molten Salt Fast Reactor (MSFR). This promising GEN-IV nuclear reactor concept features peculiar characteristics such as the on-line fuel reprocessing, which prevents the use of commonly available burn-up codes. Besides, the presence of circulating nuclear fuel and radioactive streams from the core to the reprocessing plant requires a precise knowledge of the fuel isotopic composition during the plant operation.},
+	language = {en},
+	number = {1-3},
+	urldate = {2022-01-17},
+	journal = {Journal of Nuclear Materials},
+	author = {Aufiero, M. and Cammi, A. and Fiorina, C. and Leppänen, J. and Luzzi, L. and Ricotti, M.E.},
+	month = oct,
+	year = {2013},
+	pages = {473--486},
+	file = {Aufiero et al. - 2013 - An extended version of the SERPENT-2 code to inves.pdf:C\:\\Users\\Luke\\Zotero\\storage\\CRKWR3CZ\\Aufiero et al. - 2013 - An extended version of the SERPENT-2 code to inves.pdf:application/pdf},
+}
+
+@inproceedings{rodriguez-vieitez_transmutation_2002,
+	title = {{TRANSMUTATION} {CAPABILITY} {OF} {ONCE}-{THROUGH} {CRITICAL} {OR} {SUB}-{CRITICAL} {MOLTEN}-{SALT} {REACTORS}},
+	abstract = {A neutronic parametric study is performed for graphite-moderated molten-salt (MS) critical or source-driven sub-critical transmuting reactors. The NaF-ZrF 4 MS reactor is fuelled with transuranium isotopes from LWR spent fuel and operates in a once-through mode. The MS with actinides is continuously fed and continuously extracted at a very slow rate. All the fission products are removed from the core as soon as formed. The primary question addressed is whether or not it is possible to design such a reactor to have an acceptable k eff when at equilibrium composition, while the Ac concentration is below their solubility limit, and what is the corresponding transmutation fraction. The primary design variables are the MS channel diameter and the graphite-to-MS volume ratio (C/MS). For an average power density of 390 W/cm 3 of MS, MS feed rate of 1 millilitre/day/MW th and actinide concentration of 12.87 mol\% it was found that both k eff and the fractional transmutation peak while the equilibrium concentration is at a minimum when C/MS is close to 1.0. The equilibrium actinide concentration is below the solubility limit for C/MS between 1 and 7 for 7cm and 3.5 cm channel diameter and between 1 and 15 for a 1 cm channel diameter. The peak k eff is close to 1.0 and the fractional transmutation exceeds 90\% in one pass through the core. The Pu coming out from the C/MS=12 core has a very low fissile content of only 17\%. The optimal core has an epithermal spectrum and small channel diameter. The graphite lifetime in the core is 0.6 or 1.3 years for C/MS of 1 or 3, respectively. Reduction of the power density to 39 W/cm 3 can increase the graphite lifetime by an order of magnitude. This reduction of the power density reduces the attainable k eff by {\textasciitilde}5\% and increases the equilibrium actinide concentration by {\textasciitilde}0.4 mol\%. An illustrative core design for a 10 GW th MS transmuter is given.},
+	booktitle = {National {Research} {Council}},
+	author = {Rodriguez-Vieitez, Elena and Lowenthal, Micah and Greenspan, Ehud and Ahn, Joonhong},
+	month = oct,
+	year = {2002},
+	file = {Full Text PDF:C\:\\Users\\Luke\\Zotero\\storage\\TMY4AVP7\\Rodriguez-Vieitez et al. - 2002 - TRANSMUTATION CAPABILITY OF ONCE-THROUGH CRITICAL .pdf:application/pdf},
+}
+
+@article{rykhlevskii_modeling_2019,
+	title = {Modeling and simulation of online reprocessing in the thorium-fueled molten salt breeder reactor},
+	volume = {128},
+	issn = {03064549},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454919300350},
+	doi = {10.1016/j.anucene.2019.01.030},
+	abstract = {In the search for new ways to generate carbon-free, reliable base-load power, interest in advanced nuclear energy technologies, particularly Molten Salt Reactors (MSRs), has resurged with multiple new companies pursuing MSR commercialization. To further develop these MSR concepts, researchers need simulation tools for analyzing liquid-fueled MSR depletion and fuel processing. However, most contemporary nuclear reactor physics software is unable to perform high-ﬁdelity full-core depletion calculations for a reactor design with online reprocessing. This paper introduces a Python package, SaltProc, which couples with the Monte Carlo code, SERPENT2 to simulate MSR online reprocessing by modeling the changing isotopic composition of MSR fuel salt. This work demonstrates SaltProc capabilities for a fullcore, high-ﬁdelity model of the commercial Molten Salt Breeder Reactor (MSBR) concept and veriﬁes these results to results in the literature from independent, lower-ﬁdelity analyses.},
+	language = {en},
+	urldate = {2022-01-17},
+	journal = {Annals of Nuclear Energy},
+	author = {Rykhlevskii, Andrei and Bae, Jin Whan and Huff, Kathryn D.},
+	month = jun,
+	year = {2019},
+	pages = {366--379},
+	file = {Rykhlevskii et al. - 2019 - Modeling and simulation of online reprocessing in .pdf:C\:\\Users\\Luke\\Zotero\\storage\\HNFUZXGR\\Rykhlevskii et al. - 2019 - Modeling and simulation of online reprocessing in .pdf:application/pdf},
+}
+
+@article{betzler_molten_2017,
+	title = {Molten salt reactor neutronics and fuel cycle modeling and simulation with {SCALE}},
+	volume = {101},
+	issn = {03064549},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454916309185},
+	doi = {10.1016/j.anucene.2016.11.040},
+	abstract = {Current interest in advanced nuclear energy and molten salt reactor (MSR) concepts has enhanced interest in building the tools necessary to analyze these systems. A Python script known as ChemTriton has been developed to simulate equilibrium MSR fuel cycle performance by modeling the changing isotopic composition of an irradiated fuel salt using SCALE for neutron transport and depletion calculations. Improved capabilities in ChemTriton include a generic geometry capable of modeling multi-zone and multi-fluid systems, enhanced time-dependent feed and separations, and a critical concentration search. Although more generally applicable, the capabilities developed to date are illustrated in this paper in three applied problems: (1) simulating the startup of a thorium-based MSR fuel cycle (a likely scenario requires the first of these MSRs to be started without available 233U); (2) determining the effect of the removal of different fission products on MSR operations; and (3) obtaining the equilibrium concentration of a mixed-oxide light-water reactor fuel in a two-stage fuel cycle with a sodium fast reactor. The third problem is chosen to demonstrate versatility in an application to analyze the fuel cycle of a non-MSR system. In the first application, the initial fuel salt compositions fueled with different sources of fissile material are made feasible after (1) removing the associated nonfissile actinides after much of the This manuscript has been authored by UT-Battelle, LLC under Contract No. DE-AC05-00OR22725 with the U.S. Department of Energy. The United States Government retains and the publisher, by accepting the article for publication, acknowledges that the United States Government retains a non-exclusive, paid-up, irrevocable, world-wide license to publish or reproduce the published form of this manuscript, or allow others to do so, for United States Government purposes. The Department of Energy will provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan (http://energy.gov/downloads/doe-public-access-plan ).},
+	language = {en},
+	urldate = {2022-01-17},
+	journal = {Annals of Nuclear Energy},
+	author = {Betzler, Benjamin R. and Powers, Jeffrey J. and Worrall, Andrew},
+	month = mar,
+	year = {2017},
+	pages = {489--503},
+	file = {Betzler et al. - 2017 - Molten salt reactor neutronics and fuel cycle mode.pdf:C\:\\Users\\Luke\\Zotero\\storage\\PLN5L72S\\Betzler et al. - 2017 - Molten salt reactor neutronics and fuel cycle mode.pdf:application/pdf},
+}
+
+@article{ridley_method_2017,
+	title = {A method for predicting fuel maintenance in once-through {MSRs}},
+	volume = {110},
+	issn = {03064549},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S030645491730021X},
+	doi = {10.1016/j.anucene.2017.06.043},
+	abstract = {Liquid fuel molten salt reactors allow reactivity control by material addition. This paper presents a method to adjust material ﬂows in a molten salt reactor to keep the core critical, and to maintain desired reduction-oxidation potential in the core salt melt. The method is aimed at low-enriched uranium fueled thermal systems. It is developed as a Python library and uses Serpent2 Monte-Carlo transport and depletion code. A toy 300 MW(th) reactor with a FLiBe carrier salt is employed to demonstrate the performance of the method over 10 full power years. Results of the calculation are presented, including material ﬂows, conversion ratio, effective delayed neutron fraction, and expected limits on triﬂuoride concentrations and graphite lifetime are investigated. This method lays a foundation for future studies including fuel cycle performance of molten salt reactors and dynamic behavior of the core during depletion.},
+	language = {en},
+	urldate = {2022-02-08},
+	journal = {Annals of Nuclear Energy},
+	author = {Ridley, Gavin and Chvala, Ondrej},
+	month = dec,
+	year = {2017},
+	pages = {265--281},
+	file = {Ridley and Chvala - 2017 - A method for predicting fuel maintenance in once-t.pdf:C\:\\Users\\Luke\\Zotero\\storage\\9MPX7VNZ\\Ridley and Chvala - 2017 - A method for predicting fuel maintenance in once-t.pdf:application/pdf},
+}
+
+@article{ahmad_neutronics_2015,
+	title = {Neutronics calculations for denatured molten salt reactors: {Assessing} resource requirements and proliferation-risk attributes},
+	volume = {75},
+	issn = {03064549},
+	shorttitle = {Neutronics calculations for denatured molten salt reactors},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454914003995},
+	doi = {10.1016/j.anucene.2014.08.014},
+	abstract = {Molten salt reactors (MSRs) are often advocated as a radical but worthwhile alternative to traditional reactor concepts based on solid fuels. This article builds upon the existing research into MSRs to model and simulate the operation of thorium-fueled single-ﬂuid and two-ﬂuid reactors. The analysis is based on neutronics calculations and focuses on denatured MSR systems. Resource utilization and basic proliferation-risk attributes are compared to those of standard light-water reactors. Depending on speciﬁc design choices, even fully denatured reactors could reduce uranium and enrichment requirements by a factor of 3–4. Overall, denatured single-ﬂuid designs appear as the most promising candidate technology minimizing both design complexity and overall proliferation risks despite being somewhat less attractive from the perspective of resource utilization.},
+	language = {en},
+	urldate = {2022-02-03},
+	journal = {Annals of Nuclear Energy},
+	author = {Ahmad, Ali and McClamrock, Edward B. and Glaser, Alexander},
+	month = jan,
+	year = {2015},
+	pages = {261--267},
+	file = {Ahmad et al. - 2015 - Neutronics calculations for denatured molten salt .pdf:C\:\\Users\\Luke\\Zotero\\storage\\NEFRJB9X\\Ahmad et al. - 2015 - Neutronics calculations for denatured molten salt .pdf:application/pdf},
+}
+
+@article{park_whole_2015,
+	title = {Whole core analysis of molten salt breeder reactor with online fuel reprocessing: {Whole} core analysis of {MSBR} with online fuel reprocessing},
+	issn = {0363907X},
+	shorttitle = {Whole core analysis of molten salt breeder reactor with online fuel reprocessing},
+	url = {https://onlinelibrary.wiley.com/doi/10.1002/er.3371},
+	doi = {10.1002/er.3371},
+	abstract = {The simulation of whole core depletion and continuous reprocessing of a molten salt breeder reactor (MSBR) was performed. The MSBR model was built using MCNP6, and the depletion and reprocessing simulations were modeled using CINDER90 and a Python script. The Python script was introduced to implement online reprocessing of molten salt fuel and the feeding of new fertile material with 3-day depletion intervals during the simulations. The simulation started with the reference composition from the original Oak Ridge National Laboratory MSBR design. Equilibrium compositions were obtained from depletion and reprocessing simulations 7000 days worth of data. The MSBR whole core analysis was performed at the initial and equilibrium core conditions, for various reactor design parameters such as multiplication factors, neutron ﬂux distributions, temperature coefﬁcients, rod worths, and power distributions. The neutronic core characteristics were analyzed using a four-factor formula applied to the two zones of the core separately. Copyright © 2015 John Wiley \& Sons, Ltd.},
+	language = {en},
+	urldate = {2022-01-18},
+	journal = {International Journal of Energy Research},
+	author = {Park, Jinsu and Jeong, Yongjin and Lee, Hyun Chul and Lee, Deokjung},
+	month = jul,
+	year = {2015},
+	pages = {n/a--n/a},
+	file = {Park et al. - 2015 - Whole core analysis of molten salt breeder reactor.pdf:C\:\\Users\\Luke\\Zotero\\storage\\J6P38H2W\\Park et al. - 2015 - Whole core analysis of molten salt breeder reactor.pdf:application/pdf},
+}
+
+@article{sheu_depletion_2013,
+	title = {Depletion analysis on long-term operation of the conceptual {Molten} {Salt} {Actinide} {Recycler} \& {Transmuter} ({MOSART}) by using a special sequence based on {SCALE6}/{TRITON}},
+	volume = {53},
+	issn = {03064549},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454912004173},
+	doi = {10.1016/j.anucene.2012.10.017},
+	abstract = {A special sequence based on SCALE6/TRITON was developed to perform fuel cycle analysis of the Molten Salt Actinide Recycler \& Transmuter (MOSART), with emphasis on the simulation of its dynamic refueling and salt reprocessing scheme during long-term operation. MOSART is one of conceptual designs in the molten salt reactor (MSR) category of the Generation-IV systems. This type of reactors is distinguished by the use of liquid fuel circulating in and out of the core, which offers many unique advantages but complicates the modeling and simulation of core behavior using conventional reactor physics codes. The TRITON control module in SCALE6 can perform reliable depletion and decay analysis for many reactor physics applications due to its problem-dependent cross-section processing and rigorous treatment of neutron transport. In order to accommodate a simulation of on-line refueling and reprocessing scenarios, several in-house programs together with a run script were developed to integrate a series of stepwise TRITON calculations; the result greatly facilitates the neutronics analyses of long-term MSR operation. Using this method, a detailed reexamination of the MOSART operation in 30 years was performed to investigate the neutronic characteristics of the core design, the change of fuel salt composition from start-up to equilibrium, the effects of various salt reprocessing scenarios, the performance of actinide transmutation, and the radiotoxicity reduction.},
+	language = {en},
+	urldate = {2022-02-25},
+	journal = {Annals of Nuclear Energy},
+	author = {Sheu, R.J. and Chang, C.H. and Chao, C.C. and Liu, Y.-W.H.},
+	month = mar,
+	year = {2013},
+	pages = {1--8},
+	file = {Sheu et al. - 2013 - Depletion analysis on long-term operation of the c.pdf:C\:\\Users\\Luke\\Zotero\\storage\\GJSWS5FE\\Sheu et al. - 2013 - Depletion analysis on long-term operation of the c.pdf:application/pdf},
+}
+
+@article{nuttin_potential_2005,
+	title = {{POTENTIAL} {OF} {THORIUM} {MOLTEN} {SALT} {REACTORS} : {DETAILED} {CALCULATIONS} {AND} {CONCEPT} {EVOLUTION} {WITH} {A} {VIEW} {TO} {LARGE} {SCALE} {ENERGY} {PRODUCTION}},
+	volume = {46},
+	abstract = {We discuss here the concept of Thorium Molten Salt Reactor dedicated to future nuclear energy production. The fuel of such reactors being liquid, it can be easily reprocessed to overcome neutronic limits. In the late sixties, the MSBR project showed that breeding is possible with thorium in a thermal spectrum, provided that an efficient pyrochemical reprocessing is added. With tools developed around the Monte Carlo MCNP code, we first re-evaluate the performance of a MSBR-1ike refeience system with 232Th/233Ufuel. We find an important reduction of inventories and induced radiotoxicities at equilibrium compared to other fuel cycles, with a doubling time of about thirty years. We then study how to start this interesting reference system with the plutonium from PWR spent fuel. Such a transition appears slow and difficult, since it is very sensitive to the fissile quality of the plutonium used. Deployment scenarios of 232Th/233U MSBR-like systems from the existing French PWRs demonstrate the advantage of an upstream 233Uproduction in other reactors, allowing a direct start of the MSBR-like systems with 233U. This finally leads us to explore alternatives to some MSBR features, for energy production with {\textasciitilde}3UTh/233U fuel from the start. We thus test different options, especially in terms of core neutronics optimization and reprocessing unit adaptation.},
+	language = {en},
+	number = {1},
+	journal = {Progress in Nuclear Energy},
+	author = {Nuttin, A and Heuer, D and Billebaud, A and Brissot, R and Brun, C Le and Liatard, E and Meplan, O and Merle-Lucotte, E and Nifenecker, H and Perdu, F},
+	year = {2005},
+	pages = {23},
+	file = {Nuttin et al. - POTENTIAL OF THORIUM MOLTEN SALT REACTORS  DETAIL.pdf:C\:\\Users\\Luke\\Zotero\\storage\\XK8ZM2CW\\Nuttin et al. - POTENTIAL OF THORIUM MOLTEN SALT REACTORS  DETAIL.pdf:application/pdf},
+}
+
+@inproceedings{fiorina_preliminary_2012,
+	address = {Anaheim, California, USA},
+	title = {Preliminary {Analysis} of the {MSFR} {Fuel} {Cycle} {Using} {Modified}-{EQL3D} {Procedure}},
+	isbn = {978-0-7918-4498-4},
+	url = {http://proceedings.asmedigitalcollection.asme.org/proceeding.aspx?doi=10.1115/ICONE20-POWER2012-54236},
+	doi = {10.1115/ICONE20-POWER2012-54236},
+	abstract = {In the last few years, use of thorium in fast reactors has been gaining increasing attention due to its favorable features in terms of waste minimization and resource availability. In particular, use of thorium in a closed cycle leads to a limited build-up of transuranic isotopes, and to a lower radio-toxicity generation. Unfortunately, U233 breeding is always accompanied by the production of undesirable U232, which represents a serious radiological hazard to workers during fuel reprocessing and, in particular, fabrication. A possible way to partially overcome such difficulty would be to avoid fuel pin fabrication through the development of liquid-fuelled reactors, among which the most promising ones are the Molten Salt Reactors. The present paper investigates the fuel cycle performances of the reference GEN-IV Molten Salt Fast Reactor (MSFR) in terms of isotope evolution, radio-toxicity generation and safety parameters, considering different fuel cycle strategies. Main results are also compared with those obtained for the GEN-IV ELSY Lead Fast Reactor. Calculations are performed by means of the EQL3D procedure developed at the Paul Scherrer Institut (Switzerland) for the analysis of equilibrium fuel cycles in fast reactors. In order to take into account the peculiarities of the MSFR design, a modified version of the procedure is proposed and adopted to model on-line reprocessing and the presence of blankets.},
+	language = {en},
+	urldate = {2022-01-19},
+	booktitle = {Volume 4: {Codes}, {Standards}, {Licensing}, and {Regulatory} {Issues}; {Fuel} {Cycle}, {Radioactive} {Waste} {Management} and {Decommissioning}; {Computational} {Fluid} {Dynamics} ({CFD}) and {Coupled} {Codes}; {Instrumentation} and {Co}},
+	publisher = {ASME},
+	author = {Fiorina, Carlo and Cammi, Antonio and Krepel, Jiri and Mikityuk, Konstantin and Ricotti, Marco Enrico},
+	month = jul,
+	year = {2012},
+	pages = {293},
+	file = {Fiorina et al. - 2012 - Preliminary Analysis of the MSFR Fuel Cycle Using .pdf:C\:\\Users\\Luke\\Zotero\\storage\\D9AVFRGA\\Fiorina et al. - 2012 - Preliminary Analysis of the MSFR Fuel Cycle Using .pdf:application/pdf},
+}
+
+@article{nagy_parametric_2008,
+	title = {Parametric studies on the fuel salt composition in thermal molten salt breeder reactors},
+	abstract = {In this paper the salt composition and the fuel cycle of a graphite moderated molten salt self-breeder reactor operating on the thorium cycle is investigated. A breeder molten salt reactor is always coupled to a fuel processing plant which removes the fission products and actinides from the core. The efficiency of the removal process(es) has a large influence on the breeding capacity of the reactor. The aim is to investigate the effect on the breeding ratio of several parameters such as the composition of the molten salt, moderation ratio, power density and chemical processing. Several fuel processing strategies are studied.},
+	language = {en},
+	journal = {International Conference on the Physics of Reactors},
+	author = {Nagy, K and Kloosterman, J L and Lathouwers, D},
+	year = {2008},
+	pages = {8},
+	file = {Nagy et al. - Parametric studies on the fuel salt composition in.pdf:C\:\\Users\\Luke\\Zotero\\storage\\FG869NXB\\Nagy et al. - Parametric studies on the fuel salt composition in.pdf:application/pdf},
+}
+
+@inproceedings{merle-lucotte_thorium_2007,
+	address = {Brussels, Belgium},
+	title = {The thorium molten salt reactor: {Launching} the thorium cycle while closing the current fuel cycle},
+	abstract = {Molten salt reactors, in the configuration presented here and called Thorium Molten Salt Reactor (TMSR), are particularly well suited to fulfil the criteria defined by the Generation IV forum, and may be operated in simplified and safe conditions in the Th/233U fuel cycle with fluoride salts. The characteristics of TMSRs based on a fast neutron spectrum are detailed in this paper, focusing on their excellent level of deterministic safety. We aimed at designing a critical TMSR able to burn the Plutonium and the Minor Actinides produced in the currently operating reactors, and consequently to convert this Plutonium into 233U. This leads to closing the current fuel cycle thanks to TMSRs started with transuranic elements on a Thorium base, i.e. started in the Th/Pu fuel cycle. We study the transition between the reactors of second and third generations to the Thorium cycle in a European frame.},
+	language = {en},
+	author = {Merle-Lucotte, E and Heuer, D and Allibert, M and Ghetta, V and Brun, C Le and Brissot, R and Liatard, E and Mathieu, L},
+	year = {2007},
+	pages = {7},
+	booktitle = {European Nuclear Conference},
+	file = {Merle-Lucotte et al. - The thorium molten salt reactor Launching the tho.pdf:C\:\\Users\\Luke\\Zotero\\storage\\8DIII8C8\\Merle-Lucotte et al. - The thorium molten salt reactor Launching the tho.pdf:application/pdf},
+}
+
+@misc{h_f_bauman_rod_1971,
+	title = {{ROD}: a nuclear and fuel-cycle analysis code for circulating-fuel reactors},
+	language = {en},
+	author = {{H. F. Bauman} and {G. W. Cunnningham III} and {J. L. Lucius} and {H. T. Kerr} and {C. W. Craven, Jr.}},
+	month = sep,
+	year = {1971},
+	file = {ROD a nuclear and fuel-cycle analysis code for ci.pdf:C\:\\Users\\Luke\\Zotero\\storage\\2BQT2Q5R\\ROD a nuclear and fuel-cycle analysis code for ci.pdf:application/pdf},
+}
+
+@article{leppanen_development_2007,
+	title = {Development of a {New} {Monte} {Carlo} {Reactor} {Physics} {Code}},
+	volume = {640},
+	abstract = {Monte Carlo neutron transport codes are widely used in various reactor physics applications, traditionally related to criticality safety analyses, radiation shielding problems, detector modelling and validation of deterministic transport codes. The main advantage of the method is the capability to model geometry and interaction physics without major approximations. The disadvantage is that the modelling of complicated systems is very computing-intensive, which restricts the applications to some extent. The importance of Monte Carlo calculation is likely to increase in the future, along with the development in computer capacities and parallel calculation.},
+	language = {en},
+	journal = {VTT Publications},
+	author = {Leppänen, Jaakko},
+	year = {2007},
+	pages = {241},
+	file = {Leppänen - Development of a New Monte Carlo Reactor Physics C.pdf:C\:\\Users\\Luke\\Zotero\\storage\\BQ5BYSD8\\Leppänen - Development of a New Monte Carlo Reactor Physics C.pdf:application/pdf},
+}
+
+@article{romano_openmc_2015,
+	series = {Joint {International} {Conference} on {Supercomputing} in {Nuclear} {Applications} and {Monte} {Carlo} 2013, {SNA} + {MC} 2013. {Pluri}- and {Trans}-disciplinarity, {Towards} {New} {Modeling} and {Numerical} {Simulation} {Paradigms}},
+	title = {{OpenMC}: {A} state-of-the-art {Monte} {Carlo} code for research and development},
+	volume = {82},
+	issn = {0306-4549},
+	shorttitle = {{OpenMC}},
+	url = {https://www.sciencedirect.com/science/article/pii/S030645491400379X},
+	doi = {10.1016/j.anucene.2014.07.048},
+	abstract = {This paper gives an overview of OpenMC, an open source Monte Carlo particle transport code recently developed at the Massachusetts Institute of Technology. OpenMC uses continuous-energy cross sections and a constructive solid geometry representation, enabling high-fidelity modeling of nuclear reactors and other systems. Modern, portable input/output file formats are used in OpenMC: XML for input, and HDF5 for output. High performance parallel algorithms in OpenMC have demonstrated near-linear scaling to over 100,000 processors on modern supercomputers. Other topics discussed in this paper include plotting, CMFD acceleration, variance reduction, eigenvalue calculations, and software development processes.},
+	urldate = {2023-09-10},
+	journal = {Annals of Nuclear Energy},
+	author = {Romano, Paul K. and Horelik, Nicholas E. and Herman, Bryan R. and Nelson, Adam G. and Forget, Benoit and Smith, Kord},
+	month = aug,
+	year = {2015},
+	keywords = {HDF5, Monte Carlo, Neutron transport, OpenMC, Parallel, XML},
+	pages = {90--97},
+	file = {ScienceDirect Snapshot:C\:\\Users\\lukes\\Zotero\\storage\\BSBR4TH4\\S030645491400379X.html:text/html;Submitted Version:C\:\\Users\\lukes\\Zotero\\storage\\T8YPVSID\\Romano et al. - 2015 - OpenMC A state-of-the-art Monte Carlo code for re.pdf:application/pdf},
+}
+
+@article{leppanen_serpent_2015,
+	title = {The {Serpent} {Monte} {Carlo} code: {Status}, development and applications in 2013},
+	volume = {82},
+	issn = {03064549},
+	shorttitle = {The {Serpent} {Monte} {Carlo} code},
+	url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454914004095},
+	doi = {10.1016/j.anucene.2014.08.024},
+	abstract = {The Serpent Monte Carlo reactor physics burnup calculation code has been developed at VTT Technical Research Centre of Finland since 2004, and is currently used in over 100 universities and research organizations around the world. This paper presents the brief history of the project, together with the currently available methods and capabilities and plans for future work. Typical user applications are introduced in the form of a summary review on Serpent-related publications over the past few years.},
+	language = {en},
+	urldate = {2022-01-18},
+	journal = {Annals of Nuclear Energy},
+	author = {Leppänen, Jaakko and Pusa, Maria and Viitanen, Tuomas and Valtavirta, Ville and Kaltiaisenaho, Toni},
+	month = aug,
+	year = {2015},
+	pages = {142--150},
+	file = {Leppänen et al. - 2015 - The Serpent Monte Carlo code Status, development .pdf:C\:\\Users\\Luke\\Zotero\\storage\\ML9A93TN\\Leppänen et al. - 2015 - The Serpent Monte Carlo code Status, development .pdf:application/pdf},
+}
+
+@techreport{betzler_liquid-fueled_2021,
+	title = {Liquid-fueled {Molten} {Salt} {Reactor} {Depletion} {Modeling}},
+	url = {https://www.osti.gov/biblio/1809981},
+	abstract = {The U.S. Department of Energy's Office of Scientific and Technical Information},
+	language = {English},
+	urldate = {2023-12-12},
+	institution = {Oak Ridge National Lab. (ORNL), Oak Ridge, TN (United States)},
+	author = {Betzler, Benjamin},
+	month = jun,
+	year = {2021},
+	note = {2},
+}
+
+@article{shahbazi_steady-state_2022,
+	title = {Steady-state radiochemical transport model of the molten salt reactor experiment},
+	volume = {331},
+	issn = {1588-2780},
+	url = {https://doi.org/10.1007/s10967-022-08535-3},
+	doi = {10.1007/s10967-022-08535-3},
+	abstract = {A radiochemical transport model of the Molten Salt Reactor Experiment (MSRE) was formulated based on the material derivative featuring system level 1-D flow providing spatial dependence accounting for multiple phenomena including radioactive decay, chemical removal, and fuel depletion across custom volume regions. The steady-state version, which is based on a system of ODE’s, can be solved efficiently and is useful for sensitivity studies utilizing Monte Carlo sampling. Accounting for multiple phenomena in a fully coupled model is necessary to understand the complexities of transport and distribution of radionuclides throughout the primary loop of a flowing fuel reactor.},
+	language = {en},
+	number = {12},
+	urldate = {2024-01-08},
+	journal = {Journal of Radioanalytical and Nuclear Chemistry},
+	author = {Shahbazi, Shayan and Romano, Paul and Fei, Tingzhou and Grabaskas, David},
+	month = dec,
+	year = {2022},
+	note = {4},
+	keywords = {Molten salt reactor, Chemical removal, Fuel depletion, Radionuclide transport, Sensitivity study},
+	pages = {5247--5257},
+	file = {Full Text PDF:C\:\\Users\\lukes\\Zotero\\storage\\W7SM34GY\\Shahbazi et al. - 2022 - Steady-state radiochemical transport model of the .pdf:application/pdf},
+}
+
+@techreport{anderson_user_2022,
+	title = {User {Guide} to the {Advanced} {Dimensional} {Depletion} for {Engineering} of {Reactors} ({ADDER}) {Software} ({V}.1.01)},
+	url = {https://www.osti.gov/biblio/1866062},
+	abstract = {The Advanced Dimensional Depletion for Engineering of Reactors (ADDER) software is being developed in the Research and Test Reactor (RTR) Program at Argonne National Laboratory to meet the reactor design and analysis needs of the Conversion Program. ADDER is a flexible tool that (1) provides a depletion capability through coupling external neutronics codes with a built-in CRAM solver or external depletion code and (2) provides a user-friendly interface to perform fuel management and criticality search operations. The ADDER software is a Python 3 application written using modern software development practices subject to a compliant implementation of NQA-1 and applicable Department of Energy software quality assurance standards. This report is the user guide for the software release referred to as ADDER v1.0.1. The motivation for a software to have flexible capabilities that ADDER possesses is the need to support a wide variety of geometries that are commonly required in analysis of research and test reactors. These reactors can have complex fuel, experiment, or control material shuffling patterns that persist over several years with many fuel management and partial refueling intervals. The scale of fuel management analysis can require tracking of an inventory that is multiple times the core loading. Many reactors, both power and non-power reactors of various types, will find the features of ADDER useful to facilitate key tasks that a fuel or core design engineer must perform with the convenience of concise input and validated functionality.},
+	language = {English},
+	number = {ANL/RTR/TM-21/8-Rev.1},
+	urldate = {2023-10-09},
+	institution = {Argonne National Laboratory (ANL), Argonne, IL (United States)},
+	author = {Anderson, K. and Mascolino, V. and Nelson, A. G.},
+	month = apr,
+	year = {2022},
+	doi = {10.2172/1866062},
+	file = {Full Text PDF:C\:\\Users\\lukes\\Zotero\\storage\\QPYKJ8U3\\Anderson et al. - 2022 - User Guide to the Advanced Dimensional Depletion f.pdf:application/pdf},
+}
+
+@conference{tanocoupled2023,
+    author = {Tano, M and Walker, S A and Abou-Jaoude, A},
+    booktitle = {American Nuclear Society Mathematics \& Computation},
+    title = {A {Coupled} {Griffin} and {Pronghorn} {Method} for {Spatially} {Resolved} {Depletion} {Analysis} of {Molten} {Salt} {Reactors}},
+    year = 2023
+}
+
+@techreport{fei_validation_2022,
+	title = {Validation of {NEAMS} {Tools} {Using} {MSRE} {Data}},
+	url = {https://www.osti.gov/biblio/1880993},
+	abstract = {This report documents the benchmarks developed and performed for the tools and codes developed under the Nuclear Energy Advanced Modeling and Simulation (NEAMS) program utilizing the MSRE experiment data. There are three focus areas explored in this work: fuel evolution, CFD, and system transient analyses. Fuel depletion is important for MSR reactor physics and fuel cycle analysis. Fuel depletion capability is currently being developed in the Griffin reactor physics code. To support this, a benchmark problem is developed using the MSRE data and an existing depletion code with flowing fuel analysis functionality (ADDER) to validate this new capability in Griffin. The ADDER calculation is compared with the TRITON-MSR results as well as the MSRE experimental data. This benchmark can be directly used to verify and validate the Griffin fuel depletion capability in future years. For CFD simulation, the MSRE CAD model is obtained from the Copenhagen Atomics and a mesh is generated for the MSRE inlet plenum. The Nek5000 code will be employed to find the flow distribution in the MSRE inlet plenum based on the mesh generated. For system analysis, a simple benchmark problem for three types of MSR system transients is developed. The SAM and SPECTRA codes are used to solve the simple problem, and the results from the two codes agree well. The SAM code is also employed to obtain the frequency response of the MSRE system at the 5 and 8 MWt power levels. The results agree well with the experiment measurements. These verification and validation efforts gives SAM users more confidence in MSR system transient simulations using SAM. Lastly, the SAM-Griffin Multiphysics coupling work is initiated. A simple one-way coupling of evaluating the precursor drift effect on the MSRE k-eff is demonstrated. This preliminary coupling work serves as the basis for future more complex Multiphysics simulation and modelling.},
+	language = {English},
+	number = {ANL/NSE-22/48},
+	urldate = {2024-02-16},
+	institution = {Argonne National Laboratory (ANL), Argonne, IL (United States)},
+	author = {Fei, T. and Shahbazi, S. and Fang, J. and Shaver, D.},
+	month = aug,
+	year = {2022},
+	doi = {10.2172/1880993},
+	file = {Full Text PDF:C\:\\Users\\lukes\\Zotero\\storage\\YFBVDTXD\\Fei et al. - 2022 - Validation of NEAMS Tools Using MSRE Data.pdf:application/pdf},
+}
+
+@article{bohr1939mechanism,
+  title={The mechanism of nuclear fission},
+  author={Bohr, Niels and Wheeler, John Archibald},
+  journal={Physical Review},
+  volume={56},
+  number={5},
+  pages={426},
+  year={1939},
+  publisher={APS}
+}
+
+@book{ott1985introductory,
+  title={Introductory Nuclear Reactor Dynamics},
+  author={Ott, K.O. and Neuhold, R.J.},
+  isbn={9780894480294},
+  lccn={85022903},
+  url={https://books.google.com/books?id=IAyMQgAACAAJ},
+  year={1985},
+  publisher={American Nuclear Society}
+}
+
+@article{conant1971measurement,
+  title={Measurement of the delayed-neutron fractions for thermal fission of uranium-235, plutonium-239, and uranium-233},
+  author={Conant, John F and Palmedo, Philip F},
+  journal={Nuclear Science and Engineering},
+  volume={44},
+  number={2},
+  pages={173--179},
+  year={1971},
+  publisher={Taylor \& Francis}
+}
+
+@article{wilson2002delayed,
+  title={Delayed neutron study using ENDF/B-VI basic nuclear data},
+  author={Wilson, WB and England, TR},
+  journal={Progress in Nuclear Energy},
+  volume={41},
+  number={1-4},
+  pages={71--107},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@techreport{robertson_conceptual_1971,
+	title = {{CONCEPTUAL} {DESIGN} {STUDY} {OF} {A} {SINGLE}-{FLUID} {MOLTEN}-{SALT} {BREEDER} {REACTOR}.},
+	url = {http://www.osti.gov/servlets/purl/4030941/},
+	language = {en},
+	number = {ORNL--4541, 4030941},
+	urldate = {2022-01-17},
+	institution = {ORNL},
+	author = {Robertson, R.C.},
+	month = jan,
+	year = {1971},
+	doi = {10.2172/4030941},
+	pages = {ORNL--4541, 4030941},
+	file = {Robertson - 1971 - CONCEPTUAL DESIGN STUDY OF A SINGLE-FLUID MOLTEN-S.pdf:C\:\\Users\\Luke\\Zotero\\storage\\726V9RCR\\Robertson - 1971 - CONCEPTUAL DESIGN STUDY OF A SINGLE-FLUID MOLTEN-S.pdf:application/pdf},
+}
+
+@ARTICLE{2020SciPy-NMeth,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and
+            Haberland, Matt and Reddy, Tyler and Cournapeau, David and
+            Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and
+            Bright, Jonathan and {van der Walt}, St{\'e}fan J. and
+            Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and
+            Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and
+            Kern, Robert and Larson, Eric and Carey, C J and
+            Polat, {\.I}lhan and Feng, Yu and Moore, Eric W. and
+            {VanderPlas}, Jake and Laxalde, Denis and Perktold, Josef and
+            Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and
+            Harris, Charles R. and Archibald, Anne M. and
+            Ribeiro, Ant{\^o}nio H. and Pedregosa, Fabian and
+            {van Mulbregt}, Paul and {SciPy 1.0 Contributors}},
+  title   = {{{SciPy} 1.0: Fundamental Algorithms for Scientific
+            Computing in Python}},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  adsurl  = {https://rdcu.be/b08Wh},
+  doi     = {10.1038/s41592-019-0686-2},
+}
+
+@misc{uncertaintiespackage,
+  title        = "Uncertainties: a Python package for calculations with uncertainties",
+  author       = "{Eric O. LEBIGOT. A}"
+}
+
+@phdthesis{kinlaw2007delayed,
+    author = {Kinlaw, Mathew Thomas},
+    title = {Delayed neutron group parameters from photofission},
+    school = {Idaho State University},
+    year = {2007}
+}
+
+@article{virtanen2020scipy,
+  title={SciPy 1.0: fundamental algorithms for scientific computing in Python},
+  author={Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E and Haberland, Matt and Reddy, Tyler and Cournapeau, David and Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and Bright, Jonathan and others},
+  journal={Nature methods},
+  volume={17},
+  number={3},
+  pages={261--272},
+  year={2020},
+  publisher={Nature Publishing Group}
+}
+
+@article{chen2002rigorous,
+  title={Rigorous MCNP based shutdown dose rate calculations: computational scheme, verification calculations and application to ITER},
+  author={Chen, Y and Fischer, U},
+  journal={Fusion Engineering and Design},
+  volume={63},
+  pages={107--114},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@article{parish1999status,
+  title={Status of six-group delayed neutron data and relationships between delayed neutron parameters from the macroscopic and microscopic approaches},
+  author={Parish, TA and Charlton, WS and Shinohara, N and Andoh, M and Brady, MC and Raman, S},
+  journal={Nuclear science and engineering},
+  volume={131},
+  number={2},
+  pages={208--221},
+  year={1999},
+  publisher={Taylor \& Francis}
+}
+
+@article{lindsay_introduction_2018,
+    title = {Introduction to {Moltres}: {An} application for simulation of {Molten} {Salt} {Reactors}},
+    volume = {114},
+    issn = {0306-4549},
+    url = {https://linkinghub.elsevier.com/retrieve/pii/S0306454917304760},
+    doi = {10.1016/j.anucene.2017.12.025},
+    journal = {Annals of Nuclear Energy},
+    author = {Lindsay, Alexander and Ridley, Gavin and Rykhlevskii, Andrei and Huff, Kathryn},
+    month = apr,
+    year = {2018},
+    keywords = {Reactor physics, Nuclear fuel cycle, nuclear engineering, agent based modeling, Hydrologic contaminant transport, Object orientation, repository, Systems analysis, Simulation, Multiphysics, Finite elements, MOOSE, Parallel computing},
+    pages = {530--540},
+}
+
+@book{python,
+ author = {Van Rossum, Guido and Drake, Fred L.},
+ title = {Python 3 Reference Manual},
+ year = {2009},
+ isbn = {1441412697},
+ publisher = {CreateSpace},
+ address = {Scotts Valley, CA}
+}
+
+@ARTICLE{scipy,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and
+            Haberland, Matt and Reddy, Tyler and Cournapeau, David and
+            Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and
+            Bright, Jonathan and {van der Walt}, St{\'e}fan J. and
+            Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and
+            Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and
+            Kern, Robert and Larson, Eric and Carey, C J and
+            Polat, {\.I}lhan and Feng, Yu and Moore, Eric W. and
+            {VanderPlas}, Jake and Laxalde, Denis and Perktold, Josef and
+            Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and
+            Harris, Charles R. and Archibald, Anne M. and
+            Ribeiro, Ant{\^o}nio H. and Pedregosa, Fabian and
+            {van Mulbregt}, Paul and {SciPy 1.0 Contributors}},
+  title   = {{{SciPy} 1.0: Fundamental Algorithms for Scientific
+            Computing in Python}},
+  journal = {Nature Methods},
+  year    = {2020},
+  volume  = {17},
+  pages   = {261--272},
+  adsurl  = {https://rdcu.be/b08Wh},
+  doi     = {10.1038/s41592-019-0686-2},
+}
+
+@Article{         numpy,
+ title         = {Array programming with {NumPy}},
+ author        = {Charles R. Harris and K. Jarrod Millman and St{\'{e}}fan J.
+                 van der Walt and Ralf Gommers and Pauli Virtanen and David
+                 Cournapeau and Eric Wieser and Julian Taylor and Sebastian
+                 Berg and Nathaniel J. Smith and Robert Kern and Matti Picus
+                 and Stephan Hoyer and Marten H. van Kerkwijk and Matthew
+                 Brett and Allan Haldane and Jaime Fern{\'{a}}ndez del
+                 R{\'{i}}o and Mark Wiebe and Pearu Peterson and Pierre
+                 G{\'{e}}rard-Marchant and Kevin Sheppard and Tyler Reddy and
+                 Warren Weckesser and Hameer Abbasi and Christoph Gohlke and
+                 Travis E. Oliphant},
+ year          = {2020},
+ month         = sep,
+ journal       = {Nature},
+ volume        = {585},
+ number        = {7825},
+ pages         = {357--362},
+ doi           = {10.1038/s41586-020-2649-2},
+ publisher     = {Springer Science and Business Media {LLC}},
+ url           = {https://doi.org/10.1038/s41586-020-2649-2}
+}
+
+@Article{matplotlib,
+  Author    = {Hunter, J. D.},
+  Title     = {Matplotlib: A 2D graphics environment},
+  Journal   = {Computing in Science \& Engineering},
+  Volume    = {9},
+  Number    = {3},
+  Pages     = {90--95},
+  abstract  = {Matplotlib is a 2D graphics package used for Python for
+  application development, interactive scripting, and publication-quality
+  image generation across user interfaces and operating systems.},
+  publisher = {IEEE COMPUTER SOC},
+  doi       = {10.1109/MCSE.2007.55},
+  year      = 2007
+}
+
+@software{pandas,
+  author       = {{The pandas development team}},
+  title        = {pandas-dev/pandas: Pandas},
+  year         = 2024,
+  publisher    = {Zenodo},
+  version      = {v2.2.2},
+  doi          = {10.5281/zenodo.10957263},
+  url          = {https://doi.org/10.5281/zenodo.10957263}
 }

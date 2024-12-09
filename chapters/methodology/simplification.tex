@@ -1,0 +1,51 @@
+To create tabulated \gls{DNP} group parameter data in a reactor agnostic manner, the manner of tabulation needs to be reactor agnostic as well.
+At the same time, a large number of tabulation parameters to fully detail the flow regime is not computationally feasible.
+Instead, the flow-related tabulation uses only three parameters: a mixing rate ($\lambda_{mix}$), an in-core average residence time ($\tau_{in}$), and an ex-core residence time ($\tau_{ex}$).
+
+This approach captures the advection of the fuel salt around the primary loop as well as an approximation of turbulent and diffusive mixing.
+The terms are based on the averaged behavior from a control volume of fuel salt, so thermal-hydraulic effects such as vortices would be treated as changes in residence times and mixing rate.
+This method allows an approximate fitting for any circulating fuel reactor geometry, where all that is required is generating the relevant parameters for accessing the tabulated data.
+
+The other tabulation required is for the reprocessing, which can vary in which fission products are removed and their reprocessing rates.
+Refueling is not considered in this work, as for the short time frames analyzed, the effects of adding additional fuel are considered to be negligible.
+Additionally, since the saturation irradiation time frame is on the order of multiple half lives of the longest lived \gls{DNP}, this means a maximum irradiation time of five minutes is required to reach equilibrium \glspl{DNP} concentrations.
+This means that elements which have cycle times on the order of months to years are likely to have negligible changes and do not need to be treated.
+Elements with changes on the order of seconds to days will have a sufficient contribution such that their inclusion is needed to generate accurate data.
+
+The \gls{MSBR} reprocessing scheme is used as a base in this work, shown in Table \ref{tab:msbr_cycle_times}.
+The rare earths, seminoble metals, volatile fluorides, discard, and higher nuclides are likely negligible for the time scales studied in this work.
+However, to ensure that they are negligible, the effects of these larger cycle time terms are studied in Section \ref{sec:large-tcyc}.
+Additionally, to better understand how the reprocessing rates affect the group parameters, the cycle times are scaled up and down in Section \ref{sec:repr-scale}.
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\caption{MSBR Online Reprocessing Cycle Times from \cite{robertson_conceptual_1971}}
+\label{tab:msbr_cycle_times}
+\begin{center}
+\begin{tabular}{ p{0.27\linewidth} | p{0.25\linewidth} | p{0.35\linewidth} }
+ \hline
+ Reprocessing Group & Element(s) & Cycle Time (Full Power)\\
+ \hline
+ \hline
+ Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & 50 days\\
+ Rare Earths & Eu & 500 days\\
+ Noble Metals  & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & 20 seconds\\
+ Seminoble Metals & Zr, Cd, In, Sn &  200 days\\
+ Gases & Kr, Xe & 20 seconds\\
+ Volatile Fluorides & Br, I & 60 days\\
+ Discard & Rb, Sr, Cs, Ba & 3435 days\\
+ Salt Discard & Th, Li, Be, F & 3435 days\\
+ Protactinium & Pa & 3 days\\
+ Higher Nuclides & Np, Pu & 16 years\\
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Overall, the tabulations which are used are incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, mixing rate, reprocessing scheme, and reprocessing scaling vector.
+Because each unique tabulation is an extra dimension of data that must be collected, it becomes increasingly expensive to compute all of these tabulated results.
+In this work, the reprocessing scheme uses the \gls{MSBR} reprocessing scheme and a single scaling scalar, rather than a vector containing scaling values for each element.
+Additionally, for the simplified model, discussed in Section \ref{sec:simple-model}, the mixing rate is not used, which also reduces the net computational cost of generating the tabulated data.
+The incident neutron energies used are 0.0253 $eV$ and 1 $MeV$.
+For the residence times, a study is carried out in Section \ref{sec:res-time-var} to determine the minimum number of residence times and their values to capture general trends.
+

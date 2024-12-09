@@ -1,0 +1,49 @@
+There are many different \gls{MSR} designs in the literature, including \cite{cheng2014development}: the FUJI series \cite{furukawa1990thorium}, \gls{AMSTER} \cite{vergnes2002amster}, \gls{MOSART} \cite{ignatiev2007progress}, \gls{FS-MSR} \cite{holcomb2011fast}, European \gls{MSFR} \cite{merle2008introduction}, \gls{SM-MSR} \cite{casino2007small}, \gls{MSBR} \cite{robertson1971conceptual}, and MSRE \cite{robertson1965msre}.
+These designs feature a circulating salt containing fissionable material, which has different characteristics than stationary fuels traditionally used in \glspl{LWR}.
+In particular, the circulating fuel salt allows for online chemical reprocessing, causes depletion to vary spatially far more than stationary fuel, movement of \glspl{DNP}, and close coupling of thermal-hydraulics to neutronics.
+
+There are many works in the literature which have investigated online chemical reprocessing of \glspl{MSR}, as can be seen in Table \ref{tab:codes_types} recreated from \cite{seifert2023analysis}.
+Table \ref{tab:codes_types} shows which MSR depletion simulations have modeled \glspl{DNP} in the "DNP" column, which shows most models do not include \gls{DNP} movement in depletion.
+The table is sorted by the "Reprocessing" column, which signifies the method(s) used in the different \gls{MSR} models and is also sorted by the publication year in the "Year" column.
+The table shows that there are many \glspl{MSR}, shown in the "Reactor" column, which have had depletion modeled using a variety of spatial refinement levels, shown in the "Model" column, ranging from unit cells to full 3D models.
+
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\caption{Molten Salt Reactor Models Analyzed with Methods Approximating Online Reprocessing from \cite{seifert2023analysis}}
+\label{tab:codes_types}
+\begin{center}
+\begin{tabular}{  c | c | c | c | c | c}
+ \hline
+ Publication & Reprocessing & Model & Reactor & DNP & Year\\
+ \hline
+ \hline
+ Valdez et al. \cite{jr_vicente_valdez_modeling_2020} & Continuous & Unit Cell & N/A & No & 2020\\
+ Zhuang et al. \cite{zhuang_extended_2020} & Continuous & Full 3D & MSFR & No & 2020\\
+ Xia et al. \cite{xia_development_2019} & Continuous & Full 3D & N/A & No & 2019\\
+ Zhou et al. \cite{zhou_fuel_2018} & Continuous & Full 3D & MSBR & Yes & 2018\\
+ Aufiero et al. \cite{aufiero_extended_2013} & Continuous & Full 3D & MSFR & No & 2013\\
+ Rodriguez-Vieitez \cite{rodriguez-vieitez_transmutation_2002} & Continuous & Unit Cell & ADNA & No & 2002\\
+ \hline
+ 
+ Rykhlevskii \cite{rykhlevskii_modeling_2019} & Batchwise & Full 3D & MSBR & No & 2019\\
+ Betzler et al. \cite{betzler_molten_2017} & Batchwise & Unit Cell & MSBR & No & 2017\\
+ Ridley and Chvala \cite{ridley_method_2017} & Batchwise & Full 3D & Toy & No & 2017\\
+ Ahmad et al. \cite{ahmad_neutronics_2015} & Batchwise & Unit Cell & DMSR & No & 2015\\
+ Park et al. \cite{park_whole_2015} & Batchwise & Full 3D & MSBR & No & 2015\\
+ Sheu et al. \cite{sheu_depletion_2013} & Batchwise & Full 3D & MOSART & No & 2013\\
+ Nuttin et al. \cite{nuttin_potential_2005} & Batchwise & Full 3D & MSBR & No & 2005\\
+ 
+ \hline
+ Fiorina et al. \cite{fiorina_preliminary_2012} & Mixed & 2D Slice & MSFR & No & 2012\\
+ Nagy et al. \cite{nagy_parametric_2008} & Mixed & Unit Cell & Toy & Yes & 2008\\
+ Merle-Lucotte et al. \cite{merle-lucotte_thorium_2007} & Mixed & Full 3D & TMSR & No & 2007\\
+ Bauman et al. \cite{h_f_bauman_rod_1971} & Mixed & 2D Slice & N/A & Yes & 1971\\
+ 
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+Although these works incorporate the effects of online chemical reprocessing on depletion, an effect they do not explicitly model is the spatial effect on depletion.
+The reason why most works do not include spatial resolution in depletion calculations is due to the computational cost.

@@ -1,0 +1,22 @@
+An important part of ensuring safe reactor operation is making sure safety-related transient events do not disrupt safe reactor operations.
+These transients are caused by \glspl{PIE}, which are defined by the \gls{IAEA} in the \gls{IAEA} Safety Standard Series No. NS-R-1 \cite{international2000iaea}.
+Of particular importance are \glspl{PIE} which lead to \glspl{DBA}.
+Although No. SSR-2/1 has superceded No. NS-R-1, the \glspl{PIE} and \glspl{DBA} for \glspl{MSR} have not changed \cite{international2016iaea}.
+Although there is not specific events listed for \glspl{MSR}, guidance is provided on what sort of events are of interest.
+
+These events include equipment failures, such as pumps failing or pipes rupturing; human error, such as improper maintenance or faulty operator actions; external events, such as an earthquake; and combinations of events.
+For combinations of events, the \gls{IAEA} specifies that these events should make sense in combination and in the time frame modeled.
+For example, if a particular event lasts a long time or has a long lasting effect, then that event could possibly overlap with another unrelated event.
+Alternatively, events which are not independent of each other could potentially occur at the same time.
+
+
+
+Safety-related transients, for \glspl{MSR} include \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} \cite{li2015transient, daher2022improvement}.
+An \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, which causes a loss of cooling of the reactor.
+For the \gls{MSFR}, Brovchenko et al. have shown that slow \gls{ULOHS} transients that take place over a minute or longer minimize the increase in fuel salt temperature \cite{brovchenko2013design}.
+An {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
+An \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
+A \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
+
+These safety-related transients are important for the current work, as the tabulated \gls{DNP} group parameters can be used to more rapidly simulated these transients.
+Additionally, due to the coupling of the neutronics and thermal-hydraulics in calculation of the tabulated effective group parameters, the results are more accurate than they would be using more traditional transient analysis methods.
