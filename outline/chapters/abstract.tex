@@ -1,0 +1,25 @@
+Beta-delayed neutron emitters, or delayed neutron precursors (DNPs), are important for safeguards monitoring and safety considerations in reactor transients, such as shutdown decay-heat, reactor controllability, and reactivity changes.
+In particular, molten salt reactors (MSRs) have DNPs which move from areas of high importance in the core to areas of lower importance in the core and ex-core regions.
+This causes the effective delayed neutron fraction to decrease, leading to changes in reactivity based on the salt flow rate.
+Many works have investigated how the effective delayed neutron fraction changes based on the movement of fuel salt in MSRs.
+%However, simulations that fully couple depletion of the fuel salt while accounting for fuel movement are computationally-intractable \cite{betzler2021liquid, tano2023coupled}.
+What these works do not consider, however, is the effect of fuel salt movement and reprocessing on the DNP group parameters used in the transient simulations.
+%However, simulations that fully couple depletion of the fuel salt while accounting for fuel movement are computationally-intractable.
+%Because of this limitation, DNP group parameters used in MSR dynamics simulations do not account for depletion of the fuel salt.
+%An effect which has not been investigated in the literature is the change to the DNP group parameters caused by the movement of the fuel salt, online reprocessing, and thermochemical changes in MSRs.
+This issue is important to resolve, as the DNP group parameters are used for safety-related calculations as well as in safeguards-related detection simulations.
+
+The DNP group parameters for MSRs can be resolved by first generating concentrations that account for the spatially resolved depletion and reprocessing.
+Shorter lived DNP group parameters are found via pulse irradiation experiments, which occur at very short time scales relative to molten salt flow rates.
+The longer lived DNP group parameters vary from traditionally calculated values since they are measured with saturation, or infinite, irradiation experiments which occur at time scales several times longer than the longest DNP half life.
+These longer time scales mean that thermal-hydraulic, thermochemical, and reprocessing effects are able to affect the DNPs.
+
+
+The concentrations are combined with delayed neutron emission probability and half life data for each nuclide to construct delayed neutron counts as a function of time, a process described in the literature as the "microscopic" approach.
+A non-linear least-squares solver is then used in order to generate a $\chi^2$ minimized set of DNP group parameters.
+These updated MSR DNP group parameters are then used in several safety-related transient and safeguards simulations in the Molten Salt Reactor Experiment in order to demonstrate the difference between the group parameters.
+This work solves an important problem with the DNP group parameters for use in MSRs by providing updated group parameters and a method for generating them dynamically for a given reactor.
+Tabulated DNP group parameters for various flow rates and energies are provided in this work for future analyses.
+%Depletion and temperature tabulated multi-group cross-sections are generated and passed along to a loosely-coupled multiphysics solve to handle the depletion, thermal-hydraulics, and thermochemistry.
+%From these simulations, the composition of the fuel salt is collected and combined with data on delayed neutron emission probabilities and individual DNP half lives.
+%This allows for generation of a delayed neutron count, which can be generated at 

@@ -1,0 +1,41 @@
+%For the simplified model discussed in Section \ref{sec:simple-model}, the mixing term is ignored, and only advection is considered in a simplified manner.
+
+\begin{itemize}
+    \item Introduce simplified model (used to understand general trends that can be expected from advection) (Appendix for derivation of non-linear least-squares formatted equation)
+    \item Show flow diagram and discuss (several paragraphs to fully explain)
+    \item Discuss specific considerations for OpenMC simulation (self-shielding)
+    \item Discuss specifics of OpenMC model
+    \item Discuss consistent source particle rate between simulations (with equation)
+\end{itemize}
+
+
+\begin{comment}
+After the OpenMC model, the custom scripts handle converting the concentrations into group parameters.
+Within these scripts, the SciPy non-linear least squares fitting function is used to generate these group parameters.
+However, there are some alterations included to ensure the fit is as good as possible.
+The first is linearization and normalization of the data.
+The normalization is handled by taking the delayed neutron counts, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and then taking the natural logarithm.
+These normalized counts are then passed into the non-linear least squares fitting.
+The linearization is handled by taking the natural logarithm of the entire delayed neutron count fit function.
+This treatment reduces both the covariance and the $\chi^2$ of the resulting non-linear least squares fit.
+Bounds are also set from zero to 1000 for each term to speed up the process, while the tolerances for convergence are set to $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
+
+Uncertainties are tracked in this work using the uncertainties package \cite{uncertaintiespackage}.
+Uncertainties in the concentrations generated from OpenMC are not accounted for, but uncertainties in the experimentally measured emission probabilities and half lives are.
+These uncertainties are used in the minimization of $\chi^2$, shown in Equation \eqref{eq:chisq-nnls}.
+
+\begin{equation}
+    \chi^2 = \sum_{t=0}^{t_f} \left(  \frac{b_t - A_t x_t}{\sigma_t}  \right)
+    \label{eq:chisq-nnls}
+\end{equation}
+
+The terms in Equation \eqref{eq:chisq-nnls} are defined as follows:
+
+\begin{description}
+    \item $t_f$ is the final time after irradiation, starting at $t=0$ immediately following irradiation
+    \item $b_t$ is the delayed neutron count vector at the row where the time value is $t$
+    \item $A_t$ is the coefficient matrix at the row where the time value is $t$
+    \item $x_t$ is the solution vector at the row where the time value is $t$
+\end{description}
+
+\end{comment}
