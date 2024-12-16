@@ -4,7 +4,7 @@
 This derivation begins with the Equations \eqref{eq:wilson-R} and \eqref{eq:wilson-n} provided by Wilson and England \cite{wilson2002delayed}:
 
 \begin{equation}
-    R(t) = \sum_{i=1}^{I} a_i \lambda_i e^{-\lambda_i t}
+    R(t) = \sum_{i=1}^{n} a_i \lambda_i e^{-\lambda_i t}
     \label{eq:wilson-R}
 \end{equation}
 
@@ -19,6 +19,7 @@ The terms in Equation \eqref{eq:wilson-R} are discussed in Section \ref{ref:calc
     \item $T$ is the length of the fission history
     \item $t$ is the decay time from the end of the fission history
     \item $F(\tau)$ is the fission history (in fissions per second)
+    \item $\bar{\nu}_d$ is the average number of delayed neutrons per fission event
     \end{itemize}
 
 Because the results are normalized to a single delayed neutron, the $\bar{\nu}_d$ term is divided out.
@@ -92,14 +93,14 @@ This assumption makes the sine term 0 for every value of $k$, which means that t
 
 
 \begin{equation}
-    n_{d}(t) = \frac{F_0}{2} \sum_{i=1}^{I} a_i e^{-\lambda_i t}
+    n_{d}(t) = \frac{F_0}{2} \sum_{i=1}^{n} a_i e^{-\lambda_i t}
     \label{eq:fully-resolved-flow-irrad}
 \end{equation}
 
 This is very similar to the saturation irradiation delayed neutron count equation, shown in Equation \eqref{eq:saturation-count-eqn}.
 
 \begin{equation}
-    n_{d}(t) = F_0 \sum_{i=1}^{I} a_i e^{-\lambda_i t}
+    n_{d}(t) = F_0 \sum_{i=1}^{n} a_i e^{-\lambda_i t}
     \label{eq:saturation-count-eqn}
 \end{equation}
 
