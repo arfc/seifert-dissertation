@@ -33,12 +33,15 @@ This leads to over-conservatism in safety systems and increased costs, difficult
 \subsection{Measurement}
 \label{sec:measurementofdnps}
 
-\subsubsection{Macro Measurement of Delayed Neutron Precursors}
+There are two approaches used for measurement of \glspl{DNP}, referred to as the macroscopic and microscopic measurement approaches \cite{parish1999status}.
+The approaches differ initially, as the macroscopic approach uses a fissile sample irradiation to get delayed neutron counts which can be approximated using groups.
+The microscopic approach instead uses the data from many experiments combined together to simulate a fissile sample irradiation, using the data to generate the delayed neutron counts.
+This makes the microscopic approach more challenging, as it depends on the work of many experimentalists, though it also offers more detail on the delayed neutron counts.
 
-There are two approaches used for measurement of \glspl{DNP}, referred to as macroscopic, or macro, and microscopic, or micro, measurement approaches \cite{parish1999status}.
-This section covers the macro approach.
-Analysis and collection of macro approach data is very common in the literature, as the data from this method is important for reactors \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant}.
-The macro approach entails irradiation of a sample containing a single fissile nuclide at or near a given neutron energy.
+\subsubsection{Macroscopic Measurement of Delayed Neutron Precursors}
+This section covers the macroscopic approach.
+Analysis and collection of macroscopic approach data is very common in the literature, as the data from this method is important for reactors \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant}.
+The macroscopic approach entails irradiation of a sample containing a single fissile nuclide at or near a given neutron energy.
 Small samples are used in order to minimize neutron multiplication within the sample.
 Two different types of irradiation are used: pulse irradiation, where the irradiation time is shorter than the shortest half-life; and infinite, where the irradiation time is longer than the longest half-life.
 After irradiation, the delayed neutrons from the sample are counted as a function of time.
@@ -76,9 +79,9 @@ Another consideration is measurement of the number of fissions.
 Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, this does not account for source multiplication within the irradiated sample.
 Keepin et al. suggests a technique to correct for the sample self-multiplication, which can cause differences of up to 3\% in the correction factor to the number of fissions.
 
-\subsubsection{Micro Measurement of Delayed Neutron Precursors}
+\subsubsection{Microscopic Measurement of Delayed Neutron Precursors}
 
-The other approach used to measure \glspl{DNP} is the micro-measurement approach.
+The other approach used to measure \glspl{DNP} is the microscopic approach.
 This approach entails taking a sample of a single \gls{DNP} nuclide and gathering experimental data on its properties.
 Typically this involves some form of rapid chemical extraction or isotope separator and magnetic tape in order to rapidly measure short lived nuclides.
 
@@ -94,10 +97,11 @@ The time-of-flight method involves measuring the velocity of the delayed neutron
     \label{fig:micromeasure}
 \end{figure}
 
-This micro measurement data is exceptionally useful, as it allows for treatment of \glspl{DNP} on a nuclide-by-nuclide basis, rather than macro-scale.
+This microscopic measurement data is exceptionally useful, as it allows for treatment of \glspl{DNP} on a nuclide-by-nuclide basis, rather than macro-scale.
 This is particularly important for \glspl{MSR}, where the spatial concentration of \glspl{DNP} depends on half-lives, yields, thermo-chemistry, and thermal-hydraulics.
 With data on individual nuclides, higher fidelity treatment of \glspl{DNP} becomes possible.
 
 There have been many new measurements in the past several decades on these nuclides.
 Fortunately, the \gls{IAEA} has worked to compile and evaluate this data into a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
 This data, when combined with cumulative fission yields and neutronics data, can be used to model the \glspl{DNP} explicitly, rather than using groups.
+This is particularly useful for understanding what nuclides have the greatest impact as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.

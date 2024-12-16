@@ -57,7 +57,7 @@ The terms in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} are defi
 
 \Gls{PRK} are a simpler approach to modeling a transient, with the basic form given in Equations \eqref{eq:prk-n} and \eqref{eq:prk-C}.
 The derivation of the \gls{PRK} equations can be found in the work by Henry, with a fluid-fueled derivation in the work by Lapenta et al. \cite{henry1958application, lapenta2001point}.
-\gls{MPK} are used for \glspl{MSR}, as standard \gls{PRK} do not properly handle the movement of the fuel salt.
+\Gls{MPK} are used for \glspl{MSR}, as standard \gls{PRK} do not properly handle the movement of the fuel salt.
 
 \begin{equation}
     \frac{dn(t)}{dt} = \frac{\rho(t) - \beta_{eff}}{\Lambda} n(t) + \sum_{i=1}^I \lambda_i C_i(t)
@@ -81,8 +81,7 @@ The terms in Equations \eqref{eq:prk-n} and \eqref{eq:prk-C} are defined as foll
 \end{description}
 
 \Gls{PRK} in general struggle to capture spatial effects, such as flow variation, which is important for \glspl{MSR}. 
-\Gls{PRK} does, however, give a correct prediction for general evolution trends \cite{wooten2018review}.
-
+\Gls{PRK} do, however, give a correct prediction for general evolution trends \cite{wooten2018review}.
 Wooten et al. provide four different works which use \gls{MPK} in \gls{MSR} analysis \cite{guo2013simulations, merle2015physical, shi2016development, zanetti2015extension}.
 
 The work by Guo et al. analyzes \gls{ULOHS} and \gls{ULOF} transients in \gls{MOSART}.
@@ -259,9 +258,9 @@ The terms in Equations \eqref{eq:flux-treatment-rineiski} through \eqref{eq:rine
 
 The general formulation used for quasi-static methods is very similar among the various works that use it \cite{dulla2004neutron, tano2023coupled}.
 
-\subsubsection{Alternative Methods}
+%\subsubsection{Alternative Methods}
 
-Although multi-group diffusion, \gls{PRK}, and quasi-statics are the most commonly used methods, there are other choices used to analyze transients.
-One of these is the \gls{TFM} method, which entails generating fission matrices for use in a \gls{CFD} code to model transients \cite{laureau2015coupled}.
+%Although multi-group diffusion, \gls{PRK}, and quasi-statics are the most commonly used methods, there are other choices used to analyze transients.
+%One of these is the \gls{TFM} method, which entails generating fission matrices for use in a \gls{CFD} code to model transients \cite{laureau2015coupled}.
 
 

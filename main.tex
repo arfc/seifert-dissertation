@@ -171,7 +171,13 @@
 
 
 
+
+
+
 \chapter{Methodology}
+
+Maybe I could also add something in the preliminary work on tortuosity/diffusion/turbulent mixing (depending on if it could be implemented into the simplified model).
+Another consideration could be using a sinusoidal flux shape for the irradiation history (small at inlet, becomes larger, then decreases as it moves towards the outlet) (could be interesting to see if this has a non-negligible effect on the results).
 
 \section{Tools}
 \input{chapters/methodology/tools/tools}
@@ -189,8 +195,8 @@
 
 
 \subsection{MOOSE Apps}
-\gls{MOOSE} is an open-source, parallel finite element framework for which many applications have been built to handle different physics.
-Coupling of these physics is simplified using \gls{MOOSE}, and there are many pre-built applications available to handle a variety of physical phenomena.
+\input{chapters/methodology/tools/moose/moose}
+
 
 %\subsubsection{Griffin}
 %ISOXML
@@ -198,10 +204,7 @@ Coupling of these physics is simplified using \gls{MOOSE}, and there are many pr
 %\subsubsection{Pronghorn}
 
 \subsubsection{Moltres}
-Moltres is an open-source \gls{MOOSE} application which can be used for simulation of \glspl{MSR}.
-Particularly, this work uses Moltres to simulate the \gls{MSRE} with different \gls{DNP} group parameters.
-Moltres enables a validation study by comparing the results of experimental results with different \gls{DNP} group parameters.
-The validation study demonstrates the efficacy of these updated \gls{DNP} group parameters compared to static group parameters.
+\input{chapters/methodology/tools/moose/moltres}
 
 \section{Tabulation}
 \input{chapters/methodology/simplification}
@@ -231,27 +234,9 @@ The validation study demonstrates the efficacy of these updated \gls{DNP} group 
 
 %Fractional fitting (this is for running next Griffin/Pronghorn step)
 
-\section{Simulated Scenarios}
-
-\subsection{Verification}
-Comparison of Griffin/Pronghorn quasi-static to Moltres quasi-static to Moltres with fixed groups (old and new)
-
-\subsection{Validation}
-MSRE coastdown
-
-\subsection{Safeguards}
-Diversion scenario effects
-
-\subsection{Safety}
-Various safety transients
-
-
-
 \chapter{Preliminary Results}
+\input{chapters/preliminaryresults/results}
 
-For the preliminary results, the tabulation is not fully resolved.
-Instead, a default approach is utilized, with variations for refining the tabulation.
-Thermal fission of uranium-235 is used with the \gls{MSBR} reprocessing scheme with 10 second in-core and 10-second ex-core residence times at a temperature of 298.15 $K$ and a density of 10 grams per centimeter cubed irradiated over seven minutes with linearly spaced time nodes and decay daughter tracking for the group parameter non-linear least squares fit.
 
 \section{Simplified Model Refinement}
 \label{sec:model-refinement}
@@ -261,6 +246,9 @@ Thermal fission of uranium-235 is used with the \gls{MSBR} reprocessing scheme w
 \subsection{Target Density}
 
 \subsection{Total Irradiation Time}
+
+\subsection{Total Decay Time and Decay Time Steps}
+The bulk of the computational cost comes from writing statepoint files; sufficient resolution is required to ensure a smooth decay curve.
 
 \section{Tabulation Refinement}
 
@@ -299,6 +287,8 @@ Use N(t) from SaltProc with linear interpolation.
 
 Net delayed neutron yield; group abundances; group decays; comparison of most impactful nuclides (?)
 
+Include polynomial fits (figures) showing how group parameters vary based on tabulated parameters (in-core, ex-core, chemical removal scaling, etc.)
+
 \section{Verification}
 
 \subsection{Simplified Model}
@@ -309,36 +299,38 @@ No flow, reprocessing, thermochemistry, spatial depletion should equal expected 
 
 \subsection{Literature Comparison}
 
-Should match other Griffin/Pronghorn results
+Should match other Griffin/Pronghorn results. Maybe compare with Moltres/Quasimolto MSRE pump start-up/coast-down. Benchmark Sun Myung talked about?
 
-\section{INL work}
+\section{Validation}
 
-This work uses Griffin/Pronghorn/Thermochimica to simulate safeguards diversion while tracking all DNPs (but doesn't update DNP groups, only concentrations).
+\subsection{MSRE Rod Insertion}
+Sun Myung integral rod worth experimental results were slightly larger than Moltres results, maybe using updated group parameters would bring it closer?
 
 \chapter{Proposed Work}
 
-\section{Resolved Flow}
+\section{Higher-fidelity Model}
 
-\subsection{Least-Squares Fission History}
+\input{chapters/proposed work/highfidelity}
 
-This will probably need numerical evaluation of integral with a polynomial fit afterwards.
-Could also include R(t) using N(t) rather than assuming exponential decay.
+\section{DNP Spectra}
+
+\input{chapters/proposed work/dnpspectra}
 
 \section{Resolve DNP spectra}
-\cite{das1993importance} discusses why it's important in section 6.
+
 
 \section{Uncertainty Quantification}
 
-\href{https://www.researchgate.net/publication/329403358_A_new_framework_for_sampling-based_uncertainty_quantification_of_the_six-group_reactor_kinetic_parameters}{Kozlowski paper}
+Compare with \href{https://www.researchgate.net/publication/329403358_A_new_framework_for_sampling-based_uncertainty_quantification_of_the_six-group_reactor_kinetic_parameters}{Kozlowski paper}
 Using sensitivity to flow and reprocessing.
 Uncertainty in half lives and emission probabilities is small.
-Neglect uncertainty in concentrations from OpenMC (cross sections, fission yields, half lives, transmutations, decay yields, etc.).
+Neglect uncertainty in concentrations from OpenMC (cross sections, fission yields, half lives, transmutations, decay yields, etc.)?
 
 \section{Other extensions}
-Diffusion effect (not really modelable in time pulses only unless multiple materials are used).
+Diffusion/mixing effect approximated in simplified model?
 Photoneutrons - investigate
-Spatially resolved flux - consider, Specific neutron spectra
-Thermochemical effects - different nuclides will have different chemical removal rates, which will affect results
+Spatially resolved flux - consider, Specific neutron spectra (mentioned in methodology)
+Thermochemical effects - different elements will have different chemical removal rates, which will affect results (Sam knows more about this and could help me figure out if there would be something here worth investigating)
 
 \appendix
 \chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}

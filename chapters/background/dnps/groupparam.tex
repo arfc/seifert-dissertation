@@ -50,8 +50,8 @@ For example, areas further from the center of the core are less important than t
 \subsubsection{Calculation of group parameters}
 \label{ref:calc-group-param}
 
-The calculation of the kinetics parameters depend on the \gls{DNP} group parameters, which themselves are typically formulated based on experimental data as previously discussed.
-
+The \gls{DNP} group parameters are important both for simulation of transients and for their use in calculation of kinetics parameters.
+The \gls{DNP} group parameters are formulated based on the fitting of the delayed neutron count rate, as discussed in Section \ref{sec:measurementofdnps}.
 Equation \eqref{eq:delnu-exact} shows the exact formulation for the delayed neutron counts as a function of time measured by a detector for $I$ individual \glspl{DNP} for any number of fissile nuclides.
 
 \begin{equation}
@@ -176,6 +176,7 @@ n_d(E, t) \approx \epsilon \tilde{F}_s \sum_{i=1}^{n} \chi_i(E) A_i e^{-\lambda_
 A similar procedure as discussed for no energy spectra modeling can be used in order to calculate the \gls{DNP} group energy spectra.
 
 
+\subsubsection{Calculation of group concentrations}
 Another consideration in calculating group parameters is constructing group concentrations from individual nuclide data.
 This is less important for group parameters, but is important if there is desire to use the generated group parameters with concentrations which are converted into group concentrations.
 
@@ -284,6 +285,7 @@ x = (A^T A)^{-1} A^Tb
 
 With the fractional contribution vector, the concentration of a given nuclide can then be multiplied by each fraction to show much it contributes to that group.
 With a running summation, the group concentrations can thus be calculated.
+
 
 
 \subsubsection{Calculation of kinetics parameters}
