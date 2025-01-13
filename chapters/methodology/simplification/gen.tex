@@ -1,20 +1,20 @@
 %For the 0D flow model discussed in Section \ref{sec:simple-model}, the mixing term is ignored, and only advection is considered in a 0D flow manner.
-To generate sufficient data for refined tabulation, a simplified model is necessary.
+To generate sufficient data for each combination of input parameters, a simplified model is necessary.
 This simplified model will also provide estimates for the magnitude of variation which can be expected, as well as general trends.
 Specifically, this model treats the flow in a zero dimensional manner by using in-core and ex-core residence times.
 The fission history function is a square-wave, where the fission rate is some positive constant for the in-core residence time and zero for the ex-core residence time.
 This approximation simplifies the analytical solve required to create the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
 
 Figure \ref{fig:simplified-model} shows how this fission history is used in OpenMC in order to mimic the irradiation on a control volume of fuel salt due to advection.
-The model takes in eight arguments to pass into OpenMC \cite{romano_openmc_2015}: the in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
-Of these terms, three, shown in green, are not related to tabulation: the temperature, target density, and total irradiation time.
-The other inputs are in yellow and are tabulated parameters.
+The model takes in eight parameters to pass into OpenMC \cite{romano_openmc_2015}: the in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
+Of these terms, three, shown in green, are not varied to generate new group parameters: the temperature, target density, and total irradiation time.
+The other inputs are in yellow and vary to generate new group parameters.
 More detail on this block is provided in Section \ref{sec:delnu-counts}.
 
 After OpenMC finishes the fixed source simulation, the final concentrations of nuclides in the irradiated sample are saved for analysis in custom scripts.
 These scripts take in the concentrations and combine them with the IAEA beta-delayed neutron emission database data to generate a delayed neutron count rate function \cite{DIMITRIOU2021144}.
 A non-linear least squares fitting function from SciPy is then used to generate the half life and group abundances \cite{2020SciPy-NMeth}.
-These results are added to tabulated results for a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
+These group parameters are for a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
 More detail on this block is provided in Section \ref{sec:delnu-groups}.
 
 \begin{figure}[H]
@@ -25,7 +25,7 @@ More detail on this block is provided in Section \ref{sec:delnu-groups}.
 \end{figure}
 
 There are several considerations required for the OpenMC simulations.
-The non-tabulated input parameters require some amount of consideration, which is discussed in Section \ref{sec:model-refinement}.
+The constant input parameters require some amount of consideration, which is discussed in Section \ref{sec:model-refinement}.
 In particular, self-shielding of the sample due to density while avoiding self-multiplication, variations in cross sections due to temperature, and under or over irradiation can all affect the results and must be considered \cite{keepin1957delayed}.
 
 The general form of the OpenMC model is a three gram spherical sample with vacuum boundary conditions.
