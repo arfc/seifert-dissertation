@@ -137,7 +137,7 @@
 \input{chapters/introduction}
 
 
-\chapter{Background and Motivation}
+\chapter{Motivation and Background}
 \input{chapters/background/background}
 
 
@@ -145,6 +145,7 @@
 \input{chapters/background/safeguards}
 
 \section{Safety-Related Reactor Transients}
+\subsection{Overview}
 \input{chapters/background/safety/safety}
 
 \subsection{Transient Analysis Methods}
@@ -213,8 +214,12 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \label{sec:simple-model}
 \input{chapters/methodology/simplification/gen}
 
+\subsection{Sophisticated Model}
+\label{sec:soph-model}
+\input{chapters/methodology/sophisticated/gen}
 
-\section{Resolved Delayed Neutron Counts}
+
+\section{Delayed Neutron Count Rate Generation}
 \label{sec:delnu-counts}
 \input{chapters/methodology/resdncounts/overview}
 
@@ -222,7 +227,7 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \subsection{Delayed Neutron Precursor Concentrations}
 \input{chapters/methodology/resdncounts/concs}
 
-\subsection{Concentrations to Counts}
+\subsection{Concentrations to Count Rate}
 \input{chapters/methodology/resdncounts/iaeadata}
 
 \section{Delayed Neutron Precursor Group Reconstruction}
@@ -238,7 +243,7 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \input{chapters/preliminaryresults/results}
 
 
-\section{Simplified Model Refinement}
+\section{Simplified Model Sensitivity Analysis}
 \label{sec:model-refinement}
 
 \subsection{Temperature}
@@ -250,16 +255,19 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \subsection{Total Decay Time and Decay Time Steps}
 The bulk of the computational cost comes from writing statepoint files; sufficient resolution is required to ensure a smooth decay curve.
 
-\section{Tabulation Refinement}
+\section{Tabulation Sensitivity Analysis}
 
 Discuss effect of varying reprocessing; determine what differences arise from inclusion of larger cycle time elements (if any). (might need to adjust methodology section based on these results).
 Scale the reprocessing terms differently to see their effects (see if each can be scaled the same way).
 
-\subsection{Large Cycle Time Analysis}
+\subsection{Large Cycle Time}
 \label{sec:large-tcyc}
 
 \subsection{Reprocessing Rate Scaling}
 \label{sec:repr-scale}
+
+\subsection{Refuel Rate}
+\label{sec:ref-rate}
 
 \subsection{Residence Time Variation}
 \label{sec:res-time-var}
