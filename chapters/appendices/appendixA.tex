@@ -24,7 +24,7 @@ The terms in Equation \eqref{eq:wilson-R} are discussed in Section \ref{ref:calc
 
 Because the results are normalized to a single delayed neutron, the $\bar{\nu}_d$ term is divided out.
 
-To derive an analytical solution to this problem for the simplified approach where the in-core and ex-core residence times, $\tau_{in}$ and $\tau_{ex}$, are equivalent, an approximation of the fission history must be made.
+To derive an analytical solution to this problem for the 0D flow approach where the in-core and ex-core residence times, $\tau_{in}$ and $\tau_{ex}$, are equivalent, an approximation of the fission history must be made.
 For this derivation, $\tau_{res}$ will be used to represent both the in-core and ex-core residence times.
 First, the fission history is split into a shape and amplitude function, shown in Equation \eqref{eq:split-fiss}.
 This essentially just simplifies any further equations such that only the shape needs to be considered.
@@ -34,7 +34,7 @@ This essentially just simplifies any further equations such that only the shape 
     \label{eq:split-fiss}
 \end{equation}
 
-Because the simplified model's fission history is a positive square wave, analytical integration is not feasible.
+Because the 0D flow model's fission history is a positive square wave, analytical integration is not feasible.
 Instead, a Fourier decomposition of the square wave into a sum of sine waves makes the problem far more approachable.
 For numerical integration this is not an issue, but an analytical solution is useful for setting up the least squares matrices.
 
@@ -75,7 +75,7 @@ By irradiating for several half-lives of time for each \gls{DNP}, where the long
 There are two reasons this limit is taken.
 Firstly, a pulse irradiation with circulation will not provide any unique results when compared to traditional data which already exists.
 Additionally, this allows the equation to be simplified, as shown in Equation \eqref{eq:split-integral-solved-reduced}.
-Only the sine term does not go to zero as the irradiation time goes to infinity, so it is the only term significant for saturation irradiation in the simplified model.
+Only the sine term does not go to zero as the irradiation time goes to infinity, so it is the only term significant for saturation irradiation in the 0D flow model.
 
 
 \begin{equation}

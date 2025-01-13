@@ -208,7 +208,7 @@
 \section{Tabulation}
 \input{chapters/methodology/simplification}
 
-\subsection{Simplified Model}
+\subsection{0D Flow Model}
 \label{sec:simple-model}
 \input{chapters/methodology/simplification/gen}
 
@@ -296,11 +296,11 @@ These sensitivity studies are used to analyze the parameters that change between
 
 \section{Verification and Validation}
 
-\subsection{Simplified Model Verification}
+\subsection{0D Flow Model Verification}
 
 Microscopic group parameters \cite{leconte2020new, mills1991study} should match static results (no flow or chemical removal.)
 
-\subsection{Simplified Model Validation}
+\subsection{0D Flow Model Validation}
 
 MSRE pump start-up and coast-down with Moltres and Quasimolto \cite{prince1968zero, reynolds2023analysis}.
 
@@ -316,7 +316,7 @@ Net delayed neutron yield; group abundances; group decays; comparison of most im
 
 Include polynomial fits (figures) showing how group parameters vary based on tabulated parameters (in-core, ex-core, chemical removal scaling, etc.)
 
-Comparison with simplified model
+Comparison with 0D Flow Model
 
 \section{Resolve DNP Spectra}
 \input{chapters/proposedwork/dnpspectra}
@@ -330,14 +330,15 @@ Neglect uncertainty in concentrations from OpenMC (cross sections, fission yield
 
 \section{Other extensions}
 \begin{itemize}
-\item Diffusion effect (not really modelable in time pulses only unless multiple materials are used) (could be approximated in simplified model).
+\item Diffusion effect (not really modelable in time pulses only unless multiple materials are used) (could be approximated in 0D Flow Model).
 \item Photoneutrons - investigate
-\item Spatially resolved flux in simplified model - consider, Specific neutron spectra
+\item Spatially resolved flux in 0D Flow Model - consider, Specific neutron spectra
 \item Thermochemical effects - different nuclides will have different chemical removal rates, which will affect results (Sam knows more about this and could help me figure out if there would be something here in particular worth investigating)
 \end{itemize}
 \appendix
 \chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
 \input{chapters/appendices/appendixA}
+
 
 
 
