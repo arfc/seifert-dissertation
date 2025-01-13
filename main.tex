@@ -163,7 +163,7 @@
 
 
 
-\section{Molten Salt Reactor Depletion}
+\section{Molten Salt Reactor Fuel Depletion}
 \subsection{Overview}
 \input{chapters/background/msrs/msrs}
 
@@ -176,9 +176,6 @@
 
 
 \chapter{Methodology}
-
-Maybe I could also add something in the preliminary work on tortuosity/diffusion/turbulent mixing (depending on if it could be implemented into the simplified model).
-Another consideration could be using a sinusoidal flux shape for the irradiation history (small at inlet, becomes larger, then decreases as it moves towards the outlet) (could be interesting to see if this has a non-negligible effect on the results).
 
 \section{Tools}
 \input{chapters/methodology/tools/tools}
@@ -207,6 +204,7 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \subsubsection{Moltres}
 \input{chapters/methodology/tools/moose/moltres}
 
+
 \section{Tabulation}
 \input{chapters/methodology/simplification}
 
@@ -217,7 +215,6 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 \subsection{Sophisticated Model}
 \label{sec:soph-model}
 \input{chapters/methodology/sophisticated/gen}
-
 
 \section{Delayed Neutron Count Rate Generation}
 \label{sec:delnu-counts}
@@ -239,57 +236,79 @@ Another consideration could be using a sinusoidal flux shape for the irradiation
 
 %Fractional fitting (this is for running next Griffin/Pronghorn step)
 
+%\section{Simulated Scenarios}
+
+%\subsection{Verification}
+%Comparison of Griffin/Pronghorn quasi-static to Moltres quasi-static to Moltres with fixed groups (old and new)
+
+%\subsection{Validation}
+%MSRE coastdown
+
+%\subsection{Safeguards}
+%Diversion scenario effects
+
+%\subsection{Safety}
+%Various safety transients
+
+
+
 \chapter{Preliminary Results}
+
 \input{chapters/preliminaryresults/results}
 
-
-\section{Simplified Model Sensitivity Analysis}
+\section{Sensitivity Studies}
 \label{sec:model-refinement}
 
-\subsection{Temperature}
+\subsection{Constants for Simulations}
 
-\subsection{Target Density}
+These sensitivity studies are used to analyze parameters that are held constant during the simulations and determine if simplifications can be made to some with negligible impact on the results.
 
-\subsection{Total Irradiation Time}
+\subsubsection{Temperature}
 
-\subsection{Total Decay Time and Decay Time Steps}
+\subsubsection{Target Density}
+
+\subsubsection{Total Irradiation Time}
+
+\subsubsection{Total Decay Time and Decay Time Steps}
+\label{sec:time-eval}
 The bulk of the computational cost comes from writing statepoint files; sufficient resolution is required to ensure a smooth decay curve.
 
-\section{Tabulation Sensitivity Analysis}
-
-Discuss effect of varying reprocessing; determine what differences arise from inclusion of larger cycle time elements (if any). (might need to adjust methodology section based on these results).
-Scale the reprocessing terms differently to see their effects (see if each can be scaled the same way).
-
-\subsection{Large Cycle Time}
+\subsubsection{Large Cycle Time Elements}
 \label{sec:large-tcyc}
 
-\subsection{Reprocessing Rate Scaling}
-\label{sec:repr-scale}
-
-\subsection{Refuel Rate}
+\subsubsection{Refuel Rate}
 \label{sec:ref-rate}
 
-\subsection{Residence Time Variation}
+\subsubsection{Decay Chain Parents}
+\label{sec:decaychaindaughters}
+
+\subsection{Variables for Simulations}
+
+These sensitivity studies are used to analyze the parameters that change between simulations to understand the effect these changing parameters have on the results.
+
+\subsubsection{Removal Rates}
+\label{sec:repr-scale}
+
+\subsubsection{In and Ex-core Residence Times}
 \label{sec:res-time-var}
 
-\section{Parameter Fit Refinement}
+\subsubsection{Combined Removal Rates and Residence Times}
 
-\subsection{Time Evaluations}
-\label{sec:time-eval}
+\section{Verification and Validation}
 
-\subsection{Delayed Neutron Count Uncertainties}
+\subsection{Simplified Model Verification}
 
-\subsection{Group Parameter Uncertainties (?)}
+Microscopic group parameters \cite{leconte2020new, mills1991study} should match static results (no flow or chemical removal.)
 
-\section{Group Parameter Comparisons}
+\subsection{Simplified Model Validation}
 
-\subsection{Comparison with Documented Results}
+MSRE pump start-up and coast-down with Moltres and Quasimolto \cite{prince1968zero, reynolds2023analysis}.
 
-\subsection{Comparison of Current Results}
+\chapter{Proposed Work}
 
-\subsection{Comparison with Decay Chain Daughters}
-\label{sec:decaychaindaughters}
-Use N(t) from SaltProc with linear interpolation.
+\section{Develop Sophisticated Model}
+
+\input{chapters/proposedwork/highfidelity}
 
 \section{Spatially Resolved Depletion Effects on Precursors}
 
@@ -297,53 +316,28 @@ Net delayed neutron yield; group abundances; group decays; comparison of most im
 
 Include polynomial fits (figures) showing how group parameters vary based on tabulated parameters (in-core, ex-core, chemical removal scaling, etc.)
 
-\section{Verification}
+Comparison with simplified model
 
-\subsection{Simplified Model}
-
-\subsection{No Molten Properties Comparisons}
-
-No flow, reprocessing, thermochemistry, spatial depletion should equal expected results.
-
-\subsection{Literature Comparison}
-
-Should match other Griffin/Pronghorn results. Maybe compare with Moltres/Quasimolto MSRE pump start-up/coast-down. Benchmark Sun Myung talked about?
-
-\section{Validation}
-
-\subsection{MSRE Rod Insertion}
-Sun Myung integral rod worth experimental results were slightly larger than Moltres results, maybe using updated group parameters would bring it closer?
-
-\chapter{Proposed Work}
-
-\section{Higher-fidelity Model}
-
-\input{chapters/proposedwork/highfidelity}
-
-\section{DNP Spectra}
-
+\section{Resolve DNP Spectra}
 \input{chapters/proposedwork/dnpspectra}
-
-\section{Resolve DNP spectra}
-
 
 \section{Uncertainty Quantification}
 
-Compare with \href{https://www.researchgate.net/publication/329403358_A_new_framework_for_sampling-based_uncertainty_quantification_of_the_six-group_reactor_kinetic_parameters}{Kozlowski paper}
+\href{https://www.researchgate.net/publication/329403358_A_new_framework_for_sampling-based_uncertainty_quantification_of_the_six-group_reactor_kinetic_parameters}{Kozlowski paper}
 Using sensitivity to flow and reprocessing.
 Uncertainty in half lives and emission probabilities is small.
-Neglect uncertainty in concentrations from OpenMC (cross sections, fission yields, half lives, transmutations, decay yields, etc.)?
+Neglect uncertainty in concentrations from OpenMC (cross sections, fission yields, half lives, transmutations, decay yields, etc.).
 
 \section{Other extensions}
-Diffusion/mixing effect approximated in simplified model?
-Photoneutrons - investigate
-Spatially resolved flux - consider, Specific neutron spectra (mentioned in methodology)
-Thermochemical effects - different elements will have different chemical removal rates, which will affect results (Sam knows more about this and could help me figure out if there would be something here worth investigating)
-
+\begin{itemize}
+\item Diffusion effect (not really modelable in time pulses only unless multiple materials are used) (could be approximated in simplified model).
+\item Photoneutrons - investigate
+\item Spatially resolved flux in simplified model - consider, Specific neutron spectra
+\item Thermochemical effects - different nuclides will have different chemical removal rates, which will affect results (Sam knows more about this and could help me figure out if there would be something here in particular worth investigating)
+\end{itemize}
 \appendix
 \chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
 \input{chapters/appendices/appendixA}
-
 
 
 
