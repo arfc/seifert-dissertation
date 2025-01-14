@@ -38,13 +38,20 @@ These uncertainties are used in the minimization of $\chi^2$, shown in Equation 
 \end{equation}
 
 The terms in Equation \eqref{eq:chisq-nnls} are defined as follows:
+\begin{align}
+t_f &= \mbox{ the final time after irradiation, starting at $t=0$, immediately following irradiation [$s$]} \nonumber \\ 
+b_t &= \mbox{ the delayed neutron count vector at the row where the time value is $t$ [$s^{-1}$] } \nonumber \\ 
+A_t &= \mbox{ the coefficient matrix at the row where the time value is $t$ [$s^{-1}$] } \nonumber \\ 
+x_t &= \mbox{ the solution vector at the row where the time value is $t$ [-].} \nonumber
+\end{align}
 
-\begin{description}
-    \item $t_f$ is the final time after irradiation, starting at $t=0$ immediately following irradiation
-    \item $b_t$ is the delayed neutron count vector at the row where the time value is $t$
-    \item $A_t$ is the coefficient matrix at the row where the time value is $t$
-    \item $x_t$ is the solution vector at the row where the time value is $t$
-\end{description}
+
+%\begin{description}
+%    \item $t_f$ is the final time after irradiation, starting at $t=0$ immediately following irradiation
+%    \item $b_t$ is the delayed neutron count vector at the row where the time value is $t$
+%    \item $A_t$ is the coefficient matrix at the row where the time value is $t$
+%    \item $x_t$ is the solution vector at the row where the time value is $t$
+%\end{description}
 
 
 Once the group fits and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.

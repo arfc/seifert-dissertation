@@ -77,18 +77,30 @@ n_d(t) \approx \epsilon \dot{F}_s \sum_{i=1}^{n}  a_i e^{-\lambda_i t}
 \end{equation}
 
 The terms in Equations \eqref{eq:delnu-exact}, \eqref{eq:delnu-fit}, and \eqref{eq:delnu-fit-sat} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $I$ is the total number of \glspl{DNP}
-    \item $n$ is the number of \gls{DNP} groups
-    \item $\epsilon$ is the detector efficiency
-    \item $P_{n, i}$ is the emission probability of \gls{DNP} $i$
-    \item $\lambda_i$ is the decay constant of the $i$th \gls{DNP} or group
-    \item $N_i(t)$ is the time dependent number of atoms of nuclide $i$
-    \item $F_s$ is the total number of fission events in the pulse irradiation
-    \item $\dot{F}_s$ is the fission rate for a saturation irradiation
-    \item $a_i$ is the $i$th group yield, or group abundance
-\end{description}
+\begin{align}
+I &= \mbox{ the total number of \glspl{DNP} [-]} \nonumber \\ 
+n &= \mbox{ the number of \gls{DNP} groups [-]} \nonumber \\ 
+\epsilon &= \mbox{ the detector efficiency [-]} \nonumber \\ 
+P_{n, i} &= \mbox{ the emission probability of \gls{DNP} \textit{i} [-] } \nonumber \\ 
+\lambda_i &= \mbox{ the decay constant of \gls{DNP} or group \textit{i} [$s^{-1}$] } \nonumber \\ 
+N_i(t) &= \mbox{ the time dependent number of atoms of nuclide \textit{i} [$atoms$] } \nonumber \\ 
+F_s &= \mbox{ the total number of fission events in the pulse irradiation [-]} \nonumber \\ 
+\dot{F}_s &= \mbox{ the fission rate for a saturation irradiation [$s^{-1}$]} \nonumber \\ 
+a_i &= \mbox{ the group yield, or group abundance for group \textit{i} [-] .} \nonumber
+\end{align}
+
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $I$ is the total number of \glspl{DNP}
+%    \item $n$ is the number of \gls{DNP} groups
+%    \item $\epsilon$ is the detector efficiency
+%    \item $P_{n, i}$ is the emission probability of \gls{DNP} $i$
+%    \item $\lambda_i$ is the decay constant of the $i$th \gls{DNP} or group
+%    \item $N_i(t)$ is the time dependent number of atoms of nuclide $i$
+%    \item $F_s$ is the total number of fission events in the pulse irradiation
+%    \item $\dot{F}_s$ is the fission rate for a saturation irradiation
+%    \item $a_i$ is the $i$th group yield, or group abundance
+%\end{description}
 
 The pulse irradiation approach gives better statistics on the short lives \glspl{DNP}, while the longer lived \glspl{DNP} are better represented by saturation irradiation.
 Brady discusses this, and uses both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
@@ -333,16 +345,27 @@ This is shown in Equation \eqref{eq:betaeff-exact} \cite{romero2022calculation}.
 \end{equation}
 
 The terms in Equation \eqref{eq:betaeff-exact} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $\phi^\dagger$ is the adjoint neutron flux
-    \item $\chi_d$ is the delayed neutron energy spectrum
-    \item $\chi$ is the fission neutron energy spectrum
-    \item $\beta$ is the delayed neutron fraction
-    \item $\nu$ is the average number of neutrons released per fission
-    \item $\Sigma_f$ is the macroscopic fission cross section
-    \item $\phi$ is the neutron flux
-\end{description}
+\begin{align}
+\phi^\dagger &= \mbox{ the adjoint neutron flux [$\frac{n}{cm^2 s}$]} \nonumber \\ 
+\chi_d &= \mbox{ the delayed neutron energy spectrum [-]} \nonumber \\ 
+\chi &= \mbox{ the fission neutron energy spectrum [-]} \nonumber \\ 
+\beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\ 
+\nu &= \mbox{ the average number of neutrons released per fission [-]} \nonumber \\ 
+\Sigma_f &= \mbox{ the macroscopic fission cross section [$cm^{-1}$]} \nonumber \\
+\phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$].} \nonumber
+\end{align}
+
+
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $\phi^\dagger$ is the adjoint neutron flux
+%    \item $\chi_d$ is the delayed neutron energy spectrum
+%    \item $\chi$ is the fission neutron energy spectrum
+%    \item $\beta$ is the delayed neutron fraction
+%    \item $\nu$ is the average number of neutrons released per fission
+%    \item $\Sigma_f$ is the macroscopic fission cross section
+%    \item $\phi$ is the neutron flux
+%\end{description}
 
 $\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the "...time between the birth of a neutron and the subsequent absorption that induces fission."
 This is shown in Equation \eqref{eq:lambdaeff-exact} \cite{verboomen2006monte}.
@@ -353,13 +376,20 @@ This is shown in Equation \eqref{eq:lambdaeff-exact} \cite{verboomen2006monte}.
 \end{equation}
 
 The terms in Equation \eqref{eq:lambdaeff-exact} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $\phi_0^\dagger$ is the critical adjoint neutron flux
-    \item $\phi_0$ is the critical neutron flux
-    \item $v$ is the neutron speed
-    \item $F_0$ is the total fission operator
-\end{description}
+\begin{align}
+\phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\ 
+\phi_0 &= \mbox{ the critical neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\ 
+v &= \mbox{ the neutron speed [$\frac{cm}{s}$]} \nonumber \\ 
+F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
+\end{align}
+
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $\phi_0^\dagger$ is the critical adjoint neutron flux
+%    \item $\phi_0$ is the critical neutron flux
+%    \item $v$ is the neutron speed
+%    \item $F_0$ is the total fission operator
+%\end{description}
 
 
 

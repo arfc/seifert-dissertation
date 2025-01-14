@@ -32,25 +32,46 @@ The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} a
 \end{equation}
 
 The terms in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} are defined as follows:
-\begin{description}
-    \item $\nu_g$ is the average number of neutrons produced by fission of group $g$
-    \item $\phi_g$ is the scalar neutron flux of group $g$
-    \item $D_g$ is the group $g$ diffusion term
-    \item $G$ is the total number of energy groups
-    \item $\Sigma_{s, g' \rightarrow g}$ is the macroscopic scattering cross section from group $g'$ to group $g$
-    \item $\beta$ is the delayed neutron fraction
-    \item $\chi_{p, g}$ is the number of prompt neutrons born in group $g$
-    \item $\Sigma_f$ is the macroscopic fission cross section
-    \item $I$ is the number of delayed neutron precursor groups
-    \item $\chi_{d, g, i}$ is the number of delayed neutrons from precursor group $i$ born in group $g$
-    \item $\lambda_i$ is the decay constant for group $i$
-    \item $C_i$ is the concentration of group $i$
-    \item $\vec{u}$ is the velocity profile
-    \item $\Sigma_{a, g}$ is the macroscopic absorption cross section for group $g$
-    \item $\beta_i$ is the delayed neutron fraction for group $i$
-    \item $\nu_T$ is the eddy viscosity
-    \item $Sc_T$ is the turbulent Schmidt number
-\end{description}
+\begin{align}
+\nu_g &= \mbox{ the average number of neutrons produced by fission of group \textit{g} [-]} \nonumber\\
+\phi_g &= \mbox{ the scalar neutron flux of group \textit{g} [$\frac{n}{cm^2 s}$]} \nonumber\\
+D_g &=\mbox{ the group \textit{g} diffusion term [$cm$]}\nonumber\\
+G &= \mbox{ the total number of energy groups [-]} \nonumber\\
+\Sigma_{s, g' \rightarrow g} &= \mbox{the macroscopic scattering cross section from group \textit{g'} to group \textit{g} [$cm^{-1}$]} \nonumber\\
+\beta &= \mbox{the delayed neutron fraction [-]} \nonumber\\
+\chi_{p, g} &= \mbox{the number of prompt neutrons born in group \textit{g} [-]} \nonumber\\
+\Sigma_f &= \mbox{the macroscopic fission cross section [$cm^{-1}$]} \nonumber\\
+I &= \mbox{the number of delayed neutron precursor groups [-]} \nonumber\\
+\chi_{d, g, i} &= \mbox{the number of delayed neutrons from precursor group \textit{i} born in group \textit{g} [-]} \nonumber\\
+\lambda_i &= \mbox{the decay constant for group \textit{i} [$s^{-1}$]} \nonumber\\
+C_i &= \mbox{the concentration of group \textit{i} [$\frac{atoms}{cm^3}$]} \nonumber\\
+\vec{u} &= \mbox{the velocity profile [$\frac{cm}{s}$]} \nonumber\\
+\Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
+\beta_i &= \mbox{the delayed neutron fraction for group \textit{it} [-]} \nonumber\\
+\nu_T &= \mbox{the eddy viscosity [$\frac{cm^2}{s}]$} \nonumber\\
+Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
+\end{align}
+
+%The terms in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} are defined as follows:
+%\begin{description}
+%    \item $\nu_g$ is the average number of neutrons produced by fission of group $g$
+%    \item $\phi_g$ is the scalar neutron flux of group $g$
+%    \item $D_g$ is the group $g$ diffusion term
+%    \item $G$ is the total number of energy groups
+%    \item $\Sigma_{s, g' \rightarrow g}$ is the macroscopic scattering cross section from group $g'$ to group $g$
+%    \item $\beta$ is the delayed neutron fraction
+%    \item $\chi_{p, g}$ is the number of prompt neutrons born in group $g$
+%    \item $\Sigma_f$ is the macroscopic fission cross section
+%    \item $I$ is the number of delayed neutron precursor groups
+%    \item $\chi_{d, g, i}$ is the number of delayed neutrons from precursor group $i$ born in group $g$
+%    \item $\lambda_i$ is the decay constant for group $i$
+%    \item $C_i$ is the concentration of group $i$
+%    \item $\vec{u}$ is the velocity profile
+%    \item $\Sigma_{a, g}$ is the macroscopic absorption cross section for group $g$
+%    \item $\beta_i$ is the delayed neutron fraction for group $i$
+%    \item $\nu_T$ is the eddy viscosity
+%    \item $Sc_T$ is the turbulent Schmidt number
+%\end{description}
 
 
 \subsubsection{Modified point kinetics}
@@ -70,15 +91,25 @@ The derivation of the \gls{PRK} equations can be found in the work by Henry, wit
 \end{equation}
 
 The terms in Equations \eqref{eq:prk-n} and \eqref{eq:prk-C} are defined as follows:
-\begin{description}
-    \item $n$ is the neutron density
-    \item $\rho$ is the reactivity
-    \item $\beta_{eff}$ is the effective delayed neutron fraction
-    \item $\Lambda$ is the prompt neutron generation time
-    \item $\lambda_i$ is the group $i$ decay constant
-    \item $C_i$ is the concentration of group $i$
-    \item $\beta_{eff, i}$ is the effective delayed neutron fraction from group $i$
-\end{description}
+\begin{align}
+n &= \mbox{ the relative neutron density [-]} \nonumber\\
+\rho &= \mbox{ the reactivity [-]} \nonumber\\
+\beta_{eff} &= \mbox{ the effective delayed neutron fraction [-]} \nonumber\\
+\Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber\\
+\lambda_i &= \mbox{ the group \textit{i} decay constant [$s^{-1}$]} \nonumber\\
+C_i &= \mbox{ the concentration of group \textit{i} [$atoms$]} \nonumber\\
+\beta_{eff, i} &= \mbox{ the effective delayed neutron fraction from group \textit{i} [-].} \nonumber
+\end{align}
+
+%\begin{description}
+%    \item $n$ is the relative neutron density
+%    \item $\rho$ is the reactivity
+%    \item $\beta_{eff}$ is the effective delayed neutron fraction
+%    \item $\Lambda$ is the prompt neutron generation time
+%    \item $\lambda_i$ is the group $i$ decay constant
+%    \item $C_i$ is the concentration of group $i$
+%    \item $\beta_{eff, i}$ is the effective delayed neutron fraction from group $i$
+%\end{description}
 
 \Gls{PRK} in general struggle to capture spatial effects, such as flow variation, which is important for \glspl{MSR}. 
 \Gls{PRK} do, however, give a correct prediction for general evolution trends \cite{wooten2018review}.
@@ -132,14 +163,24 @@ Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex}
 \end{equation}
 
 The terms in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-tauloop} are defined as follows, with most terms identical to those in the \gls{PRK} equations:
-\begin{description}
-    \item $V_{loop}$ is the volume of the loop
-    \item $V_{core}$ is the volume of the core
-    \item $\beta_{static}$ is the value of $\beta_{eff}$ without flow
-    \item $M_{core}$ is the mass in the core
-    \item $M_{loop}$ is the mass in the loop
-    \item $w(t)$ is the mass flow rate
-\end{description}
+\begin{align}
+V_{loop} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
+V_{core} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
+\beta_{static} &= \mbox{ the value of $\beta_{eff}$ without flow [-]} \nonumber \\ 
+M_{core} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
+M_{loop} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
+w(t) &= \mbox{ the mass flow rate [$\frac{kg}{s}$].} \nonumber
+\end{align}
+
+
+%\begin{description}
+%    \item $V_{loop}$ is the volume of the loop
+%    \item $V_{core}$ is the volume of the core
+%    \item $\beta_{static}$ is the value of $\beta_{eff}$ without flow
+%    \item $M_{core}$ is the mass in the core
+%    \item $M_{loop}$ is the mass in the loop
+%    \item $w(t)$ is the mass flow rate
+%\end{description}
 
 A similar method is also used by Suzuki and Shimazu for analyzing a reactivity initiated accident in the FUJI-12 reactor \cite{suzuki2008reactivity}.
 That work uses a simpler form of the equations, without dividing the precursor concentrations into core and loop regions.
@@ -230,31 +271,58 @@ This allows Equation \eqref{eq:rineiski-big-cm} to be solved.
 \end{equation}
 
 The terms in Equations \eqref{eq:flux-treatment-rineiski} through \eqref{eq:rineiski-big-cs} are defined as follows:
-\begin{description}
-    \item $\Phi$ is the neutron flux
-    \item $N(t)$ is the neutron flux amplitude
-    \item $\psi(\vec{x}, t)$ is the neutron flux shape
-    \item $\nu$ is the average neutron speed
-    \item $M(t)$ is the neutron disappearance operator
-    \item $F(t)$ is the neutron production operator
-    \item $\beta$ is the delayed neutron fraction
-    \item $\beta_{eff}$ is the effective delayed neutron fraction
-    \item $\chi_p$ is the prompt neutron energy spectra
-    \item $\chi_d$ is the delayed neutron energy spectra
-    \item $\chi$ is the neutron energy spectra
-    \item $\lambda_i$ is the decay constant for \gls{DNP} group $i$
-    \item $C_i(\vec{x}, t)$ is the concentration of \gls{DNP} group $i$
-    \item $Q(\vec{x}, t)$ is the external neutron source
-    \item $u(\vec{x}, t)$ is the \gls{DNP} velocity
-    \item $C_{s, i}(\vec{x}, t)$ is the "standard" precursor concentration of group $i$
-    \item $C_{m, i}(\vec{x}, t)$ is the "movable" precursor concentration of group $i$
-    \item $\rho$ is the reactivity
-    \item $c_{s, i}$ is the \gls{PRK} "standard" precursor concentration of group $i$
-    \item $c_{m, i}$ is the \gls{PRK} "movable" precursor concentration of group $i$
-    \item $q_{eff}$ is the \gls{PRK} external neutron source 
-    \item $\Lambda$ is the prompt neutron generation time
-    \item $W(x)$ is the weighting function (by default in SIMMER is an adjoint flux computed at steady-state conditions)
-\end{description}
+\begin{align}
+\Phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\
+N(t) &= \mbox{ the neutron flux amplitude [$n$]} \nonumber \\
+\psi(\vec{x}, t) &= \mbox{ the neutron flux shape [$cm^{-2} s^{-1}$]} \nonumber \\
+\nu &= \mbox{ the average neutron speed [$\frac{cm}{s}$]} \nonumber \\
+M(t) &= \mbox{ the neutron disappearance operator [$cm^{-1}$] } \nonumber \\
+F(t) &= \mbox{ the neutron production operator [$cm^{-1}$]} \nonumber \\
+\beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\
+\beta_{eff} &= \mbox{ the effective delayed neutron fraction [-]} \nonumber \\
+\chi_p &= \mbox{ the prompt neutron energy spectra [-]} \nonumber \\
+\chi_d &= \mbox{ the delayed neutron energy spectra [-]} \nonumber \\
+\chi &= \mbox{ the neutron energy spectra [-]} \nonumber \\
+\lambda_i &= \mbox{ the decay constant for \gls{DNP} group \textit{i} [$s^{-1}$] } \nonumber \\
+C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
+Q(\vec{x}, t) &= \mbox{ the external neutron source [$\frac{n}{cm^3 s}$] } \nonumber \\
+u(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$\frac{cm}{s}$]} \nonumber \\
+C_{s, i}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
+C_{m, i}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
+\rho &= \mbox{ the reactivity [-]} \nonumber \\
+c_{s, i} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $i$ [$atoms$]} \nonumber \\
+c_{m, i} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $i$ [$atoms$]} \nonumber \\
+q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$\frac{n}{s}$] } \nonumber \\
+\Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber \\
+W(x) &= \mbox{ the weighting function (the default in SIMMER}\\
+&\;\;\;\;\; \mbox{ is an adjoint flux computed at steady-state conditions) [-].} \nonumber
+\end{align}
+
+%\begin{description}
+%    \item $\Phi$ is the neutron flux
+%    \item $N(t)$ is the neutron flux amplitude
+%    \item $\psi(\vec{x}, t)$ is the neutron flux shape
+%    \item $\nu$ is the average neutron speed
+%    \item $M(t)$ is the neutron disappearance operator
+%    \item $F(t)$ is the neutron production operator
+%    \item $\beta$ is the delayed neutron fraction
+%    \item $\beta_{eff}$ is the effective delayed neutron fraction
+%    \item $\chi_p$ is the prompt neutron energy spectra
+%    \item $\chi_d$ is the delayed neutron energy spectra
+%    \item $\chi$ is the neutron energy spectra
+%    \item $\lambda_i$ is the decay constant for \gls{DNP} group $i$
+%    \item $C_i(\vec{x}, t)$ is the concentration of \gls{DNP} group $i$
+%    \item $Q(\vec{x}, t)$ is the external neutron source
+%    \item $u(\vec{x}, t)$ is the \gls{DNP} velocity
+%    \item $C_{s, i}(\vec{x}, t)$ is the "standard" precursor concentration of group $i$
+%    \item $C_{m, i}(\vec{x}, t)$ is the "movable" precursor concentration of group $i$
+%    \item $\rho$ is the reactivity
+%    \item $c_{s, i}$ is the \gls{PRK} "standard" precursor concentration of group $i$
+%    \item $c_{m, i}$ is the \gls{PRK} "movable" precursor concentration of group $i$
+%    \item $q_{eff}$ is the \gls{PRK} external neutron source 
+%    \item $\Lambda$ is the prompt neutron generation time
+%    \item $W(x)$ is the weighting function (by default in SIMMER is an adjoint flux computed at steady-state conditions)
+%\end{description}
 
 The general formulation used for quasi-static methods is very similar among the various works that use it \cite{dulla2004neutron, tano2023coupled}.
 

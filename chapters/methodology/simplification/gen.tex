@@ -44,13 +44,21 @@ Equation \eqref{eq:balancedsdot} shows how the source rate is calculated to main
 \end{equation}
 
 The terms in Equation \eqref{eq:balancedsdot} are defined as follows:
-\begin{description}
-    \item $\dot{S}$ is the source particle rate
-    \item $S_{net}$ is the total number of source particles
-    \item $\tau_{in}$ is the in-core residence time
-    \item $\tau_{ex}$ is the ex-core residence time
-    \item $T$ is the net irradiation time
-\end{description}
+\begin{align}
+\dot{S} &= \mbox{ the source particle rate [$\frac{n}{s}$]} \nonumber \\ 
+S_{net} &= \mbox{ the total number of source particles [$n$]} \nonumber \\ 
+\tau_{in} &= \mbox{ the in-core residence time [$s$]} \nonumber \\ 
+\tau_{ex} &= \mbox{ the ex-core residence time [$s$]} \nonumber \\ 
+T &= \mbox{ the net irradiation time [$s$].} \nonumber
+\end{align}
+
+%\begin{description}
+%    \item $\dot{S}$ is the source particle rate
+%    \item $S_{net}$ is the total number of source particles
+%    \item $\tau_{in}$ is the in-core residence time
+%    \item $\tau_{ex}$ is the ex-core residence time
+%    \item $T$ is the net irradiation time
+%\end{description}
 
 \begin{comment}
 After the OpenMC model, the custom scripts handle converting the concentrations into group parameters.

@@ -12,13 +12,21 @@ The time-dependent rate of delayed neutron emission from a single beta-delayed n
 \end{equation}
 
 The terms in Equation \eqref{eq:dnpsingleeq} is defined as follows:
-\begin{itemize}
-    \setlength\itemsep{-0.25em}
-    \item $n_{d, i}$ is the delayed neutron activity, or count rate, from \gls{DNP} $i$
-    \item $P_{n, i}$ is the average number of delayed neutrons emitted from a single beta decay of nuclide $i$, or the emission probability
-    \item $\lambda_i$ is the decay constant of \gls{DNP} $i$
-    \item $N_i(t)$ is the concentration of \gls{DNP} $i$
-    \end{itemize}
+\begin{align}
+n_{d, i} &= \mbox{ the delayed neutron activity, or count rate, from \gls{DNP} $i$ [$\frac{n}{s}$]} \nonumber \\
+P_{n, i} &= \mbox{ the average number of delayed neutrons emitted from}\\
+& \;\;\;\;\;\; \mbox{a single beta decay of nuclide $i$, or the emission probability [-]} \nonumber \\
+\lambda_i &= \mbox{ the decay constant of \gls{DNP} $i$ [$s^{-1}$]} \nonumber \\
+N_i(t) &= \mbox{ the concentration of \gls{DNP} $i$ [$atoms$].} \nonumber
+\end{align}
+
+%\begin{itemize}
+%    \setlength\itemsep{-0.25em}
+%    \item $n_{d, i}$ is the delayed neutron activity, or count rate, from \gls{DNP} $i$
+%    \item $P_{n, i}$ is the average number of delayed neutrons emitted from a single beta decay of nuclide $i$, or the emission probability
+%    \item $\lambda_i$ is the decay constant of \gls{DNP} $i$
+%    \item $N_i(t)$ is the concentration of \gls{DNP} $i$
+%\end{itemize}
 
 A challenging aspect of treating \glspl{DNP} in \glspl{MSR} is the necessary inclusion of a spatial component due to the movement of the fuel salt.
 In a solid fuel reactor, such as an \gls{LWR}, a spatial component is not necessary to properly model the \glspl{DNP}.
@@ -53,11 +61,16 @@ Equation \eqref{eq:mdnp-dn} shows the delayed neutron counts as a function of ti
 \end{equation}
 
 Many of the terms in Equation \eqref{eq:mdnp-dn} are the same as in \eqref{eq:dnpsingleeq}. The terms in Equation \eqref{eq:mdnp-dn} which are different are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $I$ is the total number of \glspl{DNP}
-    \item $\epsilon$ is the detector efficiency
-\end{description}
+\begin{align}
+I &= \mbox{ the total number of \glspl{DNP} [-] } \nonumber \\
+\epsilon &= \mbox{ the detector efficiency [-].} \nonumber
+\end{align}
+
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $I$ is the total number of \glspl{DNP}
+%    \item $\epsilon$ is the detector efficiency
+%\end{description}
 
 Once this delayed neutron temporal profile is generated, it is common to then use the data to generate group and kinetics parameters for that fissile nuclide and neutron energy.
 The specifics of the methods used to form those parameters is discussed in Section \ref{sec:gandkparams}.
