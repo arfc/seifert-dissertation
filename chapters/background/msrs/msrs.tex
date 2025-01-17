@@ -9,7 +9,7 @@ The table shows that there are many \glspl{MSR}, shown in the "Reactor" column, 
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
-\caption{Molten Salt Reactor Models Analyzed with Methods Approximating Online Reprocessing from \cite{seifert2023analysis}}
+\caption{Molten Salt Reactor Models Analyzed with Methods Approximating Online Reprocessing (Recreated from \cite{seifert2023analysis})}
 \label{tab:codes_types}
 \begin{center}
 \begin{tabular}{  c | c | c | c | c | c}
@@ -46,4 +46,5 @@ The table shows that there are many \glspl{MSR}, shown in the "Reactor" column, 
 
 
 Although these works incorporate the effects of online chemical reprocessing on depletion, an effect they do not explicitly model is the spatial effect on depletion.
-The reason why most works do not include spatial resolution in depletion calculations is due to the computational cost.
+Instead, a simple approximation is used to handle the in-core and ex-core regions while accounting for the entire primary salt volume.
+The reason why simulations do not include fully resolved spatial resolution in depletion calculations is due to the computational cost.

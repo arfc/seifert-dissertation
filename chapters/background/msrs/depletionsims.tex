@@ -91,7 +91,8 @@ This way, no spatial component needs to be considered, and the system of ordinar
 
 Circulating fuel makes the problem more complex, as adding a spatial component means that instead of a system of ordinary differential equations, a system of partial differential equations must be solved.
 The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding Equation \eqref{eq:bate-flow-simple}.
-In this equation, the assumption is made that only concentration spatial resolution is applied, so the depletion matrix does not include additional spatial resolution.
+%In this equation, the assumption is made that only concentration spatial resolution is applied, so the depletion matrix does not include additional spatial resolution.
+This equation assumes spatial resolution is only applied to the concentration terms, which means the depletion matrix does not include spatial resolution.
 Thus, only the concentrations and material blocks provide spatial resolution to the problem.
 More spatial refinement can be provided to the neutronic parameters based on the specific approach used, such as a fully spatially resolved neutron flux.
 
@@ -126,7 +127,7 @@ However, these works have shown that including advection in depletion directly a
 This means that depletion simulations of MSRs need to include spatially resolved depletion to generate accurate results.
 %However, Tano et al. showed that these methods are still computationally expensive, even when attempting to simplify the problem \cite{tano_coupled_nodate}.
 
-However, including spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
+However, including fully resolved spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
 This is because tracking the $\sim$2000 nuclides over space and time requires new methods rather than those used for the time dependent system of ordinary differential equations.
 Methods for solving the system of partial differential equations require accurately capturing short time scale flow effects, which makes multi-year long depletion simulations exceedingly expensive.
 Numerical stability of the problem, when using an explicit-time solving scheme, also requires that the \gls{CFL} condition shown in Equation \eqref{eq:num-stab} to be valid.
@@ -137,5 +138,8 @@ Numerical stability of the problem, when using an explicit-time solving scheme, 
 \end{equation}
 
 This equation limits the time step size based on the flow rate and spatial mesh size.
-Although using a different time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, resolution of spatial mesh, and the overall amount of time simulated in depletion.
+Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, resolution of spatial mesh, and the overall amount of time simulated in depletion.
 
+However, for a short depletion simulation, such as a saturation irradiation of a fuel sample, capturing these effects is computationally tractable.
+Because the depletion lasts only for several minutes instead of several years, the computational cost is orders of magnitude smaller.
+This means that having a high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment to generate updated \gls{DNP} group parameters is feasible. 
