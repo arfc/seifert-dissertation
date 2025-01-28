@@ -65,13 +65,13 @@ Over the course of a depletion step, the depletion matrix is assumed to be const
 This also means that the loss term, $\lambda_{net, j}$, does not vary with time in this equation.
 
 \begin{equation}
-    \frac{dN_j}{dt} = C(t) - \lambda_{net, j} N_j(t)
+    \frac{dN_j}{dt} = S(t) - \lambda_{net, j} N_j(t)
     \label{eq:bate-stat-simple}
 \end{equation}
 
 The terms in Equation \eqref{eq:bate-stat-simple} are defined as follows:
 \begin{align}
-C &= \mbox{ the source term for nuclide $j$, } \nonumber\\
+S &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{atoms}{cm^3 s}$]} \nonumber \\
 \lambda_{net, j} &= \mbox{ the loss term for nuclide $j$,} \nonumber\\
 & \;\;\;\;\; \mbox{ containing decay and transmutation losses [$cm^{-3} s^{-1}$] .} \nonumber
@@ -97,11 +97,11 @@ Thus, only the concentrations and material blocks provide spatial resolution to 
 More spatial refinement can be provided to the neutronic parameters based on the specific approach used, such as a fully spatially resolved neutron flux.
 
 \begin{equation}
-    \frac{dN_j}{dt} = C(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
+    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
     \label{eq:bate-flow-simple}
 \end{equation}
 
-The terms in Equation \eqref{eq:bate-stat-simple} contain several repeated terms from Equation \eqref{eq:bate-stat-simple}, with new terms defined as follows:
+The terms in Equation \eqref{eq:bate-flow-simple} contain several repeated terms from Equation \eqref{eq:bate-stat-simple}, with new terms defined as follows:
 \begin{align}
 D_{mix} &= \mbox{ the mixing diffusivity, } \nonumber\\
 & \;\;\;\;\; \mbox{ which sums mass diffusivity and turbulent diffusion [$\frac{cm^2}{s}$]} \nonumber \\

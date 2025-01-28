@@ -64,7 +64,8 @@
 \input{chapters/methodology/tools/openmc}
 
 
-\subsection{MOOSE Apps}
+\subsection{Moltres}
+\label{sec:moltres}
 \input{chapters/methodology/tools/moose/moose}
 
 
@@ -73,18 +74,19 @@
 
 %\subsubsection{Pronghorn}
 
-\subsubsection{Moltres}
+%\subsubsection{Moltres}
 \input{chapters/methodology/tools/moose/moltres}
 
 
 \section{Delayed Neutron Precursor Group Generation}
+\label{sec:delnu-groupgen}
 \input{chapters/methodology/simplification}
 
 \subsection{0D Flow Model}
 \label{sec:simple-model}
 \input{chapters/methodology/simplification/gen}
 
-\subsection{Sophisticated Model}
+\subsection{Spatially Resolved Model}
 \label{sec:soph-model}
 \input{chapters/methodology/sophisticated/gen}
 
@@ -133,26 +135,8 @@
 
 \subsection{Constants for Simulations}
 
-These sensitivity studies are used to analyze parameters that are held constant during the simulations and determine if simplifications can be made to some with negligible impact on the results.
+\input{chapters/preliminaryresults/sensitivity/constants}
 
-\subsubsection{Temperature}
-
-\subsubsection{Target Density}
-
-\subsubsection{Total Irradiation Time}
-
-\subsubsection{Total Decay Time and Decay Time Steps}
-\label{sec:time-eval}
-The bulk of the computational cost comes from writing statepoint files; sufficient resolution is required to ensure a smooth decay curve.
-
-\subsubsection{Large Cycle Time Elements}
-\label{sec:large-tcyc}
-
-%\subsubsection{Refuel Rate}
-%\label{sec:ref-rate}
-
-\subsubsection{Decay Daughter Tracking}
-\label{sec:decaychaindaughters}
 
 \subsection{Variables for Simulations}
 
@@ -170,7 +154,8 @@ These sensitivity studies are used to analyze the parameters that change between
 
 \subsection{0D Flow Model Verification}
 
-Microscopic group parameters \cite{leconte2020new, mills1991study} should match static results (no flow or chemical removal.)
+\input{chapters/preliminaryresults/verification/litcompare}
+
 
 \subsection{0D Flow Model Validation}
 
@@ -202,11 +187,15 @@ Neglect uncertainty in concentrations from OpenMC (cross sections, fission yield
 
 \section{Other extensions}
 \begin{itemize}
+\item Model more nuclides to see if analyses are valid for all nuclides or only some (create polynomial fits to describe behavior)
 \item Diffusion effect (not really modelable in time pulses only unless multiple materials are used) (could be approximated in 0D Flow Model).
 \item Photoneutrons - investigate
 \item Spatially resolved flux in 0D Flow Model - consider, Specific neutron spectra
 \item Thermochemical effects - different nuclides will have different chemical removal rates, which will affect results (Sam knows more about this and could help me figure out if there would be something here in particular worth investigating)
+\item Evaluation of other datasets impact on results \cite{huynh2014calculation, mathieu2012new}
 \end{itemize}
+
+
 \appendix
-\chapter{Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
+\chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
 \input{chapters/appendices/appendixA}

@@ -311,11 +311,19 @@ Equation \eqref{eq:betai} shows that to calculate the group yield, the group abu
     \label{eq:betai}
 \end{equation}
 
-Equation \eqref{eq:dnyield} shows how the average number of delayed neutrons per fission event, $\bar{\nu}_d$, can be calculated by summing the group abundances \cite{gremyachkin2015verification}.
+A useful term for comparing \gls{DNP} group parameters is the average half-life \cite{piksaikin2002energy, piksaikin2007relative}.
+Equation \eqref{eq:avg-hl} shows the average half-life as:
+
+\begin{equation}
+    <T> = \ln (2) \sum_i^{n} \frac{a_i}{\lambda_i}.
+    \label{eq:avg-hl}
+\end{equation}
+
+Equation \eqref{eq:dnyield} shows how the total delayed neutron yield, or average number of delayed neutrons per fission event, $\bar{\nu}_d$, can be calculated by summing the group abundances \cite{gremyachkin2015verification}.
 Based on the definition of $\beta_i$ given in Equation \eqref{eq:betai}, it can be seen that the group abundances, $a_i$, could be rewritten as the group average delayed neutrons per fission event, $\bar{\nu}_{d, i}$.
 
 \begin{equation}
-    \bar{\nu}_d = \sum_i a_i
+    \bar{\nu}_d = \sum_i^n a_i
     \label{eq:dnyield}    
 \end{equation}
 

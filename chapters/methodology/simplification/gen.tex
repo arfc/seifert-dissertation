@@ -36,14 +36,15 @@ This means such an approximation does not hinder the effectiveness of this 0D fl
 
 Another consideration for the OpenMC model is having a consistent source particle rate.
 This is not strictly necessary for group parameter generation, as the values are per-fission, but it is convenient for data analysis, as the tallies are based on the source particles.
-Equation \eqref{eq:balancedsdot} shows how the source rate is calculated to maintain the same source rate between different simulations.
+The source rate for different simulations is given in Equation \eqref{eq:balancedsdot} as:
 
 \begin{equation}
-    \dot{S} = S_{net} \frac{\tau_{in} + \tau_{ex}}{\tau_{in} T}
+    \dot{S} = S_{net} \frac{\tau_{in} + \tau_{ex}}{\tau_{in} T},
     \label{eq:balancedsdot}
 \end{equation}
 
-The terms in Equation \eqref{eq:balancedsdot} are defined as follows:
+where
+
 \begin{align}
 \dot{S} &= \mbox{ the source particle rate [$\frac{n}{s}$]} \nonumber \\ 
 S_{net} &= \mbox{ the total number of source particles [$n$]} \nonumber \\ 

@@ -2004,3 +2004,104 @@ isbn="978-3-642-58113-7"
   year={2007},
   publisher={Elsevier}
 }
+
+
+
+@article{park2022verification,
+  title={Verification of moltres for multiphysics simulations of fast-spectrum molten salt reactors},
+  author={Park, Sun Myung and Munk, Madicken},
+  journal={Annals of Nuclear Energy},
+  volume={173},
+  pages={109111},
+  year={2022},
+  publisher={Elsevier}
+}
+
+@article{lindsay2023moose,
+  title={MOOSE Navier--Stokes module},
+  author={Lindsay, Alexander and Giudicelli, Guillaume and German, Peter and Peterson, John and Wang, Yaqi and Freile, Ramiro and Andrs, David and Balestra, Paolo and Tano, Mauricio and Hu, Rui and others},
+  journal={SoftwareX},
+  volume={23},
+  pages={101503},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@article{giudicelli2024moose,
+   title = {3.0 - {MOOSE}: Enabling massively parallel multiphysics simulations},
+   author = {Guillaume Giudicelli and Alexander Lindsay and Logan Harbour and Casey Icenhour and
+             Mengnan Li and Joshua E. Hansel and Peter German and Patrick Behne and Oana Marin and
+             Roy H. Stogner and Jason M. Miller and Daniel Schwen and Yaqi Wang and Lynn Munday and
+             Sebastian Schunert and Benjamin W. Spencer and Dewen Yushu and Antonio Recuero and
+             Zachary M. Prince and Max Nezdyur and Tianchen Hu and Yinbin Miao and
+             Yeon Sang Jung and Christopher Matthews and April Novak and Brandon Langley and
+             Timothy Truster and Nuno Nobre and Brian Alger and David Andr{\v{s}} and
+             Fande Kong and Robert Carlsen and Andrew E. Slaughter and John W. Peterson and
+             Derek Gaston and Cody Permann},
+    year = {2024},
+ journal = {{SoftwareX}},
+  volume = {26},
+   pages = {101690},
+    issn = {2352-7110},
+     doi = {https://doi.org/10.1016/j.softx.2024.101690},
+     url = {https://www.sciencedirect.com/science/article/pii/S235271102400061X},
+keywords = {Framework, Finite-element, Finite-volume, Parallel, Multiphysics, Multiscale},
+}
+
+@article{peterson2018overview,
+  title={Overview of the incompressible Navier--Stokes simulation capabilities in the MOOSE framework},
+  author={Peterson, John W and Lindsay, Alexander D and Kong, Fande},
+  journal={Advances in Engineering Software},
+  volume={119},
+  pages={68--92},
+  year={2018},
+  publisher={Elsevier}
+}
+
+
+@phdthesis{park_advancements_2025,
+	address = {Urbana, IL},
+	type = {{PhD} {Dissertation}},
+	title = {Advancements in {Moltres} for {Time}-{Dependent} {Multiphysics} {Molten} {Salt} {Reactor} {Modeling}},
+	copyright = {Copyright 2025 Sun Myung Park},
+	abstract = {Molten Salt Reactors (MSRs) are advanced reactors noted for strong passive safety features. They present unique challenges in multiphysics reactor modeling \& simulation arising from strong temperature reactivity feedback, delayed neutron precursor flow, and turbulent heat transport in fuel salt regions. Simulating the complex multiphysics interactions in MSRs requires robust, flexible, and highly scalable multiphysics software. Many MSR designs also still retain control rods which can complicate time-dependent reactivity-initiated transient simulations on reactor software relying on neutron diffusion theory. This work builds on existing capabilities in Moltres, a MOOSE-based MSR simulation software, to address these challenges and support efforts towards MSR deployment.
+This work verified and validated existing multiphysics coupling capabilities in Moltres in two comparative studies. In both studies, Moltres showed good agreement with other MSR simulation tools involving coupled neutronics and thermal-hydraulics problems. This work also introduces a turbulence model in Moltres to support future MSR analyses involving turbulent delayed neutron precursor and temperature transport. Lastly, this work introduces a novel hybrid SN-diffusion method for accurate control rod modeling in time-dependent MSR simulations. The hybrid method combines the strengths of both approaches by generating transport corrections using the SN method near control rods. The SN and neutron diffusion solvers are coupled through an adaptive boundary coupling algorithm. This algorithm allows the solver to adapt to the transport correction parameters and preserve smooth neutron flux gradients across the interface. In 1-D, 2-D, and 3-D k-eigenvalue simulations, the hybrid method produced accurate control rod worth estimates, relative to reference neutron transport solutions and experimental data, at approximately four times the computational cost of the neutron diffusion method. The hybrid method also performed well in a time-dependent rod drop simulation by reproducing expected trends observed in experimental data. Analysis of its computational performance indicated the possibility of further optimizations beyond its current implementation. With the hybrid methods spatial resolution and efficient computational performance, Moltres could enable accurate and cost-effective simulations of asymmetric transients in MSRs.},
+	language = {English},
+	school = {University of Illinois Urbana-Champaign},
+	author = {Park, Sun Myung},
+	month = jan,
+	year = {2025},
+	file = {Park - 2025 - Advancements in Moltres for Time-Dependent Multiph.pdf:/home/luke/Zotero/storage/VHTAFPET/Park - 2025 - Advancements in Moltres for Time-Dependent Multiph.pdf:application/pdf},
+}
+
+@article{mathieu2012new,
+  title={New neutron long-counter for delayed neutron investigations with the LOHENGRIN fission fragment separator},
+  author={Mathieu, L and Serot, Olivier and Materna, T and Bail, A and K{\"o}ster, U and Faust, H and Litaize, O and Dupont, E and Jouanne, C and Letourneau, A and others},
+  journal={Journal of Instrumentation},
+  volume={7},
+  number={08},
+  pages={P08029},
+  year={2012},
+  publisher={IOP Publishing}
+}
+
+@article{huynh2014calculation,
+  title={Calculation of delayed neutron yields for various libraries},
+  author={Huynh, TD and Jouanne, C},
+  journal={Nuclear Data Sheets},
+  volume={118},
+  pages={476--479},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{geuzaine2009gmsh,
+  title={Gmsh: A 3-D finite element mesh generator with built-in pre-and post-processing facilities},
+  author={Geuzaine, Christophe and Remacle, Jean-Fran{\c{c}}ois},
+  journal={International journal for numerical methods in engineering},
+  volume={79},
+  number={11},
+  pages={1309--1331},
+  year={2009},
+  publisher={Wiley Online Library}
+}

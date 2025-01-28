@@ -1,8 +1,8 @@
 After receiving the concentrations from OpenMC, the concentrations of each nuclide as a function of time for the measurement period can be determined.
-The concentrations are calculated as a function of half life, as shown in Equation \eqref{eq:radiodec}.
+The concentrations are calculated as a function of half life, as shown in Equation \eqref{eq:radiodec} where the concentration as a function of time is:
 
 \begin{equation}
-    N(t) = N_0 e^{-\lambda t}
+    N(t) = N_0 e^{-\lambda t}.
     \label{eq:radiodec}
 \end{equation}
 
@@ -12,13 +12,13 @@ These concentrations can be used at coarse time steps and linearly interpolated 
 This approach does not account for particles generated during decay, as it is considered beyond the scope of this work \cite{chen2002rigorous}.
 A comparison of these two approaches is investigated in Section \ref{sec:decaychaindaughters}.
 
-The concentrations are combined with Equation \eqref{eq:delnu-exact}, recreated here as Equation \eqref{eq:delnu-exact-2}.
-The efficiency term, $\epsilon$, is set to 1 in this work, since the simulated method provides a count rate that includes every produced delayed neutron.
-
+The concentrations are combined with Equation \eqref{eq:delnu-exact}, recreated here:
 \begin{equation}
-n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
-\label{eq:delnu-exact-2}
+n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t).
+\nonumber
 \end{equation}
 
-Each nuclide in the \gls{IAEA} beta-delayed neutron emitter database is iterated through \cite{DIMITRIOU2021144}.
-The delayed neutron count contribution over time is summed for each nuclide, generating the delayed neutron count rate.
+
+The efficiency term, $\epsilon$, is set to 1 in this work, since the simulated method provides a count rate that includes every produced delayed neutron.
+Each \gls{DNP} has its contribution over time summed up, generating the delayed neutron count rate.
+%The delayed neutron count contribution over time is summed for each nuclide, generating the delayed neutron count rate.

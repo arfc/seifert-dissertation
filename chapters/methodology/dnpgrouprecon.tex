@@ -1,16 +1,14 @@
 Once the delayed neutron counts as a function of time are generated, they can be converted into \gls{DNP} group parameters.
 The process of fitting the group parameters requires a non-linear least squares method, as both the group half lives and group abundances must be determined.
-The equation describing the problem is given in Equation \eqref{eq:delnu-fit}, recreated here.
+The equation describing the problem is given in Equation \eqref{eq:delnu-fit}, recreated here:
 
 \begin{equation}
-n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}
-\label{eq:delnu-fit-2}
+n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}.
 \nonumber
 \end{equation}
 
 An important consideration for this process is the time values used when generating the group fits.
 An increased number of times means increased computational cost, but too few times results in a poorer fit \cite{parish1999status}.
-Additionally, the times can be spaced in differing manners, such as linearly or geometrically.
 This is investigated in Section \ref{sec:time-eval}.
 
 Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than it is for the saturation irradiation fit.
@@ -23,7 +21,8 @@ The normalization is handled by taking the delayed neutron counts, dividing by t
 These normalized counts are then passed into the non-linear least squares fitting.
 The linearization is handled by taking the natural logarithm of the entire delayed neutron count fit function.
 This treatment reduces both the covariance and the $\chi^2$ of the resulting non-linear least squares fit.
-Bounds are also set from zero to 1000 for each term to speed up the process, while the tolerances for convergence are set to $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
+Bounds are also set from zero to 1000 for each term to speed up the process, while the tolerances for convergence are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
+These convergence criteria include both change in the independent variables and the norm of the gradient, with termination occurring when either criteria meets the set tolerance.
 
 The sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is also a possible factor.
 However, since the number of fissions in the sample are taken directly from the OpenMC tallies, this does not become an issue which must be addressed.
@@ -39,10 +38,10 @@ These uncertainties are used in the minimization of $\chi^2$, shown in Equation 
 
 The terms in Equation \eqref{eq:chisq-nnls} are defined as follows:
 \begin{align}
-t_f &= \mbox{ the final time after irradiation, starting at $t=0$, immediately following irradiation [$s$]} \nonumber \\ 
-b_t &= \mbox{ the delayed neutron count vector at the row where the time value is $t$ [$s^{-1}$] } \nonumber \\ 
-A_t &= \mbox{ the coefficient matrix at the row where the time value is $t$ [$s^{-1}$] } \nonumber \\ 
-x_t &= \mbox{ the solution vector at the row where the time value is $t$ [-].} \nonumber
+t_f &= \mbox{ the final time post irradiation [$s$]} \nonumber \\ 
+b_t &= \mbox{ the delayed neutron count vector at time $t$ [$s^{-1}$] } \nonumber \\ 
+A_t &= \mbox{ the coefficient matrix at at time $t$ [$s^{-1}$] } \nonumber \\ 
+x_t &= \mbox{ the solution vector at time $t$ [-].} \nonumber
 \end{align}
 
 
