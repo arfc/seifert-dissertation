@@ -8,10 +8,13 @@
 
 \section{Delayed Neutron Precursors}
 
-\subsection{Overview}
 \input{chapters/background/dnps/dnps}
 
-\subsection{Group and Kinetics Parameters}
+\subsection{Measurement}
+\label{sec:measurementofdnps}
+\input{chapters/background/dnps/measurement}
+
+\subsection{Delayed Neutron Precursor Group and Kinetics Parameters}
 \label{sec:gandkparams}
 \input{chapters/background/dnps/groupparam}
 
@@ -159,7 +162,12 @@ These sensitivity studies are used to analyze the parameters that change between
 
 \subsection{0D Flow Model Validation}
 
-MSRE pump start-up and coast-down with Moltres and Quasimolto \cite{prince1968zero, reynolds2023analysis}.
+\begin{itemize}
+    \item MSRE pump start-up and coast-down with Moltres and Quasimolto \cite{prince1968zero, reynolds2023analysis}.
+    \item Replicate Godiva irradiation or similar to match experimental results
+\end{itemize}
+
+
 
 \chapter{Proposed Work}
 
@@ -167,9 +175,8 @@ MSRE pump start-up and coast-down with Moltres and Quasimolto \cite{prince1968ze
 
 \input{chapters/proposedwork/highfidelity}
 
-\section{Spatially Resolved Depletion Effects on Precursors}
+\section{Polynomial Fits of Tabulated Parameters}
 
-Net delayed neutron yield; group abundances; group decays; comparison of most impactful nuclides (?)
 
 Include polynomial fits (figures) showing how group parameters vary based on tabulated parameters (in-core, ex-core, chemical removal scaling, etc.)
 
@@ -188,6 +195,7 @@ Neglect uncertainty in concentrations from OpenMC (cross sections, fission yield
 \section{Other extensions}
 \begin{itemize}
 \item Model more nuclides to see if analyses are valid for all nuclides or only some (create polynomial fits to describe behavior)
+\item Look into different ways of combining pulse and saturation irradiation results \cite{mills2014calculation}
 \item Diffusion effect (not really modelable in time pulses only unless multiple materials are used) (could be approximated in 0D Flow Model).
 \item Photoneutrons - investigate
 \item Spatially resolved flux in 0D Flow Model - consider, Specific neutron spectra
