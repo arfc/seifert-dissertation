@@ -1,4 +1,4 @@
-Depletion itself is the process of fission, transmutation, decay, reprocessing, and the changes to material compositions this process causes.
+Depletion is the process of fission, transmutation, decay, and the changes to material compositions this process causes.
 Simulating depletion requires specific information, such as decay constants, fission yields, and fission and transmutation cross-section data.
 The fission and transmutation cross-section data can come from a transport calculation, while the other data can be read from a data library \cite{leppanen_development_2007}.
 Simulating depletion entails numerically solving the Bateman equations; a generalized form of which is in Equation \eqref{eq:Bateman_default}.
@@ -6,15 +6,15 @@ Simulating depletion entails numerically solving the Bateman equations; a genera
 \begin{equation} \hfill
 \begin{split}
 %\frac{dN}{dt} = \sum_j \lambda_j N_j + \gamma \Sigma_f \phi + \Sigma_k \phi - \lambda N - \Sigma \phi - C
-\frac{dN_j}{dt}_{base} = \sum_{i \neq j}  & \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \Phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \Phi \right) N_i \right ]\\
- & - \left ( \lambda_j + \sigma_j \Phi \right ) N_j
+\frac{dN_j}{dt} = \sum_{i \neq j}  & \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \Phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \Phi \right) N_i \right ]\\
+ & - \left ( \lambda_j + \sigma_j \Phi + \lambda_{r, j} \right) N_j
 \end{split}
 \hfill\label{eq:Bateman_default} \end{equation}
 
 The terms in Equation \eqref{eq:Bateman_default} are defined as follows \cite{leppanen_development_2007}:
 \begin{align}
 N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
-\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ in the fission of isotope $i$ } \nonumber \\ 
+\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
 \sigma_{f, i} &= \mbox{ the microscopic fission cross-section of isotope $i$ $\left[cm^2\right]$ } \nonumber \\ 
 \Phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{neutrons}{cm^2 s}\right]$ } \nonumber \\ 
 \lambda _{i \rightarrow j} &= \mbox{ the decay constant of decay $i \rightarrow j$ $\left[s^{-1}\right]$ } \nonumber \\ 
@@ -42,24 +42,24 @@ N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{atoms}{cm^3}\right]
 
 
 
-The matrix form can be seen in \eqref{eq:mat_Bate}, where $N$ is a vector of compositions, and $A$ is the depletion matrix.
+The matrix form can be seen in \eqref{eq:mat_Bate}, where $\vec{N}$ is a vector of compositions, and $A$ is the depletion matrix.
 This matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
-Further documentation on treatment of depletion of these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
+Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
 
 \begin{equation}
-    \frac{dN}{dt} = A N
+    \frac{d\vec{N}}{dt} = A \vec{N}
     \label{eq:mat_Bate}
 \end{equation}
 
 There are several approaches to solving this equation, such as the Transmutation Trajectory Analysis (TTA) method and the Chebyshev Rational Approximation Method (CRAM) \cite{leppanen_serpent_2015}.
-Other codes may use external software to compute depletion, such as REM, an in-house code used by Nuttin et al. \cite{nuttin_potential_2005} to implement Fourth order Runge–Kutta.
+Other codes may use external software to compute depletion, such as REM, an in-house code used by Nuttin et al. \cite{nuttin_potential_2005} to implement $4^{th}$ order Runge–Kutta.
 Codes may also use a power series approximation of the matrix exponential, as discussed by Aufiero et al. \cite{aufiero_extended_2013}.
 
-Overall, there are many approaches to solving the depletion equation with different computational costs and levels of accuracy. Building a code to handle depletion requires two components: the depletion matrix and a numerical solver.
+Overall, there are many approaches to solving the depletion equation with different computational costs and levels of accuracy. Building a computational tool to handle depletion requires two components: the depletion matrix and a numerical solver.
 
-\subsubsection{Stationary fuel}
+\subsection{Stationary and Circulating Fuel Comparison}
 
-For a stationary fuel, the Bateman equation as shown previously is sufficient to simulate depletion.
+For stationary fuel, the Bateman equation as shown previously in Equation \eqref{eq:Bateman_default} is sufficient to simulate depletion.
 However, for the purposes of a streamlined comparison with circulating fuel, the Bateman equation can be rewritten to the form shown in Equation \eqref{eq:bate-stat-simple}.
 Over the course of a depletion step, the depletion matrix is assumed to be constant, so the source term varies in time only due to the effects of the changing compositions of other nuclides.
 This also means that the loss term, $\lambda_{net, j}$, does not vary with time in this equation.
@@ -82,12 +82,13 @@ S &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 %\item $\lambda_{net, j}$ is the loss term for nuclide $j$, containing decay and transmutation losses
 %\end{description}
 
-When solving this equation, the common approach is to have different material blocks in different spatial regions.
+This form of the Bateman equation does not have space or energy resolution, which makes it simpler to understand and compare with the circulating fuel version.
+When solving this equation, the common approach is to have different material groupings, or blocks, in different spatial regions.
 Each of these material blocks will have different compositions and neutronic properties, such as flux, used for that entire material.
-This way, no spatial component needs to be considered, and the system of ordinary differential equations can be solved rapidly.
+This way, the spatial resolution is represented by the material blocks, and the system of ordinary differential equations can be solved rapidly.
 
-\subsubsection{Circulating fuel}
-\label{sec:circ-fuel-dep}
+%\subsubsection{Circulating fuel}
+%\label{sec:circ-fuel-dep}
 
 Circulating fuel makes the problem more complex, as adding a spatial component means that instead of a system of ordinary differential equations, a system of partial differential equations must be solved.
 The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding Equation \eqref{eq:bate-flow-simple}.
@@ -113,17 +114,18 @@ D_{mix} &= \mbox{ the mixing diffusivity, } \nonumber\\
 %\item $\vec{u}$ is the fluid velocity field
 %\end{description}
 
-As previously mentioned, the main challenge faces when solving this problem is the computational cost.
+As previously mentioned, the main challenge faced when solving this problem is the computational cost.
 However, there are still many works which have attempted to develop methods to get around this problem.
-
-One approach is very computationally inexpensive, and is referred to as the "scaled flux" method \cite{betzler_liquid-fueled_2021}.
+One approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
 However, this approach does not model the in-core and ex-core regions in a physical manner.
 Instead, the scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
 Another approach is to calculate the steady-state concentration, changing the system of ordinary differential equations to spatial rather than temporal relations \cite{shahbazi_steady-state_2022}.
 
 Other approaches, such as \gls{MCNP} and \gls{ADDER}, or the method proposed by Tano et al. using Griffin and Pronghorn, try to model the flow more explicitly \cite{anderson_user_2022, tanocoupled2023}.
 This approach is more computationally expensive than the other approaches that only require solving a system of ordinary differential equations.
-However, these works have shown that including advection in depletion directly affects the equilibrium concentration of xenon-135 by roughly 70\% \cite{tanocoupled2023, fei_validation_2022}.
+However, the literature has shown that including advection in depletion directly affects the equilibrium concentration of $^{135}Xe$ by varying amounts \cite{tanocoupled2023, fei_validation_2022}.
+Tano et al. show that the $^{135}Xe$ in the \gls{MSFR} decreases by approximately 80\% when moving from no spatial resolution to a quasi-static method.
+Fei et al. show that the $^{135}Xe$ in the \gls{MSRE} increases by approximately 63\% when moving from no spatial resolution to 0D fuel flow.
 This means that depletion simulations of MSRs need to include spatially resolved depletion to generate accurate results.
 %However, Tano et al. showed that these methods are still computationally expensive, even when attempting to simplify the problem \cite{tano_coupled_nodate}.
 
@@ -133,12 +135,12 @@ Methods for solving the system of partial differential equations require accurat
 Numerical stability of the problem, when using an explicit-time solving scheme, also requires that the \gls{CFL} condition shown in Equation \eqref{eq:num-stab} to be valid.
 
 \begin{equation}
-    \Delta t \le \lambda_{CFL} \frac{\Delta z}{\nu}
+    \lambda_{CFL} \geq \frac{\nu \Delta t}{\Delta z}
 \label{eq:num-stab}
 \end{equation}
 
 This equation limits the time step size based on the flow rate and spatial mesh size.
-Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, resolution of spatial mesh, and the overall amount of time simulated in depletion.
+Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, spatial mesh resolution, and the overall amount of time simulated in depletion.
 
 However, for a short depletion simulation, such as a saturation irradiation of a fuel sample, capturing these effects is computationally tractable.
 Because the depletion lasts only for several minutes instead of several years, the computational cost is orders of magnitude smaller.

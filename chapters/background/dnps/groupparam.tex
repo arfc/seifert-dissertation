@@ -72,7 +72,7 @@ This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weig
 The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
 In contrast, the effective delayed neutron fraction varies by on the order of 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
 
-\subsection{DNP Group Parameters Calculations}
+\subsection{DNP Group Parameters}
 \label{ref:calc-group-param}
 
 The \gls{DNP} group parameters are important for simulating transients.
@@ -223,24 +223,24 @@ n_d(E, t) \approx \epsilon \tilde{F}_s \sum_{i=1}^{n} \chi_i(E) A_i e^{-\lambda_
 \label{eq:speceq}
 \end{equation}
 
-\subsection{DNP Group Concentrations Calculations}
+\subsection{DNP Group Spectra and Concentrations}
 Another consideration in calculating group parameters is constructing group concentrations from individual nuclide data.
-This is less important for group parameters, but is important if there is desire to use the generated group parameters with concentrations which are converted into group concentrations.
+This is important for using the generated group parameters with concentrations which are converted into group concentrations.
+A specific use case for this is explicitly modeling all \glspl{DNP} spatially and then using those spatially resolved concentrations with an existing six-group structure.
+In such a case, the \glspl{DNP} must be combined in such a manner to preserve their contributions to each \gls{DNP} group.
+The reverse is also true, where a given six-group spatially resolved concentration can be separated into individual \glspl{DNP} spatially resolved concentrations.
 
-Two different methods are considered for the separation and recombination of \gls{DNP} groups into individual nuclides.
-These methods have been used for generation of \gls{DNP} group spectra:
+Two different methods are considered for separating and combining the \gls{DNP} groups into individual nuclides and vice versa.
+These methods have been used to generate \gls{DNP} group spectra, so the group spectra can also be calculated using these methods:
  
 \begin{itemize}
     \item Grouping based on half lives \cite{england1983aggregate, rudstam1982six}
     \item Grouping based on fractional contribution to adjacent groups \cite{brady1988evaluation}
 \end{itemize}
 
-The grouping based on half lives is easier to implement and understand, as it simply requires comparing each nuclide's half life to a constant value.
+The grouping based on half lives requires comparing each nuclide's half life to a constant value.
 The groupings based on half lives are given in the top two sets in Table \ref{tab:halfgroup}.
 The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach.
-
-
-
 
 
 \renewcommand{\arraystretch}{1.25}
@@ -248,7 +248,7 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
     \centering
     \begin{threeparttable}
     \caption{Half-lives of \gls{DNP} groups.}
-    \begin{tabular}{c|c|c|c|c|c|c}
+    \begin{tabular}{ccccccc}
        Source  & $T_1$ $[s]$ &  $T_2$ $[s]$ & $T_3$ $[s]$ & $T_4$ $[s]$ & $T_5$ $[s]$ & $T_6$ $[s]$\\
        \hline
        \hline
@@ -277,23 +277,25 @@ The half-life grouping method thus results in a series of comparisons.
 If a nuclide is within a given group's bounds, the concentration of that nuclide is then added to that group.
 
 The fractional grouping is more complex, but assigns nuclides to groups in a more rigorous manner.
-The method uses two groups for each nuclide $k$, which are groups $i$ and $i+1$.
-These groups are determined via Equation \eqref{eq:fraclam}.
-Nuclides which do not have a $\lambda_{i+1}$ which is larger than $\lambda_k$ will have the entire fractional contribution to group $i$.
+The method uses two groups, $i$ and $i+1$, for each nuclide $k$.
+These groups are determined via Equation \eqref{eq:fraclam} as:
 
 \begin{equation}
     \lambda_i < \lambda_k < \lambda_{i+1}
     \label{eq:fraclam}
 \end{equation}
 
-The fractional contribution of nuclide $k$ to each group is represented with $f_{k, i}$ and $f_{k, i+1}$. The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum}.
+Nuclides which don't fit in these bounds will have the entire fractional contribution go the closest group.
+Otherwise, the nuclide will have some fraction of its concentration or spectra go to each \gls{DNP} group.
+The fractional contribution, or weight, of nuclide $k$ to each group is represented with $f_{k, i}$ and $f_{k, i+1}$. 
+The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as:
 
 \begin{equation}
     f_{k, i} + f_{k, i+1} = 1
     \label{eq:fracsum}
 \end{equation}
 
-To solve for the fractions of each group each nuclide contributes to, the least squares minimization problem is solved.
+To solve for the fractions, the least squares minimization problem is solved.
 This is shown in Equation \eqref{eq:fracmin}.
 
 \begin{equation}
@@ -301,7 +303,7 @@ This is shown in Equation \eqref{eq:fracmin}.
     \label{eq:fracmin}
 \end{equation}
 
-Solving this equation for where the partial derivatives are zero for each group fraction, combined with Equation \eqref{eq:fracsum}, yields the overdetermined system of equations shown in \eqref{eq:fracmats}.
+Solving this equation for where the partial derivatives are zero for each fraction, $f_{k, i}$ and $f_{k, i+1}$, combined with Equation \eqref{eq:fracsum}, yields the overdetermined system of equations shown in \eqref{eq:fracmats}.
 
 \renewcommand{\arraystretch}{2}
 \begin{equation}
@@ -323,19 +325,19 @@ x = \begin{bmatrix}
 \end{equation}
 \renewcommand{\arraystretch}{1}
 
-This system of equations is then solved using the pseudo-inverse, shown in Equation \eqref{eq:lls}.
+Because the number of rows is greater than the number of columns in the matrix, the left-inverse is used. This system of equations is then solved as shown in Equation \eqref{eq:lls} as:
 
 \begin{equation}
 x = (A^T A)^{-1} A^Tb
 \label{eq:lls}
 \end{equation}
 
-With the fractional contribution vector, the concentration of a given nuclide can then be multiplied by each fraction to show much it contributes to that group.
-With a running summation, the group concentrations can thus be calculated.
+With the fractional contribution terms, $x$, the concentration of a given nuclide can then be multiplied by each fraction to show much it contributes to that group.
+With a summation of each nuclides contribution, the group concentrations can thus be calculated and vice versa.
+Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
 
 
-
-\subsection{Kinetics Parameters Calculations}
+\subsection{Kinetics Parameters}
 \label{ref:calc-kinetic-param}
 
 The other relevant parameters to be calculated are simpler and do not require solving least squares problems.
