@@ -43,7 +43,7 @@ Based on the more recent Order, \gls{SNM} is classified as shown in Table \ref{t
 \end{table}
 \renewcommand{\arraystretch}{1}
 
-Table \ref{tab:SNM-class} is used along with the graded safeguards table from the updated Order in order to properly classify the attractiveness level and categorization of \gls{SNM}.
+Table \ref{tab:SNM-class} is used along with the graded safeguards table from the updated Order to properly classify the attractiveness level and categorization of \gls{SNM}.
 These categories include weapons, pure products, high-grade materials, low-grade materials, and all other materials, ranging from attractiveness level "A" to "E".
 High-grade materials, with attractiveness level "C", include fuel elements and assemblies.
 Low-grade materials, with attractiveness level "D", include solutions with target concentrations of 1-25 g/L.
@@ -51,8 +51,10 @@ All other materials, with attractiveness level "E", are made up of highly irradi
 
 The quantities provided in Table \ref{tab:SNM-class} show the minimum reportable, or accountable, quantities for each material type.
 These quantities make up the lower limit of Category IV materials for "B" through "E" attractiveness level materials.
-If the material is classified as attractiveness level "C", then any quantity of plutonium or $^{233}$U $\ge$ 6 kg is considered Category I.
-If the material contains $^{235}$U, separated $^{237}$Np, or $^{241}$Am and $^{243}$Am, then an amount $\ge$ 20 kg is considered Category I.
+The \gls{SNM} Category depends on the quantity of material as well as the attractiveness level of that material.
+Higher Category material has more stringent requirements due to their greater strategic importance, with Category I \gls{SNM} having the most requirements.
+For example, if material is classified as attractiveness level "C", then any quantity of plutonium or $^{233}$U $\ge$ 6 kg is considered Category I \gls{SNM}.
+Alternatively, if the same material contains $^{235}$U, separated $^{237}$Np, or $^{241}$Am and $^{243}$Am, then an amount $\ge$ 20 kg is considered Category I \gls{SNM}.
 
 If the material in the reactor is classified as attractiveness level "D", then any quantity $\ge$ 16 kg is considered Category II, as Category I quantities do not exist for this attractiveness level.
 Material of attractiveness level "D" do not have a listed Category I quantity for material containing $^{235}$U, separated $^{237}$Np, or $^{241}$Am and $^{243}$Am.
@@ -61,27 +63,44 @@ Material of attractiveness level "E" does not have Category I, II, or III quanti
 Instead, reportable quantities are considered Category IV.
 
 
-Significant quantities of material are also of interest, of which there are two categories: direct use and indirect use.
+Significant quantities (SQs) of material are also of interest, of which there are two categories: direct use and indirect use.
 Direct use nuclear material consists of $^{233}$U, \gls{HEU} ($^{235}$U enriched over 20\%), and any amount of $^{239}$Pu with less than 80\% $^{238}$Pu.
 Indirect use nuclear material consists of thorium and \gls{LEU} ($^{235}$U enriched at less than 20\%). 
-Significant quantities of the different material categories are as follows \cite{protection2011evaluation, international2022iaea, bathke2012attractive}: 
-\begin{itemize}
-\item Direct use
-\begin{itemize}
-    \setlength\itemsep{-0.25em}
-    \item 8kg of plutonium
-    \item 25kg of \gls{HEU}
-    \item 8kg of $^{233}$U
-\end{itemize}
+SQs of the different material categories are given in Table \ref{tab:sqs} \cite{protection2011evaluation, international2022iaea, bathke2012attractive}.
 
-\item Indirect use
-\begin{itemize}
-    \setlength\itemsep{-0.25em}
-    \item 75kg of $^{233}$U
-    \item 10t of natural uranium
-    \item 20t of depleted uranium
-\end{itemize}
-\end{itemize}
+\begin{table}[]
+    \centering
+    \begin{tabular}{ccc}
+        Use & Material & Significant Quantity $[kg]$ \\
+        \hline
+        Direct & Plutonium & 8\\
+        Direct & \gls{HEU} & 25\\
+        Direct & $^{233}$U & 8\\
+        Indirect & $^{233}$U & 75\\
+        Indirect & Natural Uranium & 10,000\\
+        Indirect & Depleted Uranium & 20,000\\
+    \end{tabular}
+    \caption{Significant quantities of various materials.}
+    \label{tab:sqs}
+\end{table}
+
+%\begin{itemize}
+%\item Direct use
+%\begin{itemize}
+%    \setlength\itemsep{-0.25em}
+%    \item 8kg of plutonium
+%    \item 25kg of \gls{HEU}
+%    \item 8kg of $^{233}$U
+%\end{itemize}
+
+%\item Indirect use
+%\begin{itemize}
+%    \setlength\itemsep{-0.25em}
+%    \item 75kg of $^{233}$U
+%    \item 10t of natural uranium
+%    \item 20t of depleted uranium
+%\end{itemize}
+%\end{itemize}
 
 This information is important for the current work, as it provides values for quantities of diverted material to analyze.
 The exact classification, materials, and quantities to use will vary based on the specifics of the fuel salt and diversion scenario.

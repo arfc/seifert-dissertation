@@ -2,12 +2,12 @@ There are several different methods which have been used for analyzing transient
 These methods include, as of 2018, "...fluid-flow-velocity field
 coupled multi-group, time-resolved, neutron diffusion; ... point reactor kinetics schemes; and
 quasi-statics; generally all coupled, tightly or loosely, to a thermal-hydraulics solver" \cite{wooten2018review}.
-In general, although these methods have varying accuracy and costs, none of them include \gls{MSR} specific phenomena in generation of the \gls{DNP} group parameters.
+In general, although these methods have varying accuracy and costs, none of them include \gls{MSR} specific phenomena when generating the \gls{DNP} group parameters.
 
 \subsubsection{Multi-group diffusion}
 
-Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches which can be applied to transient problems.
-Hurwitz and Ehrlich have a general formulation of multi-group diffusion written in 1953, and many more recent works have used the method \cite{hurwitz1953multigroup}.
+Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches which can be applied to transient problems, surpassed only by transport.
+Hurwitz and Ehrlich provide a standard formulation of multi-group diffusion written in 1953  \cite{hurwitz1953multigroup}.
 
 Examples of works that use fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling using \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
 Other examples can be found in the review by Wooten at al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development}.
@@ -45,7 +45,7 @@ G &= \mbox{ the total number of energy groups [-]} \nonumber\\
 I &= \mbox{the number of delayed neutron precursor groups [-]} \nonumber\\
 \chi_{d, g, i} &= \mbox{the number of delayed neutrons from precursor group \textit{i} born in group \textit{g} [-]} \nonumber\\
 \lambda_i &= \mbox{the decay constant for group \textit{i} [$s^{-1}$]} \nonumber\\
-C_i &= \mbox{the concentration of group \textit{i} [$\frac{atoms}{cm^3}$]} \nonumber\\
+C_i &= \mbox{the concentration of \glspl{DNP} in group \textit{i} [$\frac{atoms}{cm^3}$]} \nonumber\\
 \vec{u} &= \mbox{the velocity profile [$\frac{cm}{s}$]} \nonumber\\
 \Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
 \beta_i &= \mbox{the delayed neutron fraction for group \textit{it} [-]} \nonumber\\
@@ -98,7 +98,7 @@ n &= \mbox{ the relative neutron density [-]} \nonumber\\
 \beta_{eff} &= \mbox{ the effective delayed neutron fraction [-]} \nonumber\\
 \Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber\\
 \lambda_i &= \mbox{ the group \textit{i} decay constant [$s^{-1}$]} \nonumber\\
-C_i &= \mbox{ the concentration of group \textit{i} [$atoms$]} \nonumber\\
+C_i &= \mbox{ the concentration of \glspl{DNP} in group \textit{i} [$atoms$]} \nonumber\\
 \beta_{eff, i} &= \mbox{ the effective delayed neutron fraction from group \textit{i} [-].} \nonumber
 \end{align}
 
@@ -119,25 +119,24 @@ Wooten et al. provide four different works which use \gls{MPK} in \gls{MSR} anal
 The work by Guo et al. analyzes \gls{ULOHS} and \gls{ULOF} transients in \gls{MOSART}.
 The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor concentrations in-core and ex-core.
 These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP} for a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
-This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but "...may fail to adequately capture reactivity oscillations in transients
-occurring at low or zero power and with increases in flow rate" \cite{wooten2018review}.
+This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but fails to capture all oscillatory effects \cite{wooten2018review}.
 
 
 \begin{equation}
-    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{i=1}^{I} \lambda_i C_{i, core} (t)
+    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{i=1}^{I} \lambda_i C_{i, c} (t)
     \label{eq:dpk-n}
 \end{equation}
 
 \begin{equation}
 \begin{split}
-    \frac{dC_{i, core}(t)}{dt} & = \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{core}} \right) C_{i, core}(t)\\
-    & + \frac{1}{\tau_{loop}} \left(\frac{V_{loop}}{V_{core}}\right) C_{i, loop} (t - \tau_{loop})\\
+    \frac{dC_{i, c}(t)}{dt} & = \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{c}} \right) C_{i, c}(t)\\
+    & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{i, l} (t - \tau_{l})\\
     \label{eq:dpk-cin}
 \end{split}
 \end{equation}
 
 \begin{equation}
-    \frac{dC_{i, loop}(t)}{dt} = \frac{1}{\tau_{core}} \left(\frac{V_{core}}{V_{loop}}\right) C_{i, core} (t) - \left(\lambda_i + \frac{1}{\tau_{loop}} \right) C_{i, loop}(t)
+    \frac{dC_{i, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{i, c} (t) - \left(\lambda_i + \frac{1}{\tau_{l}} \right) C_{i, l}(t)
     \label{eq:dpk-cex}
 \end{equation}
 
@@ -149,27 +148,27 @@ Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex}
 \end{equation}
 
 \begin{equation}
-    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{i=1}^I \lambda_i C_{i, loop}
+    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{i=1}^I \lambda_i C_{i, l}
     \label{eq:dpk-betaloss}
 \end{equation}
 
 \begin{equation}
-    \tau_{core} = \frac{M_{core}}{w(t)}
+    \tau_{c} = \frac{M_{c}}{w(t)}
     \label{eq:dpk-taucore}
 \end{equation}
 
 \begin{equation}
-    \tau_{core} = \frac{M_{loop}}{w(t)}
+    \tau_{c} = \frac{M_{l}}{w(t)}
     \label{eq:dpk-tauloop}
 \end{equation}
 
 The terms in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-tauloop} are defined as follows, with most terms identical to those in the \gls{PRK} equations:
 \begin{align}
-V_{loop} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
-V_{core} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
+V_{l} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
+V_{c} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
 \beta_{static} &= \mbox{ the value of $\beta_{eff}$ without flow [-]} \nonumber \\ 
-M_{core} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
-M_{loop} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
+M_{c} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
+M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
 w(t) &= \mbox{ the mass flow rate [$\frac{kg}{s}$].} \nonumber
 \end{align}
 
@@ -189,9 +188,9 @@ That work uses a simpler form of the equations, without dividing the precursor c
 The work by Merle-Lucotte et al. uses a method called "IPK method," which may stand for "Improve Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}.
 This method uses a fixed mesh for neutronics and a mobile mesh for fluid properties.
 Merle-Lucotte et al. found that the \gls{PRK} method without any modifications was able to match the IPK method for general trends and end-states, but was unable to capture reactivity oscillations properly.
-The IPK method was able to capture these oscillations, but assumes "a uniform fission distribution in the core, together with an instantaneous propagation and extraction of the heat produced" \cite{merle2015physical}.
+The IPK method was able to capture these oscillations, but assumes uniform fission and instantaneous heat transfer \cite{merle2015physical}.
 
-The work by Zanetti et al. creates an extension of the TRACE code, a finite volume code used for \gls{LWR} transients \cite{zanetti2015extension}.
+The work by Zanetti et al. extends the TRACE code, a finite volume code used for \gls{LWR} transients \cite{zanetti2015extension}.
 The \gls{DNP} concentration as a function of space and time is resolved upwind in space and with backward Euler for time. 
 Adjoint-weighted quantities discretized with the trapezoidal rule are then passed to \gls{PRK} equation, and the set of \gls{DNP} concentration and the \gls{PRK} power, or neutron density, equations are resolved using LU factorization.
 
