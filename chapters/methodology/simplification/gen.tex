@@ -13,7 +13,7 @@ More detail on this block is provided in Section \ref{sec:delnu-counts}.
 
 After OpenMC finishes the fixed source simulation, the final concentrations of nuclides in the irradiated sample are saved for analysis in custom scripts.
 These scripts take in the concentrations and combine them with the IAEA beta-delayed neutron emission database data to generate a delayed neutron count rate function \cite{DIMITRIOU2021144}.
-A non-linear least squares fitting function from SciPy is then used to generate the half life and group abundances \cite{2020SciPy-NMeth}.
+A non-linear least squares fitting function from SciPy is then used to generate the half life and group yields \cite{2020SciPy-NMeth}.
 These group parameters are for a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
 More detail on this block is provided in Section \ref{sec:delnu-groups}.
 
@@ -29,10 +29,10 @@ The constant input parameters require some amount of consideration, which is dis
 In particular, self-shielding of the sample due to density while avoiding self-multiplication, variations in cross sections due to temperature, and under or over irradiation can all affect the results and must be considered \cite{keepin1957delayed}.
 
 The general form of the OpenMC model is a three gram spherical sample with vacuum boundary conditions.
-This is treated as a fixed-source problem, with a uniform neutron source distributed evenly throughout the spherical sample.
-This is not physical, as in reality the neutron source would have a spectrum and would be external.
+The model is treated as a fixed-source problem, with a uniform neutron source distributed evenly throughout the spherical sample.
+This treatment is not physical, as in reality the neutron source would have a spectrum and would be external.
 However, for the 0D flow model, the desired effects to capture are the differences between the group parameters with flow and reprocessing compared to the static results.
-This means such an approximation does not hinder the effectiveness of this 0D flow model.
+Such an approximation does not hinder the effectiveness of this 0D flow model.
 
 Another consideration for the OpenMC model is having a consistent source particle rate.
 This is not strictly necessary for group parameter generation, as the values are per-fission, but it is convenient for data analysis, as the tallies are based on the source particles.

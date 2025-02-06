@@ -75,7 +75,7 @@ S &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{ containing decay and transmutation losses [$s^{-1}$] .} \nonumber
 \end{align}
 Over the course of a depletion step, the depletion matrix is assumed to be constant, so the source term varies in time only due to the effects of the changing compositions of other nuclides.
-This also means that the loss term, $\lambda_{net, j}$, does not vary with time in this equation.
+The loss term, $\lambda_{net, j}$, does not vary with time in this equation.
 
 
 
@@ -92,7 +92,7 @@ This way, the spatial resolution is represented by the material blocks, and the 
 %\subsubsection{Circulating fuel}
 %\label{sec:circ-fuel-dep}
 
-Circulating fuel makes the problem more complex, as adding a spatial component means that instead of a system of ordinary differential equations, a system of partial differential equations must be solved.
+Circulating fuel makes the problem more complex, as instead of solving a system of ordinary differential equations, a system of partial differential equations must be solved.
 The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding:
 \begin{equation}
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
@@ -103,7 +103,7 @@ where,
 D_{mix} &= \mbox{ the mass diffusivity [$\frac{cm^2}{s}$]. } \nonumber
 \end{align}
 %In this equation, the assumption is made that only concentration spatial resolution is applied, so the depletion matrix does not include additional spatial resolution.
-This equation assumes spatial resolution is only applied to the concentration terms, which means the depletion matrix does not include spatial resolution.
+This equation assumes spatial resolution is only applied to the concentration terms, so the depletion matrix does not include spatial resolution.
 Thus, only the concentrations and material blocks provide spatial resolution to the problem.
 More spatial refinement can be provided to the neutronic parameters based on the specific approach used, such as a fully spatially resolved neutron flux.
 
@@ -126,7 +126,7 @@ This approach is more computationally expensive than the other approaches that o
 However, the literature has shown that including advection in depletion directly affects the equilibrium concentration of $^{135}Xe$ by varying amounts \cite{tanocoupled2023, fei_validation_2022}.
 Tano et al. show that the $^{135}Xe$ in the \gls{MSFR} decreases by approximately 80\% when moving from no spatial resolution to a quasi-static method.
 Fei et al. show that the $^{135}Xe$ in the \gls{MSRE} increases by approximately 63\% when moving from no spatial resolution to 0D fuel flow.
-This means that depletion simulations of MSRs need to include spatially resolved depletion to generate accurate results.
+Depletion simulations of MSRs need to include spatially resolved depletion to generate accurate results.
 %However, Tano et al. showed that these methods are still computationally expensive, even when attempting to simplify the problem \cite{tano_coupled_nodate}.
 
 However, including fully resolved spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
@@ -147,4 +147,4 @@ Although using an implicit time solver can work around this condition, the overa
 
 However, for a short depletion simulation, such as a saturation irradiation of a fuel sample, capturing these effects is computationally tractable.
 Because the depletion lasts only for several minutes instead of several years, the computational cost is orders of magnitude smaller.
-This means that having a high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment to generate updated \gls{DNP} group parameters is feasible. 
+A high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment is feasible to generate updated \gls{DNP} group parameters. 

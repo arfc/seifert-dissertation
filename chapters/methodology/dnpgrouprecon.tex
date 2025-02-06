@@ -1,14 +1,14 @@
 Once the delayed neutron count rate is generated, it can be converted into \gls{DNP} group parameters.
-The process of fitting the group parameters requires a non-linear least squares method, as both the group half lives and group abundances must be determined.
+The process of fitting the group parameters requires a non-linear least squares method, as both the group half lives and group yields must be determined.
 The equation describing the problem is given in Equation \eqref{eq:delnu-fit}, recreated here:
 
 \begin{equation}
-n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}.
+\dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \nonumber
 \end{equation}
 
 An important consideration for this process is the time values used when generating the group fits.
-An increased number of times means increased computational cost, but too few times results in a poorer fit \cite{parish1999status}.
+An increased number of times causes increased computational cost, but too few times results in a poorer fit \cite{parish1999status}.
 This is investigated in Section \ref{sec:time-eval}.
 
 Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than it is for the saturation irradiation fit.

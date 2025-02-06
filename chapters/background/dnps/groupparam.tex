@@ -33,7 +33,7 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
 
 The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.% (or $\beta_i$).
 These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event.
-The group abundances represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
+The group yields represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
 The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP} groups, along with the group spectra, $\chi_k$, for \gls{DNP} group $k$.
 With this data, the other group parameters can be derived, such as the total delayed neutron yield, $Y$, and delayed neutron fraction $\beta$.
 
@@ -99,7 +99,7 @@ K &= \mbox{ the number of \gls{DNP} groups [-]} \nonumber \\
 \lambda_k &= \mbox{ the decay constant of \gls{DNP} group \textit{k} [$s^{-1}$] } \nonumber \\ 
 F_s &= \mbox{ the total number of fission events in the pulse irradiation [-]} \nonumber \\ 
 \dot{F}_s &= \mbox{ the fission rate for a saturation irradiation [$s^{-1}$]} \nonumber \\ 
-\bar{\nu}_{d, k} &= \mbox{ the group yield, or group abundance for group \textit{k} [-] .} \nonumber
+\bar{\nu}_{d, k} &= \mbox{ the group yield for group \textit{k} [-] .} \nonumber
 \end{align}
 More information on the derivation of these equations can be found in Appendix \ref{ref:appendixA}.
 These equations are specifically for a single fissile nuclide, and the derivation can be found in the work of Wilson and England \cite{wilson2002delayed}.
@@ -142,7 +142,7 @@ Specifically, Brady uses the four long-period groups from the saturation irradia
 %\end{equation}
 
 
-Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group abundances and decays.
+Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group yields and decays.
 For example, Brady used STEPIT to handle the non-linear least-squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
 Waldo et al. also solve the least-squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
 The general form of the solve is given as:
@@ -205,7 +205,7 @@ The target vector contains the linearized delayed neutron count rate data normal
 \label{eq:lstsq-target}
 \end{equation}
 
-By solving this non-linear system of equations, the group half-lives, $T_n$, and abundances, $a_n$, can be generated.
+By solving this non-linear system of equations, the group half-lives, $T_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group half lives using \cite{das1993importance} as:
 
 \begin{equation}
