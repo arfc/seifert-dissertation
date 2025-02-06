@@ -4,15 +4,14 @@ coupled multi-group, time-resolved, neutron diffusion; ... point reactor kinetic
 quasi-statics; generally all coupled, tightly or loosely, to a thermal-hydraulics solver" \cite{wooten2018review}.
 In general, although these methods have varying accuracy and costs, none of them include \gls{MSR} specific phenomena when generating the \gls{DNP} group parameters.
 
-\subsubsection{Multi-group diffusion}
+\subsubsection{Multi-Group Diffusion}
 
-Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches which can be applied to transient problems, surpassed only by transport.
+Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches applied to transient problems, surpassed only by transport methods.
 Hurwitz and Ehrlich provide a standard formulation of multi-group diffusion written in 1953  \cite{hurwitz1953multigroup}.
 
 Examples of software that use fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling using \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
-Other examples can be found in the review by Wooten at al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development}.
-Even more studies which use the multi-group diffusion method can be found in the literature \cite{zhang2009analysis, yamamoto2006transient, krepel2007dyn3d, nicolino2008coupled, park_advancements_2025}.
-
+Other examples can be found in the review by Wooten at al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development} and elsewhere in the literature \cite{zhang2009analysis, yamamoto2006transient, krepel2007dyn3d, nicolino2008coupled, park_advancements_2025}.
+%Even more studies which use the multi-group diffusion method can be found in the literature \cite{zhang2009analysis, yamamoto2006transient, krepel2007dyn3d, nicolino2008coupled, park_advancements_2025}.
 These studies typically use Picard iteration with multi-group neutron diffusion coupled with thermal-hydraulics to accurately capture the multi-physics effects of the reactor.
 However, this accuracy also comes with a higher computational cost than simpler methods.
 %The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} \cite{wooten2018review}.
@@ -69,7 +68,7 @@ Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 %\end{description}
 
 
-\subsubsection{Modified point kinetics}
+\subsubsection{Modified Point Kinetics}
 
 \Gls{PRK} are a simpler approach to modeling a transient, with the basic form given as:
 \begin{equation}
@@ -114,7 +113,7 @@ The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor c
 \end{equation}
 \begin{equation}
 \begin{split}
-    \frac{dC_{i, c}(t)}{dt} & = \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{c}} \right) C_{i, c}(t)\\
+    \frac{dC_{i, c}(t)}{dt} =& \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{c}} \right) C_{i, c}(t)\\
     & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{i, l} (t - \tau_{l}),
     \label{eq:dpk-cin}
 \end{split}
@@ -123,7 +122,8 @@ The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor c
     \frac{dC_{i, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{i, c} (t) - \left(\lambda_i + \frac{1}{\tau_{l}} \right) C_{i, l}(t).
     \label{eq:dpk-cex}
 \end{equation}
-These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP} for a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
+These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP}.
+Shi et al. simulate a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
 This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but fails to capture all oscillatory effects \cite{wooten2018review}.
 
 Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} are shown in Equations \eqref{eq:dpk-betaeff} through \eqref{eq:dpk-tauloop} as:
@@ -167,7 +167,7 @@ M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\
 A similar method is also used by Suzuki and Shimazu for analyzing a reactivity initiated accident in the FUJI-12 reactor \cite{suzuki2008reactivity}.
 That work uses a simpler form of the equations, without dividing the precursor concentrations into core and loop regions.
 
-The work by Merle-Lucotte et al. uses a method called "IPK method," which may stand for "Improve Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}.
+The work by Merle-Lucotte et al. uses the "IPK method," which may stand for "Improved Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}.
 This method uses a fixed mesh for neutronics and a mobile mesh for fluid properties.
 Merle-Lucotte et al. found that the \gls{PRK} method without any modifications was able to match the IPK method for general trends and end-states, but was unable to capture reactivity oscillations properly.
 The IPK method was able to capture these oscillations, but assumes uniform fission and instantaneous heat transfer \cite{merle2015physical}.
@@ -177,9 +177,9 @@ The \gls{DNP} concentration as a function of space and time is resolved upwind i
 Adjoint-weighted quantities discretized with the trapezoidal rule are then passed to \gls{PRK} equation, and the set of \gls{DNP} concentration and the \gls{PRK} power, or neutron density, equations are resolved using LU factorization.
 
 Another approach to modify the \gls{PRK} is to alter the kinetics parameters based on a phase-space integration weighted with the adjoint flux \cite{lapenta2000basic}.
-Alternatively, effective flow-inclusive group yields can be calculated, as shown by Haubenreich, and used in \gls{PRK} equations \cite{haubenreich1962prediction}.
+Alternatively, effective flow-inclusive group yields can be calculated, as shown by Haubenreich and used in \gls{PRK} equations \cite{haubenreich1962prediction}.
 
-\subsubsection{Quasi-statics}
+\subsubsection{Quasi-Statics}
 
 Quasi-static methods seek to maintain the accuracy of multi-group diffusion approaches while also having the cost savings of \gls{PRK}.
 The general approach of these methods is to update \gls{PRK} parameters with occasional multi-group diffusion simulations to capture changes in flux and \gls{DNP} spatial distributions \cite{wooten2018review}.
@@ -221,7 +221,7 @@ and,
 \end{equation}
 
 Within these "shape" steps are also sub-steps referred to as "reactivity" steps.
-At each of these "reactivity" steps, the \gls{PRK} parameters are calculated as well as the flux amplitude.
+At each of these "reactivity" steps, the \gls{PRK} parameters and flux amplitude are calculated.
 The equations used in the "reactivity" steps are recreated here as:
 \begin{equation}
     \frac{d \phi_A}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) \phi_A + q_{eff} + \sum_{i=1}^I \lambda_i \left( c_{s, i} + c_{m, i} \right),

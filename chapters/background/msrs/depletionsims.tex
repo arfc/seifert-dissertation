@@ -5,7 +5,7 @@ Simulating depletion entails numerically solving the Bateman equations; a genera
 \begin{equation} \hfill
 \begin{split}
 %\frac{dN}{dt} = \sum_j \lambda_j N_j + \gamma \Sigma_f \phi + \Sigma_k \phi - \lambda N - \Sigma \phi - C
-\frac{dN_j}{dt} = \sum_{i \neq j}  & \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right) N_i \right ]\\
+\frac{dN_j}{dt} =& \sum_{i \neq j}  \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right) N_i \right ]\\
  & - \left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right) N_j + \dot{N}_{f, j},
 \end{split}
 \hfill\label{eq:Bateman_default} \end{equation}
@@ -92,20 +92,21 @@ This way, the spatial resolution is represented by the material blocks, and the 
 %\subsubsection{Circulating fuel}
 %\label{sec:circ-fuel-dep}
 
-Circulating fuel makes the problem more complex, as instead of solving a system of ordinary differential equations, a system of partial differential equations must be solved.
+Circulating fuel is more complex, as instead of solving a system of ordinary differential equations, a system of partial differential equations must be solved.
 The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding:
 \begin{equation}
-    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
+    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
     \label{eq:bate-flow-simple}
 \end{equation}
 where,
 \begin{align}
-D_{mix} &= \mbox{ the mass diffusivity [$\frac{cm^2}{s}$]. } \nonumber
+D &= \mbox{ the mass diffusivity [$\frac{cm^2}{s}$]. } \nonumber
 \end{align}
 %In this equation, the assumption is made that only concentration spatial resolution is applied, so the depletion matrix does not include additional spatial resolution.
-This equation assumes spatial resolution is only applied to the concentration terms, so the depletion matrix does not include spatial resolution.
-Thus, only the concentrations and material blocks provide spatial resolution to the problem.
-More spatial refinement can be provided to the neutronic parameters based on the specific approach used, such as a fully spatially resolved neutron flux.
+%This equation assumes spatial resolution is only applied to the concentration terms, so the depletion matrix does not include spatial resolution.
+The depletion matrix is assumed to have no spatial resolution in this equation.
+Because of this assumption, only the concentrations and material blocks provide spatial resolution to the problem.
+Spatial refinement can be added to this equation based on the specific approach, such as using a spatially resolved neutron flux.
 
 
 
@@ -115,13 +116,13 @@ More spatial refinement can be provided to the neutronic parameters based on the
 %\end{description}
 
 As previously mentioned, the main challenge faced when solving this problem is the computational cost.
-However, there are still many studies which have attempted to develop methods to get around this problem.
-One approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
-However, this approach does not model the in-core and ex-core regions in a physical manner.
-Instead, the scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
-Another approach is to calculate the steady-state concentration, changing the system of ordinary differential equations to spatial rather than temporal relations \cite{shahbazi_steady-state_2022}.
+However, there are many studies which have attempted to develop methods to get around this problem.
+One common approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
+However, this method does not model the in-core and ex-core regions in a physical manner.
+Instead, it scales the flux by the fraction of fuel salt in-core compared to ex-core.
+Another approach is to calculate the steady-state concentration, changing the system of ordinary differential equations into spatial rather than temporal relations \cite{shahbazi_steady-state_2022}.
 
-Other approaches, such as \gls{MCNP} and \gls{ADDER}, or the method proposed by Tano et al. using Griffin and Pronghorn, try to model the flow more explicitly \cite{anderson_user_2022, tanocoupled2023}.
+Other approaches, such as the method proposed by Tano et al. using Griffin and Pronghorn, try to model the flow more explicitly \cite{tanocoupled2023}.
 This approach is more computationally expensive than the other approaches that only require solving a system of ordinary differential equations.
 However, the literature has shown that including advection in depletion directly affects the equilibrium concentration of $^{135}Xe$ by varying amounts \cite{tanocoupled2023, fei_validation_2022}.
 Tano et al. show that the $^{135}Xe$ in the \gls{MSFR} decreases by approximately 80\% when moving from no spatial resolution to a quasi-static method.
@@ -130,8 +131,10 @@ Depletion simulations of MSRs need to include spatially resolved depletion to ge
 %However, Tano et al. showed that these methods are still computationally expensive, even when attempting to simplify the problem \cite{tano_coupled_nodate}.
 
 However, including fully resolved spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
-This is because tracking the $\sim$2000 nuclides over space and time requires new methods rather than those used for the time dependent system of ordinary differential equations.
-Methods for solving the system of partial differential equations require accurately capturing short time scale flow effects, which makes multi-year long depletion simulations exceedingly expensive.
+Tracking the $\sim$2000 nuclides over space and time requires new methods rather than those used for the time dependent system of ordinary differential equations.
+Methods for solving the system of partial differential equations require accurately capturing short time scale flow effects, making multi-year long depletion simulations exceedingly expensive.
+
+
 Numerical stability of the problem, when using an explicit-time solving scheme, also requires the \gls{CFL} condition be satisfied as:
 \begin{equation}
     \lambda_{CFL} \geq \frac{u \Delta t}{\Delta z},

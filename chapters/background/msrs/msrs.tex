@@ -1,11 +1,12 @@
 %There are many different \gls{MSR} designs in the literature, including \cite{cheng2014development}: the FUJI series \cite{furukawa1990thorium}, \gls{AMSTER} \cite{vergnes2002amster}, \gls{MOSART} \cite{ignatiev2007progress}, \gls{FS-MSR} \cite{holcomb2011fast}, European \gls{MSFR} \cite{merle2008introduction}, \gls{SM-MSR} \cite{casino2007small}, \gls{MSBR} \cite{robertson_conceptual_1971}, \gls{MSRE} \cite{robertson1965msre}, \gls{ADNA} Tier-1 reactor \cite{bowman2000once}, single fluid and two fluid \glspl{DMSR} \cite{engel1980conceptual, ahmad_neutronics_2015}, and the \gls{TMSR} \cite{nuttin2005potential, merle-lucotte_thorium_2007}.
 There are many different \gls{MSR} designs in the literature, as shown in Table \ref{tab:msr-designs} \cite{cheng2014development}.
 These designs feature a circulating salt containing fissile material.
-In particular, the circulating fuel salt allows for online chemical reprocessing, causes depletion to vary spatially far more than stationary fuel, movement of \glspl{DNP}, and close coupling of thermal-hydraulics to neutronics.
+In particular, the circulating fuel salt allows for online chemical reprocessing, causes depletion to vary spatially, leads to movement of \glspl{DNP}, and requires close coupling of thermal-hydraulics to neutronics for realistic modeling.
 
 \begin{table}[H]
     \centering
     \begin{tabular}{lc}
+    \hline
        \gls{MSR} Name  & Source \\
        \hline
        FUJI series  & \cite{furukawa1990thorium}\\
@@ -19,6 +20,7 @@ In particular, the circulating fuel salt allows for online chemical reprocessing
        \Gls{ADNA} Tier-1 reactor & \cite{bowman2000once}\\
        Single fluid and two fluid \glspl{DMSR} & \cite{engel1980conceptual, ahmad_neutronics_2015}\\
        \Gls{TMSR} & \cite{nuttin2005potential, merle-lucotte_thorium_2007}\\
+       \hline
     \end{tabular}
     \caption{A collection of various \gls{MSR} designs publicly available in the literature.}
     \label{tab:msr-designs}
@@ -26,10 +28,10 @@ In particular, the circulating fuel salt allows for online chemical reprocessing
 
 
 
-There are many publications in the literature which have investigated online chemical reprocessing of \glspl{MSR}, as can be seen in Table \ref{tab:codes_types} recreated from \cite{seifert2023analysis}.
-Table \ref{tab:codes_types} shows which MSR depletion simulations have modeled \glspl{DNP} in the "DNP" column, which shows most models do not include \gls{DNP} movement in depletion.
+There are many publications in the literature which have investigated online chemical reprocessing of \glspl{MSR}, as shown in Table \ref{tab:codes_types} recreated from \cite{seifert2023analysis}.
+Table \ref{tab:codes_types} shows which MSR depletion simulations have modeled \glspl{DNP} in the "DNP" column, showing most models do not include \gls{DNP} movement in depletion.
 The table is sorted by the "Reprocessing" column, which signifies the method(s) used in the different \gls{MSR} models and is also sorted by the publication year in the "Year" column.
-The table shows that there are many \gls{MSR} concepts, shown in the "Reactor" column, for which depletion was modeled.
+The table shows there are many \gls{MSR} concepts, shown in the "Reactor" column, for which depletion was modeled.
 The study by Valdez et al. investigates two \gls{MSR} designs, specifically the \gls{MSBR} and the \gls{MSDR}.
 These models used a variety of spatial refinement levels, shown in the "Model" column, ranging from unit cells to full 3D models.
 
@@ -39,6 +41,7 @@ These models used a variety of spatial refinement levels, shown in the "Model" c
 \label{tab:codes_types}
 \begin{center}
 \begin{tabular}{  l  c  c  c  c  c}
+    \hline
  Publication & Reprocessing & Model & Reactor & DNP & Year\\
  \hline
  Valdez et al. \cite{jr_vicente_valdez_modeling_2020} & Continuous & Unit Cell & Several & No & 2020\\

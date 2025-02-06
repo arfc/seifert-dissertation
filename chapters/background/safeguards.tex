@@ -21,7 +21,7 @@ Based on the more recent Order, \gls{SNM} is classified as shown in Table \ref{t
     \begin{threeparttable}
     \caption{The \Gls{SNM} classification table is recreated from \cite{holmer2024doe}.}
     \label{tab:SNM-class}
-    \begin{tabularx}{\textwidth}{X|X|X|X}
+    \begin{tabularx}{\textwidth}{X X X X}
         \hline
         Material Type & Accountable Quantity & Weight Field Used for Element & Weight Field Used for Isotope \\
         \hline
@@ -45,6 +45,7 @@ Based on the more recent Order, \gls{SNM} is classified as shown in Table \ref{t
 
 Table \ref{tab:SNM-class} is used along with the graded safeguards table from the updated Order to properly classify the attractiveness level and categorization of \gls{SNM}.
 These categories include weapons, pure products, high-grade materials, low-grade materials, and all other materials, ranging from attractiveness level "A" to "E".
+For this work, only materials of attractiveness level "C" and below are relevant.
 High-grade materials, with attractiveness level "C", include fuel elements and assemblies.
 Low-grade materials, with attractiveness level "D", include solutions with target concentrations of 1-25 g/L.
 All other materials, with attractiveness level "E", are made up of highly irradiated forms, solutions with concentrations $<$1 g/L, or uranium containing $<$20\% $^{235}$U or $<$10\% $^{233}$U.
@@ -70,7 +71,8 @@ SQs of the different material categories are given in Table \ref{tab:sqs} \cite{
 
 \begin{table}[]
     \centering
-    \begin{tabular}{ccc}
+    \begin{tabular}{ccr}
+        \hline
         Use & Material & Significant Quantity $[kg]$ \\
         \hline
         Direct & Plutonium & 8\\
@@ -79,6 +81,7 @@ SQs of the different material categories are given in Table \ref{tab:sqs} \cite{
         Indirect & $^{233}$U & 75\\
         Indirect & Natural Uranium & 10,000\\
         Indirect & Depleted Uranium & 20,000\\
+        \hline
     \end{tabular}
     \caption{Significant quantities of various materials are given along with their use category.}
     \label{tab:sqs}

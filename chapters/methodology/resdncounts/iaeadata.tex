@@ -12,9 +12,9 @@ These concentrations can be used at coarse time steps and linearly interpolated 
 This approach does not account for particles generated during decay, as it is considered beyond the scope of this work \cite{chen2002rigorous}.
 A comparison of these two approaches is investigated in Section \ref{sec:decaychaindaughters}.
 
-The concentrations are combined with Equation \eqref{eq:delnu-exact}, recreated here:
+The concentrations are combined with Equation \eqref{eq:mdnp-dn}, recreated here:
 \begin{equation}
-n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t).
+\dot{n}_d(t) = \epsilon \sum_{k=1}^{K} P_{n, k} \lambda_k N_{k}(t).
 \nonumber
 \end{equation}
 

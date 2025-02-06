@@ -2,15 +2,18 @@ Macroscopic and microscopic approaches are used for measuring \glspl{DNP} \cite{
 %There are two approaches used for measurement of \glspl{DNP}, referred to as the macroscopic and microscopic measurement approaches \cite{parish1999status, rudstam2002delayed}.
 The macroscopic approach uses a fissile sample irradiation to get the delayed neutron count rate, which can be approximated using groups.
 %The approaches differ initially, as the macroscopic approach uses a fissile sample irradiation to get delayed neutron counts which can be approximated using groups.
-The microscopic approach instead uses the data from many experiments combined together to simulate a fissile sample irradiation and generate the delayed neutron count rate.
-This makes the microscopic approach more challenging, as it depends on the work of many experimentalists, though it also offers more detail on the delayed neutron count rate.
+Conversely, the microscopic approach uses the data from many experiments combined together to simulate a fissile sample irradiation and generate the delayed neutron count rate.
+The microscopic approach is more challenging, as it depends on the work of many experimentalists.
+However, it offers more detail on the delayed neutron count rate.
 
 \subsubsection{Macroscopic Measurement of Delayed Neutron Precursors}
 This section covers the macroscopic approach.
-Analysis and collection of macroscopic experiment data is very common in the literature \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant, conant1971measurement}.
+Analysis and collection of macroscopic experiment data is common in the literature \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant, conant1971measurement}.
 The macroscopic approach entails irradiating a sample containing a single fissile nuclide at or near a given neutron energy.
-Small samples are used in order to minimize neutron multiplication within the sample.
-Two different types of irradiation are used: pulse irradiation, where the irradiation time is shorter than the shortest half-life; and infinite irradiation, where the irradiation time is longer than the longest half-life.
+Small samples are used to minimize neutron multiplication within the sample.
+Two different types of irradiation are used: pulse and infinite. 
+Pulse irradiation has an irradiation time shorter than the shortest half-life.
+Infinite irradiation has an irradiation time longer than several times the longest half-life.
 After irradiation, the delayed neutrons from the sample are counted as a function of time.
 The delayed neutron count rate as a function of time after irradiation, $n_d(t)$, is given as:
 
@@ -31,7 +34,7 @@ I &= \mbox{ the total number of \glspl{DNP} [-] } \nonumber \\
 %    \item $\epsilon$ is the detector efficiency
 %\end{description}
 
-Once this delayed neutron count rate is generated, it is common to then use the data to generate group and kinetics parameters for that fissile nuclide and neutron energy.
+Once this delayed neutron count rate is generated, the data is used to generate group and kinetics parameters for that fissile nuclide and neutron energy.
 The specifics of the methods used to form those parameters is discussed in Section \ref{sec:gandkparams}.
 Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows an experimental setup for collecting delayed neutrons.
 
@@ -50,12 +53,12 @@ Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows an
 \end{figure}
 
 Challenges associated collecting this experimental data \cite{bank2000jef} include experimental noise and signal obfuscation due to moderation. 
-Experimental noise becomes significant after long periods of time, as the delayed neutron counts decrease.
+Experimental noise becomes significant after long periods of time as the delayed neutron counts decrease.
 Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation.
 Both the long and short time-scale measurements have greater uncertainty than the middle time-scale measurements.
 
 Similarly, uncertainty arises from the measurement of the number of fissions.
-Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, this does not account for source multiplication within the irradiated sample.
+Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, the fission chamber does not account for source multiplication within the irradiated sample.
 Keepin et al. suggests a technique to correct for the sample self-multiplication.
 The sample self-multiplication require a correction factor of up to 3\% in the number of fissions.
 
@@ -63,7 +66,7 @@ The sample self-multiplication require a correction factor of up to 3\% in the n
 
 The other approach used to measure \glspl{DNP} is the microscopic approach, investigated in detail in the 1990-2000's \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010's with more data \cite{mills2014calculation, huynh2014calculation}. Leconte et al. used this approach as recently as 2020 \cite{leconte2020new}.
 This approach requires experiments on individual \gls{DNP} nuclides, from which emission probabilities and half-lives can be measured.
-Typically, this involves rapid chemical extraction or isotope separation and magnetic tape in order to rapidly measure short lived nuclides.
+Typically, this involves rapid chemical extraction or isotope separation and magnetic tape to rapidly measure short lived nuclides.
 The magnetic tape is used to transport samples or remove longer-lived decay products \cite{shalev1974energy, rudstam1974delayed}.
 
 There are many different experimental methods used to study \glspl{DNP}, particularly their spectra: on-line mass spectrometry, helium-3 spectrometry, the proton-recoil technique, the time-of-flight method, and the neutron scintillator \cite{das1993importance}.
@@ -83,6 +86,6 @@ This is particularly important for \glspl{MSR}, where the spatial \gls{DNP} conc
 With data on individual nuclides, higher fidelity treatment of \glspl{DNP} becomes possible.
 
 There have been many new measurements in the past several decades on these nuclides.
-Fortunately, the \gls{IAEA} has worked to compile and evaluate this data into a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
-This data, when combined with cumulative fission yields and neutronics data, can be used to model the \glspl{DNP} explicitly, rather than using groups.
-This is particularly useful for understanding what nuclides have the greatest impact as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.
+The \gls{IAEA} has compiled and evaluated this data in a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
+This data, when combined with cumulative fission yields and neutronics data, can be used to model the \glspl{DNP} explicitly rather than using groups.
+This is particularly useful for understanding what nuclides have the greatest impact, as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.
