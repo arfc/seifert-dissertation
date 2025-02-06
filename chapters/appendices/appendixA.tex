@@ -2,80 +2,62 @@
 \label{ref:appendixA}
 
 This derivation begins with the Equations \eqref{eq:wilson-R} and \eqref{eq:wilson-n} provided by Wilson and England \cite{wilson2002delayed}:
-
 \begin{equation}
-    R(t) = \sum_{i=1}^{n} a_i \lambda_i e^{-\lambda_i t}
+    R(t) = \sum_{k=1}^{K} \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t},
     \label{eq:wilson-R}
 \end{equation}
-
+and,
 \begin{equation}
-    n_d(T, t) = \bar{\nu}_d \int_{0}^{T} F(\tau) R(T-\tau+t) d\tau
+    \dot{n}_d(T, t) = \bar{\nu}_d \int_{0}^{T} F(\tau) R(T-\tau+t) d\tau,
     \label{eq:wilson-n}
 \end{equation}
-
-The terms in Equation \eqref{eq:wilson-R} are discussed in Section \ref{ref:calc-group-param}, and the terms not discussed in the text in Equation \eqref{eq:wilson-n} are defined as follows:
+where,
 \begin{align}
 T &= \mbox{ the length of the fission history [$s$]} \nonumber \\
 t &= \mbox{ the decay time from the end of the fission history [$s$]} \nonumber \\
-F(\tau) &= \mbox{ the fission history [$\frac{fissions}{s}$]} \nonumber \\
-\bar{\nu}_d &= \mbox{ the average number of delayed neutrons per fission event [-]. } \nonumber
+F(\tau) &= \mbox{ the fission rate history [$\frac{fissions}{s}$].} \nonumber
 \end{align}
-
-%\begin{itemize}
-%    \setlength\itemsep{-0.25em}
-%    \item $T$ is the length of the fission history
-%    \item $t$ is the decay time from the end of the fission history
-%    \item $F(\tau)$ is the fission history (in fissions per second)
-%    \item $\bar{\nu}_d$ is the average number of delayed neutrons per fission event
-%    \end{itemize}
-
 Because the results are normalized to a single delayed neutron, the $\bar{\nu}_d$ term is divided out.
 
 To derive an analytical solution to this problem for the 0D flow approach where the in-core and ex-core residence times, $\tau_{in}$ and $\tau_{ex}$, are equivalent, an approximation of the fission history must be made.
 For this derivation, $\tau_{res}$ will be used to represent both the in-core and ex-core residence times.
-First, the fission history is split into a shape and amplitude function, shown in Equation \eqref{eq:split-fiss}.
-This essentially just simplifies any further equations such that only the shape needs to be considered.
-
-\begin{equation}
-    F(t) = F_0 \psi(t)
-    \label{eq:split-fiss}
-\end{equation}
-
 Because the 0D flow model's fission history is a positive square wave, analytical integration is not feasible.
 Instead, a Fourier decomposition of the square wave into a sum of sine waves makes the problem far more approachable.
-For numerical integration this is not an issue, but an analytical solution is useful for setting up the least squares matrices.
-
+This is given as:
+%For numerical integration this is not an issue, but an analytical solution is useful for setting up the least squares matrices.
 \begin{equation}
-    \psi(t) = \frac{1}{2} + \frac{2}{\pi} \left(sin \left(\frac{\pi t}{\tau_{res}} \right) + \frac{1}{3} sin \left(\frac{3 \pi t}{\tau_{res}} \right) + \dots  \right)
+    \frac{F(t)}{F_0} = \frac{1}{2} + \frac{2}{\pi} \left(sin \left(\frac{\pi t}{\tau_{res}} \right) + \frac{1}{3} sin \left(\frac{3 \pi t}{\tau_{res}} \right) + \dots  \right),
     \label{eq:pos-square}
 \end{equation}
+where,
+\begin{align}
+    F_0 =& \text{ the magnitude of the constant fission rate [$\frac{fissions}{s}$].} \nonumber
+\end{align}
 
-Plugging this in and separating the integral gives Equation \eqref{eq:split-integral} for group $i$ and for $k$ Fourier terms.
-
+Plugging this in and separating the integral, for group $k$ and for $j$ Fourier terms, gives:
 \begin{equation}
 \begin{split}
-    n_{d, i}(T, t) =& \; \frac{F_0 a_i \lambda_i}{2} \int_{0}^{T} e^{-\lambda_i \left( T-\tau + t \right)} d\tau\\
-    & + \frac{2 F_0 a_i \lambda_i}{\pi} \int_{0}^{T} sin \left( \frac{\pi \tau}{\tau_{res}}  \right) e^{-\lambda_i \left( T-\tau + t \right)} d\tau\\
+    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} \lambda_k}{2} \int_{0}^{T} e^{-\lambda_k \left( T-\tau + t \right)} d\tau\\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \int_{0}^{T} sin \left( \frac{\pi \tau}{\tau_{res}}  \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau\\
     & + \dots\\
-    & + \frac{2 F_0 a_i \lambda_i}{(2k+1) \pi} \int_{0}^{T} sin \left( \frac{(2k+1) \pi \tau}{\tau_{res}}  \right) e^{-\lambda_i \left( T-\tau + t \right)} d\tau
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{(2j+1) \pi} \int_{0}^{T} sin \left( \frac{(2j+1) \pi \tau}{\tau_{res}}  \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau
     \label{eq:split-integral}
 \end{split}
 \end{equation}
 
-Solving the integrals and simplifying yields Equation \eqref{eq:split-integral-solved}, where each integrated Fourier term generates four terms added to the sum.
-
+Solving the integrals and simplifying yields: 
 \begin{equation}
 \begin{split}
-    n_{d, i}(T, t) =& \; \frac{F_0 a_i e^{-\lambda_i t} \left( 1 - e^{-\lambda_i T} \right)}{2}\\
+    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1 - e^{-\lambda_k T} \right)}{2}\\
     & + \dots\\
-    & + \frac{2 F_0 a_i \lambda_i^2 \tau_{res}^2 e^{-\lambda_i t} }{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)\\
-    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} cos\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)  \\
-    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} 2 \pi k  \\
-    & + \frac{2 F_0 a_i \lambda_i \tau_{res} e^{-\lambda_i t} e^{-\lambda_i T}}{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} \pi  \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k^2 \tau_{res}^2 e^{-\lambda_k t} }{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)\\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k \tau_{res} e^{-\lambda_k t} e^{-\lambda_k T}}{\left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} cos\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)  \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k \tau_{res} e^{-\lambda_k t} e^{-\lambda_k T}}{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} 2 \pi j  \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k \tau_{res} e^{-\lambda_k t} e^{-\lambda_k T}}{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} \pi,
     \label{eq:split-integral-solved}
 \end{split}
 \end{equation}
-
+where each integrated Fourier term generates four terms added to the sum.
 
 Similar to \cite{wilson2002delayed}, the irradiation time is taken to the limit as it approaches infinity, though only for the non-periodic terms.
 By irradiating for several half-lives of time for each \gls{DNP}, where the longest half-life is roughly one minute, then the irradiation time can be taken as infinite. 
@@ -87,32 +69,27 @@ Only the sine term does not go to zero as the irradiation time goes to infinity,
 
 \begin{equation}
 \begin{split}
-    n_{d, i}(T, t) =& \; \frac{F_0 a_i e^{-\lambda_i t}}{2}\\
+    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t}}{2}\\
     & + \dots\\
-    & + \frac{2 F_0 a_i \lambda_i^2 \tau_{res}^2 e^{-\lambda_i t} }{\left( (2k+1) \pi \right) \left( (2 \pi k + \pi)^2 + \lambda_i^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2k+1) T}{\tau_{res}} \right)\\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_i^2 \tau_{res}^2 e^{-\lambda_k t} }{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)\\
     \label{eq:split-integral-solved-reduced}
 \end{split}
 \end{equation}
 
 The final assumption to make is that the irradiation time, $T$, is an integer multiple of the residence times, $\tau_{res}$.
-This assumption makes the sine term 0 for every value of $k$, which means that the result simplifies to \eqref{eq:fully-resolved-flow-irrad}.
-
-
-
+This assumption makes the sine term 0 for every value of $k$, which means that the result simplifies to:
 \begin{equation}
-    n_{d}(t) = \frac{F_0}{2} \sum_{i=1}^{n} a_i e^{-\lambda_i t}
+    n_{d}(t) = \frac{F_0}{2} \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
     \label{eq:fully-resolved-flow-irrad}
 \end{equation}
-
-This is very similar to the saturation irradiation delayed neutron count equation, shown in Equation \eqref{eq:saturation-count-eqn}.
-
+This is very similar to the saturation irradiation delayed neutron count rate equation, which is:
 \begin{equation}
-    n_{d}(t) = F_0 \sum_{i=1}^{n} a_i e^{-\lambda_i t}
+    n_{d}(t) = F_0 \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
     \label{eq:saturation-count-eqn}
 \end{equation}
 
 Because of the initial assumption made, which was that half the time is in-core and half ex-core, the average fission rate is half of the fission rate scaling term, $F_0$.
-For both of the cases of constant irradiation and half in-core and half ex-core, the fission term in front is simply the average fission rate over the irradiation time.
+For both cases (constant irradiation and half in-core and half ex-core), the fission term in front is simply the average fission rate over the irradiation time.
 
 \begin{comment}
 

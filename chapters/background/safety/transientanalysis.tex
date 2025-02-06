@@ -15,40 +15,34 @@ Even more works which use the multi-group diffusion method can be found in the l
 
 These works typically use Picard iteration with multi-group neutron diffusion coupled with thermal-hydraulics to accurately capture the multi-physics effects of the reactor.
 However, this accuracy also comes with a higher computational cost than simpler methods.
-The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} \cite{wooten2018review}.
-
+%The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} \cite{wooten2018review}.
+The general form of the coupling is given as \cite{wooten2018review}:
 
 \begin{equation}
     \begin{split}
-    \frac{1}{\nu_g} \frac{\partial \phi_g}{\partial t} = & \; \nabla \cdot D_g \nabla \phi_g + \sum_{g' \neq g}^G \Sigma_{s, g' \rightarrow g} \phi_{g'} \\
+    \frac{1}{\bar{\nu}_g} \frac{\partial \phi_g}{\partial t} = & \; \nabla \cdot D_g \nabla \phi_g + \sum_{g' \neq g}^G \Sigma_{s, g' \rightarrow g} \phi_{g'} \\
     & + (1-\beta) \chi_{p, g} \sum_{g'=1}^{G} (\nu \Sigma_f)_{g'} \phi_{g'}\\
-    & \sum_{i=1}^I \chi_{d, g, i} \lambda_i C_i - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g}
+    & \sum_{i=1}^I \chi_{d, g, i} \lambda_i C_i - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g},
     \label{eq:mg-n-diff}
     \end{split}
 \end{equation}
-
+and,
 \begin{equation}
-    \frac{\partial C_i}{\partial t} = \beta_i \sum_{g=1}^G (\nu \Sigma_f)_g \phi_g - \lambda_i C_i - \nabla \cdot (C_i \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_i
+    \frac{\partial C_i}{\partial t} = \beta_i \sum_{g=1}^G (\bar{\nu}_g \Sigma_f)_g \phi_g - \lambda_i C_i - \nabla \cdot (C_i \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_i,
     \label{eq:mg-n-diff-Ci}
 \end{equation}
-
-The terms in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} are defined as follows:
+where,
 \begin{align}
-\nu_g &= \mbox{ the average number of neutrons produced by fission of group \textit{g} [-]} \nonumber\\
+\bar{\nu}_g &= \mbox{ the average number of neutrons produced by fission of group \textit{g} [-]} \nonumber\\
 \phi_g &= \mbox{ the scalar neutron flux of group \textit{g} [$\frac{n}{cm^2 s}$]} \nonumber\\
 D_g &=\mbox{ the group \textit{g} diffusion term [$cm$]}\nonumber\\
 G &= \mbox{ the total number of energy groups [-]} \nonumber\\
 \Sigma_{s, g' \rightarrow g} &= \mbox{the macroscopic scattering cross section from group \textit{g'} to group \textit{g} [$cm^{-1}$]} \nonumber\\
-\beta &= \mbox{the delayed neutron fraction [-]} \nonumber\\
 \chi_{p, g} &= \mbox{the number of prompt neutrons born in group \textit{g} [-]} \nonumber\\
-\Sigma_f &= \mbox{the macroscopic fission cross section [$cm^{-1}$]} \nonumber\\
-I &= \mbox{the number of delayed neutron precursor groups [-]} \nonumber\\
 \chi_{d, g, i} &= \mbox{the number of delayed neutrons from precursor group \textit{i} born in group \textit{g} [-]} \nonumber\\
-\lambda_i &= \mbox{the decay constant for group \textit{i} [$s^{-1}$]} \nonumber\\
 C_i &= \mbox{the concentration of \glspl{DNP} in group \textit{i} [$\frac{atoms}{cm^3}$]} \nonumber\\
 \vec{u} &= \mbox{the velocity profile [$\frac{cm}{s}$]} \nonumber\\
 \Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
-\beta_i &= \mbox{the delayed neutron fraction for group \textit{it} [-]} \nonumber\\
 \nu_T &= \mbox{the eddy viscosity [$\frac{cm^2}{s}]$} \nonumber\\
 Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 \end{align}
@@ -77,30 +71,26 @@ Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 
 \subsubsection{Modified point kinetics}
 
-\Gls{PRK} are a simpler approach to modeling a transient, with the basic form given in Equations \eqref{eq:prk-n} and \eqref{eq:prk-C}.
-The derivation of the \gls{PRK} equations can be found in the work by Henry, with a fluid-fueled derivation in the work by Lapenta et al. \cite{henry1958application, lapenta2001point}.
-\Gls{MPK} are used for \glspl{MSR}, as standard \gls{PRK} do not properly handle the movement of the fuel salt.
-
+\Gls{PRK} are a simpler approach to modeling a transient, with the basic form given as:
 \begin{equation}
-    \frac{dn(t)}{dt} = \frac{\rho(t) - \beta_{eff}}{\Lambda} n(t) + \sum_{i=1}^I \lambda_i C_i(t)
+    \frac{dn(t)}{dt} = \frac{\rho(t) - \beta_{eff}}{\Lambda} n(t) + \sum_{i=1}^I \lambda_i C_i(t),
     \label{eq:prk-n}
 \end{equation}
-
+and,
 \begin{equation}
-    \frac{dC_i(t)}{dt} = \frac{\beta_{eff, i}}{\Lambda} n(t) - \lambda_i C_i(t)
+    \frac{dC_i(t)}{dt} = \frac{\beta_{eff, i}}{\Lambda} n(t) - \lambda_i C_i(t),
     \label{eq:prk-C}
 \end{equation}
-
-The terms in Equations \eqref{eq:prk-n} and \eqref{eq:prk-C} are defined as follows:
+where,
 \begin{align}
 n &= \mbox{ the relative neutron density [-]} \nonumber\\
 \rho &= \mbox{ the reactivity [-]} \nonumber\\
-\beta_{eff} &= \mbox{ the effective delayed neutron fraction [-]} \nonumber\\
-\Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber\\
-\lambda_i &= \mbox{ the group \textit{i} decay constant [$s^{-1}$]} \nonumber\\
-C_i &= \mbox{ the concentration of \glspl{DNP} in group \textit{i} [$atoms$]} \nonumber\\
-\beta_{eff, i} &= \mbox{ the effective delayed neutron fraction from group \textit{i} [-].} \nonumber
+\beta_{eff} &= \mbox{ the effective delayed neutron fraction [-].} \nonumber\\
 \end{align}
+The derivation of the \gls{PRK} equations can be found in the work by Henry, with a fluid-fueled derivation in the work by Lapenta et al. \cite{henry1958application, lapenta2001point}.
+\Gls{MPK} are used for \glspl{MSR}, as standard \gls{PRK} do not properly handle the movement of the fuel salt.
+
+
 
 %\begin{description}
 %    \item $n$ is the relative neutron density
@@ -117,59 +107,51 @@ C_i &= \mbox{ the concentration of \glspl{DNP} in group \textit{i} [$atoms$]} \n
 Wooten et al. provide four different works which use \gls{MPK} in \gls{MSR} analysis \cite{guo2013simulations, merle2015physical, shi2016development, zanetti2015extension}.
 
 The work by Guo et al. analyzes \gls{ULOHS} and \gls{ULOF} transients in \gls{MOSART}.
-The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor concentrations in-core and ex-core.
-These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP} for a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
-This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but fails to capture all oscillatory effects \cite{wooten2018review}.
-
-
+The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor concentrations in-core and ex-core, with the primary set of equations given as:
 \begin{equation}
-    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{i=1}^{I} \lambda_i C_{i, c} (t)
+    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{i=1}^{I} \lambda_i C_{i, c} (t),
     \label{eq:dpk-n}
 \end{equation}
-
 \begin{equation}
 \begin{split}
     \frac{dC_{i, c}(t)}{dt} & = \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{c}} \right) C_{i, c}(t)\\
-    & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{i, l} (t - \tau_{l})\\
+    & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{i, l} (t - \tau_{l}),
     \label{eq:dpk-cin}
 \end{split}
 \end{equation}
-
 \begin{equation}
-    \frac{dC_{i, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{i, c} (t) - \left(\lambda_i + \frac{1}{\tau_{l}} \right) C_{i, l}(t)
+    \frac{dC_{i, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{i, c} (t) - \left(\lambda_i + \frac{1}{\tau_{l}} \right) C_{i, l}(t).
     \label{eq:dpk-cex}
 \end{equation}
+These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP} for a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
+This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but fails to capture all oscillatory effects \cite{wooten2018review}.
 
-Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} are shown in Equations \eqref{eq:dpk-betaeff} through \eqref{eq:dpk-tauloop}.
-
+Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} are shown in Equations \eqref{eq:dpk-betaeff} through \eqref{eq:dpk-tauloop} as:
 \begin{equation}
-    \tilde{\beta}_{eff} = \beta_{static} - \beta_{loss}
+    \tilde{\beta}_{eff} = \beta_{static} - \beta_{loss},
     \label{eq:dpk-betaeff}
 \end{equation}
-
 \begin{equation}
-    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{i=1}^I \lambda_i C_{i, l}
+    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{i=1}^I \lambda_i C_{i, l},
     \label{eq:dpk-betaloss}
 \end{equation}
-
 \begin{equation}
-    \tau_{c} = \frac{M_{c}}{w(t)}
+    \tau_{c} = \frac{M_{c}}{\dot{M}(t)},
     \label{eq:dpk-taucore}
 \end{equation}
-
 \begin{equation}
-    \tau_{c} = \frac{M_{l}}{w(t)}
+    \tau_{l} = \frac{M_{l}}{\dot{M}(t)}.
     \label{eq:dpk-tauloop}
 \end{equation}
 
-The terms in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-tauloop} are defined as follows, with most terms identical to those in the \gls{PRK} equations:
+The terms in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-tauloop} are defined as follows:
 \begin{align}
 V_{l} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
 V_{c} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
 \beta_{static} &= \mbox{ the value of $\beta_{eff}$ without flow [-]} \nonumber \\ 
 M_{c} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
 M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
-w(t) &= \mbox{ the mass flow rate [$\frac{kg}{s}$].} \nonumber
+\dot{M}(t) &= \mbox{ the mass flow rate [$\frac{kg}{s}$].} \nonumber
 \end{align}
 
 
@@ -201,89 +183,81 @@ Alternatively, effective flow-inclusive group yields can be calculated, as shown
 
 Quasi-static methods seek to maintain the accuracy of multi-group diffusion approaches while also having the cost savings of \gls{PRK}.
 The general approach of these methods is to update \gls{PRK} parameters with occasional multi-group diffusion simulations to capture changes in flux and \gls{DNP} spatial distributions \cite{wooten2018review}.
+The general formulation used for quasi-static methods is very similar among the various works that use it \cite{dulla2004neutron, tano2023coupled}.
 A complete derivation of the quasi-static method can be found in the work by Henry, who discusses the shape and amplitude flux functions, and the work by Devooght, who discusses the  generalized quasi-static method \cite{henry1958application, devooght1980quasistatic}.
 There are also other works which discuss the quasi-static method in detail \cite{becker1968generalized}.
 
 Wooten et al. introduce several different works which have used quasi-statics \cite{wooten2018review}.
 One of these, from 2005 by Rineiski et al., covers the SIMMER code, which couples neutronics, thermal-hydraulics, and structure codes \cite{rineiski2005kinetics}.
-The neutron flux is treated as shown in Equation \eqref{eq:flux-treatment-rineiski}, where there is a flux amplitude, $N(t)$, which is recalculated more frequently than the flux shape, $\Phi (\vec{x}, t)$.
 The neutron flux is constrained in the work by a term containing the phase-space integration and the weighting function used.
-
+The neutron flux is treated as:
 \begin{equation}
-    \Phi(\vec{x}, t) = N(t) \psi (\vec{x}, t)
+    \Phi(\vec{x}, t) = \phi_A(t) \psi (\vec{x}, t),
     \label{eq:flux-treatment-rineiski}
 \end{equation}
+where,
+\begin{align}
+    \Phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\
+    \phi_A =& \text{the neutron flux amplitude function [n]} \nonumber \\
+    \psi (\vec{x}, t) =& \text { the neutron flux shape function $[cm^{-2} s^{-1}]$. }\nonumber 
+\end{align}
 
 Rineiski et al. solve "shape" steps to handle the neutronics and \gls{DNP} spatial concentrations.
 The equations used in the "shape" steps are recreated here in Equations \eqref{eq:rineiski-flux} and \eqref{eq:rineiski-big-C}.
 These equations are solved by time-discretizing Equation \eqref{eq:rineiski-flux} into a set of steady-state-like equations, which are then treated using the DANTSYS module of SIMMER \cite{alcouffe1995dantsys}.
-
+These primary equations are given as:
 \begin{equation}
 \begin{split}
-    \frac{1}{\nu} \frac{\partial \psi (\vec{x}, t)}{\partial t} + \frac{1}{\nu N} \frac{d N}{dt} \psi (\vec{x}, t) + M(t) \psi (\vec{x}, t) = & \\
+    \frac{1}{\bar{\nu}} \frac{\partial \psi (\vec{x}, t)}{\partial t} + \frac{1}{\bar{\nu} \phi_A} \frac{d \phi_A}{dt} \psi (\vec{x}, t) + M(t) \psi (\vec{x}, t) = & \\
     (1 - \beta) \chi_p F(t) \psi (\vec{x}, t)
-    + \frac{1}{N} \chi_d \sum_{i=1}^I \lambda_i C_i (\vec{x}, t) + \frac{1}{N} Q (\vec{x}, t) & \\
+    + \frac{1}{\phi_A} \chi_d \sum_{i=1}^I \lambda_i C_i (\vec{x}, t) + \frac{1}{\phi_A} Q (\vec{x}, t) & ,
     \label{eq:rineiski-flux}
 \end{split}
 \end{equation}
-
+and,
 \begin{equation}
-    \frac{\partial C_i (\vec{x}, t)}{\partial t} = N \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( u (\vec{x}, t) C_i (\vec{x}, t))
+    \frac{\partial C_i (\vec{x}, t)}{\partial t} = \phi_A \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( u (\vec{x}, t) C_i (\vec{x}, t)).
     \label{eq:rineiski-big-C}
 \end{equation}
 
 Within these "shape" steps are also sub-steps referred to as "reactivity" steps.
 At each of these "reactivity" steps, the \gls{PRK} parameters are calculated as well as the flux amplitude.
-The equations used in the "reactivity" steps are recreated here in Equations \eqref{eq:rineiski-n} through \eqref{eq:rineiski-cm}.
-
+The equations used in the "reactivity" steps are recreated here as:
 \begin{equation}
-    \frac{dN}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) N + q_{eff} + \sum_{i=1}^I \lambda_i \left( c_{s, i} + c_{m, i} \right)
+    \frac{d \phi_A}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) \phi_A + q_{eff} + \sum_{i=1}^I \lambda_i \left( c_{s, i} + c_{m, i} \right),
     \label{eq:rineiski-n}
 \end{equation}
-
 \begin{equation}
-    \frac{dc_{s, i}}{dt} = \frac{\beta_{eff}}{\Lambda} N - \lambda_i C_{s, i}
+    \frac{dc_{s, i}}{dt} = \frac{\beta_{eff}}{\Lambda} \phi_A - \lambda_i C_{s, i}.
     \label{eq:rineiski-cs}
 \end{equation}
-
 \begin{equation}
-    \rho = \frac{\left\langle W(\vec{x}), \left(\chi F(t) - M(t)\right) \psi  (\vec{x}, t) \right\rangle}{\left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}
+    \rho = \frac{\left\langle W(\vec{x}), \left(\chi F(t) - M(t)\right) \psi  (\vec{x}, t) \right\rangle}{\left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}.
     \label{eq:rineiski-rho}
 \end{equation}
-
 \begin{equation}
-    c_{m, i} = \frac{\left\langle W(\vec{x}), \chi_d C_{m, i} \right\rangle}{\Lambda \left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}
+    c_{m, i} = \frac{\left\langle W(\vec{x}), \chi_d C_{m, i} \right\rangle}{\Lambda \left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}.
     \label{eq:rineiski-cm}
 \end{equation}
 
-Intermediate terms used in Equations \eqref{eq:rineiski-n} through \eqref{eq:rineiski-cm} are shown in Equations \eqref{eq:rineiski-big-cm} through \eqref{eq:rineiski-big-cs}.
+Intermediate terms used in Equations \eqref{eq:rineiski-n} through \eqref{eq:rineiski-cm} are given as:
+\begin{equation}
+    \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( u(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( u(\vec{x}, t) C_{m, i}(\vec{x}, t)\right),
+    \label{eq:rineiski-big-cm}
+\end{equation}
+and,
+\begin{equation}
+    \frac{\partial C_{s, i}(\vec{x}, t)}{\partial t} = \phi_A(t) \beta_i F(t) \psi (\vec{x}, t) - \lambda_i C_{s, i}(\vec{x}, t).
+    \label{eq:rineiski-big-cs}
+\end{equation}
 The $C_s(\vec{x}, t)$ term is computed at steady state by setting the left-hand side of both Equation \eqref{eq:rineiski-flux} and \eqref{eq:rineiski-big-C} to zero as well as the fluid velocity to zero at t=0.
 This allows Equation \eqref{eq:rineiski-big-cm} to be solved.
 
-\begin{equation}
-    \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( u(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( u(\vec{x}, t) C_{m, i}(\vec{x}, t)\right)
-    \label{eq:rineiski-big-cm}
-\end{equation}
-
-\begin{equation}
-    \frac{\partial C_{s, i}(\vec{x}, t)}{\partial t} = N(t) \beta_i F(t) \psi (\vec{x}, t) - \lambda_i \partial C_{s, i}(\vec{x}, t)
-    \label{eq:rineiski-big-cs}
-\end{equation}
-
 The terms in Equations \eqref{eq:flux-treatment-rineiski} through \eqref{eq:rineiski-big-cs} are defined as follows:
 \begin{align}
-\Phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\
-N(t) &= \mbox{ the neutron flux amplitude [$n$]} \nonumber \\
-\psi(\vec{x}, t) &= \mbox{ the neutron flux shape [$cm^{-2} s^{-1}$]} \nonumber \\
-\nu &= \mbox{ the average neutron speed [$\frac{cm}{s}$]} \nonumber \\
 M(t) &= \mbox{ the neutron disappearance operator [$cm^{-1}$] } \nonumber \\
 F(t) &= \mbox{ the neutron production operator [$cm^{-1}$]} \nonumber \\
-\beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\
-\beta_{eff} &= \mbox{ the effective delayed neutron fraction [-]} \nonumber \\
 \chi_p &= \mbox{ the prompt neutron energy spectra [-]} \nonumber \\
-\chi_d &= \mbox{ the delayed neutron energy spectra [-]} \nonumber \\
-\chi &= \mbox{ the neutron energy spectra [-]} \nonumber \\
-\lambda_i &= \mbox{ the decay constant for \gls{DNP} group \textit{i} [$s^{-1}$] } \nonumber \\
 C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
 Q(\vec{x}, t) &= \mbox{ the external neutron source [$\frac{n}{cm^3 s}$] } \nonumber \\
 u(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$\frac{cm}{s}$]} \nonumber \\
@@ -294,9 +268,10 @@ c_{s, i} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $i$
 c_{m, i} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $i$ [$atoms$]} \nonumber \\
 q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$\frac{n}{s}$] } \nonumber \\
 \Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber \\
-W(x) &= \mbox{ the weighting function (the default in SIMMER}\\
+W(x) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\
 &\;\;\;\;\; \mbox{ is an adjoint flux computed at steady-state conditions) [-].} \nonumber
 \end{align}
+
 
 %\begin{description}
 %    \item $\Phi$ is the neutron flux
@@ -324,7 +299,7 @@ W(x) &= \mbox{ the weighting function (the default in SIMMER}\\
 %    \item $W(x)$ is the weighting function (by default in SIMMER is an adjoint flux computed at steady-state conditions)
 %\end{description}
 
-The general formulation used for quasi-static methods is very similar among the various works that use it \cite{dulla2004neutron, tano2023coupled}.
+
 
 %\subsubsection{Alternative Methods}
 

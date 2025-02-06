@@ -1,29 +1,27 @@
 Depletion is the process of fission, transmutation, decay, and the changes to material compositions this process causes.
 Simulating depletion requires specific information, such as decay constants, fission yields, and fission and transmutation cross-section data.
 The fission and transmutation cross-section data can come from a transport calculation, while the other data can be read from a data library \cite{leppanen_development_2007}.
-Simulating depletion entails numerically solving the Bateman equations; a generalized form of which is in Equation \eqref{eq:Bateman_default}.
-
+Simulating depletion entails numerically solving the Bateman equations; a generalized form of which is given as  \cite{leppanen_development_2007}:
 \begin{equation} \hfill
 \begin{split}
 %\frac{dN}{dt} = \sum_j \lambda_j N_j + \gamma \Sigma_f \phi + \Sigma_k \phi - \lambda N - \Sigma \phi - C
-\frac{dN_j}{dt} = \sum_{i \neq j}  & \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \Phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \Phi \right) N_i \right ]\\
- & - \left ( \lambda_j + \sigma_j \Phi + \lambda_{r, j} \right) N_j
+\frac{dN_j}{dt} = \sum_{i \neq j}  & \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right) N_i \right ]\\
+ & - \left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right) N_j + \dot{N}_{f, j},
 \end{split}
 \hfill\label{eq:Bateman_default} \end{equation}
-
-The terms in Equation \eqref{eq:Bateman_default} are defined as follows \cite{leppanen_development_2007}:
+where,
 \begin{align}
 N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
 \gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
 \sigma_{f, i} &= \mbox{ the microscopic fission cross-section of isotope $i$ $\left[cm^2\right]$ } \nonumber \\ 
-\Phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{neutrons}{cm^2 s}\right]$ } \nonumber \\ 
+\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{neutrons}{cm^2 s}\right]$ } \nonumber \\ 
 \lambda _{i \rightarrow j} &= \mbox{ the decay constant of decay $i \rightarrow j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_{i \rightarrow j} &= \mbox{ the microscopic transmutation cross-section of reaction $i \rightarrow j$ $\left[cm^2\right]$ } \nonumber \\ 
 N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
 \lambda_j &= \mbox{ the decay constant of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
-\lambda_{r, j} &= \mbox{ the reprocessing constant for removal of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
+\lambda_{r, j} &= \mbox{ the removal constant for removal of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_j &= \mbox{ the microscopic total transmutation cross-section of isotope $j$ $\left[cm^2\right]$ } \nonumber \\ 
-\lambda _{f, j} &= \mbox{ the feed constant for feed of isotope $i$ $\left[s^{-1}\right]$ .} \nonumber
+\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\frac{atoms}{cm^3 \cdot s}\right]$ .} \nonumber
 \end{align}
 
 %\begin{description}
@@ -42,14 +40,18 @@ N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{atoms}{cm^3}\right]
 
 
 
-The matrix form can be seen in \eqref{eq:mat_Bate}, where $\vec{N}$ is a vector of compositions, and $A$ is the depletion matrix.
-This matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
-Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
-
+The matrix form is given as:
 \begin{equation}
-    \frac{d\vec{N}}{dt} = A \vec{N}
+    \frac{d\vec{N}}{dt} = A \vec{N},
     \label{eq:mat_Bate}
 \end{equation}
+where,
+\begin{align}
+    \vec{N} =& \text{ the vector of material compositions [$\frac{atoms}{cm^3}$]} \nonumber\\
+    A =& \text{the depletion matrix [$s^{-1}$].} \nonumber
+\end{align}
+The depletion matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
+Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
 
 There are several approaches to solving this equation, such as the Transmutation Trajectory Analysis (TTA) method and the Chebyshev Rational Approximation Method (CRAM) \cite{leppanen_serpent_2015}.
 Other codes may use external software to compute depletion, such as REM, an in-house code used by Nuttin et al. \cite{nuttin_potential_2005} to implement $4^{th}$ order Runge–Kutta.
@@ -60,22 +62,22 @@ Overall, there are many approaches to solving the depletion equation with differ
 \subsection{Stationary and Circulating Fuel Comparison}
 
 For stationary fuel, the Bateman equation as shown previously in Equation \eqref{eq:Bateman_default} is sufficient to simulate depletion.
-However, for the purposes of a streamlined comparison with circulating fuel, the Bateman equation can be rewritten to the form shown in Equation \eqref{eq:bate-stat-simple}.
-Over the course of a depletion step, the depletion matrix is assumed to be constant, so the source term varies in time only due to the effects of the changing compositions of other nuclides.
-This also means that the loss term, $\lambda_{net, j}$, does not vary with time in this equation.
-
+However, for the purposes of a streamlined comparison with circulating fuel, the Bateman equation can be rewritten as:
 \begin{equation}
-    \frac{dN_j}{dt} = S(t) - \lambda_{net, j} N_j(t)
+    \frac{dN_j}{dt} = S(t) - \lambda_{net, j} N_j(t),
     \label{eq:bate-stat-simple}
 \end{equation}
-
-The terms in Equation \eqref{eq:bate-stat-simple} are defined as follows:
+where,
 \begin{align}
 S &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{atoms}{cm^3 s}$]} \nonumber \\
 \lambda_{net, j} &= \mbox{ the loss term for nuclide $j$,} \nonumber\\
-& \;\;\;\;\; \mbox{ containing decay and transmutation losses [$cm^{-3} s^{-1}$] .} \nonumber
+& \;\;\;\;\; \mbox{ containing decay and transmutation losses [$s^{-1}$] .} \nonumber
 \end{align}
+Over the course of a depletion step, the depletion matrix is assumed to be constant, so the source term varies in time only due to the effects of the changing compositions of other nuclides.
+This also means that the loss term, $\lambda_{net, j}$, does not vary with time in this equation.
+
+
 
 %\begin{description}
 %\item $C$ is the source term for nuclide $j$, containing fission, decay, and transmutation sources
@@ -91,23 +93,21 @@ This way, the spatial resolution is represented by the material blocks, and the 
 %\label{sec:circ-fuel-dep}
 
 Circulating fuel makes the problem more complex, as adding a spatial component means that instead of a system of ordinary differential equations, a system of partial differential equations must be solved.
-The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding Equation \eqref{eq:bate-flow-simple}.
+The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding:
+\begin{equation}
+    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
+    \label{eq:bate-flow-simple}
+\end{equation}
+where,
+\begin{align}
+D_{mix} &= \mbox{ the mass diffusivity [$\frac{cm^2}{s}$]. } \nonumber
+\end{align}
 %In this equation, the assumption is made that only concentration spatial resolution is applied, so the depletion matrix does not include additional spatial resolution.
 This equation assumes spatial resolution is only applied to the concentration terms, which means the depletion matrix does not include spatial resolution.
 Thus, only the concentrations and material blocks provide spatial resolution to the problem.
 More spatial refinement can be provided to the neutronic parameters based on the specific approach used, such as a fully spatially resolved neutron flux.
 
-\begin{equation}
-    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
-    \label{eq:bate-flow-simple}
-\end{equation}
 
-The terms in Equation \eqref{eq:bate-flow-simple} contain several repeated terms from Equation \eqref{eq:bate-stat-simple}, with new terms defined as follows:
-\begin{align}
-D_{mix} &= \mbox{ the mixing diffusivity, } \nonumber\\
-& \;\;\;\;\; \mbox{ which sums mass diffusivity and turbulent diffusion [$\frac{cm^2}{s}$]} \nonumber \\
-\vec{u} &= \mbox{ the fluid velocity field [$\frac{cm}{s}$]. } \nonumber\\
-\end{align}
 
 %\begin{description}
 %\item $D_{mix}$ is the mixing diffusivity, which sums mass diffusivity and turbulent diffusion
@@ -132,13 +132,16 @@ This means that depletion simulations of MSRs need to include spatially resolved
 However, including fully resolved spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
 This is because tracking the $\sim$2000 nuclides over space and time requires new methods rather than those used for the time dependent system of ordinary differential equations.
 Methods for solving the system of partial differential equations require accurately capturing short time scale flow effects, which makes multi-year long depletion simulations exceedingly expensive.
-Numerical stability of the problem, when using an explicit-time solving scheme, also requires that the \gls{CFL} condition shown in Equation \eqref{eq:num-stab} to be valid.
-
+Numerical stability of the problem, when using an explicit-time solving scheme, also requires the \gls{CFL} condition be satisfied as:
 \begin{equation}
-    \lambda_{CFL} \geq \frac{\nu \Delta t}{\Delta z}
+    \lambda_{CFL} \geq \frac{u \Delta t}{\Delta z},
 \label{eq:num-stab}
 \end{equation}
-
+where,
+\begin{align}
+    \Delta t =& \text{ the time step size [s]} \nonumber \\
+    \Delta z =& \text{ the length between spatial nodes [cm].} \nonumber
+\end{align}
 This equation limits the time step size based on the flow rate and spatial mesh size.
 Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, spatial mesh resolution, and the overall amount of time simulated in depletion.
 
