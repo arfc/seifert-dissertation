@@ -3,17 +3,19 @@ This work uses Moltres to simulate the \gls{MSRE} with different \gls{DNP} group
 Moltres enables a validation study by comparing experimental results with different \gls{DNP} group parameters.
 The validation study demonstrates the efficacy of these updated \gls{DNP} group parameters compared to static group parameters.
 
-The \gls{MSRE} has experimental data which can be used for validation, the \gls{MSRE} primarily consists of flow through channels which is simpler to model than open-pool designs, and the combination of Moltres and the \gls{MSRE} has been previously demonstrated \cite{lindsay_introduction_2018}.
-Since the initial demonstration, Park et al. have discussed the results, stating the following: "The neutron flux and temperature distributions agreed qualitatively with legacy MSRE data, albeit with some minor quantitative discrepancies due to simplifications and assumptions in the reactor geometry. Moltres has since undergone further development to support 1) the looping of DNP drift back into the reactor core, 2) coupling the aforementioned DNP drift to incompressible Navier–Stokes velocity flows within the reactor core, and 3) a decay heat model to simulate decay heat from fission products." \cite{park2022verification}. Additionally, Park has released a dissertation with 1-D, 2-D, and 3-D neutronics models of the \gls{MSRE} \cite{park_advancements_2025}.
+The \gls{MSRE} has experimental data which can be used for validation.
+The \gls{MSRE} core consists of flow through channels, which makes the core simpler to model than open-pool designs as the flow path is more restricted. 
+The combination of Moltres and the \gls{MSRE} has been demonstrated \cite{lindsay_introduction_2018}.
+Since the initial demonstration, Park et al. have discussed the results, stating that the general results agree though the differences are due to simplifications and assumptions in the geometry \cite{park2022verification}.
+Additionally, Park has released a dissertation with 1-D, 2-D, and 3-D neutronics models of the \gls{MSRE} \cite{park_advancements_2025}.
 
 The purpose of using Moltres in this work is to simulate transients using \gls{MSR} specific \gls{DNP} group parameters and to generate those updated parameters in a higher-fidelity manner than the 0D method.
-In Moltres, there are three coupled physical phenomena required to model an \gls{MSR}.
-These phenomena include the neutron flux, \glspl{DNP}, and thermal-hydraulics.
+In Moltres, there are three coupled physical phenomena required to model an \gls{MSR}: the neutron flux, \glspl{DNP}, and thermal-hydraulics.
 
 \subsubsection{Flux Modeling}
 
-The neutron flux is important to model, as it provides the energy of neutrons interacting with the sample as well as the number of interactions within the sample.
-This will directly influence the number of fissions which occur in the sample and the rate at which they occur, which directly affects the fission product concentrations, specifically the \glspl{DNP}.
+The neutron flux modeling is important, as it provides the energy of neutrons interacting with the sample and the number of interactions within the sample.
+This influences the number of fissions occurring in the sample and the rate they occur, directly affecting the fission product concentrations -- including the \glspl{DNP}.
 The time-dependent multi-group neutron diffusion equation is given in Equation \eqref{eq:mg-n-diff}, recreated here:
 
 \begin{equation}
@@ -25,29 +27,26 @@ The time-dependent multi-group neutron diffusion equation is given in Equation \
     \end{split}
 \end{equation}
 
-In accounting for the neutron flux, consideration must also be given to the \glspl{DNP}.
-The \gls{DNP} contribute to the neutron flux and have their own energy spectra, so their contribution must be included.
+When accounting for the neutron flux, consideration must also be given to the \glspl{DNP}.
+The \gls{DNP} contribute to the neutron flux and have their own energy spectra, so their contribution must be included as its own term.
 
 \subsubsection{Precursor Modeling}
 
-The time dependent \gls{DNP} concentration is given in Equation \eqref{eq:mg-n-diff-Ci}, recreated here:
+The time dependent \gls{DNP} concentration is given in Equation \eqref{eq:mg-n-diff-Ci} and recreated here:
 
 \begin{equation}
     \frac{\partial C_i}{\partial t} = \beta_i \sum_{g=1}^G (\nu \Sigma_f)_g \phi_g - \lambda_i C_i - \nabla \cdot (C_i \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_i
     \nonumber
 \end{equation}
 
-An issue arises in using this equation however, as one of the primary motivations for using Moltres is to generate \gls{MSR} specific \gls{DNP} group parameters.
-However, this equation requires using \gls{DNP} group parameters.
+An issue arises using this equation since one of the motivations for using Moltres is to generate \gls{MSR} specific \gls{DNP} group parameters, and this equation requires using \gls{DNP} group parameters.
 To generate the \gls{DNP} group parameters, this equation is instead replaced by \eqref{eq:bate-flow-simple}, recreated here:
 
 \begin{equation}
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
     \nonumber
 \end{equation}
-
-Specifically, the solution to this problem is to use spatially resolved depletion over the irradiation simulation.
-Instead of concentrations of \gls{DNP} groups, the concentrations will be instead be of the \glspl{DNP} themselves.
+Specifically, the solution to this problem is to use spatially resolved depletion over the irradiation simulation; instead of concentrations of \gls{DNP} groups, the concentrations will be instead be of the \glspl{DNP} themselves.
 
 \subsubsection{Thermal-Hydraulic Modeling}
 
@@ -118,14 +117,14 @@ where
 \end{align}
 
 With the combination of the flux modeling, precursor modeling, and thermal-hydraulic modeling, Moltres can almost simulate \glspl{MSR}.
-However, there is one additional \gls{MSR} phenomena which must be considered to complete the model.
-This phenomena is related to the movement of the fuel salt boundary condition, as it is the flow of the fuel salt between the in-core to ex-core regions.
+However, there is one additional \gls{MSR} phenomena to complete the model.
+This phenomena is the flow of the fuel salt between the in-core to ex-core regions
 
 \subsubsection{Ex-core and In-core Coupling}
 
-Moltres treats the ex-core region as a tightly-coupled 1D pipe geometry, with coupling using Picard iterations and the inlet/outlet boundary conditions.
+Moltres treats the ex-core region as a tightly-coupled 1D pipe geometry with coupling using Picard iterations and the inlet/outlet boundary conditions.
 The specific equations to treat the variables of interest in this geometry can be derived from their full forms.
-For example, the flux is zero in the ex-core region and the eddy viscosity is zero, which leads to Equation \eqref{eq:prec-conc-ex}, which shows the precursor concentration in the ex-core region is:
+For example, the flux is zero in the ex-core region and the eddy viscosity is zero, leading to Equation \eqref{eq:prec-conc-ex} which shows the precursor concentration in the ex-core region is:
 
 \begin{equation}
     \frac{\partial C_i}{\partial t} = - \lambda_i C_i - u_x \frac{\partial C_i}{\partial x}.

@@ -1,4 +1,4 @@
-After receiving the concentrations from OpenMC, the concentrations of each nuclide as a function of time for the measurement period can be determined.
+After receiving the concentrations from OpenMC, the concentrations of each nuclide as a function of time for the measurement period are determined.
 The concentrations are calculated as a function of half life, as shown in Equation \eqref{eq:radiodec} where the concentration as a function of time is:
 
 \begin{equation}
@@ -7,7 +7,7 @@ The concentrations are calculated as a function of half life, as shown in Equati
 \end{equation}
 
 This is a simple equation which does not take into account decay chains between nuclides.
-An alternative approach which does account for these decay chains is to use repeated decay simulations of OpenMC in order to generate concentrations as a function of time.
+An alternative approach which does account for these decay chains is to use repeated decay simulations of OpenMC to generate concentrations as a function of time.
 These concentrations can be used at coarse time steps and linearly interpolated using SciPy, enabling the scripts to access these more accurate concentrations at any time after irradiation of the sample \cite{virtanen2020scipy}.
 This approach does not account for particles generated during decay, as it is considered beyond the scope of this work \cite{chen2002rigorous}.
 A comparison of these two approaches is investigated in Section \ref{sec:decaychaindaughters}.

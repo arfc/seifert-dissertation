@@ -1,9 +1,8 @@
 OpenMC is an open-source Monte Carlo neutron and photon transport code.
-For the purposes of this work, OpenMC offers many benefits.
 The Python \gls{API} provides useful functionality which makes interfacing with the in-house Python scripts straightforward.
-Irradiation of the sample is also simple and can be easily configured, adjusting various parameters by altering the Python script inputs.
+Irradiation of the sample is also simple and easily configured, adjusting various parameters by altering the script inputs.
 OpenMC also offers useful functionality in depletion, where a zero-power depletion step is rapidly calculated since only depletion is tracked.
-The transfer-rates functionality in OpenMC can also be used during depletion, which enables simulation of chemical removal that would occur in an \gls{MSR}.
+The transfer-rates functionality in OpenMC can also be used during depletion, enabling simulation of chemical removal that occurs in an \gls{MSR}.
 
 For this work, the scripts use the ENDF/B-VIII.0 based depletion chains provided by OpenMC and ENDF/B-VIII.0 cross section data.
 The thermal spectrum chain is used for neutron irradiation less than $300 \; eV$, while the fast spectrum is used for higher energy neutron irradiation.

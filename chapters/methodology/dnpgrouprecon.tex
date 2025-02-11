@@ -17,15 +17,15 @@ Unfortunately, attempts to replace the multiplication of these two values with a
 This is because the multiplication of the terms is not independent and is necessary to properly model the fit.
 
 There is also linearization and normalization of the data in the non-linear least squares.
-The normalization is handled by taking the delayed neutron count rate, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and then taking the natural logarithm.
+The normalization is handled by taking the delayed neutron count rate, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and taking the natural logarithm.
 The normalized count rate is then passed into the non-linear least squares fitting.
 The linearization is handled by taking the natural logarithm of the delayed neutron count rate.
 This treatment reduces both the covariance and the $\chi^2$ of the resulting non-linear least squares fit.
-Bounds are also set from zero to 1000 for each term to speed up the process, while the tolerances for convergence are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
+Bounds are also set from 0 to 1000 for each term to speed up the process, while the tolerances for convergence are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
 These convergence criteria include both change in the independent variables and the norm of the gradient, with termination occurring when either criteria meets the set tolerance.
 
 The sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is also a possible factor.
-However, since the number of fissions in the sample are taken directly from the OpenMC tallies, this does not become an issue which must be addressed.
+However, since the number of fissions in the sample are taken directly from the OpenMC tallies, the fissions from self-multiplication are included and do not introduce error.
 
 Uncertainties are tracked in this work using the uncertainties package \cite{uncertaintiespackage}.
 Uncertainties in the concentrations generated from OpenMC are not accounted for, but uncertainties in the experimentally measured emission probabilities and half lives are.

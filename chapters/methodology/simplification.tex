@@ -1,12 +1,12 @@
 To create \gls{DNP} group parameter data in a reactor agnostic manner, the manner of generation needs to be reactor agnostic as well.
-Additionally, the group parameters must be generated for various parameters in such a way that the resulting group parameters are easily tabulated.
+Additionally, the group parameters must be generated for various parameters so the resulting group parameters are easily tabulated.
 However, a large number of parameters to fully detail the flow regime is not computationally feasible.
 %Instead, the flow-related tabulation uses only three parameters: a mixing rate ($\lambda_{mix}$), an in-core average residence time ($\tau_{in}$), and an ex-core residence time ($\tau_{ex}$).
 Instead, the flow is reduced to only two parameters: an in-core average residence time ($\tau_{in}$) and an ex-core residence time ($\tau_{ex}$).
 
-This approach captures the advection of the fuel salt around the primary loop as well as an approximation of turbulent and diffusive mixing.
+This approach captures the advection of the fuel salt around the primary loop and an approximation of turbulent and diffusive mixing.
 The terms are based on the averaged behavior from a control volume of fuel salt, so thermal-hydraulic effects such as vortices would be treated as changes in the residence times.
-This method allows an approximate fitting for any circulating fuel reactor geometry, where all that is required is generating the relevant parameters for accessing the data.
+This method allows an approximate fitting for any circulating fuel reactor geometry, where generating the relevant parameters for accessing the data is all that is required.
 
 The other parameters required are for the chemical removal, which can vary both in which fission products are removed and their reprocessing rates.
 Refueling is not considered in this work, as for the short time frames analyzed, the effects of adding additional fuel are considered to be negligible.
@@ -16,7 +16,7 @@ Elements with changes on the order of seconds to days will have a sufficient con
 
 The \gls{MSBR} reprocessing scheme is used as the base for cycle times in this work, shown in Table \ref{tab:msbr_cycle_times}.
 The rare earths, seminoble metals, volatile fluorides, discard, and higher nuclides are likely negligible for the time scales studied in this work.
-To ensure that they are negligible, the effects of these larger cycle time terms are studied in Section \ref{sec:large-tcyc}.
+To ensure they are negligible, the effects of these larger cycle time terms are studied in Section \ref{sec:large-tcyc}.
 Additionally, to better understand how the reprocessing rates affect the group parameters, the cycle times are scaled to various degrees in Section \ref{sec:repr-scale}.
 
 \begin{table}[H]
@@ -43,7 +43,7 @@ Additionally, to better understand how the reprocessing rates affect the group p
 \end{center}
 \end{table}
 
-Overall, the parameters which are used are incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, mixing rate, reprocessing scheme, and reprocessing scaling vector.
+Overall, the parameters used are incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, mixing rate, reprocessing scheme, and reprocessing scaling vector.
 Because each unique parameter is an extra dimension of data that must be collected, it becomes increasingly expensive to compute all of the group parameters for each unique combination of data.
 In this work, the reprocessing scheme uses the \gls{MSBR} reprocessing scheme and a single scaling scalar, rather than a vector containing scaling values for each element.
 %Additionally, for the 0D flow model, discussed in Section \ref{sec:simple-model}, the mixing rate is not used, which also reduces the net computational cost of generating the tabulated data.
