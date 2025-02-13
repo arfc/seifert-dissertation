@@ -32,7 +32,7 @@ The number of source particles is divided by the irradiation time to generate th
 The irradiation time is the amount of time the sample is irradiated, the decay time is the amount of time the sample has the delayed neutron count rate measured after irradiation, and the decay time step is the time step used when updating the nuclide concentrations post-irradiation.
 Additionally, by default, no chemical removal is modeled.
 
-\subsubsection{OpenMC Particles}
+\subsection{OpenMC Particles}
 
 If this value can be reduced, then the total amount of simulation time can be reduced.
 Alternatively, the default value may be insufficient for this problem and lead to inaccurate results.
@@ -46,6 +46,7 @@ Based on these values, 50000 particles results in a fit accurate for the average
 \begin{table}[H]
     \centering
     \begin{tabular}{rcccc}
+    \hline
 Particles & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta \bar{T}|$ $[s]$ \\
 \hline
 1 & 0.016339 & 7.343276 & 0.002394 & 0.028612 \\
@@ -59,6 +60,7 @@ Particles & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta 
 100000 & 0.018730 & 7.314608 & 0.000002 & 0.000055 \\
 500000 & 0.018731 & 7.314636 & 0.000002 & 0.000028 \\
 1000000 & 0.018733 & 7.314663 & - & - \\
+\hline
     \end{tabular}
     \caption{Sensitivity study of total delayed neutron yields and average half-lives due to number of particles simulated in OpenMC.}
     \label{tab:omc-nps}
@@ -99,7 +101,7 @@ If the \gls{CV} is replaced with the standard deviation, then there are six out 
 These nuclides are $^{137}I$, $^{88}Br$, $^{93}Rb$, $^{89}Br$, $^{138}I$, and $^{136}Te$.
 Although the relative changes in these nuclides are smaller, the absolute change is larger, which drives a greater difference in groups 2 through 4.
 
-\subsubsection{Temperature}
+\subsection{Temperature}
 
 \begin{figure}[H]
     \centering
@@ -111,6 +113,7 @@ Although the relative changes in these nuclides are smaller, the absolute change
 \begin{table}[H]
     \centering
     \begin{tabular}{rcccc}
+    \hline
 Temperature $[K]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$\\
 \hline
 250 & 0.018729 & 7.315157 \\
@@ -120,12 +123,13 @@ Temperature $[K]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$\\
 920 & 0.018745 & 7.318251\\
 1200 & 0.018722 & 7.314862 \\
 2500 & 0.018732 & 7.315089 \\
+\hline
     \end{tabular}
     \caption{Sensitivity study of total delayed neutron yields and average half-lives due to the sample temperature simulated in OpenMC.}
     \label{tab:omc-tirrad}
 \end{table}
 
-\subsubsection{Target Density}
+\subsection{Target Density}
 
 \begin{figure}[H]
     \centering
@@ -137,6 +141,7 @@ Temperature $[K]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$\\
 \begin{table}[H]
     \centering
     \begin{tabular}{rcc}
+    \hline
 Density $[\frac{g}{cm^3}]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ \\
 \hline
 $1$ & 0.018738 & 7.313331\\
@@ -144,6 +149,7 @@ $5$ & 0.018725 & 7.313464\\
 $10$ & 0.018735 & 7.313371\\
 $50$ & 0.018731 & 7.313418\\
 $100$ & 0.018730 & 7.313413\\
+\hline
     \end{tabular}
     \caption{Sensitivity study of total delayed neutron yields and average half-lives due to sample density simulated in OpenMC.}
     \label{tab:omc-gpcc}
@@ -152,7 +158,7 @@ $100$ & 0.018730 & 7.313413\\
 
 
 
-\subsubsection{Irradiation Time}
+\subsection{Irradiation Time}
 
 \begin{figure}[H]
     \centering
@@ -164,6 +170,7 @@ $100$ & 0.018730 & 7.313413\\
 \begin{table}[H]
     \centering
     \begin{tabular}{rcccc}
+    \hline
 Time $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta \bar{T}|$ $[s]$ \\
 \hline
 60 & 0.017690 & 7.388026 & 0.001062 & 0.066482 \\
@@ -171,21 +178,80 @@ Time $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta
 240 & 0.018687 & 7.329571 & 0.000065 & 0.008026 \\
 420 & 0.018731 & 7.322325 & 0.000021 & 0.000780 \\
 600 & 0.018752 & 7.321545 & - & - \\
+\hline
     \end{tabular}
     \caption{Sensitivity study of total delayed neutron yields and average half-lives due to net irradiation time simulated in OpenMC.}
     \label{tab:omc-tirrad}
 \end{table}
 
 
-\subsubsection{Decay Time and Decay Time Steps}
+\subsection{Decay Time and Decay Time Steps}
 \label{sec:time-eval}
 The bulk of the computational cost comes from writing statepoint files; sufficient resolution is required to ensure a smooth decay curve.
 
-\subsubsection{Large Cycle Time Elements}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/yields-csvs-decdt.png}
+    \caption{Group yields resulting from various decay time steps in OpenMC.}
+    \label{fig:yields-decdt}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{rcccc}
+    \hline
+$\Delta t$ $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta \bar{T}|$ $[s]$ \\
+\hline
+10$s$ & 0.018722 & 7.314094 & 0.000013 & 0.000076 \\
+5$s$ & 0.018732 & 7.314083 & 0.000003 & 0.000065 \\
+2$s$ & 0.018729 & 7.314162 & 0.000006 & 0.000144 \\
+1$s$ & 0.018735 & 7.314021 & 0.000000 & 0.000003 \\
+0.5$s$ & 0.018731 & 7.314008 & 0.000004 & 0.000010 \\
+0.1$s$ & 0.018735 & 7.314018 & 0.000000 & 0.000000 \\
+\hline
+    \end{tabular}
+    \caption{Sensitivity study of total delayed neutron yields and average half-lives due to decay time step simulated in OpenMC.}
+    \label{tab:omc-decstep}
+\end{table}
+
+Using a time step of 1 second:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/yields-csvs-dect.png}
+    \caption{Group yields resulting from various decay times in OpenMC.}
+    \label{fig:yields-dect}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{rcccc}
+    \hline
+$t$ $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta \bar{T}|$ $[s]$ \\
+\hline
+60$s$ & 0.018734 & 7.315858 & 0.000010 & 0.000039 \\
+120$s$ & 0.018744 & 7.315819 & 0.000000 & 0.000000 \\
+240$s$ & 0.018735 & 7.315828 & 0.000009 & 0.000009 \\
+420$s$ & 0.018734 & 7.315880 & 0.000010 & 0.000061 \\
+600$s$ & 0.018744 & 7.315819 & 0.000000 & 0.000000 \\
+\hline
+    \end{tabular}
+    \caption{Sensitivity study of total delayed neutron yields and average half-lives due to decay time simulated in OpenMC.}
+    \label{tab:omc-dect}
+\end{table}
+
+\subsection{Large Cycle Time Elements}
 \label{sec:large-tcyc}
 
 %\subsubsection{Refuel Rate}
 %\label{sec:ref-rate}
 
-\subsubsection{Decay Daughter Tracking}
+\subsection{Decay Daughter Tracking}
 \label{sec:decaychaindaughters}
+
+\subsection{Takeaways}
+
+50k particles (0.8 pcm difference very small)
+
+Decay time step of 1 second (becomes more expensive for more time steps)
+Irradiation time of 600 seconds (difference of 2.1 pcm small, but might as well account for it)

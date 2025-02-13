@@ -1,0 +1,27 @@
+The use and handling of the various data has a direct impact on the \gls{DNP} group parameters.
+For example, Huynh et al. compare the effects of cumulative fission yield and emission probabilities from the \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
+Mathieu et al. investigate different datasets as well, including the \gls{NNDC} website and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+This can be expanded upon by comparing the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and various data compilations for various combinations of emission probabilities, half-lives, fission yields, and cross sections.
+
+A relevant analysis to be conducted is comparing the cumulative fission yield to the full depletion approach.
+Previous microscopic \gls{DNP} group parameter evaluations have used cumulative fission yields rather than depletion simulations.
+This approach does not capture the full time dependence of decay chains leading to \glspl{DNP}, which could result in discrepancies when including the \gls{MSR} physical phenomena.
+However, because using the cumulative fission yields would remove the need for depletion simulations, it is useful to determine whether the cumulative fission yield approach can be used.
+It is also useful because the spatially resolved method is much more efficient using the cumulative fission yield rather than full spatially resolved depletion.
+
+Another analysis of interest in regards to the data is on the number of \glspl{DNP} needed in the spatially resolved method to generate accurate results.
+The computational cost and memory requirements for the spatially resolved method scale with the number of nuclides included, so minimizing them is of interest.
+The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, replicated here:
+
+\begin{equation}
+    \bar{\nu}_{d, i} = P_{n, i} \lambda_i N_{i, 0}.
+    \nonumber
+\end{equation}
+Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
+The \glspl{DNP} with the most impact are modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
+
+\begin{comment}
+Finally, the pulse and saturation irradiation \gls{DNP} group parameters can be combined in a different manner.
+The Levenberg-Marquardt method is discussed in the literature for combining the pulse and saturation irradiation data \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
+This method of fitting \gls{DNP} group parameters to both sets of data simultaneously may provide more accurate results.
+\end{comment}
