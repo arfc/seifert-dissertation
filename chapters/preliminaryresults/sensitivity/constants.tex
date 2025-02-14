@@ -243,6 +243,27 @@ $t$ $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta 
 \subsection{Large Cycle Time Elements}
 \label{sec:large-tcyc}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/yields-csvs-largerepr.png}
+    \caption{Group yields resulting with and without large cycle time reprocessing in OpenMC.}
+    \label{fig:yields-largerepr}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lcccc}
+    \hline
+Large Cycle Time Reprocessing & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta \bar{T}|$ $[s]$ \\
+\hline
+False & 0.018442 & 7.060040 & 0.000018 & 0.000029 \\
+True & 0.018460 & 7.060011 & - & - \\
+\hline
+    \end{tabular}
+    \caption{Sensitivity study of total delayed neutron yields and average half-lives due with and without large cycle time reprocessing simulated in OpenMC.}
+    \label{tab:omc-largerepr}
+\end{table}
+
 %\subsubsection{Refuel Rate}
 %\label{sec:ref-rate}
 
@@ -255,3 +276,8 @@ $t$ $[s]$ & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ & $|\Delta \bar{\nu}_d|$ & $|\Delta 
 
 Decay time step of 1 second (becomes more expensive for more time steps)
 Irradiation time of 600 seconds (difference of 2.1 pcm small, but might as well account for it)
+Large cycle time elements have 1.8 pcm difference, but negligible computational cost.
+
+
+All these small differences add up.
+Do a comparison between the full fidelity results and results with +/- 2 pcm.
