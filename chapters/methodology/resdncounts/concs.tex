@@ -1,24 +1,22 @@
-The OpenMC model uses a fixed-source problem on a three gram spherical sample of a given fissile target.
-A uniformly distributed source is placed inside the target, and a vacuum boundary condition is used at the edge of the sphere.
-The sample must have a sufficiently large volume such that there are a large number of fissions, but a volume that is too large increases self-shielding and self-multiplication.
-This can be adjusted by modifying the density, where a more dense target increases self-shielding and self-multiplication.
-A less dense target reduces the probability of fission, which worsens the statistics for the solve.
+The OpenMC model uses a fixed-source problem on a three-gram spherical sample of a fissile target.
+A uniformly distributed source is placed inside the target with a vacuum boundary condition at the edge of the sphere.
+The sample must have a sufficiently large volume to ensure a high number of fissions, but excessive volume increases self-shielding and self-multiplication.
+Adjusting the density mitigates this issue: higher density increases self-shielding and self-multiplication, while lower density reduces fission probability and worsens statistical accuracy.
 
-The fixed-source used in this model is made up entirely of neutrons at a given energy, rather than a spectrum.
-This energy affects the fission cross sections, transmutation cross sections, and fission yields.
-Traditionally, tabulated group parameter data is formatted for a single energy or a range of energies.
-However, the macroscopic experiments, discussed in Section \ref{sec:measurementofdnps}, are performed on a reactor which has a neutron energy spectrum, not mono-energetic neutrons.
-This could be worked around by modeling a reactor in OpenMC and using a k-eigenvalue solve to generate a neutron energy spectra.
-However, for this work, the effects of the spectra are considered to be sufficiently small in scale that they do not need to be included.
-There are also photons which can generate delayed neutrons through photofission, though these are not investigated in this work \cite{kinlaw2007delayed}.
+The fixed-source in this model consists entirely of neutrons at a specific energy, rather than a spectrum.
+This energy dictates fission cross sections, transmutation cross sections, and fission yields.
+Traditionally, tabulated group parameter data is formatted for a single energy or energy range, such as fast or thermal.
+However, macroscopic experiments, discussed in Section \ref{sec:measurementofdnps}, use reactors with varying neutron energy spectra, not mono-energetic neutrons.
+This could be addressed by modeling a reactor in OpenMC and using a k-eigenvalue solve to generate a neutron energy spectrum.
+However, this work assumes the spectral effects are sufficiently small to exclude.
+Photons can also generate delayed neutrons through photofission, though this is not investigated here \cite{kinlaw2007delayed}.
 
-The distribution of the neutron source does not precisely describe the actual experimental process, where neutrons irradiate the sample from around the sample rather than inside.
-However, having the source evenly distributed removes concerns of self-shielding from the problem.
-The exact spatial locations where fission events occur within the sample should cause negligible changes in the concentrations of nuclides, which is the output from the OpenMC simulation.
-Assuming a density of 10 $\frac{g}{cc}$, then the spherical sample has a radius of approximately 0.4 $cm$.
-The spatial resolution of the concentrations in such a small sample should not be significant.
+The neutron source distribution does not replicate the experimental process, where neutrons irradiate the sample externally rather than internally.
+However, an evenly distributed source eliminates self-shielding concerns.
+The exact spatial locations of fission events within the sample should negligibly affect the nuclide concentrations, which are the outputs of the OpenMC simulation.
+With a density of 10 $\frac{g}{cc}$, the spherical sample has a radius of approximately 0.4 $cm$.
+The spatial resolution of concentrations within the sample is insignificant.
 Additionally, the concentrations extracted from the OpenMC simulation are spatially collapsed in the post-processing, so the spatial effect of a uniformly distributed source serves only to reduce any self-shielding effects which could reduce the statistics and cause more transmutation than expected.
 
-After running the OpenMC simulation, the concentrations are collected from the depletion results for the final time step of irradiation.
-This final time step of concentrations can then be passed along to the other scripts.
-These other scripts handle conversion of concentrations to the delayed neutron count rate.
+After running the OpenMC simulation, the concentrations are collected from the depletion results for the final irradiation time step.
+These final concentrations are passed to other scripts that convert the concentrations into a delayed neutron count rate.

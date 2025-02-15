@@ -1,24 +1,20 @@
-After receiving the concentrations from OpenMC, the concentrations of each nuclide as a function of time for the measurement period are determined.
-The concentrations are calculated as a function of half life, as shown in Equation \eqref{eq:radiodec} where the concentration as a function of time is:
-
+After receiving the concentrations from OpenMC, the scripts determine the concentration of each nuclide as a function of time during the measurement period.
+The concentrations are calculated based on half-life, as shown in Equation \eqref{eq:radiodec}, where the concentration as a function of time is:
 \begin{equation}
     N(t) = N_0 e^{-\lambda t}.
     \label{eq:radiodec}
 \end{equation}
 
-This is a simple equation which does not take into account decay chains between nuclides.
-An alternative approach which does account for these decay chains is to use repeated decay simulations of OpenMC to generate concentrations as a function of time.
-These concentrations can be used at coarse time steps and linearly interpolated using SciPy, enabling the scripts to access these more accurate concentrations at any time after irradiation of the sample \cite{virtanen2020scipy}.
-This approach does not account for particles generated during decay, as it is considered beyond the scope of this work \cite{chen2002rigorous}.
-A comparison of these two approaches is investigated in Section \ref{sec:decaychaindaughters}.
+This simple equation does not account for decay chains between nuclides.
+An alternative approach uses repeated zero-power depletion simulations in OpenMC to generate concentrations as a function of time, incorporating decay chains.
+These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing the scripts to access more accurate concentrations at any time after irradiation \cite{virtanen2020scipy}.
+This approach only models delayed neutrons generated during decay, as it is beyond the scope of this work to model other particles \cite{chen2002rigorous}.
+Section \ref{sec:decaychaindaughters} compares these two approaches.
 
 The concentrations are combined with Equation \eqref{eq:mdnp-dn}, recreated here:
 \begin{equation}
 \dot{n}_d(t) = \epsilon \sum_{k=1}^{K} P_{n, k} \lambda_k N_{k}(t).
 \nonumber
 \end{equation}
-
-
-The efficiency term, $\epsilon$, is set to 1 in this work, since the simulated method provides a count rate that includes every produced delayed neutron.
-Each \gls{DNP} has its contribution over time summed up, generating the delayed neutron count rate.
-%The delayed neutron count contribution over time is summed for each nuclide, generating the delayed neutron count rate.
+The efficiency term, $\epsilon$, is set to 1 in this work, as the simulated method includes every produced delayed neutron in the count rate.
+The contributions of each \gls{DNP} over time are summed to generate the delayed neutron count rate.

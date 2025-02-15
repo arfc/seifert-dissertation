@@ -1,21 +1,21 @@
-%For the 0D flow model discussed in Section \ref{sec:simple-model}, the mixing term is ignored, and only advection is considered in a 0D flow manner.
 A simplified model is necessary to generate sufficient data for each combination of input parameters.
-This simplified model will also estimate the magnitude of variation to expect, as well as general trends.
-Specifically, this model treats the flow in a zero dimensional manner by using in-core and ex-core residence times.
-The fission history function is a square-wave, where the fission rate is some positive constant for the in-core residence time and zero for the ex-core residence time.
-This approximation simplifies the analytical problem required to create the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
+This model estimates the magnitude of variation and identifies general trends.
+It treats the flow in a zero-dimensional manner using in-core and ex-core residence times.
+The fission history function is a square wave, with a constant fission rate during the in-core residence time and no fission during the ex-core residence time.
+This approximation simplifies the analytical form of the fission history for creating the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
 
-Figure \ref{fig:simplified-model} shows how OpenMC uses this fission history to mimic the irradiation on a control volume of fuel salt due to advection.
-The model passes eight parameters into OpenMC \cite{romano_openmc_2015}: the in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
-Of these terms, three, shown in green, are not varied to generate new group parameters: the temperature, target density, and total irradiation time.
-The other inputs are in yellow and vary to generate new group parameters.
-More detail on this block is provided in Section \ref{sec:delnu-counts}.
+Figure \ref{fig:simplified-model} shows how OpenMC uses this fission history to simulate irradiation on a control volume of fuel salt circulating in the primary loop.
+The model passes eight parameters into OpenMC \cite{romano_openmc_2015}: in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
+Three parameters, shown in green, remain constant: temperature, target density, and total irradiation time.
+The remaining inputs, shown in yellow, vary to generate new group parameters.
+Section \ref{sec:delnu-counts} provides further details on this process.
 
-After OpenMC finishes the fixed source simulation, the final concentrations of nuclides in the irradiated sample are saved for analysis in custom scripts.
-These scripts take in the concentrations and combine them with the IAEA beta-delayed neutron emission database data to generate a delayed neutron count rate function \cite{DIMITRIOU2021144}.
-A non-linear least squares fitting function from SciPy is then used to generate the half life and group yields \cite{2020SciPy-NMeth}.
-These group parameters are for a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
-More detail on this block is provided in Section \ref{sec:delnu-groups}.
+After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in custom scripts.
+These scripts combine the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
+A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields \cite{2020SciPy-NMeth}.
+These group parameters correspond to a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
+Section \ref{sec:delnu-groups} provides further details on this block.
+Some additional factors to consider include self-shielding due to sample density (while avoiding self-multiplication), temperature-induced cross-section variations, and under- or over-irradiation, all of which can affect the results \cite{keepin1957delayed}.
 
 \begin{figure}[H]
     \centering
@@ -24,29 +24,22 @@ More detail on this block is provided in Section \ref{sec:delnu-groups}.
     \label{fig:simplified-model}
 \end{figure}
 
-There are several considerations required for the OpenMC simulations.
-Some amount of consideration is given to the constant input parameters, which are discussed in Section \ref{sec:model-refinement}.
-In particular, self-shielding of the sample due to density while avoiding self-multiplication, variations in cross sections due to temperature, and under or over irradiation can all affect the results and must be considered \cite{keepin1957delayed}.
+The OpenMC model uses a three-gram spherical sample with vacuum boundary conditions.
+It treats the problem as a fixed-source simulation, with a uniform neutron source distributed evenly throughout the sphere.
+This approach is not physical, as a real neutron source would have a spectrum and originate externally.
+However, the exact neutron spectrum for irradiating samples to generate \gls{DNP} group parameters is not provided in the literature.
+The exact neutron energy spectrum is not needed, as only significant differences in the neutron energy spectrum affect the \gls{DNP} group parameters.
+The source distribution also has negligible impact, as the sample is small and exhibits minimal self-multiplication.
+Thus, this approximation does not limit the effectiveness of the 0D flow model.
 
-The general form of the OpenMC model is a three gram spherical sample with vacuum boundary conditions.
-The model is treated as a fixed-source problem, with a uniform neutron source distributed evenly throughout the spherical sample.
-This treatment is not physical, because in reality the neutron source would have a spectrum and would be external.
-However, the neutron spectrum used to irradiate the sample for \gls{DNP} group parameters is commonly not given in high fidelity in the literature.
-This is because only large differences in the neutron energy spectrum leads to differences in the \gls{DNP} group parameters.
-Additionally, the distribution does not affect the results since the sample is small and there is negligible self-multiplication.
-Therefore, the approximation does not hinder the effectiveness of this 0D flow model.
-
-Another consideration for the OpenMC model is having a consistent source particle rate.
-This is not strictly necessary for group parameter generation, as the values are per-fission, but it is convenient for data analysis, as the tallies are based on the source particles.
-The source rate for different simulations is given in Equation \eqref{eq:balancedsdot} as:
-
+Another consideration for the OpenMC model is maintaining a consistent source particle rate.
+While not strictly necessary for group parameter generation since the values are per-fission, it simplifies the data analysis, as the tallies depend on the source particles.
+Equation \eqref{eq:balancedsdot} provides the source rate for the irradiation simulations:
 \begin{equation}
     \dot{S} = S_{net} \frac{\tau_{in} + \tau_{ex}}{\tau_{in} T},
     \label{eq:balancedsdot}
 \end{equation}
-
-where
-
+where,
 \begin{align}
 \dot{S} &= \mbox{ the source particle rate [$\frac{n}{s}$]} \nonumber \\ 
 S_{net} &= \mbox{ the total number of source particles [$n$]} \nonumber \\ 

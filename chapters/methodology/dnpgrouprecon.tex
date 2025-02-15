@@ -1,35 +1,34 @@
-Once the delayed neutron count rate is generated, it can be converted into \gls{DNP} group parameters.
-The process of fitting the group parameters requires a non-linear least squares method, as both the group half lives and group yields must be determined.
-The equation describing the problem is given in Equation \eqref{eq:delnu-fit}, recreated here:
-
+Once the delayed neutron count rate is generated, it is converted into \gls{DNP} group parameters.
+Fitting the group parameters requires a non-linear least squares method, as both the group half-lives and yields must be determined.
+The equation describing the problem appears in Equation \eqref{eq:delnu-fit}, recreated here:
 \begin{equation}
 \dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \nonumber
 \end{equation}
 
-An important consideration for this process is the time values used when generating the group fits.
-An increased number of times causes increased computational cost, but too few times results in a poorer fit \cite{parish1999status}.
-This is investigated in Section \ref{sec:time-eval}.
+An important consideration for this process is the selection of time values for generating the group fits.
+Increasing the number of time nodes raises computational costs, but too few nodes result in a poorer fit \cite{parish1999status}.
+Section \ref{sec:time-eval} shows the sensitivity study for the time nodes, for both the node spacing and the maximum time to measure delayed neutrons.
 
-Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than it is for the saturation irradiation fit.
-This is due to the multiplication of the group yield by the group decay constant.
-Unfortunately, attempts to replace the multiplication of these two values with a new, independent term results in a poor fit.
-This is because the multiplication of the terms is not independent and is necessary to properly model the fit.
+Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than for the saturation irradiation fit.
+This results from multiplying the group yield by the group decay constant.
+Attempts to replace this multiplication with an independent term produce poor fits, as the multiplication is not independent and is necessary for accurate modeling.
 
-There is also linearization and normalization of the data in the non-linear least squares.
+The non-linear least squares process also involves linearization and normalization of the data.
 The normalization is handled by taking the delayed neutron count rate, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and taking the natural logarithm.
 The normalized count rate is then passed into the non-linear least squares fitting.
 The linearization is handled by taking the natural logarithm of the delayed neutron count rate.
-This treatment reduces both the covariance and the $\chi^2$ of the resulting non-linear least squares fit.
-Bounds are also set from 0 to 1000 for each term to speed up the process, while the tolerances for convergence are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
-These convergence criteria include both change in the independent variables and the norm of the gradient, with termination occurring when either criteria meets the set tolerance.
+This treatment reduces both the covariance and the $\chi^2$ of the fit.
+Bounds from 0 to 1000 are set for each term to speed up the process, while convergence tolerances are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure a well-refined solution.
+The convergence criteria include changes in the independent variables and the norm of the gradient, with termination occurring when either criterion meets the set tolerance.
 
-The sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is also a possible factor.
-However, since the number of fissions in the sample are taken directly from the OpenMC tallies, the fissions from self-multiplication are included and do not introduce error.
+Sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps }, is another consideration.
+However, since the fission counts are taken directly from OpenMC tallies, self-multiplication is included and does not introduce error.
 
-Uncertainties are tracked in this work using the uncertainties package \cite{uncertaintiespackage}.
-Uncertainties in the concentrations generated from OpenMC are not accounted for, but uncertainties in the experimentally measured emission probabilities and half lives are.
-These uncertainties are used in the minimization of $\chi^2$, as shown in Equation \eqref{eq:minthis}.
+The final consideration in \gls{DNP} group reconstruction is uncertainty.
+This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.
+These uncertainties include uncertainties in cross sections, fission yields, half-lives, and emission probabilities.
+These uncertainties are used in the $\chi^2$ minimization, as shown in Equation \eqref{eq:minthis}.
 
 
 %\begin{description}
@@ -39,12 +38,12 @@ These uncertainties are used in the minimization of $\chi^2$, as shown in Equati
 %    \item $x_t$ is the solution vector at the row where the time value is $t$
 %\end{description}
 
-
 Once the group fits and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
-The saturation irradiation provides better statistics for longer-lived groups, while the pulse irradiation is better for shorter-lived groups.
-Brady combines the irradiation results by using four long-period groups for saturation irradiation and four short-period groups for pulse irradiation.
-The groups are renormalized at the second group, where the two longest lived group half-lives and the ratio of yields use the saturation results \cite{brady1988evaluation}.
-The remainder of the groups use the pulse irradiation results.
+Saturation irradiation provides better statistics for longer-lived groups, while pulse irradiation is better for shorter-lived groups.
+Brady combines the results by using four long-period groups from saturation irradiation and four short-period groups from pulse irradiation.
+The groups are renormalized at the second group, where the two longest-lived group half-lives and yield ratios use the saturation results \cite{brady1988evaluation}.
+The remaining groups use the pulse irradiation results.
 
-For this work, a similar approach is used, though slightly simplified.
-The group parameters are calculated for pulse and saturation irradiation, after which the two longest lived groups use the saturation irradiation results while the four shortest lived groups use the pulse irradiation results.
+This work uses a similar but slightly simplified approach.
+The group parameters are first calculated for both pulse and saturation irradiation.
+Then, the two longest-lived groups use the saturation irradiation results, while the four shortest-lived groups use the pulse irradiation results.

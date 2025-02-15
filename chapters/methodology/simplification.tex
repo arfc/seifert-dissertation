@@ -1,23 +1,21 @@
-To create \gls{DNP} group parameter data in a reactor agnostic manner, the manner of generation needs to be reactor agnostic as well.
-Additionally, the group parameters must be generated for various parameters so the resulting group parameters are easily tabulated.
-However, a large number of parameters to fully detail the flow regime is not computationally feasible.
-%Instead, the flow-related tabulation uses only three parameters: a mixing rate ($\lambda_{mix}$), an in-core average residence time ($\tau_{in}$), and an ex-core residence time ($\tau_{ex}$).
-Instead, the flow is reduced to only two parameters: an in-core average residence time ($\tau_{in}$) and an ex-core residence time ($\tau_{ex}$).
+Generating \gls{DNP} group parameter data in a reactor-agnostic manner requires a reactor-agnostic generation process.
+Fully detailing the flow regime with a large number of parameters is computationally infeasible.
+Instead, the flow is simplified to two parameters: an in-core average residence time, $\tau_{in}$, and an ex-core residence time, $\tau_{ex}$.
 
-This approach captures the advection of the fuel salt around the primary loop and an approximation of turbulent and diffusive mixing.
-The terms are based on the averaged behavior from a control volume of fuel salt, so thermal-hydraulic effects such as vortices would be treated as changes in the residence times.
-This method allows an approximate fitting for any circulating fuel reactor geometry, where generating the relevant parameters for accessing the data is all that is required.
+This approach captures fuel salt advection around the primary loop and approximates turbulent and diffusive mixing.
+The terms derive from the averaged behavior of a fuel salt control volume, treating thermal-hydraulic effects, such as vortices, as changes in residence times.
+This method allows for approximate fitting of any circulating fuel reactor, requiring only the generation of relevant parameters for determining the associated \gls{DNP} group parameters.
 
-The other parameters required are for the chemical removal, which can vary both in which fission products are removed and their reprocessing rates.
-Refueling is not considered in this work, as for the short time frames analyzed, the effects of adding additional fuel are considered to be negligible.
-Additionally, since the saturation irradiation time frame is on the order of multiple half lives of the longest lived \gls{DNP}, an irradiation time of approximately five minutes is sufficient to reach equilibrium \glspl{DNP} concentrations.
-Elements which have cycle times on the order of months to years are likely to have negligible changes and do not need to be treated.
-Elements with changes on the order of seconds to days will have a sufficient contribution such that their inclusion is needed to generate accurate data.
+The other required parameters describe chemical removal, which varies by fission product and reprocessing rate.
+Refueling is not considered in this work, as its effects are negligible over the short time frames analyzed.
+An irradiation time of approximately seven minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
+Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \cite{sec:large-tcyc}.
+Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
 
-The \gls{MSBR} reprocessing scheme is used as the base for cycle times in this work, shown in Table \ref{tab:msbr_cycle_times}.
-The rare earths, seminoble metals, volatile fluorides, discard, and higher nuclides are likely negligible for the time scales studied in this work.
-To ensure they are negligible, the effects of these larger cycle time terms are studied in Section \ref{sec:large-tcyc}.
-Additionally, to better understand how the reprocessing rates affect the group parameters, the cycle times are scaled to various degrees in Section \ref{sec:repr-scale}.
+The \gls{MSBR} reprocessing scheme serves as the basis for cycle times in this work, as shown in Table \ref{tab:msbr_cycle_times}.
+Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have negligible effects over the time scales studied.
+Section \ref{sec:large-tcyc} examines these longer cycle times to confirm their negligible impact.
+Section \ref{sec:repr-scale} scales the cycle times to analyze how reprocessing rates influence the group parameters.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
@@ -43,10 +41,8 @@ Additionally, to better understand how the reprocessing rates affect the group p
 \end{center}
 \end{table}
 
-Overall, the parameters used are incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, mixing rate, reprocessing scheme, and reprocessing scaling vector.
-Because each unique parameter is an extra dimension of data that must be collected, it becomes increasingly expensive to compute all of the group parameters for each unique combination of data.
-In this work, the reprocessing scheme uses the \gls{MSBR} reprocessing scheme and a single scaling scalar, rather than a vector containing scaling values for each element.
-%Additionally, for the 0D flow model, discussed in Section \ref{sec:simple-model}, the mixing rate is not used, which also reduces the net computational cost of generating the tabulated data.
-The incident neutron energies used are 0.0253 $eV$ and 1 $MeV$.
-For the residence times, a study is carried out in Section \ref{sec:res-time-var} to determine the minimum number of residence times and their values to capture general trends.
-
+The parameters used include incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scaling vector.
+Each unique parameter adds a dimension to the data, exponentially increasing the computational cost of generating group parameters for every combination.
+This work uses the \gls{MSBR} reprocessing scheme with a single scaling value applied to each reprocessing group instead of a unique scaling value for each.
+The incident neutron energies that irradiate the sample are 0.0253 $eV$ and 1 $MeV$.
+Section \ref{sec:res-time-var} determines the minimum number of residence times and their values required to capture general trends.

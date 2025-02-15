@@ -1,64 +1,62 @@
 The impact of the \gls{DNP} groups on transients is evaluated using Moltres with fluid-flow-velocity field coupled multi-group diffusion kinetics, as discussed in Section \ref{sec:mgd-kinetics}.
-This approach provides high-fidelity results which couple the thermal-hydraulics and neutronics, a necessary condition for \gls{MSR} modeling.
-Because modeling every \gls{DNP} in space and time would be prohibitively expensive, they are instead modeled using the \gls{DNP} group parameters.
-This means that static \gls{DNP} group parameters which do not account for \gls{MSR} phenomena can be directly compared with the \gls{DNP} group parameters which do account for these phenomena.
+This approach provides high-fidelity results by coupling thermal-hydraulics and neutronics, a necessity for \gls{MSR} modeling.
+Modeling every \gls{DNP} in space and time would be prohibitively expensive, so they are instead modeled using \gls{DNP} group parameters.
+Moltres allows direct comparison between static \gls{DNP} group parameters, which do not account for \gls{MSR} phenomena, and parameters that do.
 
-The results of interest from this analysis will be the reactivity and power responses due to various initiating events.
-The initiating event and transients of interest also vary, as there are different reactor responses that are of interest.
-The events of interest are dictated by the perspective from which the reactor response is studied.
+The results of interest from this analysis include the reactivity and power responses to various initiating events.
+The initiating events and transients vary, as different reactor responses are studied.
+The events of interest depend on the perspective from which the reactor response is analyzed.
 
-Specifically, there are four different perspectives of interest here: validation, safety, security, and safeguards.
-Within each of these perspectives, there is a unique combination of motivation, proposed initiating event, and investigated response.
-These are discussed specifically in each respective section.
+Specifically, there are four different perspectives of interest in this work: validation, safety, security, and safeguards.
+Each perspective involves a unique combination of motivation, proposed initiating event, and investigated response.
+These are discussed in detail in their respective sections.
 
 \subsection{Validation}
-The motivation behind validation is to confirm that the proposed methodology and results match experimental results.
-This ensures that the demonstrated \gls{DNP} group parameters are useful for actual \glspl{MSR}.
-Discrepancies between the experimental results and the model offer insight into potential weaknesses of the approach.
-If there are no discrepancies, than it is reasonable to have more confidence in the results for problems similar to those which have been validated.
+The motivation for validation is to confirm that the proposed methodology and results align with experimental data.
+This ensures the demonstrated updated \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
+Discrepancies between experimental results and the model highlight potential weaknesses in the approach.
+If no discrepancies exist, confidence in the results increases for problems similar to those validated.
 
-The validation of the \gls{DNP} group parameters has a multi-stage approach.
-The first stage is validation of the irradiation by comparing the irradiated sample's generated delayed neutron count rate to that of the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
-If the delayed neutron count rates do not match, then this means there is an issue in the data being used or the aggregation of the individual \glspl{DNP} into the count rate.
-If the delayed neutron count rate is accurately predicted, then the delayed neutron count rate formulation can be accepted as valid.
-
-The second stage of the validation is for the generated \gls{DNP} group parameters.
-This stage uses the \gls{MSRE} pump start-up and coast-down experimental data to see if the group parameters accurately model the reactivity changes from the \glspl{DNP} \cite{prince1968zero}.
-This experiment has been previously studied using Moltres and Quasimolto, so the results can be compared against them as well \cite{reynolds2023analysis, park_advancements_2025}.
-However, those works did not include the inlet and outlet plena, which led to results which did not match the experimental data.
-A model which includes the plena should give results closer to the experimental data, particularly when combined with the updated \gls{DNP} group parameters.
+The validation of the \gls{DNP} group parameters follows a multi-stage approach.
+The first stage compares the irradiated sample’s delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
+If the count rates do not match, the issue lies in the data or the aggregation of individual \glspl{DNP} into the count rate.
+If the count rate is accurately predicted, the formulation is considered valid.
+The second stage validates the generated \gls{DNP} group parameters using \gls{MSRE} pump start-up and coast-down experimental data to assess their accuracy in modeling reactivity changes from \glspl{DNP} \cite{prince1968zero}.
+This experiment has been studied using Moltres and Quasimolto, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
+However, previous models excluded the inlet and outlet plena, leading to discrepancies with experimental data.
+A model including the plena, combined with updated \gls{DNP} group parameters, should yield results closer to the experimental data.
 
 \subsection{Safety}
-The motivation behind studying safety is to protect the public and meet regulatory requirements.
-Safety is discussed in detail in Section \ref{sec:safety}, though the general takeaway is many possible safety-related transients exist.
-The \gls{DNP} group parameters are important in these transients, as they affect the reactor period, power, and temperature.
+The motivation for studying safety is to protect the public and meet regulatory requirements.
+Safety is discussed in detail in Section \ref{sec:safety}, though the general takeaway is that many safety-related transients exist.
+The \gls{DNP} group parameters are critical in these transients, as they influence the reactor period, power, and temperature.
 
 The transients investigated are \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
-For each of these transients, the reactor period, power response, maximum temperature, minimum temperature, and reactivity response are all recorded.
-The reactor period is important, as it represents the controllability of the reactor.
-The power response shows how changing the \gls{DNP} group parameters affects other responses, such as the temperature.
+For each transient, the reactor period, power response, maximum temperature, minimum temperature, and reactivity response are recorded.
+The reactor period is critical, as it reflects the reactor’s controllability.
+The power response shows how changes in the \gls{DNP} group parameters affect other responses, such as temperature.
 It is important to make sure differences in the \gls{DNP} parameters don't lead to temperature changes or oscillations which result in unsafe reactor conditions.
 
 \subsection{Security}
-Security is discussed in detail in Section \ref{sec:security}, but the general takeaway for this study is that bad actors may attempt to sabotage the reactor.
-This ties directly into the safety design study, as the sabotage would be an attempt to create unsafe reactor conditions.
-It is important, then, that the \gls{MSR} of interest does not have unsafe operations after a sabotage.
-Particularly, if static \gls{DNP} group parameters predict safe operation while the updated \gls{DNP} group parameters predict unsafe operation, then this would be important to correct in the reactor design.
+Security is discussed in detail in Section \ref{sec:security}, but the general takeaway is that bad actors may attempt to sabotage the reactor.
+This ties directly into the safety design study, as sabotage aims to create unsafe reactor conditions.
+Ensuring the \gls{MSR} operates safely after sabotage is critical.
+If static \gls{DNP} group parameters predict safe operation while updated parameters predict unsafe operation, correcting this discrepancy in the reactor design is essential.
 
-Because the safety study investigates most of the transients which would be of interest for sabotage, additional considerations can be included in the transients instead.
-Because these transients are initiated by sabotage, it becomes more reasonable to then consider if multiple safety-related transients occur simultaneously. 
-With four unique transients, this yields six unique combinations of double transients, three unique combinations of triple transients, and one combination of all four transients, for a total of ten security-related sabotage-initiated transients.
+Since the safety study covers most transients relevant to sabotage, additional considerations can be incorporated into these transients.
+As sabotage may initiate multiple safety-related transients simultaneously, it is reasonable to investigate such scenarios.
+With four unique transients, this results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten security-related sabotage-initiated transients.
 
 \subsection{Safeguards}
-Safeguards is discussed in Section \ref{sec:safeguards}, but the main takeaway is that it is important to safeguard the \gls{MSR} of interest from having \gls{SNM} diverted.
-One aspect of safeguarding the reactor is detection, which can take forms such as neutron detectors and surveillance systems \cite{zubair2024nuclear}.
-The updated \gls{DNP} group parameters used in this work affect the effective delayed neutron fraction, and thus the reactivity response.
-This means means detecting \gls{SNM} diversion by studying reactivity responses using static \gls{DNP} group parameters predicts less accurate responses than the updated \gls{DNP} group parameters.
-If this difference is sufficiently large, it may be possible that failure to use these updated parameters would reduce the detection probability of a diversion scenario.
+Safeguards are discussed in Section \ref{sec:safeguards}, but the main takeaway is the importance of preventing \gls{SNM} diversion in \glspl{MSR}.
+Detection methods, such as neutron detectors and surveillance systems, play a key role in safeguarding the reactor \cite{zubair2024nuclear}.
+The updated \gls{DNP} group parameters in this work affect the effective delayed neutron fraction and reactivity response.
+Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the updated parameters.
+If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
 To investigate this, diversion scenarios are studied with a single significant quantity of material removed over the course of one year, simulated using OpenMC.
-Then, the \gls{DNP} group parameters are generated for the fuel composition at that time, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
-For example, the total delayed neutron yield would be given as:
+The \gls{DNP} group parameters are then generated for the fuel composition at that time, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
+For example, the total delayed neutron yield is given as:
 \begin{equation}
     \bar{\nu}_{d} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
 \end{equation}
