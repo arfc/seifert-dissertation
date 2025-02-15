@@ -38,7 +38,7 @@ The time dependent \gls{DNP} concentration is given in Equation \eqref{eq:mg-n-d
 \end{equation}
 
 An issue arises with this equation because Moltres generates \gls{MSR}-specific \gls{DNP} group parameters, yet the equation requires predefined \gls{DNP} group parameters.
-To generate the \gls{DNP} group parameters, this equation is replaced by \eqref{eq:bate-flow-simple }, recreated here:
+To generate the \gls{DNP} group parameters, this equation is replaced by \eqref{eq:bate-flow-simple}, recreated here:
 
 \begin{equation}
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D_{mix} \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
@@ -112,7 +112,7 @@ This phenomena is the flow of the fuel salt between the in-core to ex-core regio
 
 Moltres treats the ex-core region as a tightly-coupled 1D pipe geometry with coupling using Picard iterations and the inlet/outlet boundary conditions.
 The specific equations to treat the variables of interest in this geometry can be derived from their full forms.
-For example, the flux and eddy viscosity are zero in the ex-core region, leading to Equation \eqref{eq:prec-conc-ex }, which describes the precursor concentration in the ex-core region as:
+For example, the flux and eddy viscosity are zero in the ex-core region, leading to Equation \eqref{eq:prec-conc-ex}, which describes the precursor concentration in the ex-core region as:
 \begin{equation}
     \frac{\partial C_i}{\partial t} = - \lambda_i C_i - u_x \frac{\partial C_i}{\partial x}.
     \label{eq:prec-conc-ex}
