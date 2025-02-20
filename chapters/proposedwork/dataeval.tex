@@ -1,18 +1,64 @@
 The use and handling of the various data has a direct impact on the \gls{DNP} group parameters.
-For example, Huynh et al. compare the effects of cumulative fission yield and emission probabilities from the \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
-Mathieu et al. investigate different datasets as well, including the \gls{NNDC} website and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
-This can be expanded upon by comparing the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and various data compilations for various combinations of emission probabilities, half-lives, fission yields, and cross sections.
+These impacts can be caused by the data source, time resolution of the fission yield, number of \glspl{DNP} included in the model, and energy of the incident neutrons used to irradiate the sample.
+The data source includes the source of cross-section data, fission yields, emission probabilities, half-lives, and other associated data used to generate the \gls{DNP} group parameters.
+The time resolution of the fission yield is the difference between using a cumulative fission yield and a time-resolved depletion chain for evaluating \gls{DNP} concentrations.
+The number of \glspl{DNP} is important because modeling more \glspl{DNP} is more computationally expensive for the spatially resolved model, so minimizing this term without affect \gls{DNP} group generation is of interest.
+Finally, the incident neutron energy spectra is used to study the most effective way of organizing the \gls{DNP} group parameters with regards to energy, such as using the median or mean energy.
 
+\subsection{Data Sources}
+Huynh et al. compare the effects of cumulative fission yield and emission probabilities from the \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
+Mathieu et al. investigate different datasets as well, including the \gls{NNDC} website (the data in which comes from \gls{ENSDF}) and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+This can be expanded upon by comparing the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and various data compilations for various combinations of emission probabilities (also called delayed neutron branching ratios), half-lives, fission yields, and cross sections.
+By comparing these different data sources, the uncertainty caused by differences in the data can be more clearly understood.
+Table \ref{tab:datasources} shows the selection of data sources which will be used in the comparison.
+The "Concentration" column refers to data such as fission yields and cross-sections which affect the \gls{DNP} concentration term.
+Although the half-life of the nuclides also affects the concentration, the data sources which do not have a concentration contribution only provide relevant data on the half-lives and emission probabilities.
+Audi et al., Pfeiffer and Kratz, and Rudstam et al. are presentations of data from the literature rather than official databases.
+Audi et al. use \gls{ENSDF}, \gls{AME}, experimental data from the literature, and trends in neighboring nuclides. 
+Pfeiffer and Kratz present experimental data, data from an update to the \gls{KHF}, and data from a unified macroscopic-microscopic model within the \gls{QRPA}.
+Rudstam et al. presents experimental data.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{lccccc}
+    \hline
+    Data name & Year & Source & Half-life & Emission probability & Concentration\\
+    \hline
+      \gls{IAEA} database & 2018 & \cite{DIMITRIOU2021144} & Yes & Yes & No\\
+      \gls{JEFF} 3.3 & 2017 & \cite{plompen2020joint} & Yes & Yes & Yes\\
+      \gls{ENDF}/B-VIII.0 & 2018 & \cite{Brown20181} & Yes & Yes & Yes\\
+      \gls{JENDL}-5 & 2021 & \cite{iwamoto2023japanese} & Yes & Yes & Yes\\
+      \gls{ENSDF} & 2025 & \cite{ensdf} & Yes & Yes & No\\
+      Audi et al. & 2003 & \cite{audi2003nubase} & Yes & Yes & No\\
+      Pfeiffer and Kratz & 2002 & \cite{pfeiffer2002status} & Yes & Yes & No\\
+      Rudstam et al. & 1993& \cite{rudstam1993delayed} & Yes & Yes & No\\
+    \hline
+    \end{tabular}
+    \caption{Various data sources as well as the data which they contain.}
+    \label{tab:datasources}
+\end{table}
+
+The expected outcome of using these varying data sources is the following: more recently updated data will be more accurate and the official databases will be more accurate than the collections from the literature.
+The more recent data should be more accurate, as new experimental data should be an improvement due to better equipment and measurement techniques.
+The official databases are expected to be more accurate, as they have many users that can report mistakes, and they have been developed for an extended period of time.
+It will be useful to investigate these data sources and determine the differences between the \gls{DNP} group parameters generated for each.
+If the differences are large, then it will be important to understand in regards to propagation of the uncertainty, while negligible differences will simplify further uncertainty analysis.
+
+
+\subsection{Fission Yield Time Resolution}
 A relevant analysis to be conducted is comparing the cumulative fission yield to the full depletion approach.
 Previous microscopic \gls{DNP} group parameter evaluations have used cumulative fission yields rather than depletion simulations.
 This approach does not capture the full time dependence of decay chains leading to \glspl{DNP}, which could result in discrepancies when including the \gls{MSR} physical phenomena.
 However, because using the cumulative fission yields would remove the need for depletion simulations, it is useful to determine whether the cumulative fission yield approach can be used.
 It is also useful because the spatially resolved method is much more efficient using the cumulative fission yield rather than full spatially resolved depletion.
 
+Because saturation irradiation, this should not matter for static.
+With flow and reprocessing, it could matter.
+
+\subsection{Number of \glspl{DNP}}
 Another analysis of interest in regards to the data is on the number of \glspl{DNP} needed in the spatially resolved method to generate accurate results.
 The computational cost and memory requirements for the spatially resolved method scale with the number of nuclides included, so minimizing them is of interest.
 The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, replicated here:
-
 \begin{equation}
     \bar{\nu}_{d, i} = P_{n, i} \lambda_i N_{i, 0}.
     \nonumber
@@ -20,6 +66,7 @@ The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, repl
 Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
 The \glspl{DNP} with the most impact are modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
 
+\subsection{Incident Neutron Energy Spectra}
 Analyzing the effect of a neutron irradiation spectrum compared to a single neutron irradiation energy is also of interest.
 Particularly, the effect of various neutron irradiation spectra where the average and mean neutron irradiation energy matches that of a single energy irradiation.
 
