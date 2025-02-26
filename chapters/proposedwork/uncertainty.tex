@@ -6,3 +6,73 @@ This uncertainty uses a linear approximation near the optimum \cite{vugrin2007co
 There are also uncertainties in the \gls{MSR} physical phenomena.
 These include uncertainties in the flow rate and reprocessing rates, where the reprocessing rate is correlated with the flow rate.
 The magnitude of this uncertainty is discussed in Section \ref{sec:msr-results}, where the sensitivity of the \gls{DNP} group parameters to the changes in the \gls{MSR} phenomena demonstrate the potential impact of uncertainties.
+
+These uncertainties are important because they propagate to the \gls{DNP} group parameters, which then affects the reactor response to different transients.
+It is important to understand this for safety, security, and safeguards design, as the design should account for these uncertainties.
+
+\subsection{Data Uncertainties}
+The uncertainties in the data affect the \gls{DNP} group parameters through the calculation of the delayed neutron count rate.
+The uncertainty in the delayed neutron count rate consist of uncertainties in the half-lives, emission probabilities, and concentrations.
+The half-life and emission probability uncertainties are typically given from the experimental results.
+The uncertainty in the concentrations depends on the specific method with which the concentrations are generated.
+In general, the uncertainty in the concentrations comes from uncertainty in the fission yield (cumulative or independent, depending on the approach), cross-sections, half-lives, and flux.
+
+Most of these uncertainties will be collected from \gls{ENDF}/B-VIII.0, while the uncertainty in the flux will come from OpenMC for the 0D flow model.
+Because Moltres uses a deterministic method to calculate the neutron flux, the uncertainty in the flux can instead be calculated using the \textsc{Stochastic Tools} module in \gls{MOOSE}.
+The \textsc{Stochastic Tools} module allows for the other uncertain parameters to be adjusted so that the uncertainty in the flux due to the other uncertainties can be calculated.
+The uncertainties can then be propagated through the Python scripts using the Uncertainties package and applied to the various analyses \cite{uncertaintiespackage}.
+
+\subsection{MSR Uncertainties}
+Aside from uncertainties in the data, there are also uncertainties in the \gls{MSR} phenomena.
+Specifically, there are uncertainties in the in-core residence time, ex-core residence time, and the chemical removal rates.
+The sensitivity of the \gls{DNP} group parameters to these terms is discussed in Section \ref{sec:msr-results}.
+It is important to understand the potential uncertainty in these terms, as the residence times and chemical removal rates cannot be known with no uncertainty.
+
+The residence time correlates linearly with the flow rate, which is dependent on the temperature.
+The temperature affects the fuel salt density, buoyant force, and viscosity, all of which affect the flow rate and thus residence time.
+The temperature is affected by the fission rate, which has uncertainties from the flux and fission cross section.
+The uncertainties in the residence times can be conservatively approximated for the 0D flow model by treating the uncertainty in the temperature as the difference between the inlet and outlet temperatures for the core.
+The mass flow rate is assumed to be constant, so the density change due to the large temperature uncertainty provides a velocity uncertainty, which is used to determine the change to the residence time.
+If this conservative approach to the temperature uncertainty leads to negligible uncertainty for the residence times, then it can be neglected for the spatially resolved flow model.
+Otherwise, the spatially resolved flow model can account for this uncertainty by using the \textsc{Stochastic Tools} module to determine the uncertainty in the residence times directly.
+
+The chemical removal uncertainty challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
+The removal efficiency of xenon in a gas separation system is given by \cite{peebles1968removal, rykhlevskii2020fuel} as:
+\begin{equation}
+    \epsilon = \frac{1-e^{-K_LaA_CL \left(\frac{1}{Q_{salt}}+\frac{RT}{H} \frac{1}{Q_{He}} \right) }}{1+\frac{RT}{H} \frac{Q_{salt}}{Q_{He}}},
+    \label{eq:xe-eff}
+\end{equation}
+where,
+\begin{align}
+    R &= \text{the universal gas constant $[L \cdot Pa \cdot mol^{-1} \cdot K^{-1}]$} \nonumber \\
+    T &= \text{the salt temperature $[K]$} \nonumber \\
+    H &= \text{Henry's law constant for solute gas $[Pa \cdot mol^{-1} \cdot L]$} \nonumber \\
+    Q_{salt} &= \text{the volumetric salt flow rate $[m^{3} \cdot s^{-1}]$} \nonumber \\
+    Q_{He} &= \text{the volumetric helium flow rate $[m^{3} \cdot s^{-1}]$} \nonumber \\
+    K_L &= \text{the liquid phase mass transfer coefficient $[m \cdot s^{-1}]$} \nonumber \\
+    a &= \text{the gas-liquid interfacial area per unit volume $[m^{-1}]$} \nonumber \\
+    A_C &= \text{the contactor cross-section $[m^{2}]$ } \nonumber \\
+    L &= \text{the contractor length $[m]$.} \nonumber
+\end{align}
+
+The reductive liquid-liquid bismuth extraction distribution coefficient and equilibrium constant depend on the element, temperature, and concentration \cite{moriyama1984reductive}.
+In general, an increase in the temperature leads to an increased distribution coefficient and a decreased equilibrium constant.
+The distribution coefficient represents the ratio of the bismuth phase concentration to the salt phase concentration, and can be thought of as an efficiency term that is multiplied with the mass flow rate to determine the removal rate.
+However, the distribution coefficient changes with temperature and flow rate differently for each element and fuel salt used.
+
+A simplified, generic approach will be implemented in this work.
+The temperature is assumed to linearly increase the efficiency, and the flow velocity is assumed to linearly decrease the efficiency.
+Since the cycle times of each element are known for the \gls{MSBR} from Table \ref{tab:msbr_cycle_times}, which enables solving for a simplified removal rate term, $\epsilon_{s}$:
+\begin{equation}
+    \epsilon_s = \frac{1}{T_{cyc}} \frac{T \tau_{chem}}{T_0 \tau_{chem, 0}},
+\end{equation}
+where,
+\begin{align}
+    T_{cyc} &= \text{the cycle time $[s]$} \nonumber \\
+    T_{0} &= \text{the fuel salt temperature for which the cycle time was evaluated $[K]$} \nonumber \\
+    \tau_{chem, 0} &= \text{the residence time of the region where chemical removal occurs } \nonumber \\
+    & \;\;\;\;\;\; \text{for which the cycle was evaluated $[s]$} \nonumber \\
+    \tau_{chem} &= \text{the residence time of the region where chemical removal occurs $[s]$.} \nonumber
+\end{align}
+This equation is solved for each element and provides a simplified way to propagate uncertainties in the chemical removal efficiencies.
+

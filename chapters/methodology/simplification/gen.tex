@@ -12,14 +12,14 @@ Section \ref{sec:delnu-counts} provides further details on this process.
 
 After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in custom scripts.
 These scripts combine the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
-A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields \cite{2020SciPy-NMeth}.
+A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields using the Trust Region Reflective algorithm \cite{2020SciPy-NMeth, branch1999subspace}.
 These group parameters correspond to a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
 Section \ref{sec:delnu-groups} provides further details on this block.
 Some additional factors to consider include self-shielding due to sample density (while avoiding self-multiplication), temperature-induced cross-section variations, and under- or over-irradiation, all of which can affect the results \cite{keepin1957delayed}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/simplified-model-2.png}
+    \includegraphics[width=0.9\linewidth]{images/simplified-model-3.png}
     \caption{Flow diagram of 0D flow model used to generate flow-inclusive precursor group fit parameters.}
     \label{fig:simplified-model}
 \end{figure}

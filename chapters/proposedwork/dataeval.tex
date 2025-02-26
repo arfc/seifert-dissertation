@@ -46,29 +46,74 @@ If the differences are large, then it will be important to understand in regards
 
 
 \subsection{Fission Yield Time Resolution}
-A relevant analysis to be conducted is comparing the cumulative fission yield to the full depletion approach.
-Previous microscopic \gls{DNP} group parameter evaluations have used cumulative fission yields rather than depletion simulations.
-This approach does not capture the full time dependence of decay chains leading to \glspl{DNP}, which could result in discrepancies when including the \gls{MSR} physical phenomena.
-However, because using the cumulative fission yields would remove the need for depletion simulations, it is useful to determine whether the cumulative fission yield approach can be used.
+The time resolution for when the \glspl{DNP} are formed is unimportant for stationary, saturation irradiation \gls{DNP} group parameter formulations, which means such analyses can use the cumulative fission yields rather than a full depletion simulation.
+However, for calculation of group parameters with circulation taken into account, the time resolution of the formation of the \glspl{DNP} may be important to model.
+This is an important consideration, as if using the cumulative fission yield generates the same group parameters as the full depletion simulation, then the computational cost can be greatly reduced.
 It is also useful because the spatially resolved method is much more efficient using the cumulative fission yield rather than full spatially resolved depletion.
 
-Because saturation irradiation, this should not matter for static.
-With flow and reprocessing, it could matter.
+Before comparing the methods for the circulating system, they are first compared for a stationary system.
+The \gls{DNP} group parameters should align for both methods in a stationary system.
+If they do not, then that would mean either there is a fault in the implementation or that this approach, which is common in the literature, may not be an accurate way of treating the \glspl{DNP}.
 
-\subsection{Number of \glspl{DNP}}
-Another analysis of interest in regards to the data is on the number of \glspl{DNP} needed in the spatially resolved method to generate accurate results.
-The computational cost and memory requirements for the spatially resolved method scale with the number of nuclides included, so minimizing them is of interest.
+To evaluate the efficacy of using the cumulative fission yield compared to depletion, a direct comparison will be made between the group parameters generated using each method.
+The same dataset, \gls{ENDF}/B-VIII.0, will be used for both to ensure there are minimal differences.
+The \gls{DNP} group parameters will be generated using each method for a variety of residence times, so as to capture the time-dependent effects in higher resolution.
+
+If the \gls{DNP} group parameters are identical for all residence times, then this will greatly reduce the computational costs and will be implemented.
+If they have non-negligible differences, then the more costly method will continue to be used.
+
+\subsection{Number of DNP}
+The number of \gls{DNP} which must be tracked is of interest, particularly for the spatially resolved flow model.
+The 0D flow model computational cost increases negligibly with more \gls{DNP} to track, while the spatially resolved flow model requires much more memory and operations in order to track each new \gls{DNP} over both space and time.
+To improve the computational efficiency of the spatially resolved flow model, minimizing the number of \glspl{DNP} is of interest.
+However, if the 0D flow model is capable of generating \gls{DNP} group parameters which have negligible difference to those of the spatially resolved flow model, then the minimization of the number of \glspl{DNP} is less useful.
+For potential future analyses which could include spatially resolved reprocessing and other effects, it is still of interest to optimize the spatially resolved flow model.
+
 The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, replicated here:
 \begin{equation}
     \bar{\nu}_{d, i} = P_{n, i} \lambda_i N_{i, 0}.
     \nonumber
 \end{equation}
 Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
-The \glspl{DNP} with the most impact are modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
+The \glspl{DNP} with the most impact can be modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
+
+Comparisons will be made between group parameters generated with varying numbers of the most important \glspl{DNP}.
+A full sensitivity study will be conducted to determine a reasonable number of \glspl{DNP} to include in the spatially resolved flow model.
 
 \subsection{Incident Neutron Energy Spectra}
-Analyzing the effect of a neutron irradiation spectrum compared to a single neutron irradiation energy is also of interest.
-Particularly, the effect of various neutron irradiation spectra where the average and mean neutron irradiation energy matches that of a single energy irradiation.
+\label{sec:indidentspectra}
+The incident neutron energy spectrum directly affects the \gls{DNP} group parameters.
+However, it would be exceedingly computationally expensive to generate new \gls{DNP} group parameters for every slightly different incident neutron energy spectrum.
+Some resolution is required, so it is of interest to determine how to best categorize the \gls{DNP} group parameters for different energy spectra.
+
+This sensitivity study will investigate different levels of fidelity to organize the energy spectra: fine spectra, middling spectra, coarse spectra, and single value spectra.
+The approach will use the 0D flow model with the only changes being to the neutron source energy spectra.
+The fine, middling, and coarse spectra will contain the full data of the incident neutron energy spectra, but with different sized energy bins.
+The single value spectra contain several categories: neutron energy classification, mean energy, and median energy.
+The neutron energy classification is given in Table \ref{tab:neutronenergyspectra}, recreated from \cite{l2003nuclear}.
+The study will also investigate hand-crafted spectra where the mean and median remain unchanged while the spectrum itself changes.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+    \hline
+        Category & Energy Range \\
+    \hline
+      Cold   & $< 0.003$ $[eV]$ \\
+      Thermal & $0.003 - 0.4$ $[eV]$ \\
+      Epithermal & $0.4 - 100$ $[eV]$ \\
+      Intermediate & $0.1 - 200$ $[keV]$ \\
+      Fast & $0.2 - 10$ $[MeV]$ \\
+      Relativistic & $> 10$ $[MeV]$ \\
+    \hline
+    \end{tabular}
+    \caption{Classification of neutron energy categories by energy range from \cite{l2003nuclear}.}
+    \label{tab:neutronenergyspectra}
+\end{table}
+
+This sensitivity study will provide an idea of what level of detail is necessary in the incident neutron energy spectrum when generating the \gls{DNP} group parameters.
+It is anticipated that organizing by category or by mean energy should be sufficient to categorize the neutron energy spectra for most cases.
+For cases where it is not applicable, a more robust approach can be selectively used.
 
 \begin{comment}
 Finally, the pulse and saturation irradiation \gls{DNP} group parameters can be combined in a different manner.
