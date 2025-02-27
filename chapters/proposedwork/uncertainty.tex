@@ -64,15 +64,15 @@ A simplified, generic approach will be implemented in this work.
 The temperature is assumed to linearly increase the efficiency, and the flow velocity is assumed to linearly decrease the efficiency.
 Since the cycle times of each element are known for the \gls{MSBR} from Table \ref{tab:msbr_cycle_times}, which enables solving for a simplified removal rate term, $\epsilon_{s}$:
 \begin{equation}
-    \epsilon_s = \frac{1}{T_{cyc}} \frac{T \tau_{chem}}{T_0 \tau_{chem, 0}},
+    \epsilon_s = \frac{1}{T_{cyc}} \frac{T \tau_{ex}}{T_0 \tau_{ex, 0}},
 \end{equation}
 where,
 \begin{align}
     T_{cyc} &= \text{the cycle time $[s]$} \nonumber \\
-    T_{0} &= \text{the fuel salt temperature for which the cycle time was evaluated $[K]$} \nonumber \\
-    \tau_{chem, 0} &= \text{the residence time of the region where chemical removal occurs } \nonumber \\
-    & \;\;\;\;\;\; \text{for which the cycle was evaluated $[s]$} \nonumber \\
-    \tau_{chem} &= \text{the residence time of the region where chemical removal occurs $[s]$.} \nonumber
+    T &= \text{the fuel salt temperature $[K]$} \nonumber \\
+    T_{0} &= \text{the fuel salt temperature for which the removal was evaluated $[K]$} \nonumber \\
+    \tau_{ex, 0} &= \text{the ex-core residence time for which the removal was evaluated $[s]$} \nonumber \\
+    \tau_{ex} &= \text{the ex-core residence time $[s]$.} \nonumber
 \end{align}
 This equation is solved for each element and provides a simplified way to propagate uncertainties in the chemical removal efficiencies.
 
