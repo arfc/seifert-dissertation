@@ -115,8 +115,30 @@ This sensitivity study will provide an idea of what level of detail is necessary
 It is anticipated that organizing by category or by mean energy should be sufficient to categorize the neutron energy spectra for most cases.
 For cases where it is not applicable, a more robust approach can be selectively used.
 
-\begin{comment}
-Finally, the pulse and saturation irradiation \gls{DNP} group parameters can be combined in a different manner.
+\subsection{Irradiation Combination}
+A key aspect of the methodology is the combination of the pulse and saturation irradiation \gls{DNP} group parameters.
+The current approach is similar to Brady's approach, combining the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six group fit parameters \cite{brady1988evaluation}.
 The Levenberg-Marquardt method is discussed in the literature for combining the pulse and saturation irradiation data \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
 This method of fitting \gls{DNP} group parameters to both sets of data simultaneously may provide more accurate results.
-\end{comment}
+This can also be accomplished using the \gls{TRF} approach, which allows for bounds to be included for the parameters \cite{branch1999subspace}.
+
+The proposed methods to compare are the current method, the Levenberg-Marquardt method, and the \gls{TRF} method.
+The new methods will minimize the residual of the form:
+\begin{align}
+    e &= min_x \left| \left| \frac{A_px - b_p}{b_p} +  \frac{A_sx - b_s}{b_s}  \right| \right|^2_2,
+\end{align}
+where,
+\begin{align}
+    e &= \text{the residual of the problem [-]} \nonumber \\
+    A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_p &= \text{the pulse irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
+    A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_s &= \text{the saturation irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
+    x &= \text{the solution vector containing group yields [-].} \nonumber
+\end{align}
+This formulation of the residual removes the need to linearize the count rate, as the residual has the count rate in the denominator.
+Additionally, this formulation simultaneously treats the pulse and saturation irradiation data, generating group parameters which fit both sets of data.
+Additional analysis will entail adjustments to the maximum number of function evaluations and convergence parameters.
+
+The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
+The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of the residual for the least squares problem using the generated \gls{DNP} group parameters over all times for both pulse and saturation irradiations.

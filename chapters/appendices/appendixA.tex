@@ -37,7 +37,7 @@ where,
 Plugging this in and separating the integral, for group $k$ and for $j$ Fourier terms, gives:
 \begin{equation}
 \begin{split}
-    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} \lambda_k}{2} \int_{0}^{T} e^{-\lambda_k \left( T-\tau + t \right)} d\tau\\
+    \dot{n}_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} \lambda_k}{2} \int_{0}^{T} e^{-\lambda_k \left( T-\tau + t \right)} d\tau\\
     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \int_{0}^{T} sin \left( \frac{\pi \tau}{\tau_{res}}  \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau\\
     & + \dots\\
     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{(2j+1) \pi} \int_{0}^{T} sin \left( \frac{(2j+1) \pi \tau}{\tau_{res}}  \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau
@@ -48,7 +48,7 @@ Plugging this in and separating the integral, for group $k$ and for $j$ Fourier 
 Solving the integrals and simplifying yields: 
 \begin{equation}
 \begin{split}
-    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1 - e^{-\lambda_k T} \right)}{2}\\
+    \dot{n}_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1 - e^{-\lambda_k T} \right)}{2}\\
     & + \dots\\
     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k^2 \tau_{res}^2 e^{-\lambda_k t} }{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)\\
     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k \tau_{res} e^{-\lambda_k t} e^{-\lambda_k T}}{\left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} cos\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)  \\
@@ -69,7 +69,7 @@ Only the sine term does not go to zero as the irradiation time goes to infinity,
 
 \begin{equation}
 \begin{split}
-    n_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t}}{2}\\
+    \dot{n}_{d, k}(T, t) =& \; \frac{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t}}{2}\\
     & + \dots\\
     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_i^2 \tau_{res}^2 e^{-\lambda_k t} }{\left( (2j+1) \pi \right) \left( (2 \pi j + \pi)^2 + \lambda_k^2 \tau_{res}^2 \right)} sin\left( \frac{\pi (2j+1) T}{\tau_{res}} \right)\\
     \label{eq:split-integral-solved-reduced}
@@ -79,17 +79,18 @@ Only the sine term does not go to zero as the irradiation time goes to infinity,
 The final assumption to make is that the irradiation time, $T$, is an integer multiple of the residence times, $\tau_{res}$.
 This assumption makes the sine term 0 for every value of $k$, which simplifies the result to:
 \begin{equation}
-    n_{d}(t) = \frac{F_0}{2} \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
+    \dot{n}_{d}(t) = \frac{F_0}{2} \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
     \label{eq:fully-resolved-flow-irrad}
 \end{equation}
 This is very similar to the saturation irradiation delayed neutron count rate equation, which is:
 \begin{equation}
-    n_{d}(t) = F_0 \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
+    \dot{n}_{d}(t) = F_0 \sum_{k=1}^{K} \bar{\nu}_{d, k} e^{-\lambda_k t}
     \label{eq:saturation-count-eqn}
 \end{equation}
 
 Because of the initial assumption made, which was that half the time is in-core and half ex-core, the average fission rate is half of the fission rate scaling term, $F_0$.
 For both cases (constant irradiation and half in-core and half ex-core), the fission term in front is simply the average fission rate over the irradiation time.
+The generic case is addressed in Appendix \ref{ref:appendixB}
 
 \begin{comment}
 

@@ -1,0 +1,82 @@
+\renewcommand{\theequation}{B\thechapter.\arabic{equation}}
+\label{ref:appendixB}
+
+This derivation builds on the derivation discussed in Appendix \ref{ref:appendixA}.
+For a generic set of in-core, $\tau_{in}$, and ex-core, $\tau_{ex}$, residence times, the fission rate history is given as:
+\begin{equation}
+    \frac{F(t)}{F_0} = \frac{2}{\pi} \sum_{j=1}^{\infty} \frac{1}{2j-1} \left( sin \left( \frac{\pi (2j-1) t}{ \tau_{in} + \tau_{ex}} \right) -  sin \left( \frac{\pi (2j-1) (t - \tau_{in})}{ \tau_{in} + \tau_{ex}} \right) \right)
+\end{equation}
+
+Plugging this into Equation \eqref{eq:wilson-n} and separating the integral for group $k$ and $J$ summation terms gives:
+\begin{comment}
+\begin{align}
+    \dot{n}_{d, k}(T, t) =& \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \int_0^T sin \left( \frac{\pi \tau}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+     & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \int_0^T  sin \left( \frac{\pi (\tau-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3 \pi} \int_0^T sin \left( \frac{3 \pi \tau}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \int_0^T  sin \left( \frac{3\pi (\tau-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+    & + ... \nonumber \\
+     & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{(2J-1) \pi} \int_0^T sin \left( \frac{(2J-1)  \pi \tau}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{(2J-1) \pi} \int_0^T  sin \left( \frac{(2J-1) \pi (\tau-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau.
+\end{align}
+\end{comment}
+\begin{align}
+    \dot{n}_{d, k}(T, t) =& \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \sum_{j=1}^J \frac{1}{2j-1} \int_0^T sin \left( \frac{\pi (2j-1) \tau}{ \tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \sum_{j=1}^J \frac{1}{2j-1} \int_0^T sin \left( \frac{\pi (2j-1) (\tau - \tau_{in})}{ \tau_{in} + \tau_{ex}} \right) e^{-\lambda_k \left( T-\tau + t \right)} d\tau \nonumber \\
+\end{align}
+Taking the integrals yields:
+\begin{comment}
+\begin{align}
+    % First sine term j=1
+    \dot{n}_{d, k}(T, t) =& \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} e^{\lambda T} (\tau_{in} + \tau_{ex}) \lambda sin \left( \frac{\pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} e^{\lambda T} \pi cos \left( \frac{\pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \pi \nonumber \\
+    % Second sine term j=1
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \lambda (\tau_{in} + \tau_{ex}) e^{\lambda T} sin \left( \frac{\pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \lambda (\tau_{in} + \tau_{ex}) sin \left( \frac{\pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \pi e^{\lambda T} cos \left( \frac{\pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \pi cos \left( \frac{\pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    % First sine term j=2
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} e^{\lambda T} (\tau_{in} + \tau_{ex}) \lambda sin \left( \frac{3 \pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} e^{\lambda T} 3 \pi cos \left( \frac{3 \pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} 3 \pi \nonumber\\
+    % Second sine term j=2
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \lambda (\tau_{in} + \tau_{ex}) e^{\lambda T} sin \left( \frac{3 \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \lambda (\tau_{in} + \tau_{ex}) sin \left( \frac{3 \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & + \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} \pi e^{\lambda T} cos \left( \frac{3 \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{2 F_0 \bar{\nu}_{d, k} \lambda_k}{3\pi} \frac{1}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + 3^2 \pi^2} (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)} 3 \pi cos \left( \frac{3 \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right)\\
+\end{align}
+\end{comment}
+\begin{align}
+    % First sine term j=1
+    \dot{n}_{d, k}(T, t) =&2 F_0 \bar{\nu}_{d, k} \sum_{j=1}^J \frac{\lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda t}}{(2j-1)\pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3}  sin \left( \frac{(2j-1) \pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{ \lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  cos \left( \frac{(2j-1)\pi T}{\tau_{in} + \tau_{ex}} \right) \nonumber \\
+    & + \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  \nonumber \\
+    % Second sine term j=1
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda t}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3} sin \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda (t+T)}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3}  sin \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & + \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  cos \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2} cos \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right)  \nonumber\\
+\end{align}
+
+Because the net irradiation time, $T$, will be a multiple of the net residence time, $\tau_{in}+\tau_{ex}$, then all ratios of the net irradiation time to net residence time are integer values.
+This causes several terms to simplify, yielding:
+\begin{align}
+    % First sine term j=1
+    \dot{n}_{d, k}(T, t) =&2 F_0 \bar{\nu}_{d, k} \sum_{j=1}^J \frac{ \lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2} \nonumber \\
+    & + \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  \nonumber \\
+    % Second sine term j=1
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda t}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3} sin \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda (t+T)}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3}  sin \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & + \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  cos \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2} cos \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right)  \nonumber\\
+\end{align}
+The net irradiation time is also considered infinite relative to the half-lives of the nuclides, which again simplifies the problem:
+\begin{align}
+    % First sine term j=1
+    \dot{n}_{d, k}(T, t) =&2 F_0 \bar{\nu}_{d, k} \sum_{j=1}^J \frac{2 \lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2} \nonumber \\
+    % Second sine term j=1
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda t}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3} sin \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{ \lambda_k^2 (\tau_{in} + \tau_{ex})^2 e^{-\lambda (t+T)}}{(2j-1) \pi (\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^3 \pi^3}  sin \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & + \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda t}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2}  cos \left( \frac{(2j-1) \pi (T-\tau_{in})}{\tau_{in} + \tau_{ex}} \right) \nonumber\\
+    & - \frac{\lambda_k (\tau_{in} + \tau_{ex}) e^{-\lambda (t+T)}}{(\tau_{in} + \tau_{ex})^2 \lambda^2 + (2j-1)^2 \pi^2} cos \left( \frac{(2j-1) \pi \tau_{in}}{\tau_{in} + \tau_{ex}} \right)  \nonumber\\
+\end{align}
