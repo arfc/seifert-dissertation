@@ -26,7 +26,7 @@ The uncertainties can then be propagated through the Python scripts using the Un
 Aside from uncertainties in the data, there are also uncertainties in the \gls{MSR} phenomena.
 Specifically, there are uncertainties in the in-core residence time, ex-core residence time, and the chemical removal rates.
 The sensitivity of the \gls{DNP} group parameters to these terms is discussed in Section \ref{sec:msr-results}.
-It is important to understand the potential uncertainty in these terms, as the residence times and chemical removal rates cannot be known with no uncertainty.
+It is important to understand the potential uncertainty in these terms, as the residence times and chemical removal rates are not without uncertainty.
 
 The residence time correlates linearly with the flow rate, which is dependent on the temperature.
 The temperature affects the fuel salt density, buoyant force, and viscosity, all of which affect the flow rate and thus residence time.
@@ -36,7 +36,7 @@ The mass flow rate is assumed to be constant, so the density change due to the l
 If this conservative approach to the temperature uncertainty leads to negligible uncertainty for the residence times, then it can be neglected for the spatially resolved flow model.
 Otherwise, the spatially resolved flow model can account for this uncertainty by using the \textsc{Stochastic Tools} module to determine the uncertainty in the residence times directly.
 
-The chemical removal uncertainty challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
+The chemical removal uncertainty is challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
 The removal efficiency of xenon in a gas separation system is given by \cite{peebles1968removal, rykhlevskii2020fuel} as:
 \begin{equation}
     \epsilon = \frac{1-e^{-K_LaA_CL \left(\frac{1}{Q_{salt}}+\frac{RT}{H} \frac{1}{Q_{He}} \right) }}{1+\frac{RT}{H} \frac{Q_{salt}}{Q_{He}}},
@@ -60,6 +60,9 @@ In general, an increase in the temperature leads to an increased distribution co
 The distribution coefficient represents the ratio of the bismuth phase concentration to the salt phase concentration, and can be thought of as an efficiency term that is multiplied with the mass flow rate to determine the removal rate.
 However, the distribution coefficient changes with temperature and flow rate differently for each element and fuel salt used.
 
+
+
+\begin{comment}
 A simplified, generic approach will be implemented in this work.
 The temperature is assumed to linearly increase the efficiency, and the flow velocity is assumed to linearly decrease the efficiency.
 Since the cycle times of each element are known for the \gls{MSBR} from Table \ref{tab:msbr_cycle_times}, which enables solving for a simplified removal rate term, $\epsilon_{s}$:
@@ -75,4 +78,4 @@ where,
     \tau_{ex} &= \text{the ex-core residence time $[s]$.} \nonumber
 \end{align}
 This equation is solved for each element and provides a simplified way to propagate uncertainties in the chemical removal efficiencies.
-
+\end{comment}

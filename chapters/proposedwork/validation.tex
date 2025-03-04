@@ -16,9 +16,10 @@ If there is an issue with the data, it will be noted for additional future work 
 
 The second stage of the validation is for the generated \gls{DNP} group parameters.
 This stage uses the \gls{MSRE} pump start-up and coast-down experimental data to see if the group parameters accurately model the reactivity changes from the \glspl{DNP} \cite{prince1968zero}.
-This stage requires modeling the \gls{MSRE} core and upper and lower plena in Moltres.
+This stage requires modeling the \gls{MSRE} core, as well as the upper and lower plena, in Moltres \cite{fratoni2020molten}.
 The effect of the \glspl{DNP} on reactivity is then calculated for both transients using both static and updated \gls{DNP} group parameters.
 The expected result is that the updated group parameters will more accurately predict the reactivity from the \glspl{DNP} due to the change in the flow rate.
 If neither set of group parameters aligns with the experimental results, then that would indicate an issue with the model, since it has been shown previously that Moltres can model these transients \cite{reynolds2023analysis, park_advancements_2025}.
+These transients have been evaluated using other tools as well \cite{fei2021msre, delpech2003benchmark}.
 If the static group parameters more accurately predict the reactivity, then that would indicate that there is an issue with the formation of the updated group parameters, particularly if the first stage of validation was successful.
 The issue will have to be resolved before the work can continue, since the updated \gls{DNP} group parameters should provide higher accuracy relative to the static group parameters in \gls{MSR} modeling.

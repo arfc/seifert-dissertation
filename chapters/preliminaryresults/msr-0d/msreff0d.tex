@@ -3,6 +3,24 @@ Polynomial fits of group parameters.
 Using \gls{MSRE} temperature and salt density \cite{robertson1965msre}.
 No reprocessing unless specified.
 
+The in-core residence time is defined as a minimum, as based on the net residence times, the cycle may not complete.
+For example, Figure \ref{fig:br-irrad} shows the irradiation of a sample for various combinations of in-core and ex-core residence times.
+The net irradiation time is 420 seconds, for which 10, 20, and 30 are all multiples.
+However, 40 is not, which leads to a situation where the concentrations from the 20 second in-core and ex-core irradiation are from the incorrect cycle.
+To account for this, the irradiation time is instead treated as a minimum irradiation time, and the actual irradiation time will be increased to allot for the full cycle to complete.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/concs_Br87-timecompare.png}
+    \caption{A comparison of various in-core and ex-core residence times on the concentration of $^{87}Br$ during irradiation of the sample over 420 seconds.}
+    \label{fig:br-irrad}
+\end{figure}
+
+
+%Additionally, the assumed sample starting position is changed from the core inlet to the center of the core.
+%Starting from the core inlet means the sample is irradiated for the full in-core residence time, then decays for the full ex-core residence time.
+%Starting from the center of the core means the sample is irradiated for half the in-core residence time, then decays for the full ex-core residence time, then is again irradiated for half the in-core residence time.
+%This approach should reduce discrepancies in the results due to measuring the sample after a full ex-core residence time while maintaining the effects of the circulation of the fuel salt on the irradiated sample.
 
 \begin{table}[H]
     \centering
@@ -21,7 +39,7 @@ No reprocessing unless specified.
         Sample Density & 2.3275 & $\frac{g}{cm^3}$\\
         In-core Residence Time & 600 & $s$\\
         Ex-core Residence Time & - & $s$\\
-        Irradiation Time & 600 & $s$\\
+        Minimum Irradiation Time & 600 & $s$\\
         Decay Time & 600 & $s$\\
         Decay Time Step & 1 & $s$\\
         \hline
