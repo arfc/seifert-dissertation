@@ -29,7 +29,7 @@ For this derivation, the sample is assumed to exist as a point at the core inlet
 This means the full cycle consists of an in-core residence time of fission followed by an ex-core residence time of decay, after which the cycle repeats until the net irradiation time is met.
 The fission rate history is therefore given as:
 \begin{align}
-    \frac{F(\tau)}{F_0} =& H(\tau) + \sum_{j=1}^J H(\tau - j\cdot \tau_{in} - j\cdot \tau_{ex}) \nonumber \\
+    \frac{F(\tau)}{F_0} =& H(\tau) - H(\tau - T) + \sum_{j=1}^J H(\tau - j\cdot \tau_{in} - j\cdot \tau_{ex}) \nonumber \\
     & - H(\tau - j \cdot\tau_{in} - (j-1) \cdot \tau_{ex}),
     \label{eq:pos-square}
 \end{align}
@@ -42,20 +42,20 @@ where,
 
 Plugging this into Equation \eqref{eq:wilson-n} for group $k$ yields:
 \begin{align}
-\dot{n}_{d, k}(T, t) =& \int_{0}^{T} H(\tau) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau \nonumber \\
+\dot{n}_{d, k}(T, t) =& \int_{0}^{T} H(\tau) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau - \int_{0}^{T} H(\tau-T) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau\nonumber \\
 & + \int_{0}^{T} \sum_{j=1}^J H(\tau - j\cdot \tau_{in} - j\cdot \tau_{ex}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
 & - \int_{0}^{T} \sum_{j=1}^J H(\tau - j \cdot\tau_{in} - (j-1) \cdot \tau_{ex}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau,
 \end{align}
 which can be simplified to:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \int_{0}^{T} H(\tau)   e^{-\lambda_k (T-\tau+t)} d\tau \nonumber \\
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \int_{0}^{T} H(\tau)   e^{-\lambda_k (T-\tau+t)} d\tau - \int_{0}^{T} H(\tau-T)   e^{-\lambda_k (T-\tau+t)} d\tau\nonumber \\
 & + \int_{0}^{T} \sum_{j=1}^J H(\tau - j\cdot \tau_{in} - j\cdot \tau_{ex})   e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
 & - \int_{0}^{T} \sum_{j=1}^J H(\tau - j \cdot\tau_{in} - (j-1) \cdot \tau_{ex}) e^{-\lambda_k (T-\tau+t)} d\tau
 \end{align}
 
 Solving the integrals yields:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \frac{1}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t+T)} \right) \nonumber \\
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \frac{1}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t+T)} \right) + 0 \nonumber \\
 & + \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + j \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + j \cdot \tau_{ex}) - t - T)} \right) \nonumber\\
 & - \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}) - t - T)} \right).
 \end{align}
@@ -86,7 +86,7 @@ By isolating the delayed neutron count rate and summing over all groups, the fin
 \end{align}
 which can be rewritten as:
 \begin{align}
-\dot{n}_{d}(T, t) =& F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{\lambda_k (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)} \right)
+\dot{n}_{d}(T, t) =& F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{\lambda_k (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)} \right).
 \end{align}
 If the in-core residence time is zero, then the delayed neutron count rate goes to zero, which is the expected behavior.
 

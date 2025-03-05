@@ -1,10 +1,9 @@
 Although the 0D flow model provides useful insights, it does not provide a high level of fidelity for any specific geometry.
-To evaluate the accuracy of the 0D flow model, a spatially resolved model will be developed.
-This model is key to determining if the 0D flow model produces \gls{DNP} group parameters of sufficient accuracy, and if not, then what the weakness are.
-The spatially resolved model is discussed in detail in Section \ref{sec:soph-model}.
-
-This spatially resolved model will be used in a comparison for multiple levels of fidelity of generating the \gls{DNP} group parameters: data only using cumulative fission yields, OpenMC simulations with depletion, spatially resolved using cumulative fission yields, and spatially resolved with depletion.
-Each step up becomes more computationally expensive, so if a simpler method is able to generate \gls{DNP} group parameters with negligible differences, it will be used preferentially.
+A spatially resolved model will be developed to evaluate the accuracy of the 0D flow model.
+This model verifies whether the 0D flow model produces sufficiently accurate \gls{DNP} group parameters.
+Section \ref{sec:soph-model} discusses the spatially resolved model in detail.
+This spatially resolved model will compare multiple levels of fidelity for generating \gls{DNP} group parameters: 0D flow model using cumulative fission yields, 0D flow model with depletion, spatially resolved flow model using cumulative fission yields, and spatially resolved flow model with depletion.
+Each step increases computational cost, so if a simpler method generates \gls{DNP} group parameters with negligible differences, it will be used preferentially.
 
 The process for comparing the 0D flow model and the spatially resolved model is as follows: the spatially resolved model runs and generates \gls{DNP} group parameters and residence times, the residence times are used to feed into the 0D flow model, the resulting \gls{DNP} group parameters are compared between the two models.
 If the results match, then this would indicate that the 0D flow model only needs residence time data for a given \gls{MSR} to generate the \gls{DNP} group parameters.
