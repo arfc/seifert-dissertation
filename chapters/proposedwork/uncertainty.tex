@@ -28,6 +28,7 @@ Section \ref{sec:msr-results} discusses the sensitivity of the \gls{DNP} group p
 It is important to understand the potential uncertainty in these terms, as the residence times and chemical removal rates are not without uncertainty.
 
 The residence time correlates linearly with the flow rate, which is dependent on the temperature.
+Although the flow rate would also have uncertainty based on variance in the pump, this uncertainty is considered outside the scope of this work.
 The temperature affects fuel salt density, buoyant force, and viscosity, all of which influence the flow rate and residence time.
 The temperature is influenced by the fission rate, which has uncertainties from the flux and fission cross section.
 For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the temperature uncertainty as the difference between the inlet and outlet temperatures for the core.
@@ -61,6 +62,68 @@ However, the distribution coefficient changes with temperature and flow rate dif
 
 Propagating the uncertainty in the chemical removal of elements from the fuel salt is challenging, as there are many variables to consider.
 These include the fuel salt composition, flow rate, redox potential, hydrostatic pressure, interfacial tension, and temperature \cite{shahbazi2022survey, thoma1971chemical}.
+Thus, generic equations are not formulated for each possible combination of variables.
+Instead, only the chemical removal of noble gases and noble metals from the \gls{MSRE} are investigated \cite{lo2022application}.
+The noble gases are actively pumped out via the off-gas system while noble metals, including molybdenum, technetium, ruthenium, rhodium, palladium, silver, and antimony plate out via reduction by UF$_6$.
+Some elements, specifically selenium, niobium, and tellurium, vary in their behavior.
+These elements only sometimes plates out based on the redox potential of the salt; a well reduced salt causes them to plate out, otherwise they act as salt seekers \cite{kedl1972migration, lo2022application}.
+
+The removal rate, $\lambda_r$, of noble gases from the pump bowl via the off-gas system is \cite{jr2020modeling, lo2022application}:
+\begin{align}
+    \lambda_r = \frac{\dot{V}}{V} \epsilon,
+\end{align}
+where,
+\begin{align}
+    \dot{V} =& \text{ the salt flow rate through the gas-liquid separator loop $[m^3 \cdot s^{-1}]$} \nonumber \\
+    V =& \text{ the total volume of salt in the primary loop $[m^3]$} \nonumber \\
+    \epsilon =& \text{ the removal efficiency [-]}. \nonumber
+\end{align}
+For the \gls{MSRE}, the values are a salt flow rate of 0.003153, a total salt volume of 1.996, and a removal efficiency of 0.026 \cite{robertson1965msre}.
+For the 0D flow model, this removal occurs while the sample is in the ex-core region and stops while the sample is in the in-core region.
+This is because the removal occurs in the pump bowl and not inside the core.
+For the spatially resolved flow model, this removal also occurs in the ex-core region, treated in the same way as the 0D flow model.
+
+The removal rate, $\lambda_r$, of noble metals via plate-out is \cite{lo2022application}:
+\begin{align}
+    \lambda_{i, l, r} = \frac{h_{i, l} A_l}{V},
+    \label{eq:rem-plateout}
+\end{align}
+where,
+\begin{align}
+    h_{i, l} =& \text{the mass transfer rate of element $i$ to waste stream $l$ $[m \cdot s^{-1}]$} \nonumber \\
+    A_l =& \text{the surface area of waste stream $l$ $[m^2]$.} \nonumber
+\end{align}
+The removal of noble metals does not occur in a single region, unlike the noble gas removal.
+Instead, there is a distribution of noble metals: 50\% are in the hastalloy-N surfaces in the loop, 49\% are in the ex-core region, and 1\% are in the graphite surfaces in the in-core region \cite{kedl1972migration}.
+Because 99\% of the plate-out occurs in the ex-core region, the removal can be treated as occurring only in the ex-core region.
+The surface areas and mass transfer rates for the noble metals are given in Table \ref{tab:noblemetals}, recreated from \cite{lo2022application}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lccc}
+        \hline
+        Component & $h_{i, l}$ $[m \cdot s^{-1}]$ & $A_l$ $[m^2]$ & $\lambda_{i, l, r}$ $[s^{-1}]$ \\
+        \hline
+        HX & $4.657 \times 10^{-5}$ & $2.93 \times 10^1$ & $6.827 \times 10^{-4}$ \\
+        Fuel loop piping, core and pump volute & $1.041 \times 10^{-4}$ & $6.60 \times 10^0$ & $3.441 \times 10^{-4}$ \\
+        Core wall cooling annulus & $4.318 \times 10^{-5}$ & $1.43 \times 10^1$ & $3.095 \times 10^{-4}$ \\
+        Core graphite (exposed to salt) & $5.334 \times 10^{-6}$ & $1.36 \times 10^2$ & $3.637 \times 10^{-4}$ \\
+        Miscellaneous & - & - & $1.695 \times 10^{-4}$ \\
+        Bubbles & $4.233 \times 10^{-4}$ & $3.205 \times 10^1$ & $6.7978 \times 10^{-3}$ \\
+        \hline
+        Total & - & - & $8.6674 \times 10^{-3}$ \\
+    \end{tabular}
+    \caption{Noble metal mass transfer rates, surface areas, and resulting removal rates (recreated from \cite{lo2022application} with data from \cite{kedl1972migration}).}
+    \label{tab:noblemetals}
+\end{table}
+
+
+
+
+
+\begin{comment}
+The cycle time of noble metals in fuel salt is 370 with no bubbles and 80 seconds during $^{235}$U runs \cite{kedl1972migration}.
+
 For this work, the uncertainties are only propagated for noble gas removal using Equation \eqref{eq:xe-eff}, while other elements are assumed to have uncertainty that scales linearly with residence time and temperature.
 The linearized removal efficiency, $\epsilon_s$, is given as:
 
@@ -75,3 +138,4 @@ where,
     \tau_{ex, 0} &= \text{the ex-core residence time for which the removal was evaluated $[s]$} \nonumber \\
     \tau_{ex} &= \text{the ex-core residence time $[s]$.} \nonumber
 \end{align}
+\end{comment}

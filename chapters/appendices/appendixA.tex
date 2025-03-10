@@ -36,7 +36,8 @@ The fission rate history is therefore given as:
 where,
 \begin{align}
     H =& \text{ the Heaviside function [-]} \nonumber \\
-    J =& \text{the minimum number of cycles to meet the irradiation time, $T$ [-]} \nonumber \\
+    J =& \left\lceil \frac{T}{\tau_{in} + \tau_{ex}} \right\rceil \nonumber \\
+     =& \text{ the minimum number of cycles to meet the irradiation time, $T$ [-]} \nonumber \\
     F_0 =& \text{ the magnitude of the constant fission rate [$\frac{fissions}{s}$].} \nonumber
 \end{align}
 
@@ -56,15 +57,15 @@ which can be simplified to:
 Solving the integrals yields:
 \begin{align}
 \frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \frac{1}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t+T)} \right) + 0 \nonumber \\
-& + \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + j \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + j \cdot \tau_{ex}) - t - T)} \right) \nonumber\\
-& - \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}) - t - T)} \right).
+& + \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + j \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{in} - j \cdot \tau_{ex})} \right) \nonumber\\
+& - \sum_{j=1}^J \frac{H(T-(j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}))}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{in} - (j-1) \cdot \tau_{ex})} \right).
 \end{align}
 The Heaviside functions in the summations resolve to unity while the cycle is within range of the net irradiation time, and become 0 when the cycle time goes beyond the net irradiation time.
 The problem then simplifies to:
 \begin{align}
 \frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \left( e^{-\lambda_k t} - e^{-\lambda_k (t+T)} \right) \nonumber \\
-& + \sum_{j=1}^J \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + j \cdot \tau_{ex}) - t - T)} \right) \nonumber\\
-& - \sum_{j=1}^J \left( e^{-\lambda_k t} - e^{\lambda_k ((j \cdot \tau_{in} + (j-1) \cdot \tau_{ex}) - t - T)} \right).
+& + \sum_{j=1}^J \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{in} - j \cdot \tau_{ex})} \right) \nonumber\\
+& - \sum_{j=1}^J \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{in} - (j-1) \cdot \tau_{ex})} \right).
 \end{align}
 
 If the net irradiation time is assumed to be infinite, then the delayed neutron count rate becomes:
@@ -77,16 +78,16 @@ However, as previously mentioned, this infinite approach will not work for the s
 For example, if an in-core residence time is selected which is relatively small compared to the ex-core residence time, Equation \eqref{eq:wilseng-examp} would not vary at all, even though the fission rate history would be significantly different.
 Instead, the problem takes on the form:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t}} =&  1 - e^{-\lambda_k T} + \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{\lambda_k (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)}.
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} e^{-\lambda_k t}} =&  1 - e^{-\lambda_k T} + \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{-\lambda_k( T - j \cdot \tau_{in} - (j-1)\cdot \tau_{ex})}.
 \end{align}
 By isolating the delayed neutron count rate and summing over all groups, the finalized equation can be formulated as:
 \begin{align}
 \dot{n}_{d}(T, t) =& F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} - \bar{\nu}_{d, k} e^{-\lambda_k t} e^{-\lambda_k T} \\
-& + \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{\lambda_k (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)},
+& + \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{-\lambda_k  (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)},
 \end{align}
 which can be rewritten as:
 \begin{align}
-\dot{n}_{d}(T, t) =& F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{\lambda_k (j \cdot \tau_{in} + (j-1)\cdot \tau_{ex}-T)} \right).
+\dot{n}_{d}(T, t) =& F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{-\lambda_k (T - j \cdot \tau_{in} - (j-1)\cdot \tau_{ex})} \right).
 \end{align}
 If the in-core residence time is zero, then the delayed neutron count rate goes to zero, which is the expected behavior.
 
