@@ -1,22 +1,22 @@
 Validating the \gls{DNP} group parameters is essential to ensure their practical utility.
-Although the group parameters are verified with other group parameters in the literature, this does not necessarily mean they are capturing all of the physical phenomena of interest.
+Although the group parameters are verified with other group parameters in the literature, this does not necessarily mean they capture all physical phenomena of interest.
 Validation identifies potential weaknesses in the approach by highlighting discrepancies between predicted and experimental results.
 
-Validation of the group parameters generated in this work is conducted in two stages, as discussed in Section \ref{sec:transimpact}.
+Validating the group parameters generated in this work is conducted in two stages, as discussed in Section \ref{sec:transimpact}.
 The first stage validates the delayed neutron count rate formulation and group generation for a static problem.
 The second stage validates the updated \gls{DNP} group parameters by comparing their reactivity feedback with that of the static group parameters.
 
 
 
-The first stage validates the irradiation by comparing the irradiated sample’s delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
+The first stage validates the irradiation by comparing the irradiated sample's delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
 This requires modeling Godiva in OpenMC and solving the k-eigenvalue problem to irradiate the sample.
-The post-irradiation sample concentration is passed to the scripts, which generate the \gls{DNP} group parameters.
-The delayed neutron count rate and group parameters are compared with Keepin et al.’s values to identify discrepancies.
+The post-irradiation sample concentration is passed to the scripts that generate the \gls{DNP} group parameters.
+The delayed neutron count rate and group parameters are compared with values from Keepin et al. to identify discrepancies.
 Some differences are expected due to uncertainties in the data and experimental results, so validation is successful if the results align within a few percent.
-If they do not align, this indicates either a bug not present during verification or an issue with the data.
-If the issue lies with the data, it will be noted for future work to improve the microscopic data, enabling more successful implementation of the proposed methodology.
+If they do not align, this indicates either an issue with the scripts or with the data.
+If the issue lies with the data, it will be noted for future work to improve the microscopic data, enabling a more successful implementation of the proposed methodology.
 
-The first stage validates the irradiation by comparing the irradiated sample’s delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
+The first stage validates the irradiation by comparing the irradiated sample's delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
 This requires modeling Godiva in OpenMC and solving the k-eigenvalue problem to irradiate the sample.
 The post-irradiation sample concentration is passed to the scripts, which generate the \gls{DNP} group parameters.
 The delayed neutron count rate and group parameters are compared with values from Keepin et al. to identify discrepancies.
@@ -29,9 +29,9 @@ This stage uses \gls{MSRE} pump start-up and coast-down experimental data to ass
 This stage requires modeling the \gls{MSRE} core and upper and lower plena in Moltres \cite{fratoni2020molten}.
 The reactivity effects of the \glspl{DNP} are calculated for both transients using static and updated \gls{DNP} group parameters.
 The updated group parameters are expected to predict reactivity more accurately as they account for more physical phenomena in the \gls{MSRE}.
-If neither set of reactivity responses aligns with the experimental results, this indicates a model issue, as Moltres has previously demonstrated the ability to model these transients \cite{reynolds2023analysis, park_advancements_2025}.
-These transients have also been evaluated using other tools, which offer additional comparison \cite{fei2021msre, delpech2003benchmark}.
-If the static group parameters predict reactivity more accurately, this suggests an issue with the updated group parameter formulation, particularly if the first validation stage succeeded.
+If neither set of reactivity responses aligns with the experimental results, then there is a model issue, as Moltres has previously demonstrated the ability to model these transients \cite{reynolds2023analysis, park_advancements_2025}.
+These transients have also been evaluated using other tools, providing additional comparison \cite{fei2021msre, delpech2003benchmark}.
+If the static group parameters predict reactivity more accurately than the update group parameters, this suggests an issue with the updated group parameter formulation, particularly if the first validation stage succeeded.
 The issue must be resolved before proceeding, as the updated \gls{DNP} group parameters should provide higher accuracy in \gls{MSR} modeling.
 
 %Potential challenges associated with the data are discussed in Section \ref{sec:dataeval}.

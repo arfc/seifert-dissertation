@@ -5,7 +5,7 @@ These uncertainties propagate into the \gls{DNP} group and kinetics parameters \
 Uncertainties also arise from \gls{MSR} physical phenomena, including flow rate and reprocessing rates, where the reprocessing rate is correlated with the flow rate.
 Section \ref{sec:msr-results} discusses the sensitivity of the \gls{DNP} group parameters to changes in \gls{MSR} phenomena, demonstrating the potential impact of the uncertainties in these values.
 
-These uncertainties are important because they propagate to the \gls{DNP} group parameters, which then affects the reactor response to different transients.
+These uncertainties are important because they propagate to the \gls{DNP} group parameters, which affect the reactor's response to different transients.
 It is important to understand this for safety, security, and safeguards design, as the design should account for these uncertainties.
 
 \subsection{Data Uncertainties}
@@ -19,7 +19,7 @@ Most uncertainties will be collected from \gls{ENDF}/B-VIII.0, while the flux un
 Since Moltres uses a deterministic method to calculate the neutron flux, the flux uncertainty could be calculated using the \textsc{Stochastic Tools} module in \gls{MOOSE}.
 The \textsc{Stochastic Tools} module allows adjustment of other uncertain parameters to calculate the flux uncertainty due to these factors.
 However, a simpler approach is to use the flux calculated from OpenMC along with its uncertainty. 
-The uncertainties can then be propagated through the Python scripts using the Uncertainties package and applied to various analyses \cite{uncertaintiespackage}.
+The uncertainties in the data and flux can then be propagated through the Python scripts using the Uncertainties package and applied to various analyses \cite{uncertaintiespackage}.
 
 \subsection{MSR Uncertainties}
 In addition to data uncertainties, uncertainties exist in \gls{MSR} phenomena.
@@ -29,7 +29,7 @@ It is important to understand the potential uncertainty in these terms, as the r
 
 The residence time correlates linearly with the flow rate, which is dependent on the temperature.
 Although the flow rate would also have uncertainty based on variance in the pump, this uncertainty is considered outside the scope of this work.
-The temperature affects fuel salt density, buoyant force, and viscosity, all of which influence the flow rate and residence time.
+The temperature affects fuel salt density, buoyant force, and viscosity, all influencing the flow rate and residence time.
 The temperature is influenced by the fission rate, which has uncertainties from the flux and fission cross section.
 For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the temperature uncertainty as the difference between the inlet and outlet temperatures for the core.
 Assuming a constant mass flow rate, the density change due to the large temperature uncertainty provides a velocity uncertainty, which determines the residence time uncertainty.

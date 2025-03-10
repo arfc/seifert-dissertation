@@ -6,5 +6,5 @@ This spatially resolved model will compare multiple levels of fidelity for gener
 Each step increases computational cost, so if a simpler method generates \gls{DNP} group parameters with negligible differences, it will be used preferentially.
 
 The process for comparing the 0D flow model and the spatially resolved model is as follows: the spatially resolved model runs and generates \gls{DNP} group parameters and residence times, the residence times are used to feed into the 0D flow model, the resulting \gls{DNP} group parameters are compared between the two models.
-If the results match, then this would indicate that the 0D flow model only needs residence time data for a given \gls{MSR} to generate the \gls{DNP} group parameters.
+If the results are within the uncertainty bounds of each other, then this indicates that the 0D flow model only needs residence time data for a given \gls{MSR} to generate the \gls{DNP} group parameters.
 If they do not match, then a spatially resolved approach will be necessary to properly generate the \gls{MSR} \gls{DNP} group parameters.
