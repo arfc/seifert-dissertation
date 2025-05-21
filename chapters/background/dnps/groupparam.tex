@@ -1,11 +1,17 @@
 In Section \ref{sec:measurementofdnps}, the various methods for experimentally understanding delayed neutron precursors were discussed.
 The next stage of understanding these precursors is to understand how they are used in kinetics models, as well as the various ways they are represented.
+The microscopic and macroscopic experimental approaches provide the necessary data to create more easily handled forms.
+By summing the contributions from each \gls{DNP} in the microscopic approach, the macroscopic and microscopic approaches can be said to provide data in the form of a delayed neutron count rate over time.
+Section \ref{sec:calc-group-param} discusses the least-squares approach to convert this data into several \gls{DNP} groups.
+
 The \glspl{DNP} are commonly represented in six groups.
 These groups were developed originally for computational efficiency and due to lacking data for individual precursors.
 Brady and England found that increasing the number of groups for point kinetics calculations from six to nine caused no significant differences \cite{brady1989delayed}.
 Their study shows that increasing the number of \gls{DNP} groups alone does not provide an increase in accuracy for point kinetics simulations.
 
-This section goes through the calculation of \gls{DNP} group parameters and kinetics parameters.
+Representing the \glspl{DNP} in group form also simplifies the calculation of various kinetics parameters.
+Various kinetics parameters are introduced in Section \ref{sec:bg-trans-analysis-methods}, though without detail on the purpose of each variable.
+This section provides more information on what these kinetics and delayed neutron group parameters physically represent, while Sections \ref{sec:calc-group-param} and \ref{sec:calc-kinetic-param} detail how they are calculated.
 The \gls{DNP} group parameters directly affect many of the kinetics parameters, and both sets of data are used in kinetics and dynamics problems.
 Table \ref{tab:dnpgandk} goes through each of the terms of importance for this section.
 
@@ -49,14 +55,15 @@ Updating the six-group parameters enabled greater consistency between experiment
 %This section provides more information on what these kinetics and delayed neutron group parameters physically represent, while Sections \ref{ref:calc-group-param} and \ref{ref:calc-kinetic-param} detail how they are calculated.
 
 Moving from the group parameters to the kinetics parameters, there is a convenient analogy which can be used to better understand some of the kinetics parameters.
-Arguably the most well known term in nuclear engineering is the effective multiplication factor, $k_{eff}$.
-This term represents the scaling of the number of neutrons over each generation.
+The effective multiplication factor, $k_{eff}$, is an important term in reactor physics.
+This term represents the scaling of the number of neutrons over each generation in a finite reactor system.
 The infinite multiplication factor, $k_{\infty}$, represents the multiplication without considering leakage terms.
 This is analogous to the delayed neutron fraction and mean generation time terms, where the effective form of the term requires information on the specific reactor geometry.
 
 The adjoint flux is important for calculating the effective form of many kinetics parameters.
 The adjoint flux is not a physical quantity, but rather serves as an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
 For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
+The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development}.
 
 The delayed neutron fraction, $\beta$, represents the ratio of delayed neutron production over all neutron production \cite{meulekamp2006calculating}.
 Related to the delayed neutron fraction is the effective delayed neutron fraction, $\beta_{eff}$.
@@ -64,7 +71,7 @@ This term is more sophisticated, as rather than being a physical property of a f
 For \glspl{MSR}, it also accounts for the movement of the \gls{DNP} in different parts of the reactor.
 
 A straightforward way to interpret the effective delayed neutron fraction is that it is the delayed neutron fraction corrected for the actual composition and geometry of the reactor.
-More specifically, the effective delayed neutron fraction represents the ratio between the adjoint neutron flux and spectrum-weighted delayed-neutron induced fission to the total number of fission events \cite{romero2022calculation}.
+More specifically, the effective delayed neutron fraction represents the ratio between the delayed-neutron induced fission to the total number of fission events weighted by the spectrum and adjoint neutron flux \cite{romero2022calculation}.
 Alternatively, it can be thought of as the ratio of the spectrum weighted and adjoint weighted delayed neutron production over all spectrum weighted and adjoint weighted neutron production \cite{meulekamp2006calculating}.
 For \glspl{MSR}, the movement of the fuel salt also affects the effective delayed neutron fraction, as the integrated adjoint neutron flux is reduced due to movement of the \glspl{DNP} out of the core and into less neutronically-important regions.
 
@@ -73,18 +80,16 @@ This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weig
 The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
 In contrast, the effective delayed neutron fraction varies by on the order of 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
 
-\subsection{DNP Group Parameters}
-\label{ref:calc-group-param}
+\subsubsection{Calculation of DNP Group Parameters}
+\label{sec:calc-group-param}
 
 The \gls{DNP} group parameters are important for simulating transients.
 The \gls{DNP} group parameters are formulated based on the fitting of the delayed neutron count rate, as discussed in Section \ref{sec:measurementofdnps}.
 Equation \eqref{eq:mdnp-dn} shows the exact formulation for the delayed neutron count rate as a function of time measured by a detector for $I$ individual \glspl{DNP} for any number of fissile nuclides, recreated here as:
-
 \begin{equation}
-\dot{n}_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
+\dot{n}_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t).
 \nonumber
 \end{equation}
-
 Equation \eqref{eq:delnu-fit} instead gives the $K$ group \gls{DNP} fit measured by the same detector for a pulse irradiation as:
 \begin{equation}
 \dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
@@ -148,12 +153,10 @@ Once the delayed neutron count rate is acquired, an over-determined non-linear l
 For example, Brady used STEPIT to handle the non-linear least-squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
 Waldo et al. also solve the least-squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
 The general form of the solve is given as:
-
 \begin{equation}
 A \vec{x} \approx \vec{b}.
 \label{eq:lstsq}
 \end{equation}
-
 Equation \eqref{eq:minthis} gives the $\chi^2$ term the non-linear least squares minimizes as:
 \begin{equation}
     \chi^2 = \sum_{m=0}^{M} \left(\frac{\vec{b}^{(m)} - \left(A\vec{x}\right)^{(m)}}{\vec{\sigma}^{(m)}} \right) ^2,
@@ -237,7 +240,7 @@ where,
     \chi_{d, k}(E) =& \text{ the delayed neutron energy spectrum of \gls{DNP} group $k$ [-]. } \nonumber
 \end{align}
 
-\subsection{DNP Group Spectra and Concentrations}
+\subsubsection{Calculation of DNP Group Spectra and Concentrations}
 \label{sec:groupspectra}
 Another consideration in calculating group parameters is constructing group concentrations from individual nuclide data.
 This is important for situations where reducing the problem from several hundred \glspl{DNP} to a few \gls{DNP} groups reduces computational cost.
@@ -344,8 +347,8 @@ With a summation of each nuclides contribution, the group concentrations can thu
 Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
 
 
-\subsection{Kinetics Parameters}
-\label{ref:calc-kinetic-param}
+\subsubsection{Calculation of Kinetics Parameters}
+\label{sec:calc-kinetic-param}
 
 The other relevant parameters to be calculated are simpler and do not require solving least squares problems.
 The $k^{th}$ \gls{DNP} group delayed neutron fraction is calculated as:
