@@ -14,22 +14,29 @@ Another consideration for the non-linear least squares solve is the covariance, 
 This results from multiplying the group yield by the group decay constant.
 Attempts to replace this multiplication with an independent term produce poor fits, as the multiplication is not independent and is necessary for accurate modeling.
 
+\begin{comment}
 The non-linear least squares process also involves linearization and normalization of the data.
-The normalization is handled by taking the delayed neutron count rate, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and taking the natural logarithm.
+The normalization is handled by taking the delayed neutron count rate, dividing by the fission term\footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and taking the natural logarithm.
 The normalized count rate is then passed into the non-linear least squares fitting.
 The linearization is handled by taking the natural logarithm of the delayed neutron count rate.
 This treatment reduces both the covariance and the $\chi^2$ of the fit.
-Bounds from 0 to 1000 are set for each term to speed up the process, while convergence tolerances are set slightly above machine tolerance at $2.23 \times 10^{16}$ to ensure a well-refined solution.
-The convergence criteria include changes in the independent variables and the norm of the gradient, with termination occurring when either criterion meets the set tolerance.
-
+\end{comment}
+The residual of the solve is given in Equation \eqref{eq:residual}, recreated here as:
+\begin{equation}
+    r = min_x \left| \left| \frac{b - Ax}{b + \epsilon} \right| \right|. \nonumber
+\end{equation}
+Half-life bounds are set from 1 millisecond to 1000 seconds, and the yield bounds are from 0 to 1.
+Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
 
 Sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is another consideration.
 However, since the fission counts are taken directly from OpenMC tallies, self-multiplication is included and does not introduce error.
 
 The final consideration in \gls{DNP} group reconstruction is uncertainty.
 This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.
-These uncertainties include uncertainties in cross sections, fission yields, half-lives, and emission probabilities.
-These uncertainties are used in the $\chi^2$ minimization, as shown in Equation \eqref{eq:minthis}.
+These uncertainties include uncertainties in fission yields, half-lives, and emission probabilities.
+The uncertainties are propagated through the count rate calculation, but for the non-linear least squares solve a Monte Carlo sampling based approach is used.
+Each count rate is generated using randomly sampled fission yields, half-lives, and emission probabilities within their uncertainty bounds for each \gls{DNP}.
+This enables formation of a normal distribution of group parameters, from which the mean and standard deviation of the mean can be extracted.
 
 
 %\begin{description}

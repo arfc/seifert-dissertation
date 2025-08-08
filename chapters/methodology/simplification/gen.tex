@@ -1,6 +1,6 @@
-A simplified model is necessary to generate sufficient data for each combination of input parameters.
-This model estimates the magnitude of variation and identifies general trends.
-It treats the flow in a zero-dimensional manner using in-core and ex-core residence times.
+A simple model is necessary to generate sufficient data for each combination of input parameters, but there is still need for an increased level of fidelity compared to the 0D scaled model.
+This 0D flow model enables improved analysis of the general trends in nuclide evolutions.
+It treats the flow in a zero-dimensional manner using in-core and ex-core residence times, and uses OpenMC to track the full depletion matrix.
 The fission history function is a square wave, with a constant fission rate during the in-core residence time and no fission during the ex-core residence time.
 This approximation simplifies the analytical form of the fission history for creating the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
 
@@ -19,8 +19,8 @@ Some additional factors to consider include self-shielding due to sample density
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/simplified-model-3.png}
-    \caption{Flow diagram of 0D flow model used to generate flow-inclusive precursor group fit parameters.}
+    \includegraphics[width=0.9\linewidth]{images/flow-model.png}
+    \caption{Flow diagram of 0D flow model used to generate improved \gls{DNP} precursor group parameters.}
     \label{fig:simplified-model}
 \end{figure}
 

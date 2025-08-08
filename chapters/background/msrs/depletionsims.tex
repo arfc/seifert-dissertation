@@ -60,16 +60,17 @@ Codes may also use a power series approximation of the matrix exponential, as di
 Overall, there are many approaches to solving the depletion equation with different computational costs and levels of accuracy. Building a computational tool to handle depletion requires two components: the depletion matrix and a numerical solver.
 
 \subsection{Stationary and Circulating Fuel Comparison}
+\label{sec:bateman}
 
 For stationary fuel, the Bateman equation as shown previously in Equation \eqref{eq:Bateman_default} is sufficient to simulate depletion.
 However, for the purposes of a streamlined comparison with circulating fuel, the Bateman equation can be rewritten as:
 \begin{equation}
-    \frac{dN_j}{dt} = S(t) - \lambda_{net, j} N_j(t),
+    \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t),
     \label{eq:bate-stat-simple}
 \end{equation}
 where,
 \begin{align}
-S &= \mbox{ the source term for nuclide $j$, } \nonumber\\
+S_j &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{atoms}{cm^3 s}$]} \nonumber \\
 \lambda_{net, j} &= \mbox{ the loss term for nuclide $j$,} \nonumber\\
 & \;\;\;\;\; \mbox{ containing decay and transmutation losses [$s^{-1}$] .} \nonumber
@@ -119,20 +120,24 @@ As previously mentioned, the main challenge faced when solving this problem is t
 However, there are many studies which have attempted to develop methods to get around this problem.
 One common approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
 However, this method does not model the in-core and ex-core regions in a physical manner.
-Instead, it scales the flux by the fraction of fuel salt in-core compared to ex-core.
-Another approach is to calculate the steady-state concentration, changing the system of ordinary differential equations into spatial rather than temporal relations \cite{shahbazi_steady-state_2022}.
+The scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
+This approach does not model the in-core and ex-core regions explicitly, and instead assumes the salt is perfectly mixed in the primary loop.
 
-Other approaches, such as the method proposed by Tano et al. using Griffin and Pronghorn, try to model the flow more explicitly \cite{tanocoupled2023}.
-This approach is more computationally expensive than the other approaches that only require solving a system of ordinary differential equations.
-However, the literature has shown that including advection in depletion directly affects the equilibrium concentration of $^{135}Xe$ by varying amounts \cite{tanocoupled2023, fei_validation_2022}.
-Tano et al. show that the $^{135}Xe$ in the \gls{MSFR} decreases by approximately 80\% when moving from no spatial resolution to a quasi-static method.
-Fei et al. show that the $^{135}Xe$ in the \gls{MSRE} increases by approximately 63\% when moving from no spatial resolution to 0D fuel flow.
-Depletion simulations of MSRs need to include spatially resolved depletion to generate accurate results.
-%However, Tano et al. showed that these methods are still computationally expensive, even when attempting to simplify the problem \cite{tano_coupled_nodate}.
+Another approach has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
+This approach can estimate the steady-state concentration of certain nuclides across a flow loop, but it does not account for temporal resolution \cite{shahbazi_steady-state_2022}.
 
-However, including fully resolved spatial resolution in depletion has been referred to as computationally "intractable" \cite{betzler_liquid-fueled_2021, tanocoupled2023}.
-Tracking the $\sim$2000 nuclides over space and time requires new methods rather than those used for the time dependent system of ordinary differential equations.
-Methods for solving the system of partial differential equations require accurately capturing short time scale flow effects, making multi-year long depletion simulations exceedingly expensive.
+Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of the deterministic neutron transport code Griffin with the thermal fluids code Pronghorn, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
+Tano et al.\ present an approach where only insoluble, medium-lived, and high concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
+
+Spatially and temporally resolved approaches, such as the one used by Tano et al., are more computationally expensive than those that only require solving a system of ordinary differential equations.
+However, Tano et al.\ has shown that including circulation of the fuel salt in depletion directly affects the equilibrium concentration of $^{135}$Xe by approximately 45\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
+This indicates there may be a need for spatially resolved depletion simulations to get accurate fuel salt compositions.
+
+
+Tano et al.\ and Betzler have both described fully modeling advection in depletion as computationally intractable \cite{tanocoupled2023, betzler_liquid-fueled_2021}.
+This is because tracking all nuclides over space and time requires far more computational work than handling a traditional time dependent system of ordinary differential equations (ODEs).
+This spatially resolved system of partial differential equations (PDEs) requires accuracy in the short time scale flow effects.
+These small time steps cause multi-year depletion simulations to be exceedingly expensive.
 
 
 Numerical stability of the problem, when using an explicit-time solving scheme, also requires the \gls{CFL} condition be satisfied as:

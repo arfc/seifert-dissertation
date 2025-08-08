@@ -157,6 +157,7 @@ The general form of the solve is given as:
 A \vec{x} \approx \vec{b}.
 \label{eq:lstsq}
 \end{equation}
+\begin{comment}
 Equation \eqref{eq:minthis} gives the $\chi^2$ term the non-linear least squares minimizes as:
 \begin{equation}
     \chi^2 = \sum_{m=0}^{M} \left(\frac{\vec{b}^{(m)} - \left(A\vec{x}\right)^{(m)}}{\vec{\sigma}^{(m)}} \right) ^2,
@@ -168,12 +169,13 @@ where,
     M =& \text{ the total number of time steps over which the sample decays } \nonumber \\
     \sigma =& \text{ the uncertainty at time step $m$, or unity if the uncertainty is not measured.} \nonumber
 \end{align}
+\end{comment}
 
 Based on the irradiation type used, the coefficient matrix will change, as shown in Equations \eqref{eq:delnu-fit} and \eqref{eq:delnu-fit-sat}. 
 Equation \eqref{eq:lambda} gives the coefficient matrix for a pulse irradiation as:
 
 \begin{equation}
-A = 
+A = \epsilon F_s
 \begin{bmatrix}
 \lambda_1 e^{-\lambda_1 t_0} & \lambda_2 e^{-\lambda_2 t_0} & \hdots &  \lambda_n e^{-\lambda_n t_0}\\
 \lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_n e^{-\lambda_n t_1}\\
@@ -185,7 +187,6 @@ A =
 though for a saturation irradiation the only change would be removing the $\lambda_i$ term.
 
 Within this least squares equation, the solution vector contains only the group yields, given in Equation \eqref{eq:lstsq-solvec} as:
-
 \begin{equation}
 \vec{x} = 
 \begin{bmatrix}
@@ -198,17 +199,27 @@ Within this least squares equation, the solution vector contains only the group 
 \end{equation}
 
 The target vector contains the linearized delayed neutron count rate data normalized to the number of fissions, or fission rate, and the detector efficiency, as shown in Equation \eqref{eq:lstsq-target} as:
-
 \begin{equation}
 \vec{b} = 
 \begin{bmatrix}
-\ln \left( n_d(t_0) (\epsilon F_s)^{-1} \right)\\
-\ln \left( n_d(t_1) (\epsilon F_s)^{-1} \right)\\
+\ln \left( n_d(t_0)  \right)\\
+\ln \left( n_d(t_1) \right)\\
 \vdots\\
-\ln \left( n_d(t_m) (\epsilon F_s)^{-1} \right)\\
+\ln \left( n_d(t_m) \right)\\
 \end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
+The natural logarithm is needed here, as otherwise the short time steps will dominate the generated group parameters.
+Another way to resolve this is to use a relative residual, as given by Equation \eqref{eq:residual}.
+\begin{equation}
+    r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|,
+    \label{eq:residual}
+\end{equation}
+where,
+\begin{align}
+    \epsilon &= \text{small value to avoid division by zero} \nonumber \\
+    &= 1\times10^{-12}. \nonumber
+\end{align}
 
 By solving this non-linear system of equations, the group half-lives, $T_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group half lives using \cite{das1993importance} as:
@@ -322,12 +333,12 @@ A = \begin{bmatrix}
     \frac{2 \lambda_i \lambda_{i+1}}{\lambda_i + \lambda_{i+1}} & \lambda_{i+1} \\
     1 & 1\\
 \end{bmatrix}, \quad
-b = \begin{bmatrix}
+\vec{b} = \begin{bmatrix}
     \frac{2 \lambda_i \lambda_{k}}{\lambda_i + \lambda_k}\\
     \frac{2 \lambda_k \lambda_{i+1}}{\lambda_k + \lambda_{i+1}} \\
     1\\
 \end{bmatrix}, \quad
-x = \begin{bmatrix}
+\vec{x} = \begin{bmatrix}
     f_{k, i} \\
     f_{k, i+1} \\
 \end{bmatrix}.
@@ -338,11 +349,11 @@ x = \begin{bmatrix}
 Because the number of rows is greater than the number of columns in the matrix, the left-inverse is used. This system of equations is then solved as shown in Equation \eqref{eq:lls} as:
 
 \begin{equation}
-x = (A^T A)^{-1} A^Tb
+\vec{x} = (A^T A)^{-1} A^T\vec{b}
 \label{eq:lls}
 \end{equation}
 
-With the fractional contribution terms, $x$, the concentration of a given nuclide can then be multiplied by each fraction to show how much it contributes to that group.
+With the fractional contribution terms, $\vec{x}$, the concentration of a given nuclide can then be multiplied by each fraction to show how much it contributes to that group.
 With a summation of each nuclides contribution, the group concentrations can thus be calculated and vice versa.
 Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
 
@@ -358,9 +369,10 @@ The $k^{th}$ \gls{DNP} group delayed neutron fraction is calculated as:
 \end{equation}
 
 A useful term for comparing \gls{DNP} group parameters is the average half-life \cite{piksaikin2002energy, piksaikin2007relative}.
+Parish et al. also use the average half-life, but do not include the natural log of two in their equation, which could be a typo \cite{parish1999status}.
 Equation \eqref{eq:avg-hl} gives the average half-life as:
 \begin{equation}
-    <T> = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_i}.
+    <T> = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_k}.
     \label{eq:avg-hl}
 \end{equation}
 

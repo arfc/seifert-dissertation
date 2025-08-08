@@ -1,0 +1,33 @@
+This is the lowest fidelity of the three models, and it primarily serves as a way to verify the microscopic approach is working as expected by comparing with existing literature.
+This approach can only model saturation concentrations, as there is no decay chain tracking nuclides decaying into each other.
+It is called the 0D scaled model because it uses the same concept from the scaled flux method, discussed in Section \ref{sec:bateman}.
+Instead, the cumulative fission yield is used to calculate the equilibrium \gls{DNP} concentrations, with a scaling term based on the amount of fuel salt in the core.
+An example solution with no reprocessing is shown in Equation \eqref{eq:cfy-conc} as \cite{huynh2014calculation}:
+\begin{equation}
+    N_i = \frac{f_{in} CFY_i}{\lambda_i},
+    \label{eq:cfy-conc}
+\end{equation}
+where,
+\begin{align}
+    f_{in} &= \text{fraction of fuel-salt in the core} \nonumber \\
+    CFY_i &= \text{cumulative fission yield of nuclide $i$}. \nonumber
+\end{align}
+The derivation for this equation is given in Appendix \ref{sec:appendixB}.
+
+Another consideration is that no parasitic absorption is accounted for in this model, nor is time dependent decay of nuclides into \glspl{DNP}.
+There is a possible approach to include the effects of parasitic absorption, but this method is not included in this work \cite{shahbazi_steady-state_2022, benedictnuclear}.
+
+Figure \ref{fig:data-model} shows the different data loaded into \gls{MoSDeN}, including external data and user defined input data.
+The terms in green represent input data that should be considered constant for the \gls{DNP} group parameters.
+The yellow terms indicate inputs that can be freely adjusted to formulate physically distinct \gls{DNP} group parameters.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/data-driven.png}
+    \caption{Flow diagram of 0D scaled model used to generate improved \gls{DNP} group parameters.}
+    \label{fig:data-model}
+\end{figure}
+
+After all this data is loaded into \gls{MoSDeN}, it generates the concentration of each \gls{DNP}.
+This concentration is then combined with emission probabilities and decay constants to form a delayed neutron count rate.
+A non-linear least squares solve then fits the improved \gls{DNP} group parmeters to the delayed neutron count rate, generating the group yields and half-lives, given as blue squares in Figure \ref{fig:data-model}.

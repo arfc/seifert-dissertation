@@ -130,16 +130,18 @@ This can also be accomplished using the \gls{TRF} approach, which allows for bou
 The proposed methods to compare are the current method, the Levenberg-Marquardt method, and the \gls{TRF} method.
 The new methods minimize the residual of the form:
 \begin{align}
-    e &= min_x \left| \left| \frac{A_px - b_p}{b_p} +  \frac{A_sx - b_s}{b_s}  \right| \right|^2_2,
+    r &= min_x \left| \left| \frac{A_px - b_p}{b_p + \epsilon} +  \frac{A_sx - b_s}{b_s + \epsilon}  \right| \right|^2_2,
 \end{align}
 where,
 \begin{align}
-    e &= \text{the residual of the problem [-]} \nonumber \\
+    r &= \text{the residual of the problem [-]} \nonumber \\
     A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
     b_p &= \text{the pulse irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
     A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
     b_s &= \text{the saturation irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
-    x &= \text{the solution vector containing group yields [-].} \nonumber
+    x &= \text{the solution vector containing group yields [-]} \nonumber \\
+    \epsilon &= \text{small value to avoid division by zero} \nonumber \\
+    &= 1\times10^{-12}. \nonumber
 \end{align}
 This formulation of the residual removes the need to linearize the count rate, as the residual has the count rate in the denominator.
 Additionally, this formulation simultaneously treats the pulse and saturation irradiation data, generating group parameters which fit both sets of data.
