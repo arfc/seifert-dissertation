@@ -12,8 +12,10 @@ An irradiation time of approximately seven minutes suffices to reach equilibrium
 Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:large-tcyc}.
 Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
 
-The \gls{MSBR} reprocessing scheme serves as the basis for cycle times in this work, as shown in Table \ref{tab:msbr_cycle_times}.
-Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have negligible effects over the time scales studied.
+The \gls{MSBR} reprocessing scheme serves as the basis for analyzing the most extreme cycle times in this work.
+This is because the \gls{MSBR} presents very large chemical removal rates, providing useful conservative estimates as to the impact these large removal rates could have on \gls{DNP} group parameters.
+These chemical removal rates are given in Table \ref{tab:msbr_cycle_times} as cycle times, the inverse of the chemical removal rate.
+Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have small removal rates relative to the time scales of interest for saturation irradiations.
 Section \ref{sec:large-tcyc} examines these longer cycle times to confirm their negligible impact.
 Section \ref{sec:repr-scale} scales the cycle times to analyze how reprocessing rates influence the group parameters.
 
@@ -41,8 +43,5 @@ Section \ref{sec:repr-scale} scales the cycle times to analyze how reprocessing 
 \end{center}
 \end{table}
 
-The parameters used include incident neutron energy, target fissile nuclide, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scaling vector.
-Each unique parameter adds a dimension to the data, exponentially increasing the computational cost of generating group parameters for every combination.
-This work uses the \gls{MSBR} reprocessing scheme with a single scaling value applied to each reprocessing group instead of a unique scaling value for each.
-The incident neutron energies that irradiate the sample are 0.0253 $eV$ and 1 $MeV$.
-Section \ref{sec:res-time-var} determines the minimum number of residence times and their values required to capture general trends.
+With the chemical reprocessing scheme in place, the next step to generate the \gls{DNP} group parameters is to decide on the level of fidelity. 
+In this work, the three levels of fidelity are scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.

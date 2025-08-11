@@ -1,11 +1,10 @@
 OpenMC is an open-source Monte Carlo neutron and photon transport code.
-Its Python \gls{API} offers functionality that simplifies interfacing with in-house Python scripts.
-The sample irradiation process is straightforward and configurable, as users can adjust parameters through script inputs.
+Its Python \gls{API} offers functionality that simplifies interfacing with \gls{MoSDeN}, an in-house developed open-source Python package.
+The sample irradiation process is straightforward and configurable, as users can adjust parameters through an input file.
 OpenMC also offers useful feature in depletion, where a zero-power depletion step is rapidly calculated since only depletion is tracked.
 This feature allows resolving ex-core residence time depletion steps quickly.
 Additionally, OpenMC’s transfer rate functionality during depletion enables simulation of chemical removal in an \gls{MSR}.
 
-For this work, the scripts use the \gls{ENDF}/B-VIII.0 based depletion chains provided by OpenMC and \gls{ENDF}/B-VIII.0 cross section data.
-The thermal spectrum chain applies to neutron irradiation below $300 \; eV$, while the fast spectrum chain applies to higher-energy neutron irradiation.
-Monoenergetic neutrons irradiate the fissile sample in the 0D flow model.
-This approach ensures the irradiation generates group parameters for a specific neutron energy rather than a particular spectrum.
+For this work, \gls{MoSDeN} by default uses the \gls{ENDF}/B-VII.1 based depletion chains provided by OpenMC and \gls{ENDF}/B-VII.1 cross section data.
+The thermal spectrum chain applies to neutron irradiation below $1 \; keV$, while the fast spectrum chain applies to higher-energy neutron irradiation.
+The models by default assume monoenergetic neutrons irradiate the sample.

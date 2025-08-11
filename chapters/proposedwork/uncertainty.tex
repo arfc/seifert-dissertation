@@ -19,7 +19,7 @@ Most uncertainties will be collected from \gls{ENDF}/B-VIII.0, while the flux un
 Since Moltres uses a deterministic method to calculate the neutron flux, the flux uncertainty could be calculated using the \textsc{Stochastic Tools} module in \gls{MOOSE}.
 The \textsc{Stochastic Tools} module allows adjustment of other uncertain parameters to calculate the flux uncertainty due to these factors.
 However, a simpler approach is to use the flux calculated from OpenMC along with its uncertainty. 
-The uncertainties in the data and flux can then be propagated through the Python scripts using the Uncertainties package and applied to various analyses \cite{uncertaintiespackage}.
+The uncertainties in the data and flux are then propagated through \gls{MoSDeN} using the Uncertainties package and applied to various analyses \cite{uncertaintiespackage}.
 
 \subsection{MSR Uncertainties}
 In addition to data uncertainties, uncertainties exist in \gls{MSR} phenomena.
@@ -90,8 +90,8 @@ The removal rate, $\lambda_r$, of noble metals via plate-out is \cite{lo2022appl
 \end{align}
 where,
 \begin{align}
-    h_{i, l} =& \text{the mass transfer rate of element $i$ to waste stream $l$ $[m \cdot s^{-1}]$} \nonumber \\
-    A_l =& \text{the surface area of waste stream $l$ $[m^2]$.} \nonumber
+    h_{i, l} =& \text{ the mass transfer rate of element $i$ to waste stream $l$ $[m \cdot s^{-1}]$} \nonumber \\
+    A_l =& \text{ the surface area of waste stream $l$ $[m^2]$.} \nonumber
 \end{align}
 The removal of noble metals does not occur in a single region, unlike the noble gas removal.
 Instead, there is a distribution of noble metals: 50\% are in the hastalloy-N surfaces in the loop, 49\% are in the ex-core region, and 1\% are in the graphite surfaces in the in-core region \cite{kedl1972migration}.

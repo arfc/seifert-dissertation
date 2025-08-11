@@ -90,7 +90,7 @@ Equation \eqref{eq:mdnp-dn} shows the exact formulation for the delayed neutron 
 \dot{n}_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t).
 \nonumber
 \end{equation}
-Equation \eqref{eq:delnu-fit} instead gives the $K$ group \gls{DNP} fit measured by the same detector for a pulse irradiation as:
+Equation \eqref{eq:delnu-fit} instead gives the $K$ group delayed neutron count rate by the same detector for a pulse irradiation as:
 \begin{equation}
 \dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \label{eq:delnu-fit}
@@ -100,7 +100,13 @@ For an infinite irradiation (also referred to as a saturation irradiation), Equa
 \dot{n}_d(t) \approx \epsilon \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t}.
 \label{eq:delnu-fit-sat}
 \end{equation}
-The terms in Equations \eqref{eq:delnu-fit} and \eqref{eq:delnu-fit-sat} are defined as follows:
+Equation \eqref{eq:delnu-fit-intermediate} shows the intermediate case, where the irradiation time, $T$, is neither infinite nor a pulse \cite{wilson2002delayed}.
+This equation gives the delayed neutron count rate as:
+\begin{equation}
+    \dot{n}_d(t, T) \approx \epsilon \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1-e^{-\lambda_kT} \right).
+    \label{eq:delnu-fit-intermediate}
+\end{equation}
+The terms in Equations \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, and \eqref{eq:delnu-fit-intermediate} are defined as follows:
 \begin{align}
 K &= \mbox{ the number of \gls{DNP} groups [-]} \nonumber \\ 
 \lambda_k &= \mbox{ the decay constant of \gls{DNP} group \textit{k} [$s^{-1}$] } \nonumber \\ 
@@ -209,7 +215,7 @@ The target vector contains the linearized delayed neutron count rate data normal
 \end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
-The natural logarithm is needed here, as otherwise the short time steps will dominate the generated group parameters.
+The natural logarithm is needed here, as otherwise the short time steps will dominate the group parameters.
 Another way to resolve this is to use a relative residual, as given by Equation \eqref{eq:residual}.
 \begin{equation}
     r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|,
@@ -217,7 +223,7 @@ Another way to resolve this is to use a relative residual, as given by Equation 
 \end{equation}
 where,
 \begin{align}
-    \epsilon &= \text{small value to avoid division by zero} \nonumber \\
+    \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
     &= 1\times10^{-12}. \nonumber
 \end{align}
 
@@ -423,13 +429,13 @@ This is given in Equation \eqref{eq:betaeff-exact} as:
 \end{equation}
 where,
 \begin{align}
-\Phi^\dagger &= \mbox{ the adjoint neutron flux [$\frac{n}{cm^2 s}$]} \nonumber \\ 
+\Phi^\dagger &= \mbox{ the adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$]} \nonumber \\ 
 \chi_d &= \mbox{ the delayed neutron energy spectrum [-]} \nonumber \\ 
 \chi &= \mbox{ the neutron energy spectrum [-]} \nonumber \\ 
 \beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\ 
 \bar{\nu} &= \mbox{ the average number of neutrons released per fission [-]} \nonumber \\ 
 \Sigma_f &= \mbox{ the macroscopic fission cross section [$cm^{-1}$]} \nonumber \\
-\Phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$].} \nonumber
+\Phi &= \mbox{ the neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$].} \nonumber
 \end{align}
 
 
@@ -452,9 +458,9 @@ This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte
 \end{equation}
 where,
 \begin{align}
-\Phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\ 
-\Phi_0 &= \mbox{ the critical neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\ 
-\bar{v} &= \mbox{ the average neutron speed [$\frac{cm}{s}$]} \nonumber \\ 
+\Phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+\Phi_0 &= \mbox{ the critical neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+\bar{v} &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
 F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
 \end{align}
 

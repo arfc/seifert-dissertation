@@ -1,18 +1,18 @@
 Once the delayed neutron count rate is generated, it is converted into \gls{DNP} group parameters.
-Fitting the group parameters requires a non-linear least squares method, as both the group half-lives and yields must be determined.
+Fitting the \gls{DNP} group parameters to the delayed neutron count rate curve requires a non-linear least squares method, as both the group half-lives and yields must be determined.
 The equation describing the problem appears in Equation \eqref{eq:delnu-fit}, recreated here:
 \begin{equation}
 \dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \nonumber
 \end{equation}
 
-An important consideration for this process is the selection of time values for generating the group fits.
+An important consideration for this process is the selection of time values for generating the \gls{DNP} group parameters.
 Increasing the number of time nodes raises computational costs, but too few nodes result in a poorer fit \cite{parish1999status}.
 Section \ref{sec:time-eval} shows the sensitivity study for the time nodes, for both the node spacing and the maximum time to measure delayed neutrons.
 
-Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than for the saturation irradiation fit.
+Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation than for the saturation irradiation.
 This results from multiplying the group yield by the group decay constant.
-Attempts to replace this multiplication with an independent term produce poor fits, as the multiplication is not independent and is necessary for accurate modeling.
+Attempts to replace this multiplication with an independent term produces worse fits, as the multiplication is not independent and is necessary for accurate modeling.
 
 \begin{comment}
 The non-linear least squares process also involves linearization and normalization of the data.
@@ -46,7 +46,7 @@ This enables formation of a normal distribution of group parameters, from which 
 %    \item $x_t$ is the solution vector at the row where the time value is $t$
 %\end{description}
 
-Once the group fits and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
+Once the \gls{DNP} group parameters and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
 Saturation irradiation provides better statistics for longer-lived groups, while pulse irradiation is better for shorter-lived groups.
 Brady combines the results by using four long-period groups from saturation irradiation and four short-period groups from pulse irradiation.
 The groups are renormalized at the second group, where the two longest-lived group half-lives and yield ratios use the saturation results \cite{brady1988evaluation}.

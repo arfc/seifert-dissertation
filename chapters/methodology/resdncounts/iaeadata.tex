@@ -1,13 +1,15 @@
-After receiving the concentrations from OpenMC, the scripts determine the concentration of each nuclide as a function of time during the measurement period.
+After receiving the concentrations from OpenMC, \gls{MoSDeN} determines the concentration of each nuclide as a function of time during the measurement period.
 The concentrations are calculated based on half-life, as shown in Equation \eqref{eq:radiodec}, where the concentration as a function of time is:
 \begin{equation}
     N(t) = N_0 e^{-\lambda t}.
     \label{eq:radiodec}
 \end{equation}
+This is the approach used in the 0D scaled model.
 
-This simple equation does not account for decay chains between nuclides.
+This approach does not account for decay chains between nuclides.
 An alternative approach uses repeated zero-power depletion simulations in OpenMC to generate concentrations as a function of time, incorporating decay chains.
-These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing the scripts to access more accurate concentrations at any time after irradiation \cite{virtanen2020scipy}.
+This is used in the 0D flow model, though the 0D flow model also offers the option of using Equation \eqref{eq:radiodec}.
+These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing \gls{MoSDeN} to access more accurate concentrations at any time after irradiation \cite{virtanen2020scipy}.
 This approach only models delayed neutrons generated during decay, as it is beyond the scope of this work to model other particles \cite{chen2002rigorous}.
 Section \ref{sec:decaychaindaughters} compares these two approaches.
 

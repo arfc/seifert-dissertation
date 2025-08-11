@@ -13,7 +13,7 @@ These are discussed in detail in their respective sections.
 
 \subsection{Validation}
 The motivation for validation is to confirm that the proposed methodology and results align with experimental data.
-This ensures the demonstrated updated \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
+This ensures the demonstrated improved \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
 Discrepancies between experimental results and the model highlight potential weaknesses in the approach.
 If no discrepancies exist, confidence in the results increases for problems similar to those validated.
 
@@ -21,7 +21,7 @@ The validation of the \gls{DNP} group parameters follows a multi-stage approach.
 The first stage compares the irradiated sample’s delayed neutron count rate to the Keepin et al. experiment from 1957 \cite{keepin1957delayed}.
 If the count rates do not match, the issue lies in the data or the aggregation of individual \glspl{DNP} into the count rate.
 If the count rate is accurately predicted, the formulation is considered valid.
-The second stage validates the generated \gls{DNP} group parameters using \gls{MSRE} pump start-up and coast-down experimental data to assess their accuracy in modeling reactivity changes from \glspl{DNP} \cite{prince1968zero}.
+The second stage validates the improved \gls{DNP} group parameters using \gls{MSRE} pump start-up and coast-down experimental data to assess their accuracy in modeling reactivity changes from \glspl{DNP} \cite{prince1968zero}.
 This experiment has been studied using Moltres and Quasimolto, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
 However, previous models excluded the inlet and outlet plena, leading to discrepancies with experimental data.
 A model including the plena, combined with updated \gls{DNP} group parameters, should yield results closer to the experimental data.
@@ -41,7 +41,7 @@ It is important to make sure differences in the \gls{DNP} parameters don't lead 
 Security is discussed in detail in Section \ref{sec:security}, but the general takeaway is that bad actors may attempt to sabotage the reactor.
 This ties directly into the safety design study, as sabotage aims to create unsafe reactor conditions.
 Ensuring the \gls{MSR} operates safely after sabotage is critical.
-If static \gls{DNP} group parameters predict safe operation while updated parameters predict unsafe operation, correcting this discrepancy in the reactor design is essential.
+If static \gls{DNP} group parameters predict safe operation while improved parameters predict unsafe operation, correcting this discrepancy in the reactor design is essential.
 
 Since the safety study covers most transients relevant to sabotage, additional considerations can be incorporated into these transients.
 As sabotage may initiate multiple safety-related transients simultaneously, it is reasonable to investigate such scenarios.
@@ -50,8 +50,8 @@ With four unique transients, this results in six double-transient combinations, 
 \subsection{Safeguards}
 Safeguards are discussed in Section \ref{sec:safeguards}, but the main takeaway is the importance of preventing \gls{SNM} diversion in \glspl{MSR}.
 Detection methods, such as neutron detectors and surveillance systems, play a key role in safeguarding the reactor \cite{zubair2024nuclear}.
-The updated \gls{DNP} group parameters in this work affect the effective delayed neutron fraction and reactivity response.
-Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the updated parameters.
+The improved \gls{DNP} group parameters in this work affect the effective delayed neutron fraction and reactivity response.
+Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the improved parameters.
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
 To investigate this, diversion scenarios are studied with a single significant quantity of material removed over the course of one year, simulated using OpenMC.
@@ -62,9 +62,9 @@ For example, the total delayed neutron yield is given as:
 \end{equation}
 where,
 \begin{align}
-    \bar{\nu}^{(F)}_{d} &= \text{ the total delayed neutron yield for nuclide $F$ [-]}\\
-    \Sigma_f^{(F)} &= \text{ the macroscopic fission cross section for nuclide $F$ $[cm^{-1}]$}.
+    \bar{\nu}^{(F)}_{d} &= \text{the total delayed neutron yield for nuclide $F$ [-]}\\
+    \Sigma_f^{(F)} &= \text{the macroscopic fission cross section for nuclide $F$ $[cm^{-1}]$}.
 \end{align}
-These weighted group parameters are generated using the static and the updated values.
-Then, they can be used in simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, updated group parameters without diversion, and updated group parameters with diversion.
-If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and updated group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating group parameters.
+These weighted group parameters are generated using the static and the improved values.
+Then, they can be used in simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
+If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.

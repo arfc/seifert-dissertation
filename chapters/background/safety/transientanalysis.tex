@@ -34,16 +34,16 @@ and,
 where,
 \begin{align}
 \bar{\nu}_g &= \mbox{ the average number of neutrons produced by fission of group \textit{g} [-]} \nonumber\\
-\phi_g &= \mbox{ the scalar neutron flux of group \textit{g} [$\frac{n}{cm^2 s}$]} \nonumber\\
+\phi_g &= \mbox{ the scalar neutron flux of group \textit{g} [$n \cdot cm^{-2} \cdot s^{-1}$]} \nonumber\\
 D_g &=\mbox{ the group \textit{g} diffusion term [$cm$]}\nonumber\\
 G &= \mbox{ the total number of energy groups [-]} \nonumber\\
 \Sigma_{s, g' \rightarrow g} &= \mbox{the macroscopic scattering cross section from group \textit{g'} to group \textit{g} [$cm^{-1}$]} \nonumber\\
 \chi_{p, g} &= \mbox{the number of prompt neutrons born in group \textit{g} [-]} \nonumber\\
 \chi_{d, g, i} &= \mbox{the number of delayed neutrons from precursor group \textit{i} born in group \textit{g} [-]} \nonumber\\
-C_i &= \mbox{the concentration of \glspl{DNP} in group \textit{i} [$\frac{atoms}{cm^3}$]} \nonumber\\
-\vec{u} &= \mbox{the velocity profile [$\frac{cm}{s}$]} \nonumber\\
+C_i &= \mbox{the concentration of \glspl{DNP} in group \textit{i} [$atoms \cdot cm^{-3}$]} \nonumber\\
+\vec{u} &= \mbox{the velocity profile [$cm \cdot s^{-1}$]} \nonumber\\
 \Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
-\nu_T &= \mbox{the eddy viscosity [$\frac{cm^2}{s}]$} \nonumber\\
+\nu_T &= \mbox{the eddy viscosity [$cm^2 \cdot s^{-1}$]} \nonumber\\
 Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 \end{align}
 
@@ -152,7 +152,7 @@ V_{c} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\
 \beta_{static} &= \mbox{ the value of $\beta_{eff}$ without flow [-]} \nonumber \\ 
 M_{c} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
 M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
-\dot{M}(t) &= \mbox{ the mass flow rate [$\frac{kg}{s}$].} \nonumber
+\dot{M}(t) &= \mbox{ the mass flow rate [$kg \cdot s^{-1}$].} \nonumber
 \end{align}
 
 
@@ -198,9 +198,9 @@ The neutron flux is treated as:
 \end{equation}
 where,
 \begin{align}
-    \Phi &= \mbox{ the neutron flux [$\frac{n}{cm^2 s}$] } \nonumber \\
-    \phi_A =& \text{the neutron flux amplitude function [n]} \nonumber \\
-    \psi (\vec{x}, t) =& \text { the neutron flux shape function $[cm^{-2} s^{-1}]$. }\nonumber 
+    \Phi &= \text{the neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\
+    \phi_A &= \text{the neutron flux amplitude function [n]} \nonumber \\
+    \psi (\vec{x}, t) &= \text {the neutron flux shape function [$cm^{-2} \cdot s^{-1}$]. }\nonumber 
 \end{align}
 
 Rineiski et al. solve "shape" steps to handle the neutronics and \gls{DNP} spatial concentrations.
@@ -259,15 +259,15 @@ The terms in Equations \eqref{eq:flux-treatment-rineiski} through \eqref{eq:rine
 M(t) &= \mbox{ the neutron disappearance operator [$cm^{-1}$] } \nonumber \\
 F(t) &= \mbox{ the neutron production operator [$cm^{-1}$]} \nonumber \\
 \chi_p &= \mbox{ the prompt neutron energy spectra [-]} \nonumber \\
-C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
-Q(\vec{x}, t) &= \mbox{ the external neutron source [$\frac{n}{cm^3 s}$] } \nonumber \\
-u(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$\frac{cm}{s}$]} \nonumber \\
-C_{s, i}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
-C_{m, i}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{i} [$\frac{atoms}{cm^3}$] } \nonumber \\
+C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
+Q(\vec{x}, t) &= \mbox{ the external neutron source [$n \cdot cm^{-3} \cdot s^{-1}$] } \nonumber \\
+u(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$cm \cdot s^{-1}$]} \nonumber \\
+C_{s, i}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
+C_{m, i}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
 \rho &= \mbox{ the reactivity [-]} \nonumber \\
 c_{s, i} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $i$ [$atoms$]} \nonumber \\
 c_{m, i} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $i$ [$atoms$]} \nonumber \\
-q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$\frac{n}{s}$] } \nonumber \\
+q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$n \cdot s^{-1}$] } \nonumber \\
 \Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber \\
 W(x) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\
 &\;\;\;\;\; \mbox{ is an adjoint flux computed at steady-state conditions) [-].} \nonumber

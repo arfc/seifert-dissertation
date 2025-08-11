@@ -1,5 +1,5 @@
 A simple model is necessary to generate sufficient data for each combination of input parameters, but there is still need for an increased level of fidelity compared to the 0D scaled model.
-This 0D flow model enables improved analysis of the general trends in nuclide evolutions.
+The 0D flow model enables improved analysis of the general trends in nuclide evolutions.
 It treats the flow in a zero-dimensional manner using in-core and ex-core residence times, and uses OpenMC to track the full depletion matrix.
 The fission history function is a square wave, with a constant fission rate during the in-core residence time and no fission during the ex-core residence time.
 This approximation simplifies the analytical form of the fission history for creating the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
@@ -7,11 +7,11 @@ This approximation simplifies the analytical form of the fission history for cre
 Figure \ref{fig:simplified-model} shows how OpenMC uses this fission history to simulate irradiation on a control volume of fuel salt circulating in the primary loop.
 The model passes eight parameters into OpenMC \cite{romano_openmc_2015}: in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
 Three parameters, shown in green, remain constant: temperature, target density, and total irradiation time.
-The remaining inputs, shown in yellow, vary to generate new group parameters.
+The remaining inputs, shown in yellow, can be varied to generate physically unique \gls{DNP} group parameters.
 Section \ref{sec:delnu-counts} provides further details on this process.
 
-After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in custom scripts.
-These scripts combine the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
+After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in \gls{MoSDeN}.
+\gls{MoSDeN} combines the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
 A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields using the Trust Region Reflective algorithm \cite{2020SciPy-NMeth, branch1999subspace}.
 These group parameters correspond to a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
 Section \ref{sec:delnu-groups} provides further details on this block.
@@ -41,7 +41,7 @@ Equation \eqref{eq:balancedsdot} provides the source rate for the irradiation si
 \end{equation}
 where,
 \begin{align}
-\dot{S} &= \mbox{ the source particle rate [$\frac{n}{s}$]} \nonumber \\ 
+\dot{S} &= \mbox{ the source particle rate [$n \cdot s^{-1}$]} \nonumber \\ 
 S_{net} &= \mbox{ the total number of source particles [$n$]} \nonumber \\ 
 \tau_{in} &= \mbox{ the in-core residence time [$s$]} \nonumber \\ 
 \tau_{ex} &= \mbox{ the ex-core residence time [$s$]} \nonumber \\ 
