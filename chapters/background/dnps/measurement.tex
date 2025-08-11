@@ -40,15 +40,15 @@ I &= \mbox{ the total number of \glspl{DNP} [-] } \nonumber \\
 %\end{description}
 
 Once this delayed neutron count rate is generated, the data is used to generate \gls{DNP} group and kinetics parameters for that fissile nuclide and neutron energy.
-Three different approaches have been used to generate \gls{DNP} group parameters from macroscopic data: exponential stripping (or peeling) \cite{brunson1955measurement, keepin1955delayed}, least-squares \cite{brady1988evaluation, keepin1957delayed}, and using half-lives of specific \glspl{DNP} \cite{saphier1977evaluated}.
-Some approaches have even used a combination, such as least-squares fitting with specific half-lives \cite{spriggs20028}.
-The exponential stripping, or peeling, method is essentially a more subjective form of least-squares fitting, where exponential curves are subtracted away from the raw data from right to left \cite{price2020review}.
+Three different approaches have been used to generate \gls{DNP} group parameters from macroscopic data: exponential stripping (or peeling) \cite{brunson1955measurement, keepin1955delayed}, least squares \cite{brady1988evaluation, keepin1957delayed}, and using half-lives of specific \glspl{DNP} \cite{saphier1977evaluated}.
+Some approaches have even used a combination, such as least squares fitting with specific half-lives \cite{spriggs20028}.
+The exponential stripping, or peeling, method is essentially a more subjective form of least squares fitting, where exponential curves are subtracted away from the raw data from right to left \cite{price2020review}.
 The use of specific half-lives to form the \gls{DNP} groups is less subjective and offers a more physical interpretation of the groups.
-The least-squares approaches are the most objective approach and generate groups which physically do not embody a single \gls{DNP}.
+The least squares approaches are the most objective approach and generate groups which physically do not embody a single \gls{DNP}.
 Instead, they group together the \glspl{DNP} and effectively capture the overall physical effect, minimizing the objective function.
-For this work, the least-squares approach is used, as it offers an objective formulation that can be generically applied.
+For this work, the least squares approach is used, as it offers an objective formulation that can be generically applied.
 %The specifics of the methods used to form those parameters is discussed in Section \ref{sec:gandkparams}.
-The specifics of the least-squares approach used to form the \gls{DNP} parameters is discussed in Section \ref{sec:calc-group-param}.
+The specifics of the least squares approach used to form the \gls{DNP} parameters is discussed in Section \ref{sec:calc-group-param}.
 Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows an experimental setup for collecting delayed neutrons.
 
 %\begin{figure}[H]
@@ -187,7 +187,7 @@ Waldo et al.\cite{waldo1981delayed}    & 1.28926 & 0.82773 & 0.20965 & 0.08600 &
 
 There is reasonable agreement between the different \gls{DNP} group parameters, though there is variation among them.
 Not only did each approach use a slightly different experimental methodology via different energy spectra, data collection methods, sample transfer time between irradiation and measurement, sample size, and sample composition, but there are also differences in how the data was processed.
-There are several ways that the data was processed from delayed neutron count rates into \gls{DNP} group parameters among the works in these tables: simultaneous non-linear least-squares fitting of saturation and pulse irradiation data, separate non-linear least-squares fitting of pule and saturation irradiation data and subsequent combination, non-linear least-squares of an intermediate amount of time between a pulse and saturation, and exponential stripping.
+There are several ways that the data was processed from delayed neutron count rates into \gls{DNP} group parameters among the works in these tables: simultaneous non-linear least squares fitting of saturation and pulse irradiation data, separate non-linear least squares fitting of pule and saturation irradiation data and subsequent combination, non-linear least squares of an intermediate amount of time between a pulse and saturation, and exponential stripping.
 
 Keepin et al. used both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
 The separate fitting of four groups were normalized at the second group, and Keepin et al. reports that this method gave better results than the simultaneous fit \cite{keepin1957delayed}.
@@ -195,16 +195,16 @@ The separate fitting of four groups were normalized at the second group, and Kee
 Charlton et al. use the equation for an intermediate amount of time that is not infinite or a pulse, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
 They also only use five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
 The shortest lived group six \glspl{DNP} were not included, but Parish et al. added group six values for their own analysis \cite{parish1999status}.
-Charlton et al. use a least-squares solve to determine the \gls{DNP} group parameters, according to Spriggs and Campbell \cite{Spriggs2000Summary}.
+Charlton et al. use a least squares solve to determine the \gls{DNP} group parameters, according to Spriggs and Campbell \cite{Spriggs2000Summary}.
 
 Saleh et al. use the equation for an intermediate amount of time, similar to Charlton et al., where the equation is described in Equation \eqref{eq:delnu-fit-intermediate}.
-However, instead of using a least-squares solve, they use exponential stripping \cite{saleh1997measurements}.
+However, instead of using a least squares solve, they use exponential stripping \cite{saleh1997measurements}.
 
 Synetos and Williams use the same approach as Charlton et al. \cite{synetos1983delayed, spriggs20028}.
 
 Tuttle formulates suggested values based on reviewing the literature and applying empirical correlations \cite{tuttle1975delayed}.
 
-Waldo et al. apply a transit time correction using an empirical correlation, and the \gls{DNP} group parameters are fitted using a least-squares solve \cite{waldo1981delayed}.
+Waldo et al. apply a transit time correction using an empirical correlation, and the \gls{DNP} group parameters are fitted using a least squares solve \cite{waldo1981delayed}.
 However, it is not made clear if pulse or saturation irradiations are used.
 Because the conclusions indicate that the \gls{DNP} group parameters are less applicable for short times or short irradiations, this implies that a saturation irradiation was used. 
 

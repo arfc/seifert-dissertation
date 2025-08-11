@@ -2,7 +2,7 @@ In Section \ref{sec:measurementofdnps}, the various methods for experimentally u
 The next stage of understanding these precursors is to understand how they are used in kinetics models, as well as the various ways they are represented.
 The microscopic and macroscopic experimental approaches provide the necessary data to create more easily handled forms.
 By summing the contributions from each \gls{DNP} in the microscopic approach, the macroscopic and microscopic approaches can be said to provide data in the form of a delayed neutron count rate over time.
-Section \ref{sec:calc-group-param} discusses the least-squares approach to convert this data into several \gls{DNP} groups.
+Section \ref{sec:calc-group-param} discusses the least squares approach to convert this data into several \gls{DNP} groups.
 
 The \glspl{DNP} are commonly represented in six groups.
 These groups were developed originally for computational efficiency and due to lacking data for individual precursors.
@@ -156,8 +156,8 @@ Specifically, Brady uses the four long-period groups from the saturation irradia
 
 
 Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group yields and decays.
-For example, Brady used STEPIT to handle the non-linear least-squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
-Waldo et al. also solve the least-squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
+For example, Brady used STEPIT to handle the non-linear least squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
+Waldo et al. also solve the least squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
 The general form of the solve is given as:
 \begin{equation}
 A \vec{x} \approx \vec{b}.
