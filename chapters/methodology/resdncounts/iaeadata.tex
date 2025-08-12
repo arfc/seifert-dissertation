@@ -11,7 +11,6 @@ An alternative approach uses repeated zero-power depletion simulations in OpenMC
 This is used in the 0D flow model, though the 0D flow model also offers the option of using Equation \eqref{eq:radiodec}.
 These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing \gls{MoSDeN} to access more accurate concentrations at any time after irradiation \cite{virtanen2020scipy}.
 This approach only models delayed neutrons generated during decay, as it is beyond the scope of this work to model other particles \cite{chen2002rigorous}.
-Section \ref{sec:decaychaindaughters} compares these two approaches.
 
 The concentrations are combined with Equation \eqref{eq:mdnp-dn}, recreated here:
 \begin{equation}

@@ -1,3 +1,11 @@
+There are two new models which will be developed beyond the 0D scaled model: the 0D flow model and the spatially resolved model.
+The 0D scaled model only generates saturation irradiation results, scales the flux and chemical removal based on the fraction of salt in-core and ex-core, and does not track decays of nuclides into \glspl{DNP} during the decay of the sample after irradiation.
+However, the 0D scaled model offers a fast simulation, which does enable rapid development and simulation of many different parameters with ease.
+
+The 0D flow model improves the fidelity of the 0D scaled model by offering both saturation and pulse irradiation results, handles in-core and ex-core regions in time rather than simply scaling the flux, and enables tracking of decay parents for \glspl{DNP}.
+The cost of this improved fidelity is an increased computational cost, but it is still not exceedingly expensive and can be run on a desktop.
+The neutron transport solve is inexpensive since all that is required in the model is the sample in a fixed-source simulation as it is irradiated.
+
 Although the 0D flow model provides useful insights, it does not provide a high level of fidelity for any specific geometry.
 A spatially resolved model will be developed to evaluate the accuracy of the 0D flow model.
 This model verifies whether the 0D flow model produces sufficiently accurate \gls{DNP} group parameters.
