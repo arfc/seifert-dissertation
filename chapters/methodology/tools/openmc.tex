@@ -6,5 +6,5 @@ This feature allows resolving ex-core residence time depletion steps quickly.
 Additionally, OpenMC’s transfer rate functionality during depletion enables simulation of chemical removal in an \gls{MSR}.
 
 For this work, \gls{MoSDeN} by default uses the \gls{ENDF}/B-VII.1 based depletion chains provided by OpenMC and \gls{ENDF}/B-VII.1 cross section data.
-The thermal spectrum chain applies to neutron irradiation below $1 \; keV$, while the fast spectrum chain applies to higher-energy neutron irradiation.
+The thermal spectrum chain applies to neutron irradiation below $1 \; eV$, the fast spectrum chain applies to neutron irradiation above thermal and below $5 \; MeV$, and anything above that is not treated in this work \cite{Spriggs2000Summary}.
 The models by default assume monoenergetic neutrons irradiate the sample.

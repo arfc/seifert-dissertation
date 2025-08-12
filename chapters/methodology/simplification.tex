@@ -50,3 +50,9 @@ A Monte Carlo sampling approach is used to propagate uncertainties in the variou
 The sampling approach simply repeats the process for generating the \gls{DNP} group yields, but with randomly sampled input data.
 The data itself must be perturbed, and not the delayed neutron count rate itself.
 This is because the uncertainties in the delayed neutron count rate are not independent from time step to time step, but instead they all depend on the underlying data which changes the shape of the delayed neutron count rate at all times.
+
+For generation of the improved \gls{DNP} group parameters, the main goal is to formulate them for individual fissile nuclides.
+For some of the analyses presented in this work, the fissions do not come from a single fissile nuclide.
+For these analyses, a fission-weighted approach is used, where the \gls{DNP} group parameters are scaled based on the fraction of fissions that lead to those group parameters.
+This is less accurate than using an adjoint weighted approach, but the main purpose of this work is to present these improved parameters rather than formulating an optimal analysis using them \cite{radaideh2019new}.
+The fission-weighted approach does not account for the difference in fission spectrum between delayed and prompt neutrons.
