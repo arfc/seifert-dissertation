@@ -6,8 +6,8 @@ This approximation simplifies the analytical form of the fission history for cre
 
 Figure \ref{fig:simplified-model} shows how OpenMC uses this fission history to simulate irradiation on a control volume of fuel salt circulating in the primary loop.
 The model passes eight parameters into OpenMC \cite{romano_openmc_2015}: in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
-Three parameters, shown in green, remain constant: temperature, target density, and total irradiation time.
-The remaining inputs, shown in yellow, can be varied to generate physically unique \gls{DNP} group parameters.
+The external data passed into OpenMC includes the emission probabilities and the depletion matrix.
+The depletion matrix contains information on half-lives, fission yields, cross-sections, branching ratios, and other useful data needed for OpenMC depletion.
 Section \ref{sec:delnu-counts} provides further details on this process.
 
 After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in \gls{MoSDeN}.

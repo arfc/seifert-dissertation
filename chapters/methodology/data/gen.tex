@@ -18,8 +18,9 @@ Another consideration is that no parasitic absorption is accounted for in this m
 There is a possible approach to include the effects of parasitic absorption, but this method is not included in this work \cite{shahbazi_steady-state_2022, benedictnuclear}.
 
 Figure \ref{fig:data-model} shows the different data loaded into \gls{MoSDeN}, including external data and user defined input data.
-The terms in green represent input data that should be considered constant for the \gls{DNP} group parameters.
-The yellow terms indicate inputs that can be freely adjusted to formulate physically distinct \gls{DNP} group parameters.
+The green circles represent input data required for generating the \gls{DNP} group parameters.
+The red diamond represents \gls{MoSDeN}, the tool takes in the data to simulate irradiation of the target fissile sample to generate the irradiated concentrations, the delayed neutron count rate, and finally the \gls{DNP} group parameters that fit that count rate.
+The blue squares represent the outputs, in this case the \gls{DNP} group parameters: the \gls{DNP} group yields and the \gls{DNP} group half-lives.
 
 \begin{figure}[H]
     \centering

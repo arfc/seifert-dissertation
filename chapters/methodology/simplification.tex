@@ -45,3 +45,8 @@ Section \ref{sec:repr-scale} scales the cycle times to analyze how reprocessing 
 
 With the chemical reprocessing scheme in place, the next step to generate the \gls{DNP} group parameters is to decide on the level of fidelity. 
 In this work, the three levels of fidelity are scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.
+
+A Monte Carlo sampling approach is used to propagate uncertainties in the various inputs, such as in emission probabilities, half-lives, fission yields, reprocessing terms, or residence times.
+The sampling approach simply repeats the process for generating the \gls{DNP} group yields, but with randomly sampled input data.
+The data itself must be perturbed, and not the delayed neutron count rate itself.
+This is because the uncertainties in the delayed neutron count rate are not independent from time step to time step, but instead they all depend on the underlying data which changes the shape of the delayed neutron count rate at all times.
