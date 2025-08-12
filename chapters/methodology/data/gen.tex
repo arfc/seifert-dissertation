@@ -31,4 +31,16 @@ The blue squares represent the outputs, in this case the \gls{DNP} group paramet
 
 After all this data is loaded into \gls{MoSDeN}, it generates the concentration of each \gls{DNP}.
 This concentration is then combined with emission probabilities and decay constants to form a delayed neutron count rate.
-A non-linear least squares solve then fits the improved \gls{DNP} group parmeters to the delayed neutron count rate, generating the group yields and half-lives, given as blue squares in Figure \ref{fig:data-model}.
+A non-linear least squares solve then fits the improved \gls{DNP} group parameters to the delayed neutron count rate, generating the group yields and half-lives, given as blue squares in Figure \ref{fig:data-model}.
+
+This model is only valid for saturation irradiation simulations, as the concentration calculated in Equation \eqref{eq:cfy-conc} is the equilibrium concentration.
+For a pulse irradiation, this approach is not valid.
+There are four different options available to handle pulse irradiations: reduce net decay measurement time, pull only the shortest lived group(s) with independent fission yields, use OpenMC depletion, or simply do not use the shortest lived groups typically generated from a pulse irradiation since they are unlikely to be changed by \gls{MSR} physical phenomena.
+The first approach, reducing the net decay time, will result in overfitting of the short lived groups, leading to less accurate results.
+The second approach, using only the shortest lived groups with independent fission yields means that the decay chains will not be handled, but the initial pulse concentration should be accurate.
+However, the concentrations will quickly become less accurate as the decays of various nuclides into \glspl{DNP} will not be treated, so this approach could only be potentially viable for the shortest lived group.
+The third approach, using OpenMC depletion, would be accurate and easily achievable.
+However, it would greatly increase computational cost, and the use of OpenMC in such a case is already handled by the 0D flow model, making it redundant.
+The final approach would entail only using the longer lived \gls{DNP} group parameters from a saturation irradiation, while recognizing that the short lived groups are less accurate.
+Because the \gls{MSR} physical phenomena that cause non-negligible influence on the \glspl{DNP} take at least several seconds to come into effect, it is reasonable to focus on the longer lived groups.
+The shortest lived groups will use typical results from the literature for the 0D scaled model.
