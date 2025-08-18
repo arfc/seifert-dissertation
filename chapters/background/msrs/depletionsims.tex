@@ -1,3 +1,5 @@
+There are many approaches to simulating depletion with different computational costs and levels of accuracy. Building a computational tool to handle depletion requires two components: the depletion matrix and a numerical solver.
+
 Depletion is the process of fission, transmutation, decay, and the changes to material compositions this process causes.
 Simulating depletion requires specific information, such as decay constants, fission yields, and fission and transmutation cross-section data.
 The fission and transmutation cross-section data can come from a transport calculation, while the other data can be read from a data library \cite{leppanen_development_2007}.
@@ -24,6 +26,10 @@ N_i &= \mbox{ the atomic density of isotope $i$ $\left[atoms \cdot cm^{-3}\right
 \dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[atoms \cdot cm^{-3} \cdot s^{-1}\right]$ .} \nonumber
 \end{align}
 
+Equation \eqref{eq:Bateman_default} includes a continuous reprocessing method, where the chemical removal rate, $\lambda_{r, j}$, is part of the differential equation.
+There are different ways of modeling this reprocessing, including batchwise methods where material is only removed at certain time intervals \cite{seifert2023analysis}.
+For this work, the continuous reprocessing method is used.
+
 %\begin{description}
 %\item $N_j$ is the atomic density of isotope j $\left[\frac{atoms}{cm^3}\right]$
 %\item $\gamma_{i \rightarrow j}$ is the fractional fission product yield of $j$ in the fission of isotope $i$
@@ -40,7 +46,7 @@ N_i &= \mbox{ the atomic density of isotope $i$ $\left[atoms \cdot cm^{-3}\right
 
 
 
-The matrix form is given as:
+The matrix form of Equation \eqref{eq:Bateman_default} is given as:
 \begin{equation}
     \frac{d\vec{N}}{dt} = A \vec{N},
     \label{eq:mat_Bate}
@@ -51,13 +57,14 @@ where,
     A =& \text{the depletion matrix [$s^{-1}$].} \nonumber
 \end{align}
 The depletion matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
-Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
+%Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
 
 There are several approaches to solving this equation, such as the Transmutation Trajectory Analysis (TTA) method and the Chebyshev Rational Approximation Method (CRAM) \cite{leppanen_serpent_2015}.
 Other codes may use external software to compute depletion, such as REM, an in-house code used by Nuttin et al. \cite{nuttin_potential_2005} to implement $4^{th}$ order Runge–Kutta.
 Codes may also use a power series approximation of the matrix exponential, as discussed by Aufiero et al. \cite{aufiero_extended_2013}.
 
-Overall, there are many approaches to solving the depletion equation with different computational costs and levels of accuracy. Building a computational tool to handle depletion requires two components: the depletion matrix and a numerical solver.
+
+
 
 \subsection{Stationary and Circulating Fuel Comparison}
 \label{sec:bateman}

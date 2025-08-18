@@ -40,14 +40,14 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
 \end{table}
 
 The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.% (or $\beta_i$).
-These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event.
+These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event, as shown in Equation \eqref{eq:betai}.
 The group yields represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
 The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP} groups, along with the group spectra, $\chi_k$, for \gls{DNP} group $k$.
 With this data, the other group parameters can be derived, such as the total delayed neutron yield, $Y$, and delayed neutron fraction $\beta$.
 
 Although the groups are useful, there are times when individual \glspl{DNP} are needed.
 For example, in 1986, Perry et al. demonstrates that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
-In 1989, Brady and England also use the individual nuclides to compare with group data \cite{brady1989delayed}, and  updated the six-group parameters based on the explicit \glspl{DNP}.
+In 1989, Brady and England also use the individual nuclides to compare with group data \cite{brady1989delayed}, and updated the six-group parameters based on the explicit \glspl{DNP}.
 Updating the six-group parameters enabled greater consistency between experimental results and simulations.
 
 %Representing the \glspl{DNP} in group form also simplifies the calculation of various kinetics parameters.
@@ -156,9 +156,9 @@ Specifically, Brady uses the four long-period groups from the saturation irradia
 
 
 Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group yields and decays.
-For example, Brady used STEPIT to handle the non-linear least squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
+For example, Brady used STEPIT, an algorithm for finding local minima of a continuous function, to handle the least squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation, chandler1969stepit}.
 Waldo et al. also solve the least squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
-The general form of the solve is given as:
+Using Equation \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, or \eqref{eq:delnu-fit-intermediate}, the general form of the solve is given as:
 \begin{equation}
 A \vec{x} \approx \vec{b}.
 \label{eq:lstsq}
@@ -177,7 +177,7 @@ where,
 \end{align}
 \end{comment}
 
-Based on the irradiation type used, the coefficient matrix will change, as shown in Equations \eqref{eq:delnu-fit} and \eqref{eq:delnu-fit-sat}. 
+Based on the irradiation type used, the coefficient matrix will change, as shown in Equations \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, and \eqref{eq:delnu-fit-intermediate}. 
 Equation \eqref{eq:lambda} gives the coefficient matrix for a pulse irradiation as:
 
 \begin{equation}
@@ -187,10 +187,10 @@ A = \epsilon F_s
 \lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_n e^{-\lambda_n t_1}\\
 \vdots                       & \vdots                       & \ddots &  \vdots                      \\
 \lambda_1 e^{-\lambda_1 t_m} & \lambda_2 e^{-\lambda_2 t_m} &  \hdots  & \lambda_n e^{-\lambda_n t_m}\\
-\end{bmatrix},
+\end{bmatrix}.
 \label{eq:lambda}
 \end{equation}
-though for a saturation irradiation the only change would be removing the $\lambda_i$ term.
+Note that this term changes for a saturation irradiation, removing the $\lambda_i$ term and changing the fission term from net fissions to the fission rate.
 
 Within this least squares equation, the solution vector contains only the group yields, given in Equation \eqref{eq:lstsq-solvec} as:
 \begin{equation}
@@ -204,18 +204,19 @@ Within this least squares equation, the solution vector contains only the group 
 \label{eq:lstsq-solvec}
 \end{equation}
 
-The target vector contains the linearized delayed neutron count rate data normalized to the number of fissions, or fission rate, and the detector efficiency, as shown in Equation \eqref{eq:lstsq-target} as:
+The target vector contains the delayed neutron count rate data, shown in Equation \eqref{eq:lstsq-target} as:
 \begin{equation}
 \vec{b} = 
 \begin{bmatrix}
-\ln \left( n_d(t_0)  \right)\\
-\ln \left( n_d(t_1) \right)\\
+ n_d(t_0)  \\
+ n_d(t_1) \\
 \vdots\\
-\ln \left( n_d(t_m) \right)\\
+n_d(t_m)\\
 \end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
-The natural logarithm is needed here, as otherwise the short time steps will dominate the group parameters.
+Using ordinary least squares, with a non-relative residual, would lead to early time step count rates dominating due to their larger magnitudes.
+One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
 Another way to resolve this is to use a relative residual, as given by Equation \eqref{eq:residual}.
 \begin{equation}
     r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|,
@@ -227,8 +228,8 @@ where,
     &= 1\times10^{-12}. \nonumber
 \end{align}
 
-By solving this non-linear system of equations, the group half-lives, $T_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
-Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group half lives using \cite{das1993importance} as:
+By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
+Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
 
 \begin{equation}
 \lambda_k = \frac{\sum_{F} \lambda_k^{(F)} \beta_{k, eff}^{(F)}}{\sum_F \beta_{k, eff}^{(F)}},
@@ -241,11 +242,7 @@ where,
 \end{align}
 
 These equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
-Equation \eqref{eq:speceq} shows that including the energy in the delayed neutron count rate requires the energy spectra, $\chi_{d, k}(E)$, of the relevant group to be included.
-This is the general form of the saturation and pulse irradiation equations, where $A_k$ represents $\bar{\nu}_{d, k} \lambda_k$ for a pulse irradiation or $\bar{\nu}_{d, k}$ for saturation irradiation.
-$\tilde{F}_s$ is the total number of fissions for a pulse irradiation or the fission rate for saturation irradiation.
-The generic energy and time dependent neutron count rate is given as:
-
+Including the energy in the delayed neutron count rate requires the energy spectra, $\chi_{d, k}(E)$, of the relevant group to be included, as shown in Equation \eqref{eq:speceq} as:
 \begin{equation}
 \dot{n}_d(E, t) \approx \epsilon \tilde{F}_s \sum_{k=1}^{K} \chi_{d, k} (E) A_k e^{-\lambda_k t},
 \label{eq:speceq}
@@ -256,6 +253,10 @@ where,
     A_k =& \text{ the generic matrix term [$s^{-1}$ or -]  } \nonumber \\
     \chi_{d, k}(E) =& \text{ the delayed neutron energy spectrum of \gls{DNP} group $k$ [-]. } \nonumber
 \end{align}
+This is the general form of the saturation and pulse irradiation equations, where $A_k$ represents $\bar{\nu}_{d, k} \lambda_k$ for a pulse irradiation or $\bar{\nu}_{d, k}$ for saturation irradiation.
+$\tilde{F}_s$ is the total number of fissions for a pulse irradiation or the fission rate for saturation irradiation.
+
+
 
 \subsubsection{Calculation of DNP Group Spectra and Concentrations}
 \label{sec:groupspectra}
@@ -273,10 +274,9 @@ These methods have been used to generate \gls{DNP} group spectra, so the group s
     \item Grouping based on fractional contribution to adjacent groups \cite{brady1988evaluation}
 \end{itemize}
 
-The grouping based on half lives requires comparing each nuclide's half life to a constant value.
+The grouping based on half lives requires comparing each nuclide's half-life to a constant half-life bin structure formulated from analysis of individual \glspl{DNP}.
 The groupings based on half lives are given in the top two sets in Table \ref{tab:halfgroup}.
 The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach \cite{Brown20181}.
-
 
 \renewcommand{\arraystretch}{1.25}
 \begin{table}[H]
@@ -289,7 +289,7 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
        \hline
         \cite{england1983aggregate} & $T > 31$ & $31 \geq T > 9$ &  $9 \geq T > 3$ & $3 \geq T > 0.8$ & $0.8 \geq T > 0.3$ & $0.3 \geq T$ \\
         \cite{rudstam1982six}\tnote{*} & $T > 30$ & $30 \geq T > 10$ & $10 \geq T > 4$ & $4 \geq T > 1.4$ & $1.4 \geq T > 0.4$ & $0.4 \geq T$\\
-        \cite{Brown20181} & $T = 51.98$ & $T = 21.17$ & $T = 5.74$ & $T = 2.29$ & $T = 0.82$ & $T = 0.24$\\
+        \cite{endf6} & $T = 51.98$ & $T = 21.17$ & $T = 5.74$ & $T = 2.29$ & $T = 0.82$ & $T = 0.24$\\
 
 %        \hline
 %        \cite{Brown20181} & $T_1 = 51.98$\\
@@ -308,7 +308,13 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
 \end{table}
 \renewcommand{\arraystretch}{1}
 
+England and Wilson chose their half-life bins based on the half-lives given in ENDF/B-V, while specifying that of the reasonable choices for bounding values, "No one was completely satisfactory" \cite{england1983aggregate}.
+Rudstam selected half-life bins into six groups, although it is clarified that "...the grouping is somewhat arbitrary" \cite{rudstam1982six}.
 The half-life grouping method thus results in a series of comparisons; if a nuclide is within a given group's bounds, the concentration of that nuclide is added to that group.
+
+For the fractional grouping, the half-life selection is less arbitrary and is instead based on the \gls{DNP} group parameters.
+The ENDF/B-VI.8 data comes from the $^{235}$U half-lives from the $(n, \nu_d)$ reaction \cite{endf6, brady1989delayed, england1988status, brady1989validation}.
+These delayed neutron data have remained unchanged through ENDF/B-VIII.0 \cite{Brown20181, endf6}\footnote{The ENDF/B-VIII.1 data is also the same as ENDF/B-VI.8, but it is currently unpublished.}.
 
 The fractional grouping is more complex, but assigns nuclides to groups in a more rigorous manner.
 The method uses two groups, $i$ and $i+1$, for each nuclide $k$.
@@ -326,7 +332,7 @@ The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as
     \label{eq:fracsum}
 \end{equation}
 
-To solve for the fractions, the least squares minimization problem is solved as:
+To solve for the fractions, the least squares minimization problem is minimized \cite{brady1988evaluation}:
 \begin{equation}
     \int_{0}^{\infty} \left( \lambda_k e^{-\lambda_k t} -  f_{k, i} \lambda_i e^{-\lambda_i t} - f_{k, i+1} \lambda_{i+1} e^{-\lambda_{i+1} t}   \right)^2 dt
     \label{eq:fracmin}
@@ -362,7 +368,6 @@ Because the number of rows is greater than the number of columns in the matrix, 
 With the fractional contribution terms, $\vec{x}$, the concentration of a given nuclide can then be multiplied by each fraction to show how much it contributes to that group.
 With a summation of each nuclides contribution, the group concentrations can thus be calculated and vice versa.
 Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
-
 
 \subsubsection{Calculation of Kinetics Parameters}
 \label{sec:calc-kinetic-param}
@@ -424,7 +429,7 @@ $\beta_{eff}$ is the spectrum and adjoint weighted ratio of the delayed neutron 
 This is given in Equation \eqref{eq:betaeff-exact} as:
 
 \begin{equation}
-    \beta_{eff} = \frac{\int \Phi^\dagger \chi_d \beta \bar{\nu} \Sigma_f \Phi \; dE d\vec{\Omega} d\vec{r}}{\int \Phi^\dagger \chi \bar{\nu} \Sigma_f \Phi \; dE d\vec{\Omega} d\vec{r}},
+    \beta_{eff} = \frac{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
     \label{eq:betaeff-exact}
 \end{equation}
 where,
@@ -453,16 +458,17 @@ where,
 $\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the "...time between the birth of a neutron and the subsequent absorption that induces fission."
 This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte}:
 \begin{equation}
-    \Lambda_{eff} = \frac{\int \Phi_0^\dagger \frac{1}{\bar{v}} \Phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \Phi_0^\dagger F_0 \Phi_0 \; dE d\vec{\Omega} d\vec{r}}
+    \Lambda_{eff} = \frac{\int \Phi_0^\dagger \frac{1}{v} \Phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \Phi_0^\dagger F_0 \Phi_0 \; dE d\vec{\Omega} d\vec{r}}
     \label{eq:lambdaeff-exact}
 \end{equation}
 where,
 \begin{align}
 \Phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
 \Phi_0 &= \mbox{ the critical neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
-\bar{v} &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
+v &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
 F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
 \end{align}
+Because only the absorptions that induce fission are of interest, the fission operator is used.
 
 %\begin{description}
 %    %\setlength\itemsep{-0.25em}
