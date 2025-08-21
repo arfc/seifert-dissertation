@@ -393,7 +393,7 @@ Equation \eqref{eq:dnyield} shows how the total delayed neutron yield, or averag
     \label{eq:dnyield}    
 \end{equation}
 
-This yield can also be approximately represented for an individual nuclide by integrating Equation \eqref{eq:dnpsingleeq} over all time, where the concentration over time is assumed to be: 
+This yield can also be approximately represented for an individual nuclide by integrating Equation \eqref{eq:dnpsingleeq} over all time and normalizing to a single fission, where the concentration over time is assumed to be: 
 \begin{equation}
     N_{i}(t) = N_i(0) e^{-\lambda_i t}.
     \label{eq:conc-time}
@@ -403,6 +403,17 @@ This yields Equation \eqref{eq:delnu-net-nuc}, where the total number of delayed
     \int_0^{\infty} \dot{n}_{d, i}(t) dt= P_{n, i} N_{i} (0).
     \label{eq:delnu-net-nuc}
 \end{equation}
+After dividing by the total number of fission events, Equation \eqref{eq:delnu-net-nuc-CFY} shows that the total delayed neutron yield can be written as \cite{huynh2014calculation}:
+\begin{equation}
+    \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i,
+    \label{eq:delnu-net-nuc-CFY}
+\end{equation}
+where,
+\begin{align}
+    CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
+\end{align}
+This also means that the delayed neutron yield of each contributing \gls{DNP} can be calculated.
+
 
 The delayed neutron fraction can be written as:
 \begin{equation}

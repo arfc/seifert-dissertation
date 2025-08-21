@@ -1,57 +1,76 @@
 
+Because the microscopic approach uses individual \glspl{DNP}, it becomes possible to analyze the contribution of each \gls{DNP} to the total delayed neutron yield.
+This is given in Equation \eqref{eq:delnu-net-nuc-CFY}, recreated here as:
+\begin{equation}
+    \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i. \nonumber
+    \label{eq:conc-time}
+\end{equation}
+Another quantity of interest is, rather than the number of delayed neutrons per fission, is the number of delayed neutrons from the existing concentration of nuclides.
+This can be calculated by integrating the delayed neutron count rate, as shown in Equation \eqref{eq:delnu-net-nuc}, recreated here as:
+\begin{equation}
+    \int_0^{\infty} \dot{n}_{d, i}(t) dt= P_{n, i} N_{i} (0). \nonumber
+\end{equation}
 
-\todo{add a figure here showing the total delayed neutron yield}
-The equation for which is given by \cite{huynh2014calculation}. This shows the delayed neutrons per fission event.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/dnp_yield.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
-
-An alternative which may be interesting is the yield of neutrons from the total irradiation rather than per fission.
-To calculate this, simply integrate the delayed neutron counts (Pn*N).
-
-The equation for which is given by \cite{huynh2014calculation}. This shows the delayed neutrons per fission event.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/dnp_yield_full_irrad.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
-
-Top 2 at each time step.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/individual_nuclide_rates.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
+Figure \ref{fig:delnu-dnp-contributions} shows both of these approaches and how they differ.
+For the delayed neutron yield contributions, shown in sub-figure (a), $^{86}$Ge has the largest contribution, which means that for each thermal fission event in $^{235}$U, approximately 12.5\% of the delayed neutrons come from $^{86}$Ge.
+$^{86}$Ge is very short lived, with a half-life of approximately 200 milliseconds.
+This is why, in sub-figure (b), it contributes less than 4\% of the total delayed neutrons once the sample has been irradiated for some time.
+Since it has been irradiated, the longer lived nuclides have accumulated, and the delayed neutron count rate is dominated by them.
+This reinforces the justification of why pulse irradiation data is important, as the saturation irradiation does not fully capture the relative effects of the short-lived \glspl{DNP}.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/individual_nuclide_counts.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[Delayed neutron yield contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/dnp_yield.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Delayed neutron count rate contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/dnp_yield_full_irrad.png}
+}
+\caption{Delayed neutron contributions from each \gls{DNP}.}
+\label{fig:delnu-dnp-contributions}
 \end{figure}
+
+Figure \ref{fig:delnu-counts-stacked-rates} shows the delayed neutron count rate in sub-figure (a), as well as the integrated form in sub-figures (b) and (c) which represents the total delayed neutron counts at each time.
+Sub-figure (a) shows how the count rate of $^{86}$Ge dominates at short time scales due to its short half-life, while after a tenth of a second it becomes less important.
+This again demonstrates how the saturation irradiation enables better analysis of the longer-lived \glspl{DNP}, but at the cost of less relative importance of the shorter-lived \glspl{DNP}.
+Sub-figure (b) shows how the total number of counts vary over time on a log scale, so the initial contribution of $^{86}$Ge is initially dominant but quickly becomes relatively unimportant compared to the other \glspl{DNP}.
+Sub-figure (c) reflects what was shown in Figure \ref{fig:delnu-dnp-contributions} sub-figure (b), where $^{86}$Ge is minimal and the total delayed neutron count contribution is dominated by longer lived \glspl{DNP} like $^{137}$I and $^{87}$Br.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/individual_nuclide_counts_stacked.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[The delayed neutron count rate.]{
+  \includegraphics[width=0.45\linewidth]{images/individual_nuclide_rates.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[The total delayed neutron counts.]{
+  \includegraphics[width=0.45\linewidth]{images/individual_nuclide_counts.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[A stack plot of the total delayed neutron counts.]{
+  \includegraphics[width=0.45\linewidth]{images/individual_nuclide_counts_stacked.png}
+}
+\caption{Delayed neutron count rate contributions from the top two most contributing \glspl{DNP} at each time step.}
+\label{fig:delnu-counts-stacked-rates}
 \end{figure}
 
-The summed avg halflife doesn't use the non-standard avg halflife equation \cite{parish1999status}.
-When it does, 9.2 seconds. When it doesn't, 6.4 seconds.
+Another analysis of interest with the individual \gls{DNP} data is calculation of the delayed neutron yield and average half-life, shown in Table \ref{tab:indiv-dnp-params}.
+These values are calculated and then compared with the six group \gls{DNP} group parameters formulated from those \glspl{DNP}.
+Ideally these values should be identical, but because the six-group fit cannot fully capture the behavior of all the decaying \glspl{DNP}, there are some small differences.
+These differences are small relative to the uncertainty bounds for each term.
 
-Summed Vals
-0.02254145659046882 $\pm$ 0.0015166459277329472
-6.385209000563604 $\pm$ 0.38007097622923025
-Group Vals
-0.02239 $\pm$ 0.00126
-6.40289 $\pm$ 0.33653
+\begin{table}[]
+    \centering
+    \begin{tabular}{ccc}
+    \hline
+       Term & Summed & Group \\
+       \hline
+        $\bar{\nu}_d$ & 0.0225 $\pm$ 0.0015 & 0.0224 $\pm$ 0.0013\\
+        $\bar{T} [s]$ & 6.3852 $\pm$ 0.3801 & 6.4029 $\pm$ 0.3365\\
+        %$\bar{T} [s]$ & 9.2119 $\pm$ 0.5483 & 9.2374 $\pm$ 0.4855\\the non-standard avg halflife equation \cite{parish1999status}.
+        \hline
+    \end{tabular}
+    \caption{The delayed neutron yield and average half-life calculated by summing individual \glspl{DNP} and from the 6 \gls{DNP} group parameters.}
+    \label{tab:indiv-dnp-params}
+\end{table}
 
-
-summed yield=0.02254145659046882+/-0.0015166459277329472 group yield=0.02239+/-0.00126
-summed avg halflife=9.211909360152688+/-0.5483265125917376 group avg halflife=9.23741+/-0.48551
