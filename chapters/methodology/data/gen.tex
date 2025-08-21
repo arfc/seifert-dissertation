@@ -13,6 +13,8 @@ where,
     CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
 \end{align}
 The derivation for this equation is given in Appendix \ref{sec:appendixB}.
+It is important to note that the flux is scaled when calculating the fission rate as well, by the same $f_{in}$ term that scales the cumulative fission yield.
+Effectively, this cancels the term out, resulting in no deviation in the results based on the in-core fuel salt fraction by reprocessing time.
 
 Another consideration is that no parasitic absorption is accounted for in this model, nor is time dependent decay of nuclides into \glspl{DNP}.
 There is a possible approach to include the effects of parasitic absorption, but this method is not included in this work \cite{shahbazi_steady-state_2022, benedictnuclear}.
