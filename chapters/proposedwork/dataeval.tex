@@ -123,7 +123,10 @@ For cases where this approach is inadequate, a more robust method can be selecti
 \subsection{Irradiation Combination}
 \label{sec:irrad-combine}
 A key aspect of the methodology is combining pulse and saturation irradiation \gls{DNP} group parameters.
-The current approach is similar to Brady's approach, combining the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
+One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
+Brady uses the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
+Keepin et al. fit four groups with each irradiation, and then renormalize at the second group \cite{keepin1957delayed}.
+
 Another approach is the Levenberg-Marquardt method, which combines pulse and saturation irradiation data \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
 This method of fitting \gls{DNP} group parameters to both datasets simultaneously may yield more accurate results.
 This can also be accomplished using the \gls{TRF} approach, which allows for bounds to be included for the parameters \cite{branch1999subspace}.
@@ -144,8 +147,7 @@ where,
     \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
     &= 1\times10^{-12}. \nonumber
 \end{align}
-This formulation of the residual removes the need to linearize the count rate, as the residual has the count rate in the denominator.
-Additionally, this formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.
+This formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.
 
 The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
 The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of the residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.

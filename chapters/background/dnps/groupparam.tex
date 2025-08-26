@@ -26,7 +26,7 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
         $\bar{\nu}_{d, k}$/$\bar{\nu}_{d, i}$ & The delayed neutron yield for \gls{DNP} group $k$ / nuclide $i$\\
         $\chi_k$/$\chi_i$ & The spectra of \gls{DNP} group $k$ / nuclide $i$\\
         $P_{n, i}$ & The delayed neutron emission probability for nuclide $i$\\
-        $\bar{T}$ & The mean half-life\\
+        $\bar{\tau}$ & The mean half-life\\
         $Y$ & The total delayed neutron yield\\
         \hline
         $\beta_k$/$\beta_i$ & The delayed neutron fraction of \gls{DNP} group $k$ / nuclide $i$\\
@@ -285,11 +285,11 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
     \caption{Half-lives of \gls{DNP} groups from various sources.}
     \begin{tabular}{ccccccc}
     \hline
-       Source  & $T_1$ $[s]$ &  $T_2$ $[s]$ & $T_3$ $[s]$ & $T_4$ $[s]$ & $T_5$ $[s]$ & $T_6$ $[s]$\\
+       Source  & $\tau_1$ $[s]$ &  $\tau_2$ $[s]$ & $\tau_3$ $[s]$ & $\tau_4$ $[s]$ & $\tau_5$ $[s]$ & $\tau_6$ $[s]$\\
        \hline
-        \cite{england1983aggregate} & $T > 31$ & $31 \geq T > 9$ &  $9 \geq T > 3$ & $3 \geq T > 0.8$ & $0.8 \geq T > 0.3$ & $0.3 \geq T$ \\
-        \cite{rudstam1982six}\tnote{*} & $T > 30$ & $30 \geq T > 10$ & $10 \geq T > 4$ & $4 \geq T > 1.4$ & $1.4 \geq T > 0.4$ & $0.4 \geq T$\\
-        \cite{endf6} & $T = 51.98$ & $T = 21.17$ & $T = 5.74$ & $T = 2.29$ & $T = 0.82$ & $T = 0.24$\\
+        \cite{england1983aggregate} & $\tau > 31$ & $31 \geq \tau > 9$ &  $9 \geq \tau > 3$ & $3 \geq \tau > 0.8$ & $0.8 \geq \tau > 0.3$ & $0.3 \geq \tau$ \\
+        \cite{rudstam1982six}\tnote{*} & $\tau > 30$ & $30 \geq \tau > 10$ & $10 \geq \tau > 4$ & $4 \geq \tau > 1.4$ & $1.4 \geq \tau > 0.4$ & $0.4 \geq \tau$\\
+        \cite{endf6} & $\tau = 51.98$ & $\tau = 21.17$ & $\tau = 5.74$ & $\tau = 2.29$ & $\tau = 0.82$ & $\tau = 0.24$\\
 
 %        \hline
 %        \cite{Brown20181} & $T_1 = 51.98$\\
@@ -301,15 +301,15 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
         \hline
     \end{tabular}
         \begin{tablenotes}
-      \item[*] Rudstam uses $T_1 = 55.6$, but to ensure all \glspl{DNP} are included, this has been modified.
+      \item[*] Rudstam uses $\tau_1 = 55.6$, but to ensure all \glspl{DNP} are included, this has been modified.
     \end{tablenotes}
     \label{tab:halfgroup}
 \end{threeparttable}
 \end{table}
 \renewcommand{\arraystretch}{1}
 
-England and Wilson chose their half-life bins based on the half-lives given in ENDF/B-V, while specifying that of the reasonable choices for bounding values, "No one was completely satisfactory" \cite{england1983aggregate}.
-Rudstam selected half-life bins into six groups, although it is clarified that "...the grouping is somewhat arbitrary" \cite{rudstam1982six}.
+England and Wilson chose their half-life bins based on the half-lives given in ENDF/B-V, while specifying that of the reasonable choices for bounding values, ``No one was completely satisfactory" \cite{england1983aggregate}.
+Rudstam selected half-life bins into six groups, although it is clarified that ``...the grouping is somewhat arbitrary" \cite{rudstam1982six}.
 The half-life grouping method thus results in a series of comparisons; if a nuclide is within a given group's bounds, the concentration of that nuclide is added to that group.
 
 For the fractional grouping, the half-life selection is less arbitrary and is instead based on the \gls{DNP} group parameters.
@@ -383,7 +383,7 @@ A useful term for comparing \gls{DNP} group parameters is the average half-life 
 Parish et al. also use the average half-life, but with a non-standard formulation which does not include the natural log of two \cite{parish1999status}.
 Equation \eqref{eq:avg-hl} gives the average half-life as:
 \begin{equation}
-    \bar{T} = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_k}.
+    \bar{\tau} = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_k}.
     \label{eq:avg-hl}
 \end{equation}
 
