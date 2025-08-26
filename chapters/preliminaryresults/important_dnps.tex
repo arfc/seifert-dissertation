@@ -17,6 +17,10 @@ $^{86}$Ge is very short lived, with a half-life of approximately 200 millisecond
 This is why, in sub-figure (b), it contributes less than 4\% of the total delayed neutrons once the sample has been irradiated for some time.
 Since it has been irradiated, the longer lived nuclides have accumulated, and the delayed neutron count rate is dominated by them.
 This reinforces the justification of why pulse irradiation data is important, as the saturation irradiation does not fully capture the relative effects of the short-lived \glspl{DNP}.
+Finally, the relative concentration of each \gls{DNP} is shown in sub-figure (c).
+These values are generally consistent with the literature, though $^{141}$Cs is an outlier \cite{leconte2020new}.
+This is likely due to the simplifications made in the 0D scaled model, such as exclusion of parasitic absorption.
+
 
 \begin{figure}[!ht]
 \centering
@@ -26,6 +30,10 @@ This reinforces the justification of why pulse irradiation data is important, as
 \hspace{0.05\linewidth}
 \subfloat[Delayed neutron count rate contributions.]{
   \includegraphics[width=0.45\linewidth]{images/dnp_yield_full_irrad.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[\gls{DNP} relative concentrations.]{
+  \includegraphics[width=0.45\linewidth]{images/dnp_conc.png}
 }
 \caption{Delayed neutron contributions from each \gls{DNP}.}
 \label{fig:delnu-dnp-contributions}
@@ -63,7 +71,7 @@ These differences are small relative to the uncertainty bounds for each term.
     \centering
     \begin{tabular}{ccc}
     \hline
-       Term & Summed & Group \\
+       Term & \gls{DNP} & Group \\
        \hline
         $\bar{\nu}_d$ & 0.0225 $\pm$ 0.0015 & 0.0224 $\pm$ 0.0013\\
         $\bar{T} [s]$ & 6.3852 $\pm$ 0.3801 & 6.4029 $\pm$ 0.3365\\

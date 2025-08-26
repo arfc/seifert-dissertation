@@ -11,3 +11,28 @@ An additional consideration for these preliminary results is that pulse irradiat
 Whether the results from the pulse irradiation simulation are combined via simultaneous solution of a larger matrix or separately solved and then combined, they improve the \gls{DNP} group parameters for the shorter lived groups \cite{keepin1957delayed}.
 This means that the longer lived groups can be expected to be more accurate, while the longer lived groups may have a larger difference.
 This is discussed further in Section \ref{sec:irrad-combine}.
+
+These results, unless otherwise specified, use the parameters given in Table \ref{tab:default-0dsacled}.
+The sampled simulations indicates the number of non-linear least squares solves that generate \gls{DNP} group parameters.
+For each sampled simulation, the emission probability, half-lives, and fission yields are sampled within their uncertainties assuming a normal distribution.
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{cc}
+        \hline
+        Parameter & Value \\
+        \hline
+        Fissile Nuclide & $^{235}$U [-]\\
+        Incident Neutron Energy & $0.0253\; [eV]$\\
+        Fission Yields & ENDF/B-VII.1 \cite{chadwick2011endf}\\
+        Half-lives & IAEA \cite{DIMITRIOU2021144}\\
+        Emission Probability & IAEA \cite{DIMITRIOU2021144}\\
+        Final Decay Time & $600\; [s]$\\
+        Decay Time Spacing & Logarithmic\\
+        Decay Time Nodes & 300\\
+        Sampled Simulations & 1000\\
+        \hline
+    \end{tabular}
+    \caption{Default parameters for 0D scaled model simulations.}
+    \label{tab:default-0dsacled}
+\end{table}

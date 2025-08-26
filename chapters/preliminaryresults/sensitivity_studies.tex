@@ -1,7 +1,17 @@
 
+This section covers the sensitivity of the \gls{DNP} group parameters to various simulation parameters, including: chemical removal, time nodes at which to evaluate the non-linear least squares problem, and uncertainties in the data.
+For the chemical removal analysis, the \gls{MSBR} chemical reprocessing scheme is used.
+This is because it has large chemical removal rates, which will therefore provide a conservative estimate as to the impact these chemical removal rates may have on the \gls{DNP} group parameters.
+The evaluation of the time nodes include the spacing between each node, the number of nodes, the total amount of time the sample should decay, and a combination of the total time and number of nodes.
+Finally, the data uncertainties include uncertainty in the fission yields, half-lives, and emission probabilities.
+To propagate these uncertainties to the \gls{DNP} group parameters, the non-linear least squares solver is run 1000 times with a random normal distribution sample taken from the fission yield, half-life, and emission probability of each \gls{DNP}.
+
 \subsection{Chemical Removal}
 
-Using 10 seconds in and ex core (value doesn't matter as much as ratio, so assuming half in and half ex).
+As shown in Appendix \ref{sec:appendixB}, the fraction of fuel salt in the ex-core region determines the scaling of the chemical removal rate.
+For this analysis, the ex-core fraction will be assumed to be 0.5.
+This value is based on the approximate core zone I, core zone II, and annulus salt volume relative to the primary system salt volume in the \gls{MSBR} \cite{robertson_conceptual_1971}.
+The chemical reprocessing scheme from the \gls{MSBR} used in this analysis is given in Table \ref{tab:msbr_cycle_times}.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
@@ -28,122 +38,283 @@ Using 10 seconds in and ex core (value doesn't matter as much as ratio, so assum
 \end{center}
 \end{table}
 
+One consideration is that the 0D scaled model will underestimate the effect of the chemical removal rate.
+This is because it only chemically removes from the cumulative fission yield of the element in the reprocessing scheme, and does not account for decay chains which may have chemical removal rates included.
+For example, $^{137}$I has a cycle time of 60 days, or a chemical removal rate of $1.9\times 10^{-7}$ $[s^{-1}]$.
+However, Sb and Te, which both decay into I, also have a chemical removal rate of 0.05 $[s^{-1}]$, many orders of magnitudes larger than the I removal rate.
+However, using the 0D scaled model, with cumulative fission yields and no decay chain, means that this effect is not captured.
+
+\FloatBarrier
 \subsubsection{Long Cycle Time Evaluation}
 \label{sec:large-tcyc}
-Ignored all removal greater than 20 seconds (no difference).
+Based on the chemical removal rates provided in Table \ref{tab:msbr_cycle_times}, there are many elements to consider.
+However, since the sample is only irradiated over the course of several minutes, it is of interest to determine the significance of the smaller removal rates, such as the 500 day cycle time of rare earths.
+For this analysis, only 20 second cycle time elements, the noble metals and gases, are considered.
+The difference between the full \gls{MSBR} reprocessing scheme and the partial \gls{MSBR} reprocessing scheme, with only 20 second cycle time elements considered, is shown in Figure \ref{fig:chem-long}.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives-msbr-compare.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[Delayed neutron yield contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_chem_long.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Delayed neutron count rate contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_chem_long.png}
+}
+\caption{Delayed neutron contributions from each \gls{DNP}.}
+\label{fig:chem-long}
 \end{figure}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/yields-msbr-compare.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
+The difference between every \gls{DNP} group parameter is less than 0.001\%, so for all intents and purposes, it is sufficient to call them equivalent.
 
 
-
+\FloatBarrier
 \subsubsection{Removal Rate Evaluation}
 \label{sec:repr-scale}
 
 Add net yield values.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives-bool-chem.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[Delayed neutron yield contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_chem_bool.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Delayed neutron count rate contributions.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_chem_bool.png}
+}
+\caption{Delayed neutron contributions from each \gls{DNP}.}
+\label{fig:chem-long}
 \end{figure}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/yields-bool-chem.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
 
+\FloatBarrier
 \subsection{Time Nodes}
 \label{sec:time-eval}
-\subsubsection{Spacing}
-Surprisingly different.
-Linear does not capture short-time effects.
+The time node sensitivity is important, as many time nodes may be required to capture the physics fully, but at an increasing cost for each additional time node.
+Of interest are the distribution of nodes, the number of nodes, the amount of time the sample decays, and the combined decay time and number of nodes.
 
+\subsubsection{Distribution}
+For the distribution of time nodes, two different approaches are compared: a logarithmic spacing between 0.01 and 600 seconds, and a linear spacing between 0 and 600 seconds.
+Because 300 time nodes are being used, this means that the linear spacing will not capture behavior which occurs in the first 2 seconds, but instead will have a higher resolution at the longer time scales.
+This may not be as useful, as at longer time scales the number of \glspl{DNP} that are relevant drop away quickly, as discussed in Section  \ref{sec:important-dnp}.
+
+Figure \ref{fig:time-distribution} shows how the \gls{DNP} group parameters compare between the logarithmic and linear spacing.
+The half-lives of the shorter lived groups are measured as being larger for the linear spacing, which is consistent with expectations.
+The linear spacing does not have any data between zero and two seconds, and there is greater weighting on the longer lived groups due to the data distribution.
+This also leads to the shorter lived groups capturing a larger yield, with the yields being pulled from groups two, three, and four to be added to groups five and six.
+The difference between the total \gls{DNP} yields is approximately 0.1\%, so changing the spacing of the time nodes doesn't change the macroscopic behavior of the \gls{DNP} groups.
+Instead, it affects the distribution of delayed neutrons over time, where the logarithmic distribution is more accurate due to capturing the effects of shorter lived \glspl{DNP}.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives_spacing_times.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[Half-life \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_spacing_times.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Yield \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_spacing_times.png}
+}
+\caption{\gls{DNP} group parameters for linear and logarithmic spacings of the time nodes.}
+\label{fig:time-distribution}
 \end{figure}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/yields_spacing_times.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
-
-\todo{linear vs log}
+\FloatBarrier
 \subsubsection{Number of Nodes}
+\label{sec:numer-nodes}
+Figure \ref{fig:time-nodes} shows how varying the number of nodes affects the results.
+It appears that there is no significant difference between the results when varying the number of nodes.
+The main difference appears in the yields of groups four and five, with increasing nodes increasing the yield of group four and decreasing the yield of group five.
+There are also some smaller differences, such as the yield of group six decreasing and the yields of groups two and three increasing with an increasing number of nodes.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives_decay_time_nodes.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[Half-life \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_decay_time_nodes.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Yield \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_decay_time_nodes.png}
+}
+\caption{\gls{DNP} group parameters for varying numbers of time nodes.}
+\label{fig:time-nodes}
 \end{figure}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/yields_decay_time_nodes.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
+The simulation with the most nodes is the most accurate, so the percent difference of the \gls{DNP} group yields for each group can be calculated, as well as the computational cost associated with the increase in accuracy.
+This is shown in Table \ref{tab:yield-diff-num-nodes}, where using 50 nodes results in the group five yield being off by approximately 1\%, and using 200 nodes keeps differences below 0.02\%.
+The computational cost is also fairly constant for each of these different numbers of nodes.
+Based on these results, the selected default of 300 nodes appears to offer sufficiently high accuracy yields, within 0.1\%, while also residing in the constant time cost regime.
 
+\begin{table}[!ht]
+    \centering
+\begin{tabular}{cccccccc}
+\hline
+      & \multicolumn{6}{c}{Yield Difference {[}\%{]}} &              \\
+Nodes & 1     & 2     & 3     & 4     & 5     & 6     & Cost {[}s{]} \\
+\hline
+50    & 0.30                  & 0.90                  & 0.53                  & 0.75                  & 0.99                  & 0.59                  & 297          \\
+100   & 0.17                  & 0.49                  & 0.25                  & 0.39                  & 0.46                  & 0.77                  & 297          \\
+200   & 0.01                  & 0.02                  & 0.00                  & 0.01                  & 0.01                  & 0.09                  & 300          \\
+400   & 0.00                  & 0.00                  & 0.00                  & 0.00                  & 0.00                  & 0.01                  & 304          \\
+800   & -                     & -                     & -                     & -                     & -                     & -                     & 310  \\     
+\hline
+\end{tabular}
+\caption{Comparison of how the number of nodes changes the computational cost and relative difference in yields compared to the 400 node case.}
+\label{tab:yield-diff-num-nodes}
+\end{table}
+
+
+\FloatBarrier
 \subsubsection{Total Decay Time}
+\label{sec:total-decay-time}
+As the total decay time increases, there are two effects occurring at the same time: a decrease in the time node density, discussed in Section \ref{sec:time-tot-and-node}, and an increase in the number of nodes evaluated at longer times.
+Because the longest lived \gls{DNP}, $^{87}$Br, has a half-life of approximately one minute, it is reasonable to assume that the default final time of ten minutes offers sufficient data on all \gls{DNP} decays.
+
+Figure \ref{fig:time-tot-dec-time} shows that this is true, where the differences in \gls{DNP} group parameters between a 600 second decay time and a 1000 second decay time is very small relative to the uncertainty bounds.
+The short decay times do not accurately model the \glspl{DNP}, with underestimations of the half lives.
+The half-life underestimations are then correlated with overestimation of some of the longer lived \gls{DNP} group yields.
+The \gls{DNP} yield of groups two and four have an interesting trend, where they underestimate for short decay times and overestimate for intermediate decay times.
+The cause of this is likely due to the simultaneous fitting of the surrounding groups, as the raw data itself remains unchanged.
+
+
+\begin{figure}[!ht]
+\centering
+\subfloat[Half-life \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_total_decay_time.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Yield \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_total_decay_time.png}
+}
+\caption{\gls{DNP} group parameters for varying total decay times.}
+\label{fig:time-tot-dec-time}
+\end{figure}
+
+Unfortunately, it cannot be claimed that increasing the net decay time strictly improves the accuracy of the \gls{DNP} group parameters.
+Excessively short decay times would not properly capture long-lived \glspl{DNP}, while excessively long decay times would overfit the long-lived \glspl{DNP}.
+One way to check these values is to compare the total delayed neutron yields and average half-lives with values from the literature.
+These values are compared in Table \ref{tab:net-decay-time-comparison}.
+From this table, it can be seen that the differences in these values are small and within uncertainty bounds of each other.
+
+\begin{table}[!ht]
+    \centering
+\begin{tabular}{ccc}
+\hline
+$T$ [s] & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ \\
+\hline
+60 & $0.0227 \pm 0.0016$ & $6.1926 \pm 0.4058$ \\
+120 & $0.0227 \pm 0.0015$ & $6.3308 \pm 0.3804$ \\
+240 & $0.0227 \pm 0.0015$ & $6.3581 \pm 0.3651$ \\
+480 & $0.0226 \pm 0.0013$ & $6.3647 \pm 0.3432$ \\
+600 & $0.0226 \pm 0.0013$ & $6.3648 \pm 0.3424$ \\
+1000 & $0.0226 \pm 0.0013$ & $6.3647 \pm 0.3426$ \\
+\hline
+\end{tabular}
+\caption{Comparison of how the net decay time, $T$ changes the total delayed neutron yield and average half-life.}
+\label{tab:net-decay-time-comparison}
+\end{table}
+
+\FloatBarrier
+\subsubsection{Time Node Density}
+\label{sec:time-tot-and-node}
+Section \ref{sec:total-decay-time} shows how varying the total decay time affects the results, and Section \ref{sec:numer-nodes} shows how varying the number of time nodes affects the results.
+This section evaluates the sensitivity of the \gls{DNP} group parameters to the node density, number of nodes, and decay time by comparing varying numbers of nodes and decay times.
+Figure \ref{fig:time-and-nodes} shows how the \gls{DNP} group parameters vary for varying node densities.
+
+\begin{figure}[!ht]
+\centering
+\subfloat[Half-life \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/halflives_detailed_decay.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[Yield \gls{DNP} group parameters.]{
+  \includegraphics[width=0.45\linewidth]{images/yields_detailed_decay.png}
+}
+\caption{\gls{DNP} group parameters for varying node densities.}
+\label{fig:time-and-nodes}
+\end{figure}
+
+If the node density was the driving factor in the \gls{DNP} group parameters, then the black bar, with a final time of 600 seconds and with 400 time nodes, would be equivalent to the teal bar, which has a final time twice as long and with twice as many time nodes.
+Instead, the results are approximately constant with varying time nodes, and the main difference is in the final decay time.
+This means that the sensitivity analysis discussed in Section \ref{sec:total-decay-time} is valid, and does not need to also account for the varying time node density.
+
+\FloatBarrier
+\subsection{Nuclear Data Uncertainties}
+To find the the sensitivity of the \gls{DNP} group parameters to the uncertainties in the nuclear data, a Monte Carlo approach is used.
+From each piece of data used in the 0D scaled model, such as the half-life of $^{87}$Br, a random value would be sampled assuming a normal distribution.
+This is repeated for every fission yield, half-life, and emission probability for every \gls{DNP}.
+
+\subsubsection{Count Rate}
+The count rate, normalized to the Keepin et al. count rate, is given in Figure \ref{fig:keepin-counts-0dscaled}.
+The red circles indicate the count rates from various sampled simulations, while the blue dashed line indicates the \gls{DNP} group parameters used and the uncertainty based on the 1000 Monte Carlo sampled non-linear least squares solves.
+The black X's indicate the mean count rate at each point.
+The other six group \gls{DNP} parameters plotted include Keepin, which is 1.0 since the plot is normalized to the Keepin values, the Brady group parameters, and the Synetos group parameters \cite{keepin1957delayed, brady1989delayed, synetos1983delayed}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives_total_decay_time.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=0.9\linewidth]{images/Keepin_counts.png}
+    \caption{The delayed neutron count rate for thermal fission of $^{235}$U normalized to the Keepin et al. six-group \gls{DNP} group parameters.}
+    \label{fig:keepin-counts-0dscaled}
 \end{figure}
+
+This figure shows that beyond roughly three seconds, there is agreement within the uncertainty bounds between the current \gls{DNP} group parameters and most of the other results in the literature, with the Brady group parameters having a noticeable difference at longer times.
+For the short time scales, as previously discussed in the introduction to this chapter, are inaccurate due to the lack of pulse irradiation data.
+It is expected that once this data is added, the earlier times will fit more closely.
+To demonstrate this, the first two groups are used while the shorter-lived groups three through six are replaced with the Keepin et al. \gls{DNP} group parameters \cite{keepin1957delayed}.
+This modified set of \gls{DNP} group parameters can be seen in Figure \ref{fig:keepin-counts-0dscaled-mod}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{images/yields_total_decay_time.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=0.9\linewidth]{images/Keepin_counts_modified.png}
+    \caption{The delayed neutron count rate for thermal fission of $^{235}$U normalized to the Keepin et al. six-group \gls{DNP} group parameters.}
+    \label{fig:keepin-counts-0dscaled-mod}
 \end{figure}
+
+The modified \gls{DNP} group parameters are not a perfect comparison, as the non-linear least squares solve adjusts the yields of each group relative to the others and based on the half-lives of the others.
+This means that not including pulse irradiation data will also affect the longer-lived groups, though by a smaller amount than the effects on the shorter-lived groups.
+However, there is generally better agreement when adjusting the shorter lived groups, particularly during the times less than one second.
+
+\FloatBarrier
+\subsubsection{Individual \glspl{DNP}}
+
+The number of Monte Carlo simulations is increased to 5000 for this analysis, as the contribution of each \gls{DNP} needs sufficient data to ensure differences in \gls{DNP} group parameters are caused by its own sampled variation.
+To find the nuclides with the most impactful sensitivities, a linear regression fits the slope of the relative change in \gls{DNP} group parameters to the relative change to the individual \gls{DNP} nuclear data.
+In particular, sensitivities of interest are where the absolute value of the \gls{PCC}, which describes the correlation between data on a scale from -1 to 1, is greater than 0.2.
+This value is selected somewhat arbitrarily, but gives a useful indication that a nuclide has a somewhat significant correlation with the \gls{DNP} group parameter of interest.
+
+One of the most predictable sensitivities is $^{87}$Br on group one, as $^{87}$Br dominates this group.
+Specifically, the sensitivities that affect the \gls{DNP} group parameters with a \gls{PCC} greater than 0.2 are the emission probability on the group yield, the fission yield on the group yield, and the half-life on the group half-life.
+Surprisingly, there is also a correlation with group 3, where the emission probability of $^{87}$Br affects the \gls{DNP} group 3 half-life.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{images/group_counts_total_decay_time.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+    \includegraphics[width=0.9\linewidth]{images/Half-life_Br87.png}
+    \caption{The difference in each \gls{DNP} group half-life from the $^{87}$Br relative changes in emission probability, half-life, and concentration.}
+    \label{fig:br87-0dscaled-sens-halflife}
 \end{figure}
 
-\subsubsection{Total Time and Nodes}
-
+\begin{comment}
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/halflives_detailed_decay.png}
-    \caption{Caption}
-    \label{fig:placeholder}
+\centering
+\subfloat[\gls{DNP} group 1 yield variation due to emission probability variation.]{
+  \includegraphics[width=0.45\linewidth]{images/sens_pn_yield_Br87_1.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[\gls{DNP} group 1 yield variation due to fission yield variation.]{
+  \includegraphics[width=0.45\linewidth]{images/sens_conc_yield_Br87_1.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[\gls{DNP} group 1 half-life variation due to half-life variation.]{
+  \includegraphics[width=0.45\linewidth]{images/sens_lam_halflife_Br87_1.png}
+}
+\hspace{0.05\linewidth}
+\subfloat[\gls{DNP} group 3 half-life variation due to emission probability variation.]{
+  \includegraphics[width=0.45\linewidth]{images/sens_pn_halflife_Br87_3.png}
+}
+\caption{\gls{DNP} group parameter sensitivity to changes in $^{87}$Br nuclear data.}
+\label{fig:time-and-nodes}
 \end{figure}
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/yields_detailed_decay.png}
-    \caption{Caption}
-    \label{fig:placeholder}
-\end{figure}
+\end{comment}
 
 
-\subsection{Data Uncertainties}
-\todo{Sensitivity hypercube}
+\FloatBarrier
