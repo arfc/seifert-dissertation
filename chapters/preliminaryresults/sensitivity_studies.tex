@@ -13,7 +13,7 @@ For this analysis, the ex-core fraction will be assumed to be 0.5.
 This value is based on the approximate core zone I, core zone II, and annulus salt volume relative to the primary system salt volume in the \gls{MSBR} \cite{robertson_conceptual_1971}.
 The chemical reprocessing scheme from the \gls{MSBR} used in this analysis is given in Table \ref{tab:msbr_cycle_times}.
 
-\begin{table}[H]
+\begin{table}[!ht]
 \renewcommand{\arraystretch}{1.25}
 \caption{MSBR Online Reprocessing Cycle Times (recreated from \cite{robertson_conceptual_1971})}
 \label{tab:msbr_cycle_times}
@@ -72,7 +72,10 @@ The difference between every \gls{DNP} group parameter is less than 0.001\%, so 
 \subsubsection{Removal Rate Evaluation}
 \label{sec:repr-scale}
 
-Add net yield values.
+It is also of interest to determine the sensitivity of the \gls{DNP} group parameters to the chemical reprocessing scheme.
+The 0D scaled model will underestimate the effect of chemical removal due to the use of cumulative fission yields without explicit nuclide tracking, but this analysis can still give a useful conceptual understanding of the chemical reprocessing impact.
+The comparison of \gls{DNP} group parameters with and without the \gls{MSBR} reprocessing scheme is given in Figure \ref{fig:chem-long}.
+This figure shows that the half-lives are very similar, while the yields without removal are slightly higher.
 
 \begin{figure}[!ht]
 \centering
@@ -86,6 +89,10 @@ Add net yield values.
 \caption{Delayed neutron contributions from each \gls{DNP}.}
 \label{fig:chem-long}
 \end{figure}
+
+The difference between the average half-lives is negligible, while the difference between the total delayed neutron yields is 0.57\%, or approximately $12$ $pcm$.
+This is a small difference, which is likely due to the nature of the 0D scaled model not treating the decay chain explicitly.
+However, since the effects of chemical reprocessing will consistently reduce the total delayed neutron yield due to removal of \glspl{DNP}, it is important to account for this factor.
 
 
 \FloatBarrier
@@ -147,6 +154,7 @@ Based on these results, the selected default of 300 nodes appears to offer suffi
 
 \begin{table}[!ht]
     \centering
+    \caption{Comparison of how the number of nodes changes the computational cost and relative difference in yields compared to the 400 node case.}
 \begin{tabular}{cccccccc}
 \hline
       & \multicolumn{6}{c}{Yield Difference {[}\%{]}} &              \\
@@ -159,7 +167,6 @@ Nodes & 1     & 2     & 3     & 4     & 5     & 6     & Cost {[}s{]} \\
 800   & -                     & -                     & -                     & -                     & -                     & -                     & 310  \\     
 \hline
 \end{tabular}
-\caption{Comparison of how the number of nodes changes the computational cost and relative difference in yields compared to the 400 node case.}
 \label{tab:yield-diff-num-nodes}
 \end{table}
 
@@ -198,6 +205,7 @@ From this table, it can be seen that the differences in these values are small a
 
 \begin{table}[!ht]
     \centering
+    \caption{Comparison of how the net decay time, $T$ changes the total delayed neutron yield and average half-life.}
 \begin{tabular}{ccc}
 \hline
 $T$ [s] & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ \\
@@ -210,7 +218,6 @@ $T$ [s] & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ \\
 1000 & $0.0226 \pm 0.0013$ & $6.3647 \pm 0.3426$ \\
 \hline
 \end{tabular}
-\caption{Comparison of how the net decay time, $T$ changes the total delayed neutron yield and average half-life.}
 \label{tab:net-decay-time-comparison}
 \end{table}
 

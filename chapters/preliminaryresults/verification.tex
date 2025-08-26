@@ -127,6 +127,7 @@ Using the modified 0D scaled model, where groups three through six use the Keepi
 
 \begin{table}[!h]
     \centering
+    \caption{Total delayed neutron yields of 100 fissions from thermal fission of $^{235}$U (based on \cite{huynh2014calculation}).}
     \begin{tabular}{lcl}
         \hline
        Approach & Data & Delayed Yield \\
@@ -152,6 +153,34 @@ Using the modified 0D scaled model, where groups three through six use the Keepi
 
         \hline
     \end{tabular}
-    \caption{Total delayed neutron yields of 100 fissions from thermal fission of $^{235}$U (based on \cite{huynh2014calculation}).}
     \label{tab:total-delnu-compare-net}
+\end{table}
+
+Table \ref{tab:avg-halflife-net} shows how the average half-lives compare between the 0D scaled model and the literature.
+The 0D scaled model average half-life is too short, which is primarily due to the overvaluing of the group 5 and 6 yields, which weighs those half-lives more than they should be.
+Using the modified 0D scaled model with groups three through six replaced by the Keepin et al. \gls{DNP} group parameters once again results in the model aligning much closer with the literature.
+This indicates, once again, the importance of the pulse irradiation data to properly capture the short-lived \gls{DNP} behavior.
+
+\begin{table}[!h]
+    \centering
+    \caption{Average half-life from thermal fission of $^{235}$U.}
+    \begin{tabular}{lcl}
+        \hline
+       Approach & Data & Average half-life $[s]$ \\
+       \hline
+        Microscopic & ENDF/B-VI.8 \cite{endf6}   & $7.66$ \\
+        Microscopic & Mills et al. \cite{mills1991study}    & $8.63 \pm 0.52$ \\
+        Microscopic & Brady and England \cite{brady1989delayed} & $7.90 \pm 0.34$\\
+        Microscopic & 0D Scaled Model Data & $6.39 \pm 0.38$\\
+        Microscopic & 0D Scaled Model & $6.39 \pm 0.34$ \\
+        Hybrid & Modified 0D Scaled Model & $8.74 \pm 0.46$\\
+        Macroscopic & Keepin et al. \cite{keepin1957delayed} & $9.03 \pm 0.63$ \\
+        Macroscopic & Charlton et al. \cite{charlton1996delayed}\tnote{*} & $8.92 \pm 0.28$\\
+        Macroscopic & Saleh et al. \cite{saleh1997measurements} & $9.49 \pm 0.90$ \\
+        Macroscopic & Synetos and Williams \cite{synetos1983delayed}\tnote{*} & $8.96 \pm 0.56$ \\
+        Macroscopic & Tuttle \cite{tuttle1975delayed}    & $8.84 \pm 0.45$\\
+        Macroscopic & Waldo et al.\cite{waldo1981delayed}    & $8.72 \pm 0.73$ \\
+        \hline
+    \end{tabular}
+    \label{tab:avg-halflife-net}
 \end{table}
