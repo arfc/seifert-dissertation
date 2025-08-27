@@ -285,43 +285,126 @@ However, there is generally better agreement when adjusting the shorter lived gr
 \subsubsection{Individual \glspl{DNP}}
 
 The number of Monte Carlo simulations is increased to 5000 for this analysis, as the contribution of each \gls{DNP} needs sufficient data to ensure differences in \gls{DNP} group parameters are caused by its own sampled variation.
-To find the nuclides with the most impactful sensitivities, a linear regression fits the slope of the relative change in \gls{DNP} group parameters to the relative change to the individual \gls{DNP} nuclear data.
-In particular, sensitivities of interest are where the absolute value of the \gls{PCC}, which describes the correlation between data on a scale from -1 to 1, is greater than 0.2.
-This value is selected somewhat arbitrarily, but gives a useful indication that a nuclide has a somewhat significant correlation with the \gls{DNP} group parameter of interest.
+To find the nuclides with the most impactful sensitivities, a linear regression fits the slope of the relative change in \gls{DNP} group parameters to the relative change to the individual \gls{DNP} nuclear data, while also calculating the \gls{PCC}.
+The \gls{PCC} describes the linear relationship between two variables on a scale from -1, representing a perfect negative correlation, +1 is a perfect positive correlation, and 0 is no correlation \cite{frey2018sage}. 
+The changes in nuclear data include changes to emission probability, $P_n$; fission yields, which affect the concentration, $N$; and half-lives, $\tau$.
 
-One of the most predictable sensitivities is $^{87}$Br on group one, as $^{87}$Br dominates this group.
-Specifically, the sensitivities that affect the \gls{DNP} group parameters with a \gls{PCC} greater than 0.2 are the emission probability on the group yield, the fission yield on the group yield, and the half-life on the group half-life.
-Surprisingly, there is also a correlation with group 3, where the emission probability of $^{87}$Br affects the \gls{DNP} group 3 half-life.
+Sensitivities of interest in this analysis are for absolute values of the \gls{PCC} greater than 0.2.
+This value is selected somewhat arbitrarily, but gives a useful indication that a nuclide has a non-negligible correlation with the \gls{DNP} group parameter of interest.
+The results of this analysis are given in Table \ref{tab:pcc-analysis}.
 
-\begin{figure}[!ht]
+\begin{table}[!ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/Half-life_Br87.png}
-    \caption{The difference in each \gls{DNP} group half-life from the $^{87}$Br relative changes in emission probability, half-life, and concentration.}
-    \label{fig:br87-0dscaled-sens-halflife}
-\end{figure}
+    \caption{\Glspl{PCC} with a magnitude larger than 0.2 for variation in \gls{DNP} data which correspond to changes in \gls{DNP} group parameters.}
+\begin{tabular}{lllr}
+\hline
+Nuclide & Group Value & \gls{DNP} Value & \gls{PCC} \\
+\hline
+$^{84}$Ga & $\tau_3 [s]$ & $N_i [-]$ & -0.211724 \\
+$^{84}$Ga & $\tau_4 [s]$ & $N_i [-]$ & -0.222001 \\
+$^{84}$Ga & $\tau_5 [s]$ & $N_i [-]$ & -0.203050 \\
+$^{85}$As & $\bar{\nu}_{d, 4} [-]$ & $N_i [-]$ & 0.757084 \\
+$^{85}$As & $\tau_4 [s]$ & $N_i [-]$ & -0.411166 \\
+$^{85}$As & $\bar{\nu}_{d, 5} [-]$ & $N_i [-]$ & 0.718393 \\
+$^{85}$As & $\tau_5 [s]$ & $N_i [-]$ & 0.448911 \\
+$^{88}$Br & $\bar{\nu}_{d, 3} [-]$ & $P_{n, i} [-]$ & 0.276294 \\
+$^{88}$Br & $\bar{\nu}_{d, 3} [-]$ & $\tau_i [s]$ & -0.221999 \\
+$^{88}$Br & $\tau_3 [s]$ & $P_{n, i} [-]$ & 0.379647 \\
+$^{88}$Br & $\tau_3 [s]$ & $N_i [-]$ & 0.264940 \\
+$^{138}$I & $\bar{\nu}_{d, 3} [-]$ & $P_{n, i} [-]$ & 0.211254 \\
+$^{137}$I & $\bar{\nu}_{d, 2} [-]$ & $P_{n, i} [-]$ & 0.478664 \\
+$^{137}$I & $\bar{\nu}_{d, 2} [-]$ & $\tau_i [s]$ & -0.270646 \\
+$^{137}$I & $\bar{\nu}_{d, 2} [-]$ & $N_i [-]$ & 0.746893 \\
+$^{137}$I & $\tau_2 [s]$ & $\tau_i [s]$ & 0.813782 \\
+$^{137}$I & $\tau_2 [s]$ & $N_i [-]$ & 0.252540 \\
+$^{86}$As & $\bar{\nu}_{d, 5} [-]$ & $N_i [-]$ & 0.512737 \\
+$^{98}$Y & $\bar{\nu}_{d, 4} [-]$ & $P_{n, i} [-]$ & 0.243371 \\
+$^{86}$Ge & $\bar{\nu}_{d, 2} [-]$ & $\tau_i [s]$ & -0.238309 \\
+$^{86}$Ge & $\tau_2 [s]$ & $\tau_i [s]$ & 0.359997 \\
+$^{86}$Ge & $\bar{\nu}_{d, 3} [-]$ & $\tau_i [s]$ & -0.637401 \\
+$^{86}$Ge & $\tau_3 [s]$ & $\tau_i [s]$ & 0.656167 \\
+$^{86}$Ge & $\bar{\nu}_{d, 4} [-]$ & $\tau_i [s]$ & -0.407397 \\
+$^{86}$Ge & $\tau_4 [s]$ & $\tau_i [s]$ & 0.673363 \\
+$^{86}$Ge & $\bar{\nu}_{d, 5} [-]$ & $\tau_i [s]$ & 0.263800 \\
+$^{86}$Ge & $\tau_5 [s]$ & $\tau_i [s]$ & 0.662307 \\
+$^{86}$Ge & $\bar{\nu}_{d, 6} [-]$ & $P_{n, i} [-]$ & 0.830397 \\
+$^{86}$Ge & $\bar{\nu}_{d, 6} [-]$ & $N_i [-]$ & 0.464433 \\
+$^{86}$Ge & $\tau_6 [s]$ & $P_{n, i} [-]$ & -0.306136 \\
+$^{86}$Ge & $\tau_6 [s]$ & $\tau_i [s]$ & 0.893433 \\
+$^{87}$Br & $\bar{\nu}_{d, 1} [-]$ & $P_{n, i} [-]$ & 0.896423 \\
+$^{87}$Br & $\bar{\nu}_{d, 1} [-]$ & $N_i [-]$ & 0.456307 \\
+$^{87}$Br & $\tau_1 [s]$ & $\tau_i [s]$ & 0.997442 \\
+$^{137}$Sb & $\bar{\nu}_{d, 3} [-]$ & $N_i [-]$ & 0.229445 \\
+$^{137}$Sb & $\tau_3 [s]$ & $N_i [-]$ & -0.229578 \\
+$^{137}$Sb & $\tau_4 [s]$ & $N_i [-]$ & -0.250857 \\
+$^{137}$Sb & $\tau_5 [s]$ & $N_i [-]$ & -0.299691 \\
+\hline
+\end{tabular}
+\label{tab:pcc-analysis}
+\end{table}
 
+Many of the correlations in Table \ref{tab:pcc-analysis} are intuitively understandable.
+One of the most predictable sensitivities is the effect of $^{87}$Br on the group one half-life and yield, as $^{87}$Br dominates this group.
+Specifically, the sensitivities that affect the \gls{DNP} group parameters with a \gls{PCC} greater than 0.2 are the emission probability on the group yield, the concentration on the group yield, and the half-life on the group half-life.
+Figure \ref{fig:br87-sens-0dscaled} shows how the group one parameters vary with changes in the $^{87}$Br data, as well as less strongly correlated data, such as the emission probability of $^{87}$Br on the group three half-life.
+Although it is not intuitive that changes to the emission probability of $^{87}$Br would affect the half-life of group three, there is a non-zero correlation.
+This is because the \gls{DNP} group parameters cannot be taken in isolation, but as a collective set of parameters that best fit the delayed neutron count rate curve.
+Thus, changes to that curve propagate to all group parameters, albeit with varying magnitudes to different groups and different parameters.
 
 \begin{figure}[!ht]
 \centering
-\subfloat[\gls{DNP} group 1 yield variation due to emission probability variation.]{
+\subfloat[\gls{DNP} group 1 yield variation due to emission probability variation with a \gls{PCC} of 0.90.]{
   \includegraphics[width=0.45\linewidth]{images/sens_pn_yield_Br87_1.png}
 }
 \hspace{0.05\linewidth}
-\subfloat[\gls{DNP} group 1 yield variation due to fission yield variation.]{
+\subfloat[\gls{DNP} group 1 yield variation due to fission yield variation with a \gls{PCC} of 0.46.]{
   \includegraphics[width=0.45\linewidth]{images/sens_conc_yield_Br87_1.png}
 }
 \hspace{0.05\linewidth}
-\subfloat[\gls{DNP} group 1 half-life variation due to half-life variation.]{
+\subfloat[\gls{DNP} group 1 half-life variation due to half-life variation with a \gls{PCC} of 1.00.]{
   \includegraphics[width=0.45\linewidth]{images/sens_lam_halflife_Br87_1.png}
 }
 \hspace{0.05\linewidth}
-\subfloat[\gls{DNP} group 3 half-life variation due to emission probability variation.]{
+\subfloat[\gls{DNP} group 3 half-life variation due to emission probability variation with a \gls{PCC} of -0.19.]{
   \includegraphics[width=0.45\linewidth]{images/sens_pn_halflife_Br87_3.png}
 }
 \caption{\gls{DNP} group parameter sensitivity to changes in $^{87}$Br nuclear data.}
-\label{fig:time-and-nodes}
+\label{fig:br87-sens-0dscaled}
 \end{figure}
 
+Another nuclide of interest in Table \ref{tab:pcc-analysis} is $^{86}$Ge, as it is also an important nuclide for calculating delayed neutron yield contributions as shown in Figure \ref{fig:delnu-dnp-contributions}.
+It can be seen that $^{86}$Ge has an impact on many \gls{DNP} group parameters as there is variation in different parameters, especially its half-life.
+Figures \ref{fig:ge86-0dscaled-sens-halflife} and \ref{fig:ge86-0dscaled-sens-yield} show the sensitivity to each \gls{DNP} group parameter to each variation in data for $^{86}$Ge.
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/Half-life_Ge86.png}
+    \caption{The difference in each \gls{DNP} group half-life from the $^{86}$Ge relative changes in emission probability, half-life, and concentration.}
+    \label{fig:ge86-0dscaled-sens-halflife}
+\end{figure}
+
+Figure \ref{fig:ge86-0dscaled-sens-halflife} has the largest sensitivities for the group half-lives when there are changes in the half-life of $^{86}$Ge.
+It is interesting to note that, for increasingly longer-lived groups, the impact of the half-life of $^{86}$Ge on the group half-life becomes less and less.
+This is intuitive, as a short-lived nuclide such as $^{86}$Ge should have much more impact on short-lived groups than on long-lived groups.
+Another interesting pattern is that the group six half-life of $^{86}$Ge sensitivity appears to have a line below which there are no data points, indicating a lack of symmetry.
+This shape is likely due to the fact that there are many longer-lived \glspl{DNP}, whereas $^{86}$Ge is one of the few very short-lived \glspl{DNP} that dominates in this time regime.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/Yield_Ge86.png}
+    \caption{The difference in each \gls{DNP} group yield from the $^{86}$Ge relative changes in emission probability, half-life, and concentration.}
+    \label{fig:ge86-0dscaled-sens-yield}
+\end{figure}
+
+Figure \ref{fig:ge86-0dscaled-sens-yield} shows there are changes in the group yields based on changes in the half-life of $^{87}$Br.
+There is not a clear trend moving from shorter to longer-lived groups, though there are some negative correlations for groups three and four, which may indicate that a longer-lived $^{87}$Br leads to a decreased yield in those groups while also increasing their half-lives, as shown in Figure \ref{fig:ge86-0dscaled-sens-halflife}.
+This indicates those groups capture fewer short-lived \glspl{DNP} as the half-life of $^{87}$Br increases both by increasing their group half-lives and decreasing their yields.
+Another interesting sensitivity correlation is the emission probability of $^{87}$Br on the group six yield, which appears to have a narrow spread of values for small emission probabilities but then spreads out for larger emission probabilities.
+The trend is positive, which is because the half-life of $^{87}$Br is very short and is contained in group six.
+One contributing factor to this spreading out of the yield is likely due to the lack of pulse irradiation data.
+Because the short-lived groups are less accurate without this data, removing $^{87}$Br leads to a more consistent yield in group six.
+However, as $^{87}$Br becomes more impactful, the possible value for the yield spreads out due to the lack of pulse irradiation data.
 
 
 \FloatBarrier
