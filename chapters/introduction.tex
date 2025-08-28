@@ -11,7 +11,6 @@ Another barrier to deployment is in reactor safety, security, and safeguards by 
 To properly design \glspl{MSR}, we must have models which are able to simulate them correctly.
 One specific phenomena which is of critical importance in \glspl{MSR} are the \glspl{DNP}.
 
-
 \Glspl{DNP} are nuclides which decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
 Properly modeling the \glspl{DNP} in reactors is important, otherwise simulations may predict incorrect power responses, reactivity worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
 The \glspl{DNP} are typically not modeled explicitly in simulations, but are instead represented using \gls{DNP} group parameters, which are intended to have the same physical effect at a much lower computational cost.
@@ -51,10 +50,11 @@ A brief historical timeline of \gls{DNP} group parameter modeling advancements i
 \rule{\linewidth}{1pt}
 \ytl{1983}{England et al. generates \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}}
 \ytl{1988}{Brady generates \gls{DNP} group parameters and spectra using 271 \glspl{DNP} using least squares \cite{brady1988evaluation}. Group parameters in ENDF/B-VI.8 set and remain unchanged through ENDF/B-VIII.0 \cite{wilson2002delayed, Brown20181, endf6, brady1989delayed, england1988status, brady1989validation}}
-\ytl{1999}{Parish et al. states \gls{DNP} group parameters are in need of revision \cite{parish1999status}}
+\ytl{1999}{Parish et al. states \gls{DNP} group parameters in \gls{ENDF} are in need of revision \cite{parish1999status}}
 \ytl{2014}{\gls{IAEA} \gls{CRP} on Development of a Reference Database for
 $\beta$-delayed neutron emission data \cite{mills2014calculation}}
 \ytl{2020}{Leconte et al. uses more than 400 \glspl{DNP} to combine data with macroscopic experimental measurements \cite{leconte2020new}}
+\ytl{2025}{This study develops \gls{DNP} group parameters for use in \glspl{MSR}}
 \bigskip
 \rule{\linewidth}{1pt}%
 \end{minipage}%
@@ -84,14 +84,3 @@ Finally, the verification with results from the literature reveals a main weakne
 This results in a poor set of \gls{DNP} group parameters for short-lived groups.
 
 The proposed work includes evaluation of the improved \gls{DNP} group parameters, evaluation of data, uncertainty quantification, group spectra generation, additional model development, and kinetics simulations.
-
-
-
-
-
-This document should contain tabulated data for various fissile nuclides, neutron irradiation energies, in-core residence times, ex-core residence times, and mixing rates.
-Additionally, data should be provided on the exact concentrations of each nuclide (up to $99\%$ of the DN yield).
-
-Could also discuss various datasets.
-\cite{mathieu2012new} - shows various datasets, most important nuclides, and the error associated with them (2012).
-\cite{huynh2014calculation} - Lots of delnu data (2014).

@@ -23,7 +23,7 @@ This treatment reduces both the covariance and the $\chi^2$ of the fit.
 \end{comment}
 The residual of the solve is given in Equation \eqref{eq:residual}, recreated here as:
 \begin{equation}
-    r = min_x \left| \left| \frac{b - Ax}{b + \epsilon} \right| \right|. \nonumber
+    r = min_x \left| \left| \frac{b - Ax}{b + \epsilon} \right| \right|_2^2. \nonumber
 \end{equation}
 Half-life bounds are set from 1 millisecond to 1000 seconds, and the yield bounds are from 0 to 1.
 Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.

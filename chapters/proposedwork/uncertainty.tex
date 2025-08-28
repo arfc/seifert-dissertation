@@ -22,7 +22,7 @@ However, a simpler approach is to use the flux calculated from OpenMC along with
 The uncertainties in the data and flux are then propagated through \gls{MoSDeN} using the Uncertainties package and applied to various analyses \cite{uncertaintiespackage}.
 
 \subsection{MSR Uncertainties}
-In addition to data uncertainties, uncertainties exist in \gls{MSR} phenomena.
+In addition to data uncertainties, uncertainties exist in \gls{MSR} phenomena which can affect the improved \gls{DNP} group parameters' uncertainties.
 These include uncertainties in the in-core residence time, ex-core residence time, and chemical removal rates.
 Section \ref{sec:sens-studies} discusses the sensitivity of the \gls{DNP} group parameters to these terms.
 It is important to understand the potential uncertainty in these terms, as the residence times and chemical removal rates are not without uncertainty.
@@ -31,15 +31,17 @@ The residence time correlates linearly with the flow rate, which is dependent on
 Although the flow rate would also have uncertainty based on variance in the pump, this uncertainty is considered outside the scope of this work.
 The temperature affects fuel salt density, buoyant force, and viscosity, all influencing the flow rate and residence time.
 The temperature is influenced by the fission rate, which has uncertainties from the flux and fission cross section.
-For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the temperature uncertainty as the difference between the inlet and outlet temperatures for the core.
-Assuming a constant mass flow rate, the density change due to the large temperature uncertainty provides a velocity uncertainty, which determines the residence time uncertainty.
+For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the difference between the inlet and outlet temperatures as the temperature uncertainty.
+Assuming a constant mass flow rate, the density change due to the large temperature uncertainty provides a velocity uncertainty, which determines the variance in the residence time.
 If this conservative approach to temperature uncertainty results in negligible residence time uncertainty, it can be neglected for the spatially resolved flow model.
 Otherwise, the spatially resolved flow model can account for this uncertainty using the \textsc{Stochastic Tools} module to directly determine residence time uncertainties.
+The \textsc{Stochastic Tools} module is a toolbox designed for performing stochastic analysis for \gls{MOOSE}-based applications.
+The \textsc{Stochastic Tools} module enables setting a range of temperatures and simulating each temperature, which can be used to generate a histogram of residence times as a function of core temperature.
 
 The chemical removal uncertainty is challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
 The removal efficiency of xenon in a gas separation system is given by \cite{peebles1968removal, rykhlevskii2020fuel} as:
 \begin{equation}
-    \epsilon = \frac{1-e^{-K_LaA_CL \left(\frac{1}{Q_{salt}}+\frac{RT}{H} \frac{1}{Q_{He}} \right) }}{1+\frac{RT}{H} \frac{Q_{salt}}{Q_{He}}},
+    \epsilon = \frac{1-e^{-k_LaA_CL \left(\frac{1}{Q_{salt}}+\frac{RT}{H} \frac{1}{Q_{He}} \right) }}{1+\frac{RT}{H} \frac{Q_{salt}}{Q_{He}}},
     \label{eq:xe-eff}
 \end{equation}
 where,
@@ -49,13 +51,13 @@ where,
     H &= \text{Henry's law constant for solute gas $[Pa \cdot mol^{-1} \cdot L]$} \nonumber \\
     Q_{salt} &= \text{the volumetric salt flow rate $[m^{3} \cdot s^{-1}]$} \nonumber \\
     Q_{He} &= \text{the volumetric helium flow rate $[m^{3} \cdot s^{-1}]$} \nonumber \\
-    K_L &= \text{the liquid phase mass transfer coefficient $[m \cdot s^{-1}]$} \nonumber \\
+    k_L &= \text{the liquid phase mass transfer coefficient $[m \cdot s^{-1}]$} \nonumber \\
     a &= \text{the gas-liquid interfacial area per unit volume $[m^{-1}]$} \nonumber \\
     A_C &= \text{the contactor cross-section $[m^{2}]$ } \nonumber \\
     L &= \text{the contractor length $[m]$.} \nonumber
 \end{align}
 
-The reductive liquid-liquid bismuth extraction distribution coefficient and equilibrium constant depend on the element, temperature, and concentration \cite{moriyama1984reductive}.
+The liquid-liquid reductive extraction, such as with bismuth, has distribution coefficients and equilibrium constants dependent on the element, temperature, and concentration \cite{moriyama1984reductive}.
 In general, an increase in the temperature leads to an increased distribution coefficient and a decreased equilibrium constant.
 The distribution coefficient represents the ratio of the bismuth phase concentration to the salt phase concentration, and can be thought of as an efficiency term that is multiplied with the mass flow rate to determine the removal rate.
 However, the distribution coefficient changes with temperature and flow rate differently for each element and fuel salt used.
@@ -83,7 +85,7 @@ For the 0D flow model, this removal occurs while the sample is in the ex-core re
 This is because the removal occurs in the pump bowl and not inside the core.
 For the spatially resolved flow model, this removal also occurs in the ex-core region, treated in the same way as the 0D flow model.
 
-The removal rate, $\lambda_r$, of noble metals via plate-out is \cite{lo2022application}:
+The removal rate, $\lambda_{i, l, r}$, of noble metal $i$ to waste stream $l$ via plate-out is \cite{lo2022application}:
 \begin{align}
     \lambda_{i, l, r} = \frac{h_{i, l} A_l}{V},
     \label{eq:rem-plateout}

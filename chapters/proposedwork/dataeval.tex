@@ -46,6 +46,7 @@ Investigating these data sources and comparing the \gls{DNP} group parameters ge
 If the differences are large, understanding the uncertainty propagation will be important.
 If the differences are negligible, this will simplify further uncertainty analysis.
 
+\begin{comment}
 \subsection{Fission Yield Time Resolution}
 The time resolution for formation of \glspl{DNP} is irrelevant for stationary, saturation irradiation \gls{DNP} group parameter formulations, allowing the use of cumulative fission yields instead of full depletion simulations.
 However, the time resolution of \gls{DNP} formation needs to be considered for group parameter calculations including circulation.
@@ -64,6 +65,7 @@ The \gls{DNP} group parameters will be generated using each method for various r
 
 If the \gls{DNP} group parameters are identical for all residence times, this will significantly reduce computational costs, and the simpler method will be implemented.
 If non-negligible differences exist, the more costly full depletion method will continue to be used.
+\end{comment}
 
 \subsection{Number of DNP}
 The number of \glspl{DNP} to track is of particular interest for the spatially resolved flow model.
@@ -87,7 +89,7 @@ A full sensitivity study will be conducted to determine a reasonable number of \
 
 \subsection{Incident Neutron Energy Spectra}
 \label{sec:indidentspectra}
-The incident neutron energy spectrum directly affects the \gls{DNP} group parameters.
+The incident neutron energy spectrum directly affects the \gls{DNP} group parameters \cite{brady1989delayed}.
 However, it would be computationally expensive to generate new \gls{DNP} group parameters for every unique incident neutron energy spectrum.
 Some coarser resolution is required, so it is of interest to determine a reasonable categorization of the \gls{DNP} group parameters for different energy spectra.
 
@@ -103,14 +105,14 @@ The study will also examine hand-crafted spectra where the mean and median remai
     \caption{Classification of neutron energy categories by energy range from \cite{l2003nuclear}.}
     \begin{tabular}{cc}
     \hline
-        Category & Energy Range \\
+        Category & Energy Range $[MeV]$ \\
     \hline
-      Cold   & $< 0.003$ $[eV]$ \\
-      Thermal & $0.003 - 0.4$ $[eV]$ \\
-      Epithermal & $0.4 - 100$ $[eV]$ \\
-      Intermediate & $0.1 - 200$ $[keV]$ \\
-      Fast & $0.2 - 10$ $[MeV]$ \\
-      Relativistic & $> 10$ $[MeV]$ \\
+      Cold   & $< 3 \times 10^9$ \\
+      Thermal & $3 \times 10^9 - 4 \times 10^7$ \\
+      Epithermal & $4 \times 10^7 - 1 \times 10^4$ \\
+      Intermediate & $1 \times 10^4 - 2 \times 10^{-1}$ \\
+      Fast & $2 \times 10^{-1} - 1 \times 10^1$ \\
+      Relativistic & $> 1 \times 10^1$ \\
     \hline
     \end{tabular}
     \label{tab:neutronenergyspectra}
@@ -140,9 +142,9 @@ where,
 \begin{align}
     r &= \text{the residual of the problem [-]} \nonumber \\
     A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_p &= \text{the pulse irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
+    b_p &= \text{the pulse irradiation delayed neutron count rate $[n \cdot s^{-1}]$} \nonumber \\
     A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_s &= \text{the saturation irradiation delayed neutron count rate data $[n \cdot s^{-1}]$} \nonumber \\
+    b_s &= \text{the saturation irradiation delayed neutron count rate $[n \cdot s^{-1}]$} \nonumber \\
     x &= \text{the solution vector containing group yields [-]} \nonumber \\
     \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
     &= 1\times10^{-12}. \nonumber

@@ -40,6 +40,7 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
 \end{table}
 
 The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.% (or $\beta_i$).
+The group yields are also known as group abundances, and can be found represented using $a_k$, $b_k$, $\nu_{dk}$, and $\alpha_k$ in the literature \cite{keepin1957delayed, williams1996choice, ott1985introductory, brady1989delayed}.
 These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event, as shown in Equation \eqref{eq:betai}.
 The group yields represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
 The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP} groups, along with the group spectra, $\chi_k$, for \gls{DNP} group $k$.
@@ -217,9 +218,9 @@ n_d(t_m)\\
 \end{equation}
 Using ordinary least squares, with a non-relative residual, would lead to early time step count rates dominating due to their larger magnitudes.
 One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
-Another way to resolve this is to use a relative residual, as given by Equation \eqref{eq:residual}.
+Another way to resolve this is to use a relative residual, given by Equation \eqref{eq:residual} as:
 \begin{equation}
-    r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|,
+    r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|_2^2,
     \label{eq:residual}
 \end{equation}
 where,
@@ -227,6 +228,11 @@ where,
     \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
     &= 1\times10^{-12}. \nonumber
 \end{align}
+The Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm} as:
+\begin{equation}
+    ||\vec{x}||_2 = \sqrt{x_1^2 + \cdots + x_n^2}.
+    \label{eq:euc-norm}
+\end{equation}
 
 By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
@@ -403,7 +409,7 @@ This yields Equation \eqref{eq:delnu-net-nuc}, where the total number of delayed
     \int_0^{\infty} \dot{n}_{d, i}(t) dt= P_{n, i} N_{i} (0).
     \label{eq:delnu-net-nuc}
 \end{equation}
-After dividing by the total number of fission events, Equation \eqref{eq:delnu-net-nuc-CFY} shows that the total delayed neutron yield can be written as \cite{huynh2014calculation}:
+After dividing by the total number of fission events, Equation \eqref{eq:delnu-net-nuc-CFY} shows that the total delayed neutron yield can be written as \cite{huynh2014calculation, mathieu2012new}:
 \begin{equation}
     \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i,
     \label{eq:delnu-net-nuc-CFY}
