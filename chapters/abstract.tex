@@ -4,33 +4,34 @@ This causes the effective delayed neutron fraction to decrease, leading to chang
 \glspl{DNP} are important for modeling and simulation of \glspl{MSR}.
 
 Many studies have investigated how the effective delayed neutron fraction changes based on the movement of fuel salt in \glspl{MSR}.
-These studies do not account for the effect of fuel salt movement and reprocessing on the \gls{DNP} group parameters used in the transient simulations.
-The effect of neglecting these \gls{MSR}-specific phenomena is reduced accuracy in the \gls{DNP} group parameters.
+However, these studies do not account for the effect of fuel salt movement and reprocessing on the \gls{DNP} group parameters used in the transient simulations.
+The effect of neglecting these \gls{MSR}-specific phenomena is reduced accuracy in the \gls{DNP} group parameters in \gls{MSR} simulations.
 
 These phenomena are important to consider, as simulations use the \gls{DNP} group parameters to enable safety, security, and safeguards by design.
 By using \gls{DNP} group parameters with greater accuracy, models can more accurately reflect physical phenomena.
 Having greater accuracy in predictive models is key for developing an advanced reactor pipeline.
 
-The \gls{DNP} group parameters for \glspl{MSR} are resolved using the microscopic, or aggregate or summation, method.
+The \gls{DNP} group parameters for \glspl{MSR} are resolved using the microscopic, also known as aggregate or summation, method.
 This method entails using individual \gls{DNP} data to reconstruct the \gls{DNP} groups by summing them together in simulated irradiation experiments.
 Pulse irradiation experiments occur at very short time scales relative to \gls{MSR} physical phenomena and are used to generate the short lived \gls{DNP} group parameters.
 Saturation, or infinite, irradiation experiments occur at time scales several times longer than the longest \gls{DNP} half-life and are used to generate the longer lived \gls{DNP} group parameters.
 Because the saturation irradiation lasts on the order of minutes, the thermal-hydraulic and chemical effects in \glspl{MSR} have a non-negligible impact.
-Therefore, the longer lived \gls{DNP} group parameters will vary, while the shorter lived \gls{DNP} group parameters will remain the same.
+Therefore, the longer lived \gls{DNP} group parameters will vary, while the shorter lived \gls{DNP} group parameters will remain constant.
 
 A non-linear least squares solver is used to generate an improved set of \gls{DNP} group parameters.
-A specific \gls{DNP} group parameter set is proposed for a particular set of conditions in the \gls{MSRE}.
+%A specific \gls{DNP} group parameter set is proposed for a particular set of conditions in the \gls{MSRE}.
 Verification is conducted via comparison with total delayed neutron yields and average half-lives from the literature.
 
-The results demonstrate the validity of these \gls{MSR} phenomena-inclusive \gls{DNP} group parameters.
+%The results demonstrate the validity of these \gls{MSR} phenomena-inclusive \gls{DNP} group parameters.
 The methodology used to generate these parameters can be replicated for other \gls{MSR} conditions, enabling the formation of more accurate sets of \gls{DNP} group parameters for \glspl{MSR}.
 This improves the accuracy of \gls{MSR} simulations, which is important for safety, security, and safeguards by design as well as for developing an advanced reactor pipeline.
 Proposed work includes the following: development and evaluation of a more sophisticated model for generating the \gls{DNP} group parameters,
 validation via comparison with the \gls{MSRE} during pump start-up and coast-down,
-generation of polynomial fits for various parameters used in the \gls{DNP} group generation,
+%generation of polynomial fits for various parameters used in the \gls{DNP} group generation,
 generation of \gls{DNP} group spectra,
-uncertainty quantification,
-analysis of the flux shape effect on \gls{DNP} group parameters,
+evaluation of various safety, security, and safeguards related transients using improved \gls{DNP} group parameters,
+%uncertainty quantification,
+%analysis of the flux shape effect on \gls{DNP} group parameters,
 and evaluation of various datasets on \gls{DNP} group parameters.
 
 
