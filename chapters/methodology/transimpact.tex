@@ -1,4 +1,4 @@
-The impact of the \gls{DNP} groups on transients is evaluated using Moltres with fluid-flow-velocity field coupled multi-group diffusion kinetics, as discussed in Section \ref{sec:mgd-kinetics}.
+The impact of the \gls{DNP} groups on transients will be evaluated using Moltres with fluid-flow-velocity field coupled multi-group diffusion kinetics, as discussed in Section \ref{sec:mgd-kinetics}.
 This approach provides high-fidelity results by coupling thermal-hydraulics and neutronics, a necessity for \gls{MSR} modeling.
 Modeling every \gls{DNP} in space and time would be prohibitively expensive, so they are instead modeled using \gls{DNP} group parameters.
 Moltres allows direct comparison between static \gls{DNP} group parameters, which do not account for \gls{MSR} phenomena, and parameters that do.
@@ -48,6 +48,7 @@ As sabotage may initiate multiple safety-related transients simultaneously, it i
 With four unique transients, this results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten security-related sabotage-initiated transients.
 
 \subsection{Safeguards}
+\label{sec:safeguards}
 Safeguards are discussed in Section \ref{sec:safeguards}, but the main takeaway is the importance of preventing \gls{SNM} diversion in \glspl{MSR}.
 Detection methods, such as neutron detectors and surveillance systems, play a key role in safeguarding the reactor \cite{zubair2024nuclear}.
 The improved \gls{DNP} group parameters in this work affect the effective delayed neutron fraction and reactivity response.
@@ -55,16 +56,6 @@ Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts l
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
 To investigate this, diversion scenarios are studied with a single significant quantity of material removed over the course of one year, simulated using OpenMC.
-The \gls{DNP} group parameters are then generated for the fuel composition at that time, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
-For example, the total delayed neutron yield is given as:
-\begin{equation}
-    \bar{\nu}_{d} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
-\end{equation}
-where,
-\begin{align}
-    \bar{\nu}^{(F)}_{d} &= \text{the total delayed neutron yield for nuclide $F$ [-]}\\
-    \Sigma_f^{(F)} &= \text{the macroscopic fission cross section for nuclide $F$ $[cm^{-1}]$}.
-\end{align}
-These weighted group parameters are generated using the static and the improved values.
-Then, they can be used in simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
+The change in the fuel salt composition affects the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
+The importance and fission-weighted \gls{DNP} group parameters can be used in simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
 If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.

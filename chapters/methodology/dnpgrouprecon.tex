@@ -1,4 +1,4 @@
-Once the delayed neutron count rate is generated, it is converted into \gls{DNP} group parameters.
+Once the delayed neutron count rate is generated, it is used to generated the improved \gls{DNP} group parameters, $\bar{\nu}_{d, k}$ and $\lambda_k$.
 Fitting the \gls{DNP} group parameters to the delayed neutron count rate curve requires a non-linear least squares method, as both the group half-lives and yields must be determined.
 The equation describing the problem appears in Equation \eqref{eq:delnu-fit}, recreated here:
 \begin{equation}
@@ -27,9 +27,6 @@ The residual of the solve is given in Equation \eqref{eq:residual}, recreated he
 \end{equation}
 Half-life bounds are set from 1 millisecond to 1000 seconds, and the yield bounds are from 0 to 1.
 Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
-
-Sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is another consideration.
-However, since the fission counts are taken directly from OpenMC tallies, self-multiplication is included and does not introduce error.
 
 The final consideration in \gls{DNP} group reconstruction is uncertainty.
 This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.

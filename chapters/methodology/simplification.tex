@@ -7,44 +7,48 @@ The terms derive from the averaged behavior of a fuel salt control volume, treat
 This method allows for approximate fitting of any circulating fuel reactor, requiring only the generation of relevant parameters for determining the associated \gls{DNP} group parameters.
 
 The other required parameters describe chemical removal, which varies by fission product and reprocessing rate.
-Refueling is not considered in this work, as its effects are negligible over the short time frames analyzed.
+Refueling could also be of interest, but only a single sample of fissile material is considered during irradiation.
+The introduction of fresh fuel would affect the incident neutron energy spectrum on the fissile sample, and is considered in Section \ref{sec:future-work}.
+%Refueling is not considered in this work, as its effects are negligible over the short time frames analyzed.
 An irradiation time of approximately seven minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
 Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:large-tcyc}.
 Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
 
 The \gls{MSBR} reprocessing scheme serves as the basis for analyzing the most extreme cycle times in this work.
 This is because the \gls{MSBR} presents very large chemical removal rates, providing useful conservative estimates as to the impact these large removal rates could have on \gls{DNP} group parameters.
-These chemical removal rates are given in Table \ref{tab:msbr_cycle_times} as cycle times, the inverse of the chemical removal rate.
+These chemical removal rates are given in Table \ref{tab:msbr_cycle_times}.
 Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have small removal rates relative to the time scales of interest for saturation irradiations.
-Section \ref{sec:large-tcyc} examines these longer cycle times to confirm their negligible impact.
+Section \ref{sec:large-tcyc} examines these longer cycle times, the inverse of the removal rates, to confirm their negligible impact.
 Section \ref{sec:repr-scale} scales the cycle times to analyze how reprocessing rates influence the group parameters.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
-\caption{MSBR Online Reprocessing Cycle Times from \cite{robertson_conceptual_1971}.}
+\caption{MSBR Online Reprocessing Removal Rates from \cite{robertson_conceptual_1971}.}
 \label{tab:msbr_cycle_times}
 \begin{center}
-\begin{tabular}{ p{0.27\linewidth}  p{0.25\linewidth}  p{0.35\linewidth} }
+\begin{tabular}{ l p{\dimexpr 0.25\linewidth-2\tabcolsep} r}
  \hline
- Reprocessing Group & Element(s) & Cycle Time (Full Power)\\
+ Reprocessing Group & Element(s) & Removal Rate $[s^{-1}]$\\
  \hline
- Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & 50 days\\
- Rare Earths & Eu & 500 days\\
- Noble Metals  & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & 20 seconds\\
- Seminoble Metals & Zr, Cd, In, Sn &  200 days\\
- Gases & Kr, Xe & 20 seconds\\
- Volatile Fluorides & Br, I & 60 days\\
- Discard & Rb, Sr, Cs, Ba & 3435 days\\
- Salt Discard & Th, Li, Be, F & 3435 days\\
- Protactinium & Pa & 3 days\\
- Higher Nuclides & Np, Pu & 16 years\\
+ Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & $2.32 \times 10^{-7}$\\
+ Rare Earths & Eu & $2.32 \times 10^{-8}$\\
+ Noble Metals  & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & $5.00 \times 10^{-2}$\\
+ Seminoble Metals & Zr, Cd, In, Sn &  $5.79 \times 10^{-8}$\\
+ Gases & Kr, Xe & $5.00 \times 10^{-2}$\\
+ Volatile Fluorides & Br, I & $1.93 \times 10^{-7}$\\
+ Discard & Rb, Sr, Cs, Ba & $3.37 \times 10^{-9}$\\
+ Salt Discard & Th, Li, Be, F & $3.37 \times 10^{-9}$\\
+ Protactinium & Pa & $3.86 \times 10^{-6}$\\
+ Higher Nuclides & Np, Pu & $1.98 \times 10^{-9}$\\
  \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-With the chemical reprocessing scheme in place, the next step to generate the \gls{DNP} group parameters is to decide on the level of fidelity. 
-In this work, the three levels of fidelity are scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.
+With the chemical reprocessing scheme in place, the next step to generate the improved \gls{DNP} group parameters is to decide on the level of fidelity. 
+The three levels of fidelity are the 0D scaled model, the 0D flow model, and the spatially resolved model.
+The 0D scaled model is completed, the 0D flow model is planned, and the spatially resolved model is a potential future development.
+%scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.
 
 A Monte Carlo sampling approach is used to propagate uncertainties in the various inputs, such as in emission probabilities, half-lives, fission yields, reprocessing terms, or residence times.
 The sampling approach simply repeats the process for generating the \gls{DNP} group yields, but with randomly sampled input data.
@@ -54,5 +58,7 @@ This is because the uncertainties in the delayed neutron count rate are not inde
 For generation of the improved \gls{DNP} group parameters, the main goal is to formulate them for individual fissile nuclides.
 For some of the analyses presented in this work, the fissions do not come from a single fissile nuclide.
 For these analyses, a fission-weighted approach is used, where the \gls{DNP} group parameters are scaled based on the fraction of fissions that lead to those group parameters.
-This is less accurate than using an adjoint weighted approach, but the main purpose of this work is to present these improved parameters rather than formulating an optimal analysis using them \cite{radaideh2019new}.
-The fission-weighted approach does not account for the difference in fission spectrum between delayed and prompt neutrons.
+Equations \eqref{eq:nubar-fw} and \eqref{eq:decayconst-fw} show how the fission-weighted \gls{DNP} group parameters can be calculated.
+The fission-weighted values can then be multiplied by an importance term to account for the difference between the delayed and prompt neutron fission spectra, as shown in Equations \eqref{eq:yield-fw-import} and \eqref{eq:decay-fw-import} \cite{radaideh2019new}.
+
+

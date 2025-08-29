@@ -236,7 +236,6 @@ The Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm} as:
 
 By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
-
 \begin{equation}
 \lambda_k = \frac{\sum_{F} \lambda_k^{(F)} \beta_{k, eff}^{(F)}}{\sum_F \beta_{k, eff}^{(F)}},
 \label{eq:lami-multinuc}
@@ -245,6 +244,46 @@ where,
 \begin{align}
     \lambda_k^{(F)} =& \text{ the decay constant of \gls{DNP} group $k$ from fission of nuclide $F$} \nonumber \\
     \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$. } \nonumber
+\end{align}
+
+Alternatively, a fission-weighting approach can be used.
+The \gls{DNP} group parameters are generated for a given fuel composition, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
+For example, the delayed neutron yield of group $k$ is given as:
+\begin{equation}
+    \bar{\nu}_{d, k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d, k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
+    \label{eq:nubar-fw}
+\end{equation}
+while the decay constant of group $k$ is given as:
+\begin{equation}
+    \lambda_{k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \lambda^{(F)}_{k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
+    \label{eq:decayconst-fw}
+\end{equation}
+where
+\begin{align}
+    \bar{\nu}^{(F)}_{d, k} &= \text{the \gls{DNP} group $k$ delayed neutron yield from nuclide $F$ [-]} \nonumber \\
+    \lambda^{(F)}_{k} &= \text{the \gls{DNP} group $k$ decay constant from nuclide $F$ $[s^{-1}]$} \nonumber \\
+    \phi &= \text{the neutron flux $[cm^{-2} \cdot s^{-1}]$} \nonumber \\ 
+    \bar{\nu}^{(FW)}_{d, k} &= \text{the fission-weighted \gls{DNP} group $k$ delayed neutron yield [-]} \nonumber \\
+    \lambda^{(FW)}_{k} &= \text{the fission-weighted \gls{DNP} group $k$ decay constant $[s^{-1}]$} \nonumber\\
+    \Sigma_f^{(F)} &= \text{the macroscopic fission cross section for nuclide $F$ $[cm^{-1}]$}. \nonumber
+\end{align}
+
+The fission-weighted values can also be multiplied by an importance term to account for the difference between the delayed and prompt neutron fission spectra \cite{radaideh2019new}.
+Equation \eqref{eq:nubar-fw} becomes:
+\begin{equation}
+    \bar{\nu}_{d, k} = \bar{\nu}^{(FW)}_{d, k} \frac{\int \chi_{d, k}(E) \phi^*(E) dE}{\int \chi(E) \phi^*(E) dE},
+    \label{eq:yield-fw-import}
+\end{equation}
+and Equation \eqref{eq:decayconst-fw} becomes:
+\begin{equation}
+    \lambda_{k} = \lambda^{(FW)}_{k} \frac{\int \chi_{d, k}(E) \phi^*(E) dE}{\int \chi(E) \phi^*(E) dE},
+    \label{eq:decay-fw-import}
+\end{equation}
+where
+\begin{align}
+    \chi_{d, k} &= \text{ the delayed neutron fission spectrum for \gls{DNP} group $k$ [-]} \nonumber \\
+    \chi &= \text{ the total fission spectrum [-]} \nonumber \\
+    \phi^* &= \text{ the adjoint flux $[cm^{-2} \cdot s^{-1}]$} \nonumber.
 \end{align}
 
 These equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
