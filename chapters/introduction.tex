@@ -1,7 +1,7 @@
 
-One of the generation IV reactor designs is the liquid fueled molten salt reactor, or \gls{MSR} \cite{kelly_generation_2014}. 
+One of the generation IV reactor designs is the \gls{MSR} \cite{kelly_generation_2014}. 
 \Glspl{MSR} are advanced reactors which are intended to improve safety and efficiency over previous reactor designs.
-\Glspl{MSR}, instead of a solid fuel, use a liquid fuel composed of a molten salt mixed with some fissile nuclide, such as $^{235}$U.
+Instead of a solid fuel, \glspl{MSR} use a liquid fuel composed of a molten salt with some fissile nuclide, such as $^{235}$U.
 There are a wide variety of benefits to \glspl{MSR}: high operating temperature, low operating pressure, and high thermal conductivity and capacity of the salts.
 Other benefits include a high coefficient of thermal expansion for negative temperature coefficient of reactivity, high resource utilization through higher burn-up, reduced cost of fabricating and transporting fuel elements, and the removal of fission products to improve the neutron economy \cite{serp_molten_2014}.
 
@@ -24,16 +24,16 @@ A brief historical timeline of \gls{DNP} group parameter modeling advancements i
 \begin{minipage}[t]{.7\linewidth}
 \color{gray}
 \rule{\linewidth}{1pt}
-\ytl{1939}{Roberts et al. discovers delayed neutrons \cite{roberts1939further}; Bohr and Wheeler explains delayed neutrons \cite{bohr1939mechanism}}
-\ytl{1946}{Burgy et al. conducts initial spectral measurements \cite{burgy1946energies}}
+\ytl{1939}{Roberts et al. discovers delayed neutrons \cite{roberts1939further}; Bohr and Wheeler explain delayed neutrons \cite{bohr1939mechanism}}
+\ytl{1946}{Burgy et al. conduct initial spectral measurements \cite{burgy1946energies}}
 \ytl{1947}{Hughes et al. initial use of six \gls{DNP} groups at Argonne heavy water pile \cite{hughes1948delayed}}
-\ytl{1957}{Keepin et al. generates improved \gls{DNP} group parameters \cite{keepin1957delayed, williams1996choice}}
+\ytl{1957}{Keepin et al. generate improved \gls{DNP} group parameters \cite{keepin1957delayed, williams1996choice}}
 \ytl{1965}{Amiel identifies seven \glspl{DNP} that account for 80\% of delayed neutrons \cite{amiel1965delayed}}
 \ytl{1969}{Marmol compiles experimental data on emission probability and half-life for 34 \glspl{DNP} \cite{del1969delayed}}
 \ytl{1972}{Tomlinson maps 38 \glspl{DNP} onto six groups \cite{tomlinson1972theory}}
-\ytl{1977}{Saphier et al. constructs delayed neutron spectra from 20 \glspl{DNP} \cite{saphier1977evaluated}}
-\ytl{1982}{Rudstam generates \gls{DNP} group parameters and spectra using 67 \glspl{DNP} based on half-lives \cite{rudstam1982six}}
-\ytl{1983}{England et al. generates \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}}
+\ytl{1977}{Saphier et al. construct delayed neutron spectra from 20 \glspl{DNP} \cite{saphier1977evaluated}}
+\ytl{1982}{Rudstam generate \gls{DNP} group parameters and spectra using 67 \glspl{DNP} based on half-lives \cite{rudstam1982six}}
+\ytl{1983}{England et al. generate \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}}
 \bigskip
 \rule{\linewidth}{1pt}%
 \end{minipage}%
@@ -48,12 +48,12 @@ A brief historical timeline of \gls{DNP} group parameter modeling advancements i
 \begin{minipage}[t]{.7\linewidth}
 \color{gray}
 \rule{\linewidth}{1pt}
-\ytl{1983}{England et al. generates \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}}
+\ytl{1983}{England et al. generate \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}}
 \ytl{1988}{Brady generates \gls{DNP} group parameters and spectra using 271 \glspl{DNP} using least squares \cite{brady1988evaluation}. Group parameters in ENDF/B-VI.8 set and remain unchanged through ENDF/B-VIII.0 \cite{wilson2002delayed, Brown20181, endf6, brady1989delayed, england1988status, brady1989validation}}
-\ytl{1999}{Parish et al. states \gls{DNP} group parameters in \gls{ENDF} are in need of revision \cite{parish1999status}}
+\ytl{1999}{Parish et al. state \gls{DNP} group parameters in \gls{ENDF} are in need of revision \cite{parish1999status}}
 \ytl{2014}{\gls{IAEA} \gls{CRP} on Development of a Reference Database for
 $\beta$-delayed neutron emission data \cite{mills2014calculation}}
-\ytl{2020}{Leconte et al. uses more than 400 \glspl{DNP} to combine data with macroscopic experimental measurements \cite{leconte2020new}}
+\ytl{2020}{Leconte et al. use more than 400 \glspl{DNP} to combine data with macroscopic experimental measurements \cite{leconte2020new}}
 \ytl{2025}{This study develops \gls{DNP} group parameters for use in \glspl{MSR}}
 \bigskip
 \rule{\linewidth}{1pt}%
@@ -78,8 +78,8 @@ This model accounts for time and space dependence over the entire primary loop.
 
 The preliminary results of this work cover important \glspl{DNP}, sensitivity studies of the \gls{DNP} group parameters, and verification of the 0D scaled model.
 The results show that the total delayed neutron yield and average half-life values are within uncertainty bounds between the raw \gls{DNP} data and the \gls{DNP} group parameters.
-This verifies the process of turning \gls{DNP} data into \gls{DNP} group parameters.
-The sensitivity studies reveal that each \gls{DNP} can multiple groups, not only the ones that are closest to them.
+This verifies the process of turning \gls{DNP} data into \gls{DNP} group parameters is capturing the impact of each \gls{DNP}.
+The sensitivity studies reveal that each \gls{DNP} can contribute to multiple groups, not only the ones that are closest to them.
 Finally, the verification with results from the literature reveals a main weakness of the 0D scaled model: it does not include pulse irradiation data.
 This results in a poor set of \gls{DNP} group parameters for short-lived groups.
 
@@ -87,5 +87,6 @@ The proposed work starts with development of the 0D flow model, which is followe
 This is then followed by validation of the model with a transient simulation of the \gls{MSRE} with experimental data to ensure the improved \gls{DNP} group parameters are physically accurate.
 The improved group spectra are then included in the formulation of the \gls{DNP} group parameters, and verified for a static case.
 Finally, transients of the \gls{MSRE} for various safety, security, and safeguards-related scenarios are simulated using the improved \gls{DNP} group parameters and pre-existing group parameters to study their impact.
-This work is considered the critical work for a full analysis, though there is also non-critical work presented in Section \ref{sec:future-work}.
+
+This set of proposed work is considered the critical path for a full analysis, though there is also non-critical work presented in Section \ref{sec:future-work}.
 The non-critical work includes development of the spatially resolved model, uncertainty tracking of \gls{MSR} physical phenomena in the \gls{DNP} group parameters, and investigation into the effects of varying the incident neutron energy spectrum on the \gls{DNP} group parameters.

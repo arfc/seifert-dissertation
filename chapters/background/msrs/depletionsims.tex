@@ -11,7 +11,7 @@ Simulating depletion entails numerically solving the Bateman equations; a genera
  & - \left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right) N_j + \dot{N}_{f, j},
 \end{split}
 \hfill\label{eq:Bateman_default} \end{equation}
-where,
+where
 \begin{align}
 N_j &= \mbox{ the atomic density of isotope $j$ $\left[atoms \cdot cm^{-3}\right]$ } \nonumber \\ 
 \gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
@@ -51,7 +51,7 @@ The matrix form of Equation \eqref{eq:Bateman_default} is given as:
     \frac{d\vec{N}}{dt} = A \vec{N},
     \label{eq:mat_Bate}
 \end{equation}
-where,
+where
 \begin{align}
     \vec{N} =& \text{the vector of material compositions [$atoms \cdot cm^{-3}$]} \nonumber\\
     A =& \text{the depletion matrix [$s^{-1}$].} \nonumber
@@ -75,7 +75,7 @@ However, for the purposes of a streamlined comparison with circulating fuel, the
     \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t),
     \label{eq:bate-stat-simple}
 \end{equation}
-where,
+where
 \begin{align}
 S_j &= \mbox{the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{containing fission, decay, and transmutation sources [$atoms \cdot cm^{-3} \cdot s^{-1}$]} \nonumber \\
@@ -106,7 +106,7 @@ The simplified static Bateman equation can be modified to include advection and 
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
     \label{eq:bate-flow-simple}
 \end{equation}
-where,
+where
 \begin{align}
 D &= \mbox{the mass diffusivity [$cm^2 \cdot s^{-1}$]. } \nonumber
 \end{align}
@@ -152,7 +152,7 @@ Numerical stability of the problem, when using an explicit-time solving scheme, 
     C = \frac{u \Delta t}{\Delta z},
 \label{eq:num-stab}
 \end{equation}
-where,
+where
 \begin{align}
     \Delta t =& \text{the time step size [s]} \nonumber \\
     \Delta z =& \text{the length between spatial nodes [cm].} \nonumber

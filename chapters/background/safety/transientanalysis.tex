@@ -31,7 +31,7 @@ and,
     \frac{\partial C_i}{\partial t} = \beta_i \sum_{g=1}^G (\bar{\nu}_g \Sigma_f)_g \phi_g - \lambda_i C_i - \nabla \cdot (C_i \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_i,
     \label{eq:mg-n-diff-Ci}
 \end{equation}
-where,
+where
 \begin{align}
 \bar{\nu}_g &= \mbox{ the average number of neutrons produced by fission of group \textit{g} [-]} \nonumber\\
 \phi_g &= \mbox{ the scalar neutron flux of group \textit{g} [$n \cdot cm^{-2} \cdot s^{-1}$]} \nonumber\\
@@ -81,7 +81,7 @@ and,
     \frac{dC_i(t)}{dt} = \frac{\beta_{eff, i}}{\Lambda} n(t) - \lambda_i C_i(t),
     \label{eq:prk-C}
 \end{equation}
-where,
+where
 \begin{align}
 n &= \mbox{ the relative neutron density [-]} \nonumber\\
 \rho &= \mbox{ the reactivity [-]} \nonumber\\
@@ -196,7 +196,7 @@ The neutron flux is treated as:
     \Phi(\vec{x}, t) = \phi_A(t) \psi (\vec{x}, t),
     \label{eq:flux-treatment-rineiski}
 \end{equation}
-where,
+where
 \begin{align}
     \Phi &= \text{the neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\
     \phi_A &= \text{the neutron flux amplitude function [n]} \nonumber \\
@@ -215,7 +215,7 @@ These primary equations are given as:
     \label{eq:rineiski-flux}
 \end{split}
 \end{equation}
-and,
+and
 \begin{equation}
     \frac{\partial C_i (\vec{x}, t)}{\partial t} = \phi_A \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( u (\vec{x}, t) C_i (\vec{x}, t)).
     \label{eq:rineiski-big-C}
@@ -246,7 +246,7 @@ Intermediate terms used in Equations \eqref{eq:rineiski-n} through \eqref{eq:rin
     \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( u(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( u(\vec{x}, t) C_{m, i}(\vec{x}, t)\right),
     \label{eq:rineiski-big-cm}
 \end{equation}
-and,
+and
 \begin{equation}
     \frac{\partial C_{s, i}(\vec{x}, t)}{\partial t} = \phi_A(t) \beta_i F(t) \psi (\vec{x}, t) - \lambda_i C_{s, i}(\vec{x}, t).
     \label{eq:rineiski-big-cs}

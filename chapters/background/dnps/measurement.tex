@@ -26,7 +26,7 @@ The delayed neutron count rate as a function of time after irradiation, $n_d(t)$
     \dot{n}_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t),
     \label{eq:mdnp-dn}
 \end{equation}
-where,
+where
 \begin{align}
 \dot{n}_d(t) &= \mbox{ the delayed neutron count rate $\left[n \cdot s^{-1}\right]$ }\nonumber \\
 I &= \mbox{ the total number of \glspl{DNP} [-] } \nonumber \\
@@ -66,10 +66,13 @@ Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows an
 \end{figure}
 
 Challenges associated collecting this experimental data \cite{bank2000jef} include experimental noise and signal obfuscation due to moderation. 
-Experimental noise becomes significant after long periods of time relative to the half-life of the longest-lived \gls{DNP}, around 1 minute from $^{87}$Br, as the delayed neutron counts decrease.
-Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation, so there is a gap between irradiation and when the sample can be moved to a delayed neutron counter.
-Even after a pulse irradiation, the long-lived groups form a background that interfere with measurement of the short-lived groups \cite{bank2000jef}.
-Due to these effects, measurement of delayed neutrons from the sample is less accurate initially, becomes increasingly accurate, and then becomes less accurate again as the delayed neutron counts decrease.
+%Experimental noise becomes significant after long periods of time relative to the half-life of the longest-lived \gls{DNP}, around 1 minute from $^{87}$Br, as the delayed neutron counts decrease.
+Experimental noise becomes significant after long periods of time relative to the half-life of the longest-lived \gls{DNP}, as the delayed neutron counts decrease exponentially.
+The short lived groups cannot be measured immediately after irradiation, but instead they have to be transported to a delayed neutron counter.
+This transport time results in missing very short-lived counts.
+%Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation, so there is a gap between irradiation and when the sample can be moved to a delayed neutron counter.
+After a pulse irradiation, the long-lived groups form a background that interfere with measurement of the short-lived groups \cite{bank2000jef}.
+Due to these effects, measurement of delayed neutrons from the sample is less accurate initially, becomes increasingly accurate, and then becomes less accurate again as the delayed neutron count rate decreases.
 
 Similarly, uncertainty arises from the measurement of the number of fissions.
 Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, the fission chamber does not account for source multiplication within the irradiated sample.

@@ -223,7 +223,7 @@ Another way to resolve this is to use a relative residual, given by Equation \eq
     r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|_2^2,
     \label{eq:residual}
 \end{equation}
-where,
+where
 \begin{align}
     \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
     &= 1\times10^{-12}. \nonumber
@@ -240,7 +240,7 @@ Once this group data is generated, and if there are multiple fissioning nuclides
 \lambda_k = \frac{\sum_{F} \lambda_k^{(F)} \beta_{k, eff}^{(F)}}{\sum_F \beta_{k, eff}^{(F)}},
 \label{eq:lami-multinuc}
 \end{equation}
-where,
+where
 \begin{align}
     \lambda_k^{(F)} =& \text{ the decay constant of \gls{DNP} group $k$ from fission of nuclide $F$} \nonumber \\
     \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$. } \nonumber
@@ -292,7 +292,7 @@ Including the energy in the delayed neutron count rate requires the energy spect
 \dot{n}_d(E, t) \approx \epsilon \tilde{F}_s \sum_{k=1}^{K} \chi_{d, k} (E) A_k e^{-\lambda_k t},
 \label{eq:speceq}
 \end{equation}
-where, 
+where
 \begin{align}
     \tilde{F}_s =& \text{ the generic fission term [- or $s^{-1}$] } \nonumber \\
     A_k =& \text{ the generic matrix term [$s^{-1}$ or -]  } \nonumber \\
@@ -453,7 +453,7 @@ After dividing by the total number of fission events, Equation \eqref{eq:delnu-n
     \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i,
     \label{eq:delnu-net-nuc-CFY}
 \end{equation}
-where,
+where
 \begin{align}
     CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
 \end{align}
@@ -471,7 +471,7 @@ The mean neutron generation time can be calculated as:
     \Lambda = \frac{l}{k},
     \label{eq:lambda-sorta}
 \end{equation}
-where,
+where
 \begin{align}
     l =& \text{ the prompt neutron lifetime [s]} \nonumber \\
     k =& \text{ the neutron multiplication factor [-].} \nonumber \\
@@ -488,7 +488,7 @@ This is given in Equation \eqref{eq:betaeff-exact} as:
     \beta_{eff} = \frac{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
     \label{eq:betaeff-exact}
 \end{equation}
-where,
+where
 \begin{align}
 \Phi^\dagger &= \mbox{ the adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$]} \nonumber \\ 
 \chi_d &= \mbox{ the delayed neutron energy spectrum [-]} \nonumber \\ 
@@ -517,7 +517,7 @@ This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte
     \Lambda_{eff} = \frac{\int \Phi_0^\dagger \frac{1}{v} \Phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \Phi_0^\dagger F_0 \Phi_0 \; dE d\vec{\Omega} d\vec{r}}
     \label{eq:lambdaeff-exact}
 \end{equation}
-where,
+where
 \begin{align}
 \Phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
 \Phi_0 &= \mbox{ the critical neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 

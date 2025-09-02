@@ -10,7 +10,7 @@ This derivation begins with the Bateman equation, given in Equation \eqref{eq:Ba
 \end{split}
 \hfill \nonumber
 \end{equation}
-where,
+where
 \begin{align}
 N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
 \gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
@@ -29,7 +29,7 @@ This can be rewritten to the simplified form given in Equation \eqref{eq:bate-fl
 \begin{equation}
     \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t), \nonumber
 \end{equation}
-where,
+where
 \begin{align}
 S_j &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 & \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{atoms}{cm^3 s}$]} \nonumber \\
@@ -43,7 +43,7 @@ This changes Equation \eqref{eq:bate-stat-simple} to Equation \eqref{eq:simple-s
     \frac{dN_j}{dt} = f_{in} S_j(t) - \lambda_{j} N_j(t) - f_{ex} \lambda_{r, j}N_j(t),
     \label{eq:simple-scaled}
 \end{equation}
-where,
+where
 \begin{align}
     f_{in} &= \text{the fraction of fuel salt in the core} \nonumber \\
     f_{ex} &= \text{the fraction of fuel salt not in the core} \nonumber \\
@@ -58,7 +58,7 @@ Additionally, parasitic absorption is neglected in this derivation, which leads 
     S_j(t) = CFY_j \phi \Sigma_f,
     \label{eq:source-rewrite}
 \end{equation}
-where,
+where
 \begin{align}
     CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
 \end{align}
