@@ -11,6 +11,13 @@ Specifically, there are four different perspectives of interest in this work: va
 Each perspective involves a unique combination of motivation, proposed initiating event, and investigated response.
 These are discussed in detail in their respective sections.
 
+There are some general results of interest, such as the effective delayed neutron fraction.
+This can be generated from Moltres using the prompt method, discussed in Section \ref{sec:calc-kinetic-param}.
+Moltres uses fission and adjoint-weighted \gls{DNP} group parameters, and the effective multiplication factor will capture the spatial distribution of each \gls{DNP} group concentration.
+This will provide an effective delayed neutron fraction that captures the effects of fuel circulation.
+The fission weighting and adjoint flux values will be generated using OpenMC.
+The fission weights can be calculated using fission rate tallies, while the adjoint flux can be calculated using a separate \gls{CMFD} OpenMC run, which enables the adjoint flux to be solved on a cartesian grid.
+
 \subsection{Validation}
 The motivation for validation is to confirm that the proposed methodology and results align with experimental data.
 This ensures the demonstrated improved \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
@@ -55,7 +62,7 @@ The improved \gls{DNP} group parameters in this work affect the effective delaye
 Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the improved parameters.
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
-To investigate this, diversion scenarios are studied with a single significant quantity of material removed over the course of one year, simulated using OpenMC.
+To investigate this, diversion scenarios are studied for a single significant quantity of $^{235}$U and Pu removed over the course of one year, simulated using OpenMC.
 The change in the fuel salt composition affects the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
-The importance and fission-weighted \gls{DNP} group parameters can be used in simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
+The importance and fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
 If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.

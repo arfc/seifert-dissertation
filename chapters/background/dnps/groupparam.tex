@@ -276,11 +276,13 @@ Equation \eqref{eq:nubar-fw} becomes:
 \end{equation}
 and Equation \eqref{eq:decayconst-fw} becomes:
 \begin{equation}
-    \lambda_{k} = \lambda^{(FW)}_{k} \frac{\int \chi_{d, k}(E) \phi^*(E) dE}{\int \chi(E) \phi^*(E) dE},
+    \lambda_{k} = \lambda^{(FW)}_{k} \beta_{eff} \left(\sum_{k=1}^K \frac{\beta_k}{\lambda_k} \right)^{-1},
     \label{eq:decay-fw-import}
 \end{equation}
 where
 \begin{align}
+    \beta_{eff} &= \text {the effective delayed neutron fraction $[-]$} \nonumber \\
+    \beta_{k} &= \text{ the delayed neutron fraction of group $k$ [-]} \nonumber \\
     \chi_{d, k} &= \text{ the delayed neutron fission spectrum for \gls{DNP} group $k$ [-]} \nonumber \\
     \chi &= \text{ the total fission spectrum [-]} \nonumber \\
     \phi^* &= \text{ the adjoint flux $[cm^{-2} \cdot s^{-1}]$} \nonumber.
@@ -542,3 +544,8 @@ $\Lambda_{eff}$ can also be calculated using the pulsed method \cite{romero2022c
 %There is also the pulsed method for calculating $\Lambda_{eff}$, and the prompt method for calculating $\beta_{eff}$ \cite{romero2022calculation}.
 For $\beta_{eff}$, there are also the prompt, Meulekamp, and Spriggs methods which can be used \cite{romero2022calculation, meulekamp2006calculating}.
 Aufiero et al. have conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods, which show that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
+
+For the effective parameters to account for the movement of the fuel salt, there is typically another step required where the static parameters, calculated with no movement, are multiplied by another term.
+Aufiero et al. uses an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
+Another approach is to account for the decay of the \glspl{DNP} outside of the core, as shown by Nestor \cite{nestor1960reactor}.
+Generally, there is some form of advection term used to account for the circulation of the \glspl{DNP}, following which the spatial distribution can be account for in the effective parameter calculation.

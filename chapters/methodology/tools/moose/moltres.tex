@@ -4,6 +4,11 @@ The \gls{MSRE} core consists of flow through channels, simplifying its modeling 
 Since the initial demonstration, Park et al. have noted general agreement in results, attributing differences to simplifications and assumptions in the geometry \cite{park2022verification}.
 Additionally, Park has published a dissertation detailing 1-D, 2-D, and 3-D neutronic models of the \gls{MSRE} \cite{park_advancements_2025}.
 
+Moltres requires various data to model various physical phenomena in a reactor.
+The delayed neutron modeling requires delayed neutron fractions, $\beta_{k}$, and delayed neutron decay constants, $\lambda_k$, which are fission and adjoint-weighted.
+Neutronics modeling requires cross-sections, prompt and delayed fission spectra, and other data to properly model those physical effects.
+Moltres provides scripts which can parse various transport solvers, such as OpenMC and Serpent, to automatically collect this information and format it for use in Moltres.
+
 There are two main capabilities in Moltres which are of interest.
 Moltres couples three physical phenomena to model an \gls{MSR}: neutron flux, \glspl{DNP}, and thermal-hydraulics.
 This allows Moltres to model transient simulations of \glspl{MSR}, which will be used to validate the improved \gls{DNP} group parameters.
