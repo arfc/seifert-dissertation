@@ -70,7 +70,7 @@ Thus, a new step forward for group parameter development is for \gls{DNP} group 
 
 This physical phenomena can be incorporated at varying levels of fidelity, with associated differences in cost and accuracy.
 The least accurate and fastest is a 0D scaled model.
-This model neglects time dependence and decay chains while scaling the flux and chemical removal rates based on the salt fractions in different regions of the primary loop.
+This model neglects time dependence, decay chains, and cross-sections while scaling the flux and chemical removal rates based on the salt fractions in different regions of the primary loop.
 The intermediate approach is a 0D flow model.
 This model accounts for time dependence and decay chains, while applying the flux and chemical removal rates only in the relevant parts of the primary loop.
 Finally, the most accurate and slowest approach is a spatially resolved model.
@@ -80,12 +80,13 @@ The preliminary results of this work cover important \glspl{DNP}, sensitivity st
 The results show that the total delayed neutron yield and average half-life values are within uncertainty bounds between the raw \gls{DNP} data and the \gls{DNP} group parameters.
 This verifies the process of turning \gls{DNP} data into \gls{DNP} group parameters is capturing the impact of each \gls{DNP}.
 The sensitivity studies reveal that each \gls{DNP} can contribute to multiple groups, not only the ones that are closest to them.
-Finally, the verification with results from the literature reveals a main weakness of the 0D scaled model: it does not include pulse irradiation data.
+Finally, the verification with results from the literature reveals a critical weakness of the 0D scaled model: it does not include pulse irradiation data.
 This results in a poor set of \gls{DNP} group parameters for short-lived groups.
+The other approximations did not lead to large differences with the literature, but the lack of decay chains results in an inability for this model to treat pulse irradiations.
 
 The proposed work starts with development of the 0D flow model, which is followed by a verification stage to ensure the improved \gls{DNP} group parameters are correct for a static case.
 This is then followed by validation of the model with a transient simulation of the \gls{MSRE} with experimental data to ensure the improved \gls{DNP} group parameters are physically accurate.
-The improved group spectra are then included in the formulation of the \gls{DNP} group parameters, and verified for a static case.
+The improved group spectra are then included in the formulation of the \gls{DNP} group parameters, and verified for a static, or stationary, case.
 Finally, transients of the \gls{MSRE} for various safety, security, and safeguards-related scenarios are simulated using the improved \gls{DNP} group parameters and pre-existing group parameters to study their impact.
 
 This set of proposed work is considered the critical path for a full analysis, though there is also non-critical work presented in Section \ref{sec:future-work}.
