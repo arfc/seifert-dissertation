@@ -68,7 +68,13 @@ Most of these studies investigate movement of \glspl{DNP} during transients, not
 However, to have accurate transient models, it is necessary that the \gls{DNP} group parameters are accurate.
 Thus, a new step forward for group parameter development is for \gls{DNP} group parameters to accurately reflect the physical phenomena in \glspl{MSR}.
 
-This physical phenomena can be incorporated at varying levels of fidelity, with associated differences in cost and accuracy.
+The objectives of this research are to generate improved \gls{DNP} group parameters that account for \gls{MSR} physical phenomena, verify the parameters with the literature, validate the parameters by simulating transients and comparing with experimental data, and evaluate the impact of the improved parameters on safety, safeguards, and security by design.
+Because the \gls{MSR} phenomena studied consider chemical removal and fuel movement, the net effect on the \glspl{DNP} is expected to be a decrease in the total quantity.
+This will lead to a reduced total delayed neutron yield, which will in turn result in a decrease to the effective delayed neutron fraction, which corresponds to a shorter reactor period, thus reducing reactor controllability.
+This means that the \gls{DNP} group parameters currently in use for modeling \glspl{MSR} may be generally overestimating the number of delayed neutrons in the system.
+
+The physical phenomena in \glspl{MSR} can be incorporated at varying levels of fidelity, with associated differences in cost and accuracy.
+In this document, three models are described: a 0D scaled model, which is already complete; a 0D flow model, which is proposed; and a spatially resolved model, which is discussed for future work.
 The least accurate and fastest is a 0D scaled model.
 This model neglects time dependence, decay chains, and cross-sections while scaling the flux and chemical removal rates based on the salt fractions in different regions of the primary loop.
 The intermediate approach is a 0D flow model.
