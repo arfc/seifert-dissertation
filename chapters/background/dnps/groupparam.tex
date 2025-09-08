@@ -64,7 +64,7 @@ This is analogous to the delayed neutron fraction and mean generation time terms
 The adjoint flux is important for calculating the effective form of many kinetics parameters.
 The adjoint flux is not a physical quantity, but rather serves as an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
 For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
-The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development}.
+The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development, truchet2015computing}.
 
 The delayed neutron fraction, $\beta$, represents the ratio of delayed neutron production over all neutron production \cite{meulekamp2006calculating}.
 Related to the delayed neutron fraction is the effective delayed neutron fraction, $\beta_{eff}$.
@@ -246,7 +246,7 @@ where
     \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$. } \nonumber
 \end{align}
 
-Alternatively, a fission-weighting approach can be used.
+This approach is effectively a fission-weighting, which can be written in a more general manner.
 The \gls{DNP} group parameters are generated for a given fuel composition, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
 For example, the delayed neutron yield of group $k$ is given as:
 \begin{equation}
@@ -269,6 +269,7 @@ where
 \end{align}
 
 The fission-weighted values can also be multiplied by an importance term to account for the difference between the delayed and prompt neutron fission spectra \cite{radaideh2019new}.
+This is used for kinetics simulations that do not explicitly model \glspl{DNP} in the transport solve, such as in \gls{PRK}.
 Equation \eqref{eq:nubar-fw} becomes:
 \begin{equation}
     \bar{\nu}_{d, k} = \bar{\nu}^{(FW)}_{d, k} \frac{\int \chi_{d, k}(E) \phi^*(E) dE}{\int \chi(E) \phi^*(E) dE},
@@ -288,7 +289,14 @@ where
     \phi^* &= \text{ the adjoint flux $[cm^{-2} \cdot s^{-1}]$} \nonumber.
 \end{align}
 
-These equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
+
+
+
+
+\subsubsection{Calculation of DNP Group Spectra and Concentrations}
+\label{sec:groupspectra}
+
+The equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
 Including the energy in the delayed neutron count rate requires the energy spectra, $\chi_{d, k}(E)$, of the relevant group to be included, as shown in Equation \eqref{eq:speceq} as:
 \begin{equation}
 \dot{n}_d(E, t) \approx \epsilon \tilde{F}_s \sum_{k=1}^{K} \chi_{d, k} (E) A_k e^{-\lambda_k t},
@@ -303,18 +311,14 @@ where
 This is the general form of the saturation and pulse irradiation equations, where $A_k$ represents $\bar{\nu}_{d, k} \lambda_k$ for a pulse irradiation or $\bar{\nu}_{d, k}$ for saturation irradiation.
 $\tilde{F}_s$ is the total number of fissions for a pulse irradiation or the fission rate for saturation irradiation.
 
-
-
-\subsubsection{Calculation of DNP Group Spectra and Concentrations}
-\label{sec:groupspectra}
 Another consideration in calculating group parameters is constructing group concentrations from individual nuclide data.
 This is important for situations where reducing the problem from several hundred \glspl{DNP} to a few \gls{DNP} groups reduces computational cost.
 A specific use case for this is explicitly modeling all \glspl{DNP} spatially and then using those spatially resolved concentrations with an existing six-group structure.
 In such a case, the \glspl{DNP} must be combined in such a manner to preserve their contributions to each \gls{DNP} group.
 The reverse is also true, where a given six-group spatially resolved concentration can be separated into individual \glspl{DNP} spatially resolved concentrations.
 
-Two different methods are considered for separating and combining the \gls{DNP} groups into individual nuclides and vice versa.
-These methods have been used to generate \gls{DNP} group spectra, so the group spectra can also be calculated using these methods:
+The methods for calculating the \gls{DNP} group spectra and the group concentrations directly overlap.
+Two different methods are considered for calculation of group spectra and group concentrations:
  
 \begin{itemize}
     \item Grouping based on half lives \cite{england1983aggregate, rudstam1982six}

@@ -13,10 +13,11 @@ These are discussed in detail in their respective sections.
 
 There are some general results of interest, such as the effective delayed neutron fraction.
 This can be generated from Moltres using the prompt method, discussed in Section \ref{sec:calc-kinetic-param}.
-Moltres uses fission and adjoint-weighted \gls{DNP} group parameters, and the effective multiplication factor will capture the spatial distribution of each \gls{DNP} group concentration.
-This will provide an effective delayed neutron fraction that captures the effects of fuel circulation.
-The fission weighting and adjoint flux values will be generated using OpenMC.
-The fission weights can be calculated using fission rate tallies, while the adjoint flux can be calculated using a separate \gls{CMFD} OpenMC run, which enables the adjoint flux to be solved on a cartesian grid.
+Moltres uses fission-weighted \gls{DNP} group parameters, and the effective multiplication factor will capture the spatial distribution of each \gls{DNP} group concentration.
+Adjoint-weighting is not used for these parameters because Moltres explicitly captures the delayed neutrons in the diffusion solve.
+Moltres will provide an effective delayed neutron fraction that captures the effects of fuel circulation.
+The fission weighting values will be generated using fission rate tallies in OpenMC.
+%The fission weights can be calculated using fission rate tallies, while the adjoint flux can be calculated using a separate \gls{CMFD} OpenMC run, which enables the adjoint flux to be solved on a cartesian grid.
 
 \subsection{Validation}
 The motivation for validation is to confirm that the proposed methodology and results align with experimental data.

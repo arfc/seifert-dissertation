@@ -129,6 +129,7 @@ One common approach, the scaled flux method, is computationally inexpensive \cit
 However, this method does not model the in-core and ex-core regions in a physical manner.
 The scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
 This approach does not model the in-core and ex-core regions explicitly, and instead assumes the salt is perfectly mixed in the primary loop.
+Generally, this this approximation does not introduce significant error in the concentrations of nuclides \cite{seifert_luke_computationally_2025}.
 
 Another approach has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
 This approach can estimate the steady-state concentration of certain nuclides across a flow loop, but it does not account for temporal resolution \cite{shahbazi_steady-state_2022}.
@@ -157,7 +158,7 @@ where
     \Delta t =& \text{the time step size [s]} \nonumber \\
     \Delta z =& \text{the length between spatial nodes [cm].} \nonumber
 \end{align}
-The Courant number, $C$, must be less than or equal to 1 for the Courant–Friedrichs–Lewy condition in an explicit finite differencing scheme \cite{seifert_luke_computationally_2025}.
+The Courant number, $C$, must be less than or equal to 1 for the Courant–Friedrichs–Lewy convergence condition in an explicit finite differencing scheme \cite{courant1928partiellen}.
 This equation limits the time step size based on the flow rate and spatial mesh size.
 Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, spatial mesh resolution, and the overall amount of time simulated in depletion.
 
