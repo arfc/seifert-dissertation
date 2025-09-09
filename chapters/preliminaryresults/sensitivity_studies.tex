@@ -5,7 +5,7 @@ For the chemical removal analysis, the \gls{MSBR} chemical reprocessing scheme i
 The \gls{MSBR} reprocessing scheme has large chemical removal rates, providing a conservative impact of these chemical removal rates on the \gls{DNP} group parameters.
 The evaluation of the time nodes include the spacing between each node, the number of nodes, the total amount of time the sample should decay, and a combination of the total time and number of nodes.
 Finally, the data uncertainties include uncertainty in the fission yields, half-lives, and emission probabilities.
-To propagate these uncertainties to the \gls{DNP} group parameters, the non-linear least squares solver is run 1000 times with a random normal distribution sample taken from the fission yield, half-life, and emission probability of each \gls{DNP}.
+To propagate these uncertainties to the \gls{DNP} group parameters, the non-linear least squares solver is run 5000 times with a random normal distribution sample taken from the fission yield, half-life, and emission probability of each \gls{DNP}.
 
 \subsection{Chemical Removal}
 
@@ -239,7 +239,7 @@ Figure \ref{fig:time-and-nodes} shows how the \gls{DNP} group parameters vary fo
 \label{fig:time-and-nodes}
 \end{figure}
 
-If the node density was the driving factor in the \gls{DNP} group parameters, then the black bar, with a final time of 600 seconds and with 400 time nodes, would be equivalent to the teal bar, which has a final time twice as long and with twice as many time nodes.
+If the node density was the driving factor in the \gls{DNP} group parameters, then the decay time of 600 seconds with 400 time nodes would be equivalent to the decay time twice as long and with twice as many time nodes.
 Instead, the results are approximately constant with varying time nodes, and the main difference is in the final decay time.
 This indicates that the sensitivity analysis discussed in Section \ref{sec:total-decay-time} is valid, and does not need to also account for the varying time node density.
 
