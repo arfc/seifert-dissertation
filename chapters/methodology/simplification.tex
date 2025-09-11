@@ -6,10 +6,12 @@ This approach captures fuel salt advection around the primary loop and approxima
 The terms derive from the averaged behavior of a fuel salt control volume, treating thermal-hydraulic effects, such as vortices, as changes in residence times.
 This method allows for approximate fitting of any circulating fuel reactor, requiring only the generation of relevant parameters for determining the associated \gls{DNP} group parameters.
 
-The other required parameters describe chemical removal, which varies by fission product and reprocessing rate.
-Refueling could also be of interest, but only a single sample of fissile material is considered during irradiation.
-The introduction of fresh fuel would affect the incident neutron energy spectrum on the fissile sample, and is considered in Section \ref{sec:future-work}.
-%Refueling is not considered in this work, as its effects are negligible over the short time frames analyzed.
+Online refueling is not of interest in this work as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
+For example, if the irradiated sample is $^{235}$U and the refuel is $^{239}$Pu, then the addition of $^{239}$Pu to the system would only change the fission-weighting and not the actual \gls{DNP} concentrations from each fissile nuclide.
+Additionally, even if the same fissile nuclide is added, this could simply be treated as many identical individual samples circulating in the system.
+Similarly, if chemical removal removes some amount of fissile nuclide, that is also not important for this analysis.
+This is because the \gls{DNP} group parameters are normalized per fission, so the only differences from adding or removing fissile nuclides are on the fission-weighting.
+
 An irradiation time of approximately seven minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
 Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:large-tcyc}.
 Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
