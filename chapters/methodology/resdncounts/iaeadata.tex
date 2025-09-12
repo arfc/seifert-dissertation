@@ -9,7 +9,7 @@ Equation \eqref{eq:radiodec} shows the approach used in the 0D scaled model, and
 However, the general form of the equation can still be used, but with inclusion of the various decay chains and branching ratios.
 A simple way of implementing decay with the decay chain is using zero-power depletion simulations in OpenMC.
 This is used in the 0D flow model, though the 0D flow model also offers the option of using Equation \eqref{eq:radiodec}.
-These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing \gls{MoSDeN} to access more accurate concentrations at any time after irradiation \cite{virtanen2020scipy}.
+These concentrations are available at coarse time steps and linearly interpolated using SciPy, allowing \gls{MoSDeN} to access more accurate concentrations at any time after irradiation \cite{scipy}.
 The specific time steps at which concentrations are written will be investigated after development of the 0D flow model.
 %This approach only models delayed neutrons generated during decay, as it is beyond the scope of this work to model other particles \cite{chen2002rigorous}.
 

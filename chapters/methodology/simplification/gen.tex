@@ -11,7 +11,7 @@ Section \ref{sec:delnu-counts} provides further details on this process.
 
 After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in \gls{MoSDeN}.
 \gls{MoSDeN} combines the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
-A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields using the Trust Region Reflective algorithm \cite{2020SciPy-NMeth, branch1999subspace}.
+A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields using the Trust Region Reflective algorithm \cite{scipy, branch1999subspace}.
 These group parameters correspond to a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
 Section \ref{sec:delnu-groups} provides further details on this block.
 Some additional factors to consider include self-shielding due to sample density (while avoiding self-multiplication), temperature-induced cross-section variations, and under- or over-irradiation, all of which can affect the results \cite{keepin1957delayed}.
