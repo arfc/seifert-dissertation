@@ -1,5 +1,5 @@
 
-Because the microscopic approach uses individual \glspl{DNP}, it becomes possible to analyze the contribution of each \gls{DNP} to the total delayed neutron yield.
+Because the microscopic approach uses individual \glspl{DNP}, it is possible to analyze the contribution of each \gls{DNP} to the total delayed neutron yield.
 This is given in Equation \eqref{eq:delnu-net-nuc-CFY}, recreated here as:
 \begin{equation}
     \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i. \nonumber
@@ -10,21 +10,21 @@ This can be calculated by integrating the delayed neutron count rate, as shown i
     \int_0^{\infty} \dot{n}_{d, i}(t) dt= P_{n, i} N_{i} (0). \nonumber
 \end{equation}
 
-Figure \ref{fig:delnu-dnp-contributions} shows both of these approaches and how they differ.
+Figure \ref{fig:delnu-dnp-contributions} shows both approaches and how they differ.
 Figure \ref{fig:delnu-counts-stacked-rates}(a) shows the delayed neutron yield contributions, which indicate the \glspl{DNP} which emit the most delayed neutrons after a single fission event.
-Figure \ref{fig:delnu-counts-stacked-rates}(b) shows the contribution of each \glspl{DNP} to the delayed neutron count rate for a saturation irradiation.
-This does not show the delayed neutron yield, but contributes directly to the \gls{DNP} group yields, as the delayed neutron count rate is critical for calculating the \gls{DNP} group parameters.
-Figure \ref{fig:delnu-counts-stacked-rates}(c) shows the concentrations of each \gls{DNP}, which is correlated to Figure \ref{fig:delnu-counts-stacked-rates}(b).
-\Glspl{DNP} with a large concentration may have a small emission probability and not contribute many delayed neutrons to the count rate, such as $^{141}$Cs.
+Figure \ref{fig:delnu-counts-stacked-rates}(b) shows each \glspl{DNP}' contribution to the delayed neutron count rate for a saturation irradiation.
+The count rate contribution is weighed more heavily towards longer-lived \glspl{DNP} because they build up during the saturation irradiation.
+Figure \ref{fig:delnu-counts-stacked-rates}(c) shows the concentrations of each \gls{DNP}, correlated with Figure \ref{fig:delnu-counts-stacked-rates}(b).
+\Glspl{DNP} with a large concentration may have a small emission probability and contribute few delayed neutrons to the count rate, such as $^{141}$Cs.
 
-For the delayed neutron yield contributions, shown in Figure \ref{fig:delnu-counts-stacked-rates}(a), $^{86}$Ge has the largest contribution to the delayed neutron yield, which means that for each thermal fission event in $^{235}$U, approximately 12.5\% of the delayed neutrons come from $^{86}$Ge.
-$^{86}$Ge is very short lived, with a half-life of approximately 200 milliseconds.
-This is why, in Figure \ref{fig:delnu-counts-stacked-rates}(b), it contributes less than 4\% of the total delayed neutrons once the sample has been irradiated for some time.
-Since it has been irradiated, the longer lived nuclides have accumulated, and the delayed neutron count rate is dominated by them.
-This reinforces the justification of why pulse irradiation data is important, as the saturation irradiation does not fully capture the relative effects of the short-lived \glspl{DNP}.
-Finally, the relative concentration of each \gls{DNP} is shown in Figure \ref{fig:delnu-counts-stacked-rates}(c).
+For the delayed neutron yield contributions in Figure \ref{fig:delnu-counts-stacked-rates}(a), $^{86}$Ge contributes the most, meaning that for each thermal fission event in $^{235}$U, approximately 12.5\% of delayed neutrons come from $^{86}$Ge.
+$^{86}$Ge is exceedingly short-lived, with a half-life of approximately 200 milliseconds.
+In Figure \ref{fig:delnu-counts-stacked-rates}(b), it contributes less than 4\% of the total delayed neutrons after the sample has been irradiated.
+Longer-lived nuclides have accumulated during irradiation, dominating the delayed neutron count rate.
+This reinforces why pulse irradiation data are important, as saturation irradiation does not fully capture short-lived \glspl{DNP} effects.
+Figure \ref{fig:delnu-counts-stacked-rates}(c) shows the relative concentration of each \gls{DNP}.
 The concentrations are generally consistent with the literature, though $^{141}$Cs is an outlier \cite{leconte2020new}.
-This may be due to the simplifications made in the 0D scaled model, such as exclusion of parasitic absorption, or that other works ignore $^{141}$Cs due to its exceedingly small emission probability.
+This may result from the 0D scaled model simplifications, such as excluding parasitic absorption, or because other works ignore $^{141}$Cs due to its extremely small emission probability.
 
 
 \begin{figure}[!ht]
@@ -44,12 +44,12 @@ This may be due to the simplifications made in the 0D scaled model, such as excl
 \label{fig:delnu-dnp-contributions}
 \end{figure}
 
-Figure \ref{fig:delnu-counts-stacked-rates} shows the delayed neutron count rate in Figure \ref{fig:delnu-counts-stacked-rates}(a), as well as the integrated form in Figures \ref{fig:delnu-counts-stacked-rates}(b) and \ref{fig:delnu-counts-stacked-rates}(c) which represents the total delayed neutron counts at each time.
-Figure \ref{fig:delnu-counts-stacked-rates}(a) shows how the count rate of $^{86}$Ge dominates at short time scales due to its short half-life, while after a tenth of a second it becomes less important.
-This again demonstrates how the saturation irradiation enables better analysis of the longer-lived \glspl{DNP}, but at the cost of less relative importance of the shorter-lived \glspl{DNP}.
-Figure \ref{fig:delnu-counts-stacked-rates}(b) shows how the total number of counts vary over time on a log scale.
-The initial contribution of $^{86}$Ge is initially dominant but quickly becomes relatively unimportant compared to the other \glspl{DNP}.
-Figure \ref{fig:delnu-counts-stacked-rates}(c) reflects Figure \ref{fig:delnu-dnp-contributions}(b), as both figures show that the contribution of $^{86}$Ge is minimal following a saturation irradiation.
+Figure \ref{fig:delnu-counts-stacked-rates} shows the delayed neutron count rate in Figure \ref{fig:delnu-counts-stacked-rates}(a), as well as the integrated form in Figures \ref{fig:delnu-counts-stacked-rates}(b) and \ref{fig:delnu-counts-stacked-rates}(c), representing the total delayed neutron counts at each time.
+Figure \ref{fig:delnu-counts-stacked-rates}(a) shows the $^{86}$Ge count rate dominates at short time scales due to its short half-life, but it becomes less important after a tenth of a second.
+This again demonstrates how saturation irradiation enables better analysis of the longer-lived \glspl{DNP}, but reduces the relative importance of shorter-lived \glspl{DNP}.
+Figure \ref{fig:delnu-counts-stacked-rates}(b) shows total counts varying over time on a log scale.
+$^{86}$Ge initially dominates but quickly becomes unimportant compared to other \glspl{DNP}.
+Figure \ref{fig:delnu-counts-stacked-rates}(c) mirrors Figure \ref{fig:delnu-dnp-contributions}(b), as both show $^{86}$Ge contribution is minimal after saturation irradiation.
 The total delayed neutron count contribution is dominated by longer lived \glspl{DNP} like $^{137}$I and $^{87}$Br.
 
 \begin{figure}[!ht]
@@ -71,7 +71,7 @@ The total delayed neutron count contribution is dominated by longer lived \glspl
 
 Another analysis of interest with the individual \gls{DNP} data is calculation of the delayed neutron yield and average half-life, shown in Table \ref{tab:indiv-dnp-params}.
 These values are calculated and then compared with the six group \gls{DNP} group parameters formulated from those \glspl{DNP}.
-Ideally these values should be identical, but because the six-group fit cannot fully capture the behavior of all the decaying \glspl{DNP}, there are some small differences.
+Ideally, these values would be identical, but the six-group fit cannot fully capture all decaying \glspl{DNP} behavior, producing small differences.
 These differences are small relative to the uncertainty bounds for each term.
 
 \begin{table}[!ht]

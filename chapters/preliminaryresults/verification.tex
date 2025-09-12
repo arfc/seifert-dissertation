@@ -1,11 +1,11 @@
-The 0D scaled model is verified using \gls{DNP} group parameters from thermal fission of $^{235}$U.
-This verification uses the data from literature, introduced in Section \ref{sec:measurementofdnps}, combined and recreated here with the results from this work included.
+The 0D scaled model verification uses \gls{DNP} group parameters from thermal fission of $^{235}$U.
+This verification uses the data from literature, introduced in Section \ref{sec:measurementofdnps}, combined and recreated here with this work’s results.
 
 Tables \ref{tab:macro-yields-net}, \ref{tab:macro-yield-delta-net}, \ref{tab:macro-half-lives-delta-net}, and \ref{tab:macro-half-lives-delta-net} show the \gls{DNP} group parameters from literature and how they compare to the 0D scaled model \gls{DNP} group parameters.
-As previously discussed, because the 0D scaled model does not include the pulse irradiation data, the shorter-lived groups are expected to be less accurate.
-This can be seen in the yields, where the groups 5 and 6 yields are significantly different, while groups 1 and 2 are much more similar to results from the literature.
-The group half-lives are similar to the literature values, though group three is an outlier.
-This is again likely due to the pulse irradiation data missing, as it is noticeably longer than the other values in the literature.
+As discussed, the 0D scaled model excludes pulse irradiation data, so shorter-lived groups are less accurate.
+This appears in the yields: groups five and six differ significantly, while groups one and two match the literature more closely.
+The group half-lives generally agree with the literature, though groups three and five are outliers.
+This likely arises from missing pulse irradiation data, as both group half-lives are approximately twice as large as the values in the literature.
 
 \begin{table}[!h]
 \centering
@@ -119,12 +119,14 @@ Waldo et al.\cite{waldo1981delayed}    & 1.28926 & 0.82773 & 0.20965 & 0.08600 &
 \end{threeparttable}
 \end{table}
 
-Table \ref{tab:total-delnu-compare-net} shows how the total delayed neutron yield for 100 fissions compares between the literature and for the 0D scaled model.
-The differences between the microscopic and macroscopic delayed yields for the same dataset exist for many fissile nuclides, not only $^{235}$U \cite{mathieu2012new}.
-The 0D scaled model yield is noticeably larger than the other values in the literature, but the raw data is also larger.
-This indicates not an issue with the \gls{DNP} group parameter formulation, but rather, that the pulse irradiation data is necessary to capture the smaller yields of the shorter-lived \gls{DNP} groups.
+Table \ref{tab:total-delnu-compare-net} compares the total delayed neutron yield for 100 fissions between the literature and the 0D scaled model.
+It can be seen that the data is not within uncertainty bounds of each other, and even differs between different approaches for the same dataset.
+Differences between microscopic and macroscopic delayed yields occur for many fissile nuclides, not only $^{235}$U \cite{mathieu2012new}.
+The 0D scaled model yield exceeds other literature values, but this is a data issue and not a fitting issue. 
+The summed \gls{DNP} data gives approximately the same yield as shown in Table \ref{tab:indiv-dnp-params}.
+This indicates no issue with \gls{DNP} group parameter formulation; rather, pulse irradiation data is needed to capture smaller yields of shorter-lived \gls{DNP} groups.
 This can be seen in Table \ref{tab:macro-yields-net}, where the group 5 and 6 yields are greatly over-valued relative to other \gls{DNP} group yields in the literature.
-Using the modified 0D scaled model, where groups three through six use the Keepin et al. \gls{DNP} group parameters, results in a yield which is more consistent with the other values in the literature.
+The modified 0D scaled model, using Keepin et al. \gls{DNP} group parameters for groups three through six, produces a yield more consistent with literature values.
 
 
 \begin{table}[!h]
@@ -157,10 +159,10 @@ Using the modified 0D scaled model, where groups three through six use the Keepi
     \label{tab:total-delnu-compare-net}
 \end{table}
 
-Table \ref{tab:avg-halflife-net} shows how the average half-lives compare between the 0D scaled model and the literature.
-The 0D scaled model average half-life is too short, which is primarily due to the overvaluing of the group 5 and 6 yields, which weighs those half-lives more than they should be.
-Using the modified 0D scaled model with groups three through six replaced by the Keepin et al. \gls{DNP} group parameters once again results in the model aligning much more closely with the literature.
-This indicates, once again, the importance of the pulse irradiation data to properly capture the short-lived \gls{DNP} behavior.
+Table \ref{tab:avg-halflife-net} compares average half-lives between the 0D scaled model and the literature.
+The 0D scaled model average half-life is too short, primarily due to overvalued group five and six yields, which overweight those half-lives.
+The modified 0D scaled model, with groups three through six replaced by Keepin et al. \gls{DNP} group parameters, aligns much more closely with literature.
+This again indicates the importance of pulse irradiation data to capture short-lived \gls{DNP} behavior.
 
 \begin{table}[!h]
     \centering
