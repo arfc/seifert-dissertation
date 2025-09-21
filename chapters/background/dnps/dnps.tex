@@ -1,11 +1,25 @@
-Before delving deeper into the \gls{DNP} group parameters, it is useful to first understand \glspl{DNP} conceptually.
+Before delving deeper into the \gls{DNP} group parameters, it is useful to first understand \glspl{DNP} conceptually because they are an important consideration in nuclear reactors \cite{das1993importance}.
 \Glspl{DNP} are nuclides which decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
-\glspl{DNP} are an important consideration in nuclear reactors \cite{das1993importance}.
+%\glspl{DNP} are an important consideration in nuclear reactors \cite{das1993importance}.
 %An important consideration in nuclear reactors, especially in \glspl{MSR}, are \glspl{DNP}, discovered in 1939, with initial spectral measurements in 1946 \cite{roberts1939further, das1993importance, burgy1946energies}.
 In this work, the term \gls{DNP} will be solely used rather than referring to emitters, as the delay of the neutron emission is effectively only due to the $\beta$ decay \cite{bohr1939mechanism, ott1985introductory}.
-Classifying between the emitter and the \gls{DNP} is not relevant for this work.
+Distinguishing between the emitter and the \gls{DNP} is not relevant for this work.
+Equation \eqref{eq:simple-reactor-period} shows a simplified equation for the reactor period $\tau_e$, calculated using a single \gls{DNP} group and without the effect of prompt neutrons included \cite{NRC2006EquationsConversions}.
+The delay in neutron emission significantly affects the reactor period, or the time it takes for the reactor power to increase by a factor of $e$, and transient behavior in general.
+\begin{equation}
+    \tau_e \approx \frac{\beta_{eff} - \rho}{\rho \lambda_{eff}}
+    \label{eq:simple-reactor-period}
+\end{equation}
+where
+\begin{align}
+    \beta_{eff} &= \text{the effective delayed neutron fraction [-]} \nonumber \\
+    \rho &= \text{the reactivity [-]} \nonumber \\
+    \lambda_{eff} &= \text{the one \gls{DNP} group decay constant [$s^{-1}$]}. \nonumber
+\end{align}
+The effective delayed neutron fraction is discussed in more detail in Section \ref{sec:gandkparams}.
+The one \gls{DNP} group approximation is not used in this study, so this approximation is not discussed in greater detail.
+However, this simplified equation demonstrates how the reactor period depends greatly on the effective delayed neutron fraction, which itself is based on the \glspl{DNP}.
 
-The delay in neutron emission significantly affects the reactor period and transient behavior.
 Equation \eqref{eq:dnpsingleeq} shows the time-dependent rate of delayed neutron emission from a single \gls{DNP} as:
 \begin{equation}
     \dot{n}_{d, i}(t) = P_{n, i} \lambda_i N_i(t),
@@ -17,7 +31,7 @@ Equation \eqref{eq:dnpsingleeq} shows the time-dependent rate of delayed neutron
 P_{n, i} &= \mbox{ the average number of delayed neutrons emitted from} \nonumber\\
 & \;\;\;\;\;\; \mbox{decay of nuclide $i$, or the emission probability [-]} \nonumber \\
 \lambda_i &= \mbox{ the decay constant of \gls{DNP} $i$ $[s^{-1}]$} \nonumber \\
-N_i(t) &= \mbox{ the number of \gls{DNP} $i$ $\left[atoms\right]$.} \nonumber
+N_i(t) &= \mbox{ the number of atoms of \gls{DNP} $i$ $\left[atoms\right]$.} \nonumber
 \end{align}
 
 %\begin{itemize}
@@ -30,11 +44,11 @@ N_i(t) &= \mbox{ the number of \gls{DNP} $i$ $\left[atoms\right]$.} \nonumber
 
 %A challenging aspect of treating \glspl{DNP} in \glspl{MSR} is the necessary inclusion of spatial resolution due to the movement of the fuel salt.
 %In \glspl{MSR}, the movement of the fuel salt necessitates spatial resolution for depletion, transmutation, and neutron emission.
+In a solid-fueled reactor, such as a \gls{LWR}, spatial resolution is not necessary to properly model the \glspl{DNP}, as the fuel remains stationary.
 In \glspl{MSR}, the movement of the fuel salt necessitates spatial resolution for tracking \gls{DNP} distributions and concentrations.
-In a solid fuel reactor, such as a \gls{LWR}, spatial resolution is not necessary to properly model the \glspl{DNP}, as the fuel remains stationary.
 Modeling space and time together largely increases computational cost, making problems involving \glspl{DNP} in \glspl{MSR} more challenging than handling \glspl{DNP} in stationary fuels.
 
-Properly modeling the \glspl{DNP} in reactors is important, otherwise simulations may predict incorrect power responses, reactivity worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
-Section \ref{sec:bg-trans-analysis-methods} shows how the power response and reactivity worth depend on the \glspl{DNP}.
+Properly modeling the \glspl{DNP} in reactors is important, otherwise simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
+Section \ref{sec:bg-trans-analysis-methods} shows how the power response depends on the \glspl{DNP}.
 The reactor controllability varies based on the available number of \glspl{DNP}.
 If there are fewer delayed neutrons available due to movement of the fuel salt, such as in a \gls{MSR}, then the reactor period becomes shorter and makes the reactor harder to control.

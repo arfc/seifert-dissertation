@@ -1,5 +1,5 @@
-manuscript = arfc-pres
-references = $(wildcard *.bib)
+manuscript = main
+references = ../$(wildcard *.bib)
 latexopt   = -halt-on-error -file-line-error -shell-escape
 
 all: all-via-pdf
