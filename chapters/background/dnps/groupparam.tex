@@ -11,7 +11,7 @@ Their study shows that increasing the number of \gls{DNP} groups alone does not 
 
 Representing the \glspl{DNP} in group form also simplifies the calculation of various kinetics parameters.
 Various kinetics parameters are introduced in Section \ref{sec:bg-trans-analysis-methods}, though without detail on the purpose of each variable.
-This section provides more information on what these kinetics and delayed neutron group parameters physically represent, while Sections \ref{sec:calc-group-param} and \ref{sec:calc-kinetic-param} detail how they are calculated.
+This section provides more information on what these kinetics and delayed neutron group parameters physically represent and how they are calculated.
 The \gls{DNP} group parameters directly affect many of the kinetics parameters, and both sets of data are used in kinetics and dynamics problems.
 Table \ref{tab:dnpgandk} goes through each of the terms of importance for this section.
 
@@ -39,7 +39,8 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
     \label{tab:dnpgandk}
 \end{table}
 
-The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.% (or $\beta_i$).
+The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.
+% (or $\beta_i$).
 The group yields are also known as group abundances, and can be found represented using $a_k$, $b_k$, $\nu_{dk}$, and $\alpha_k$ in the literature \cite{keepin1957delayed, williams1996choice, ott1985introductory, brady1989delayed}.
 These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event, as shown in Equation \eqref{eq:betai}.
 The group yields represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
@@ -47,7 +48,7 @@ The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP
 With this data, the other group parameters can be derived, such as the total delayed neutron yield, $Y$, and delayed neutron fraction $\beta$.
 
 Although the groups are useful, there are times when individual \glspl{DNP} are needed.
-For example, in 1986, Perry et al. demonstrates that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
+For example, in 1986, Perry et al. demonstrate that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
 In 1989, Brady and England also use the individual nuclides to compare with group data \cite{brady1989delayed}, and updated the six-group parameters based on the explicit \glspl{DNP}.
 Updating the six-group parameters enabled greater consistency between experimental results and simulations.
 
@@ -62,7 +63,7 @@ The infinite multiplication factor, $k_{\infty}$, represents the multiplication 
 This is analogous to the delayed neutron fraction and mean generation time terms, where the effective form of the term requires information on the specific reactor geometry.
 
 The adjoint flux is important for calculating the effective form of many kinetics parameters.
-The adjoint flux is not a physical quantity, but rather serves as an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
+The adjoint flux is not a physical quantity, but rather an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
 For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
 The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development, truchet2015computing}.
 
@@ -79,7 +80,7 @@ For \glspl{MSR}, the movement of the fuel salt also affects the effective delaye
 Another term, the mean neutron generation time, $\Lambda$, is the mean time between generation of a neutron and fission induced by that neutron \cite{romero2022calculation}.
 This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weighted form.
 The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
-In contrast, the effective delayed neutron fraction varies by on the order of 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
+In contrast, the effective delayed neutron fraction varies by approximately 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
 
 \subsubsection{Calculation of DNP Group Parameters}
 \label{sec:calc-group-param}
@@ -164,6 +165,7 @@ Using Equation \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, or \eqref{eq:deln
 A \vec{x} \approx \vec{b}.
 \label{eq:lstsq}
 \end{equation}
+Since the system is overdetermined, no exact solution exists; only a residual minimization, as shown in Equation \eqref{eq:residual}, is possible.
 \begin{comment}
 Equation \eqref{eq:minthis} gives the $\chi^2$ term the non-linear least squares minimizes as:
 \begin{equation}
@@ -248,14 +250,24 @@ where
 
 This approach is effectively a fission-weighting, which can be written in a more general manner.
 The \gls{DNP} group parameters are generated for a given fuel composition, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
-For example, the delayed neutron yield of group $k$ is given as:
+The fission-weighting term is given as:
+%\begin{equation}
+%    \bar{\nu}_{d, k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d, k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
+%    \label{eq:nubar-fw}
+%\end{equation}
 \begin{equation}
-    \bar{\nu}_{d, k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d, k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
-    \label{eq:nubar-fw}
+w_F = \frac{\displaystyle \int \Sigma_f^{(F)}(\vec{r},E) \, \phi(\vec{r},E) \, dE \, d\vec{r}}
+           {\displaystyle \sum_{F'} \int \Sigma_f^{(F')}(\vec{r},E) \, \phi(\vec{r},E) \, dE \, d\vec{r}},
+\label{eq:fission-weight}
 \end{equation}
-while the decay constant of group $k$ is given as:
+the delayed neutron yield of group $k$ is given as:
 \begin{equation}
-    \lambda_{k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \lambda^{(F)}_{k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
+\bar{\nu}_{d,k}^{(FW)} = \sum_F \bar{\nu}_{d,k}^{(F)}  w_F,
+\label{eq:nubar-fw}
+\end{equation}
+and the decay constant of group $k$ is given as:
+\begin{equation}
+    \lambda_{k}^{(FW)} = \sum_F \lambda^{(F)}_{k}  w_F,
     \label{eq:decayconst-fw}
 \end{equation}
 where
@@ -318,16 +330,11 @@ In such a case, the \glspl{DNP} must be combined in such a manner to preserve th
 The reverse is also true, where a given six-group spatially resolved concentration can be separated into individual \glspl{DNP} spatially resolved concentrations.
 
 The methods for calculating the \gls{DNP} group spectra and the group concentrations directly overlap.
-Two different methods are considered for calculation of group spectra and group concentrations:
- 
-\begin{itemize}
-    \item Grouping based on half lives \cite{england1983aggregate, rudstam1982six}
-    \item Grouping based on fractional contribution to adjacent groups \cite{brady1988evaluation}
-\end{itemize}
+Two different grouping methods are considered for calculation of group spectra and group concentrations: based on half-lives \cite{england1983aggregate, rudstam1982six} and based on fractional contribution to adjacent groups \cite{brady1988evaluation}.
 
-The grouping based on half lives requires comparing each nuclide's half-life to a constant half-life bin structure formulated from analysis of individual \glspl{DNP}.
-The groupings based on half lives are given in the top two sets in Table \ref{tab:halfgroup}.
-The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach \cite{Brown20181}.
+The grouping based on half-lives requires comparing each nuclide's half-life to a constant half-life bin structure formulated from analysis of individual \glspl{DNP}.
+The groupings based on half-lives are given in the top two sets in Table \ref{tab:halfgroup}.
+The bottom set of half-lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach \cite{Brown20181}.
 
 \renewcommand{\arraystretch}{1.25}
 \begin{table}[H]
@@ -338,9 +345,9 @@ The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fraction
     \hline
        Source  & $\tau_1$ $[s]$ &  $\tau_2$ $[s]$ & $\tau_3$ $[s]$ & $\tau_4$ $[s]$ & $\tau_5$ $[s]$ & $\tau_6$ $[s]$\\
        \hline
-        \cite{england1983aggregate} & $\tau > 31$ & $31 \geq \tau > 9$ &  $9 \geq \tau > 3$ & $3 \geq \tau > 0.8$ & $0.8 \geq \tau > 0.3$ & $0.3 \geq \tau$ \\
-        \cite{rudstam1982six}\tnote{*} & $\tau > 30$ & $30 \geq \tau > 10$ & $10 \geq \tau > 4$ & $4 \geq \tau > 1.4$ & $1.4 \geq \tau > 0.4$ & $0.4 \geq \tau$\\
-        \cite{endf6} & $\tau = 51.98$ & $\tau = 21.17$ & $\tau = 5.74$ & $\tau = 2.29$ & $\tau = 0.82$ & $\tau = 0.24$\\
+        England et al. \cite{england1983aggregate} & $\tau > 31$ & $31 \geq \tau > 9$ &  $9 \geq \tau > 3$ & $3 \geq \tau > 0.8$ & $0.8 \geq \tau > 0.3$ & $0.3 \geq \tau$ \\
+        Rudstam \cite{rudstam1982six}\tnote{*} & $\tau > 30$ & $30 \geq \tau > 10$ & $10 \geq \tau > 4$ & $4 \geq \tau > 1.4$ & $1.4 \geq \tau > 0.4$ & $0.4 \geq \tau$\\
+        ENDF/B-VI.8 \cite{endf6} & $\tau = 51.98$ & $\tau = 21.17$ & $\tau = 5.74$ & $\tau = 2.29$ & $\tau = 0.82$ & $\tau = 0.24$\\
 
 %        \hline
 %        \cite{Brown20181} & $T_1 = 51.98$\\
@@ -383,7 +390,7 @@ The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as
     \label{eq:fracsum}
 \end{equation}
 
-To solve for the fractions, the least squares minimization problem is minimized \cite{brady1988evaluation}:
+To solve for the fractions, the following least-squares minimization problem is used \cite{brady1988evaluation}:
 \begin{equation}
     \int_{0}^{\infty} \left( \lambda_k e^{-\lambda_k t} -  f_{k, i} \lambda_i e^{-\lambda_i t} - f_{k, i+1} \lambda_{i+1} e^{-\lambda_{i+1} t}   \right)^2 dt
     \label{eq:fracmin}
@@ -417,7 +424,7 @@ Because the number of rows is greater than the number of columns in the matrix, 
 \end{equation}
 
 With the fractional contribution terms, $\vec{x}$, the concentration of a given nuclide can then be multiplied by each fraction to show how much it contributes to that group.
-With a summation of each nuclides contribution, the group concentrations can thus be calculated and vice versa.
+By summing the contributions of each nuclide, the group concentrations can be calculated, and conversely, the nuclide contributions can be calculated from the group concentrations.
 Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
 
 \subsubsection{Calculation of Kinetics Parameters}
