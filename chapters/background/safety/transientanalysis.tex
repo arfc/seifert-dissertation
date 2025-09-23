@@ -1,7 +1,6 @@
 There are several different methods which have been used for analyzing transients in \glspl{MSR}.
-These methods include, as of 2018, "...fluid-flow-velocity field
-coupled multi-group, time-resolved, neutron diffusion; ... point reactor kinetics schemes; and
-quasi-statics; generally all coupled, tightly or loosely, to a thermal-hydraulics solver" \cite{wooten2018review}.
+These methods include multi-group neutron diffusion, \gls{PRK} schemes, and quasi-statics \cite{wooten2018review}.
+These methods are generally coupled, either tightly or loosely, to a thermal-hydraulics solver.
 In general, although these methods have varying accuracy and costs, none of them include \gls{MSR} specific phenomena when generating the \gls{DNP} group parameters.
 
 \subsubsection{Multi-Group Diffusion}
@@ -102,7 +101,7 @@ The derivation of the \gls{PRK} equations can be found in the work by Henry, wit
 %    \item $\beta_{eff, i}$ is the effective delayed neutron fraction from group $i$
 %\end{description}
 
-\Gls{PRK} in general struggle to capture spatial effects, such as flow variation, which is important for \glspl{MSR}. 
+\Gls{PRK} generally struggle to capture spatial effects, such as flow variation, which is important for \glspl{MSR}. 
 \Gls{PRK} do, however, give a correct prediction for general evolution trends \cite{wooten2018review}.
 Wooten et al. provide four different publications which use \gls{MPK} in \gls{MSR} analysis \cite{guo2013simulations, merle2015physical, shi2016development, zanetti2015extension}.
 
@@ -125,7 +124,7 @@ The \gls{PRK} equations are modified into the \gls{DPK}, which model precursor c
 \end{equation}
 These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are also used by Shi et al. in \gls{RELAP}.
 Shi et al. simulate a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
-This approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects at power and for loss of flow, but fails to capture all oscillatory effects \cite{wooten2018review}.
+The modified point kinetics approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects during power operation and loss-of-flow conditions, but it does not accurately capture all oscillatory effects \cite{wooten2018review}.
 
 Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} are shown in Equations \eqref{eq:dpk-betaeff} through \eqref{eq:dpk-tauloop} as:
 \begin{equation}
@@ -174,8 +173,9 @@ Merle-Lucotte et al. found that the \gls{PRK} method without any modifications w
 The IPK method was able to capture these oscillations, but assumes uniform fission and instantaneous heat transfer \cite{merle2015physical}.
 
 The work by Zanetti et al. extends the TRACE code, a finite volume code used for \gls{LWR} transients \cite{zanetti2015extension}.
-The \gls{DNP} concentration as a function of space and time is resolved upwind in space and with backward Euler for time. 
-Adjoint-weighted quantities discretized with the trapezoidal rule are then passed to \gls{PRK} equation, and the set of \gls{DNP} concentration and the \gls{PRK} power, or neutron density, equations are resolved using LU factorization.
+The \gls{DNP} concentration, dependent on both space and time, is discretized with an upwind scheme in space and a backward Euler method in time.
+Adjoint-weighted quantities discretized with the trapezoidal rule are then passed to the \gls{PRK} equation.
+The set of \gls{DNP} concentration and power, or neutron density, equations are resolved using LU factorization.
 
 Another approach to modify the \gls{PRK} is to alter the kinetics parameters based on a phase-space integration weighted with the adjoint flux \cite{lapenta2000basic}.
 Alternatively, effective flow-inclusive group yields can be calculated, as shown by Haubenreich and used in \gls{PRK} equations \cite{haubenreich1962prediction}.
@@ -217,7 +217,7 @@ These primary equations are given as:
 \end{equation}
 and
 \begin{equation}
-    \frac{\partial C_i (\vec{x}, t)}{\partial t} = \phi_A \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( u (\vec{x}, t) C_i (\vec{x}, t)).
+    \frac{\partial C_i (\vec{x}, t)}{\partial t} = \phi_A \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( \vec{u} (\vec{x}, t) C_i (\vec{x}, t)).
     \label{eq:rineiski-big-C}
 \end{equation}
 
@@ -243,7 +243,7 @@ The equations used in the "reactivity" steps are recreated here as:
 
 Intermediate terms used in Equations \eqref{eq:rineiski-n} through \eqref{eq:rineiski-cm} are given as:
 \begin{equation}
-    \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( u(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( u(\vec{x}, t) C_{m, i}(\vec{x}, t)\right),
+    \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( \vec{u}(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( \vec{u}(\vec{x}, t) C_{m, i}(\vec{x}, t)\right),
     \label{eq:rineiski-big-cm}
 \end{equation}
 and
@@ -261,7 +261,7 @@ F(t) &= \mbox{ the neutron production operator [$cm^{-1}$]} \nonumber \\
 \chi_p &= \mbox{ the prompt neutron energy spectra [-]} \nonumber \\
 C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
 Q(\vec{x}, t) &= \mbox{ the external neutron source [$n \cdot cm^{-3} \cdot s^{-1}$] } \nonumber \\
-u(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$cm \cdot s^{-1}$]} \nonumber \\
+\vec{u}(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$cm \cdot s^{-1}$]} \nonumber \\
 C_{s, i}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
 C_{m, i}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{i} [$atoms \cdot cm^{-3}$] } \nonumber \\
 \rho &= \mbox{ the reactivity [-]} \nonumber \\

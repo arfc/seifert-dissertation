@@ -493,10 +493,8 @@ This can be calculated using a time-dependent version of a Monte Carlo code alon
 
 
 
-Finally, there are the effective parameters: the effective delayed neutron fraction, $\beta_{eff}$, and the effective mean neutron generation time, $\Lambda_{eff}$.
-$\beta_{eff}$ is the spectrum and adjoint weighted ratio of the delayed neutron induced fission to the induced fissions from all neutrons \cite{romero2022calculation}.
+Finally, the effective parameters are introduced: the effective delayed neutron fraction, $\beta_{eff}$, and the effective mean neutron generation time, $\Lambda_{eff}$. The parameter $\beta_{eff}$ is the spectrum- and adjoint-weighted ratio of delayed-neutron-induced fissions to the total induced fissions from all neutrons \cite{romero2022calculation}.
 This is given in Equation \eqref{eq:betaeff-exact} as:
-
 \begin{equation}
     \beta_{eff} = \frac{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
     \label{eq:betaeff-exact}
@@ -524,7 +522,7 @@ where
 %    \item $\phi$ is the neutron flux
 %\end{description}
 
-$\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the "...time between the birth of a neutron and the subsequent absorption that induces fission."
+$\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the time between the birth of a neutron and the subsequent absorption that induces fission.
 This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte}:
 \begin{equation}
     \Lambda_{eff} = \frac{\int \Phi_0^\dagger \frac{1}{v} \Phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \Phi_0^\dagger F_0 \Phi_0 \; dE d\vec{\Omega} d\vec{r}}
@@ -537,7 +535,7 @@ where
 v &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
 F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
 \end{align}
-Because only the absorptions that induce fission are of interest, the fission operator is used.
+The fission operator is used because only the absorptions that induce fission are of interest.
 
 %\begin{description}
 %    %\setlength\itemsep{-0.25em}
@@ -554,9 +552,10 @@ weighted, method \cite{keepin1965physics}; the eigenvalue, or perturbation, meth
 $\Lambda_{eff}$ can also be calculated using the pulsed method \cite{romero2022calculation}.
 %There is also the pulsed method for calculating $\Lambda_{eff}$, and the prompt method for calculating $\beta_{eff}$ \cite{romero2022calculation}.
 For $\beta_{eff}$, there are also the prompt, Meulekamp, and Spriggs methods which can be used \cite{romero2022calculation, meulekamp2006calculating}.
-Aufiero et al. have conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods, which show that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
+Aufiero et al. have conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods.
+Their results show that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
 
 For the effective parameters to account for the movement of the fuel salt, there is typically another step required where the static parameters, calculated with no movement, are multiplied by another term.
-Aufiero et al. uses an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
+Aufiero et al. use an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
 Another approach is to account for the decay of the \glspl{DNP} outside of the core, as shown by Nestor \cite{nestor1960reactor}.
-Generally, there is some form of advection term used to account for the circulation of the \glspl{DNP}, following which the spatial distribution can be account for in the effective parameter calculation.
+Generally, an advection term is introduced to account for the circulation of the \glspl{DNP}, after which the spatial distribution is incorporated into the effective parameter calculation.

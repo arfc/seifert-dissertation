@@ -53,8 +53,8 @@ The matrix form of Equation \eqref{eq:Bateman_default} is given as:
 \end{equation}
 where
 \begin{align}
-    \vec{N} =& \text{the vector of material compositions [$atoms \cdot cm^{-3}$]} \nonumber\\
-    A =& \text{the depletion matrix [$s^{-1}$].} \nonumber
+    \vec{N} =& \text{ the vector of material compositions [$atoms \cdot cm^{-3}$]} \nonumber\\
+    A =& \text{ the depletion matrix [$s^{-1}$].} \nonumber
 \end{align}
 The depletion matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
 %Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
@@ -77,10 +77,10 @@ However, for the purposes of a streamlined comparison with circulating fuel, the
 \end{equation}
 where
 \begin{align}
-S_j &= \mbox{the source term for nuclide $j$, } \nonumber\\
-& \;\;\;\;\; \mbox{containing fission, decay, and transmutation sources [$atoms \cdot cm^{-3} \cdot s^{-1}$]} \nonumber \\
-\lambda_{net, j} &= \mbox{the loss term for nuclide $j$,} \nonumber\\
-& \;\;\;\;\; \mbox{containing decay and transmutation losses [$s^{-1}$] .} \nonumber
+S_j &= \text{the source term for nuclide $j$, } \nonumber\\
+& \;\;\;\;\; \text{containing fission, decay, and transmutation sources [$atoms \cdot cm^{-3} \cdot s^{-1}$]} \nonumber \\
+\lambda_{net, j} &= \text{the loss term for nuclide $j$,} \nonumber\\
+& \;\;\;\;\; \text{containing decay and transmutation losses [$s^{-1}$] .} \nonumber
 \end{align}
 Over the course of a depletion step, the depletion matrix is assumed to be constant, so the source term varies in time only due to the effects of the changing compositions of other nuclides.
 The loss term, $\lambda_{net, j}$, does not vary with time in this equation.
@@ -123,8 +123,8 @@ Spatial refinement can be added to this equation based on the specific approach,
 %\item $\vec{u}$ is the fluid velocity field
 %\end{description}
 
-As previously mentioned, the main challenge faced when solving this problem is the computational cost.
-However, there are many studies which have attempted to develop methods to get around this problem.
+As previously mentioned, the main challenge in solving this problem is its high computational cost.
+Numerous studies have proposed methods to mitigate this issue.
 One common approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
 However, this method does not model the in-core and ex-core regions in a physical manner.
 The scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
@@ -135,11 +135,11 @@ An example implementation of this approach is given in Appendix \ref{sec:appendi
 Another approach has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
 This approach can estimate the steady-state concentration of certain nuclides across a flow loop, but it does not account for temporal resolution \cite{shahbazi_steady-state_2022}.
 
-Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of the deterministic neutron transport code Griffin with the thermal fluids code Pronghorn, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
+Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of Griffin, a deterministic neutron transport code, with Pronghorn, a thermal fluids code, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
 Tano et al.\ present an approach where only insoluble, medium-lived, and high concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
 
 Spatially and temporally resolved approaches, such as the one used by Tano et al., are more computationally expensive than those that only require solving a system of ordinary differential equations.
-However, Tano et al.\ has shown that including circulation of the fuel salt in depletion directly affects the equilibrium concentration of $^{135}$Xe by approximately 45\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
+However, Tano et al.\ have shown that including circulation of the fuel salt in depletion directly affects the equilibrium concentration of $^{135}$Xe by approximately 45\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
 This indicates there may be a need for spatially resolved depletion simulations to get accurate fuel salt compositions.
 
 
@@ -149,7 +149,7 @@ This spatially resolved system of partial differential equations (PDEs) requires
 These small time steps cause multi-year depletion simulations to be exceedingly expensive.
 
 
-Numerical stability of the problem, when using an explicit-time solving scheme, uses the Courant number:
+Numerical stability of the problem, when using an explicit-time solving scheme, uses the Courant number, $C$:
 \begin{equation}
     C = \frac{u \Delta t}{\Delta z},
 \label{eq:num-stab}
@@ -159,7 +159,7 @@ where
     \Delta t =& \text{the time step size [s]} \nonumber \\
     \Delta z =& \text{the length between spatial nodes [cm].} \nonumber
 \end{align}
-The Courant number, $C$, must be less than or equal to 1 for the Courant–Friedrichs–Lewy convergence condition in an explicit finite differencing scheme \cite{courant1928partiellen}.
+The Courant number must be less than or equal to 1 for the Courant–Friedrichs–Lewy convergence condition in an explicit finite differencing scheme \cite{courant1928partiellen}.
 This equation limits the time step size based on the flow rate and spatial mesh size.
 Although using an implicit time solver can work around this condition, the overall computational cost remains high due to the number of nuclides, the time step size, spatial mesh resolution, and the overall amount of time simulated in depletion.
 

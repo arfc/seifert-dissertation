@@ -8,6 +8,7 @@ These designs feature a circulating salt containing fissile material.
 In particular, the circulating fuel salt allows for online chemical reprocessing, which causes depletion to vary spatially, leads to movement of \glspl{DNP}, and requires close coupling of thermal-hydraulics to neutronics for realistic modeling.
 
 \begin{table}[H]
+    \caption{A collection of various \gls{MSR} designs publicly available in the literature.}
     \centering
     \begin{tabular}{lc}
     \hline
@@ -26,14 +27,13 @@ In particular, the circulating fuel salt allows for online chemical reprocessing
        \Gls{TMSR} & \cite{nuttin2005potential, merle-lucotte_thorium_2007}\\
        \hline
     \end{tabular}
-    \caption{A collection of various \gls{MSR} designs publicly available in the literature.}
     \label{tab:msr-designs}
 \end{table}
 
 
 
 There are many publications in the literature which have investigated online chemical reprocessing of \glspl{MSR}, as shown in Table \ref{tab:codes_types}, which has been recreated from \cite{seifert2023analysis}.
-Table \ref{tab:codes_types} shows which MSR depletion simulations have modeled \glspl{DNP} in the "DNP" column, showing most models do not include \gls{DNP} movement in depletion simulations.
+Table \ref{tab:codes_types} shows which \gls{MSR} depletion simulations have modeled \glspl{DNP} in the "DNP" column, showing most models do not include \gls{DNP} movement in depletion simulations.
 The table is sorted by the "Reprocessing" column, which signifies the method(s) used in the different \gls{MSR} models, discussed in Section \ref{sec:dep-sim}.
 It is also sorted by the publication year in the "Year" column.
 The table shows there are many \gls{MSR} concepts for which depletion was modeled.
@@ -42,36 +42,32 @@ These models used a variety of spatial refinement levels, shown in the "Model" c
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
-\caption{Molten salt reactor models analyzed with methods approximating online reprocessing (recreated from \cite{seifert2023analysis}).}
-\label{tab:codes_types}
+\caption{Molten salt reactor models analyzed with methods approximating online reprocessing (recreated from \cite{seifert2023analysis}). The first row of each reprocessing method is highlighted in bold.}
 \begin{center}
 \begin{tabular}{  l  c  c  c  c  c}
     \hline
  Publication & Reprocessing & Model & Reactor & DNP & Year\\
  \hline
- Valdez et al. \cite{jr2020modeling} & Continuous & Unit Cell & Several & No & 2020\\
+ Valdez et al. \cite{jr2020modeling} & \textbf{Continuous} & Unit Cell & Several & No & 2020\\
  Zhuang et al. \cite{zhuang_extended_2020} & Continuous & Full 3D & \gls{MSFR} & No & 2020\\
  Xia et al. \cite{xia_development_2019} & Continuous & Full 3D & \gls{MSFR} & No & 2019\\
  Zhou et al. \cite{zhou_fuel_2018} & Continuous & Full 3D & \gls{MSBR} & Yes & 2018\\
  Aufiero et al. \cite{aufiero_extended_2013} & Continuous & Full 3D & \gls{MSFR} & No & 2013\\
  Rodriguez-Vieitez \cite{rodriguez-vieitez_transmutation_2002} & Continuous & Unit Cell & \gls{ADNA} & No & 2002\\
- \hline
- 
- Rykhlevskii \cite{rykhlevskii_modeling_2019} & Batchwise & Full 3D & \gls{MSBR} & No & 2019\\
+ Rykhlevskii \cite{rykhlevskii_modeling_2019} & \textbf{Batchwise} & Full 3D & \gls{MSBR} & No & 2019\\
  Betzler et al. \cite{betzler_molten_2017} & Batchwise & Unit Cell & \gls{MSBR} & No & 2017\\
- Ridley and Chvala \cite{ridley_method_2017} & Batchwise & Full 3D & Toy & No & 2017\\
+ Ridley and Chvala \cite{ridley_method_2017} & Batchwise & Full 3D & Modified \gls{DMSR} & No & 2017\\
  Ahmad et al. \cite{ahmad_neutronics_2015} & Batchwise & Unit Cell & \gls{DMSR} & No & 2015\\
  Park et al. \cite{park_whole_2015} & Batchwise & Full 3D & MSBR & No & 2015\\
  Sheu et al. \cite{sheu_depletion_2013} & Batchwise & Full 3D & \gls{MOSART} & No & 2013\\
  Nuttin et al. \cite{nuttin_potential_2005} & Batchwise & Full 3D & \gls{MSBR} & No & 2005\\
- 
- \hline
- Fiorina et al. \cite{fiorina_preliminary_2012} & Mixed & 2D Slice & \gls{MSFR} & No & 2012\\
- Nagy et al. \cite{nagy_parametric_2008} & Mixed & Unit Cell & Toy & Yes & 2008\\
+ Fiorina et al. \cite{fiorina_preliminary_2012} & \textbf{Mixed} & 2D Slice & \gls{MSFR} & No & 2012\\
+ Nagy et al. \cite{nagy_parametric_2008} & Mixed & Unit Cell & Modified \gls{MSBR} & Yes & 2008\\
  Merle-Lucotte et al. \cite{merle-lucotte_thorium_2007} & Mixed & Full 3D & \gls{TMSR} & No & 2007\\
  Bauman et al. \cite{h_f_bauman_rod_1971} & Mixed & 2D Slice & \gls{MSBR} & Yes & 1971\\
  
  \hline
+ \label{tab:codes_types}
 \end{tabular}
 \end{center}
 \end{table}
