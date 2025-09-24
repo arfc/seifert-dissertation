@@ -73,7 +73,7 @@ Equation \eqref{eq:ode-cfy-1} can be used to calculate the concentration as a fu
 Assuming a stationary fuel with no recirculation or chemical removal, the equation simplifies greatly.
 The solution to that equation, assuming no initial concentration of nuclide $j$, is given as:
 \begin{equation}
-    N_j(t) = \frac{CFY_j}{\lambda_j} \left( 1 - e^{-\lambda t}\right)
+    N_j(t) = \frac{CFY_j}{\lambda_j} \left( 1 - e^{-\lambda_j t}\right)
     \label{eq:cfy-solved-ode}
 \end{equation}
 
@@ -86,7 +86,7 @@ This means that the equation should be taken as time approaches infinity, which 
 
 For the case of a nuclide in a circulating fuel reactor with a non-zero chemical removal rate, the concentration as a function of time comes out as:
 \begin{equation}
-    N_j(t) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j} \left( 1 - e^{-f_{ex} \lambda_{r, j} t -\lambda t}\right)
+    N_j(t) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j} \left( 1 - e^{-f_{ex} \lambda_{r, j} t -\lambda_j t}\right)
     \label{eq:cfy-solved-ode-repr}
 \end{equation}
 

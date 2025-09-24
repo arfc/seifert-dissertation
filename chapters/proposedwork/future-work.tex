@@ -18,15 +18,15 @@ Additional miscellaneous work of interest could also include:
 \subsection{Spatially Resolved Model}
 
 Although the 0D flow model provides useful insights, it does not provide a high level of fidelity for any specific geometry.
-A spatially resolved model will be developed to evaluate the accuracy of the 0D flow model.
-This model verifies whether the 0D flow model produces sufficiently accurate \gls{DNP} group parameters.
+A spatially resolved model can be developed to evaluate the accuracy of the 0D flow model.
+This model would verify whether the 0D flow model produces sufficiently accurate \gls{DNP} group parameters.
 Section \ref{sec:soph-model} discusses the spatially resolved model in detail.
-This spatially resolved model will compare multiple levels of fidelity for generating \gls{DNP} group parameters: 0D flow model using cumulative fission yields, 0D flow model with depletion, spatially resolved flow model using cumulative fission yields, and spatially resolved flow model with depletion.
+This spatially resolved model can compare multiple levels of fidelity for generating \gls{DNP} group parameters: 0D scaled model using cumulative fission yields, 0D flow model with depletion, spatially resolved flow model using cumulative fission yields, and spatially resolved flow model with depletion.
 Each step increases computational cost, so if a simpler method generates \gls{DNP} group parameters with negligible differences, it will be used preferentially.
 
-The process for comparing the 0D flow model and the spatially resolved model is as follows: the spatially resolved model runs and generates \gls{DNP} group parameters and residence times, the residence times are used to feed into the 0D flow model, the resulting \gls{DNP} group parameters are compared between the two models.
+The comparison between the 0D flow model and the spatially resolved model can be conducted as follows: the spatially resolved model is first executed to generate \gls{DNP} group parameters and residence times; the residence times are supplied to the 0D flow model; and the resulting \gls{DNP} group parameters are compared between the two models.
 If the results are within the uncertainty bounds of each other, then this indicates that the 0D flow model only needs residence time data for a given \gls{MSR} to generate the \gls{DNP} group parameters.
-If they do not match, then a spatially resolved approach will be necessary to properly generate the \gls{MSR} \gls{DNP} group parameters.
+If they do not match, then a spatially resolved approach may be necessary to properly generate the \gls{MSR} \gls{DNP} group parameters.
 
 \subsubsection{Sensitivity to Number of DNPs}
 The number of \glspl{DNP} to track is of particular interest for the spatially resolved flow model.
@@ -43,22 +43,21 @@ The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, repl
 \end{equation}
 Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
 The \glspl{DNP} with the most impact can be modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
-A full sensitivity study will be conducted to determine a reasonable number of \glspl{DNP} to include in the spatially resolved flow model.
+A full sensitivity study can be conducted to determine a reasonable number of \glspl{DNP} to include in the spatially resolved flow model.
 %Comparisons will be made between group parameters generated with varying numbers of the most important \glspl{DNP}.
 
 \subsubsection{Reactor Generalization}
-One of the desired outcomes for this work is formulation of \gls{DNP} group parameters for \glspl{MSR} which can be applied generally.
-If the \gls{DNP} group parameters can be applied generally to different systems with similar residence times, then the amount of computational work required is drastically reduced.
+If the \gls{DNP} group parameters can be applied generally to different \glspl{MSR} with similar residence times, then the amount of computational work required is drastically reduced.
 However, it is necessary that sufficient evidence is provided demonstrating that the improved parameters are identical for different \glspl{MSR}.
 
-Specifically, the \gls{MSRE} and the \gls{MSFR} will be simulated using the spatially resolved model \cite{robertson1965msre, brovchenko2019neutronic}.
-The models will be adjusted such that the in-core and ex-core residence times are identical for each.
-The result will be a set of group parameters for two distinct reactors but with the same residence time tabulations.
+Specifically, the \gls{MSRE} and the \gls{MSFR} can be simulated using the spatially resolved model \cite{robertson1965msre, brovchenko2019neutronic}.
+The models can be adjusted such that the in-core and ex-core residence times are identical for each.
+The results would be a set of group parameters for two distinct reactors but with the same residence times.
 Instead of calculating the neutron flux, both reactors will be given an incident neutron energy spectrum for irradiating the sample.
 The impact of the incident neutron energy spectra is discussed in Section \ref{sec:indidentspectra}, so differences caused by the spectra will not be studied in this section.
 Additionally, the fuel salt and fuel temperature in the \gls{MSFR} will be replaced with those from the \gls{MSRE}.
 
-The two different reactor simulations will have all of the same input parameters aside from the geometry and thermal-hydraulic parameters.
+The two different reactor simulations would have all of the same input parameters aside from the geometry and thermal-hydraulic parameters.
 If the \gls{DNP} group parameters have negligible differences, then the geometry and thermal-hydraulic parameters are not necessary when generating the group parameters.
 Instead, all that is needed are the other input parameters, meaining the work does not need to be replicated for every different reactor geometry and thermal-hydraulic configuration.
 If the \gls{DNP} group parameters have non-negligible differences, then each \gls{MSR} needs to have \gls{DNP} group parameters generated for its own specific geometry and flow conditions.
@@ -74,7 +73,7 @@ It is important to understand this for safety, security, and safeguards design, 
 In particular, uncertainties of interest are in the residence times and chemical removal rates.
 
 The residence time correlates linearly with the flow rate, which is dependent on the temperature.
-Although the flow rate would also have uncertainty based on variance in the pump, this uncertainty is considered outside the scope of this work.
+Although the flow rate would also have uncertainty based on variance in the pump, this uncertainty may be beyond the scope of future work in \gls{MoSDeN}.
 The temperature affects fuel salt density, buoyant force, and viscosity, all influencing the flow rate and residence time.
 The temperature is influenced by the fission rate, which has uncertainties from the flux and fission cross section.
 For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the difference between the inlet and outlet temperatures as the temperature uncertainty.
@@ -129,7 +128,7 @@ where
 For the \gls{MSRE}, the values are a salt flow rate of 0.003153, a total salt volume of 1.996, and a removal efficiency of 0.026 \cite{robertson1965msre}.
 For the 0D flow model, this removal occurs while the sample is in the ex-core region and stops while the sample is in the in-core region.
 This is because the removal occurs in the pump bowl and not inside the core.
-For the spatially resolved flow model, this removal also occurs in the ex-core region, treated in the same way as the 0D flow model.
+For the spatially resolved flow model, this removal also occurs in the ex-core region.
 
 The removal rate, $\lambda_{i, l, r}$, of noble metal $i$ to waste stream $l$ via plate-out is \cite{lo2022application}:
 \begin{align}
@@ -153,7 +152,7 @@ The surface areas and mass transfer rates for the noble metals are given in Tabl
         \hline
         Component & $h_{i, l}$ $[m \cdot s^{-1}]$ & $A_l$ $[m^2]$ & $\lambda_{i, l, r}$ $[s^{-1}]$ \\
         \hline
-        HX & $4.657 \times 10^{-5}$ & $2.93 \times 10^1$ & $6.827 \times 10^{-4}$ \\
+        Heat Exchanger & $4.657 \times 10^{-5}$ & $2.93 \times 10^1$ & $6.827 \times 10^{-4}$ \\
         Fuel loop piping, core and pump volute & $1.041 \times 10^{-4}$ & $6.60 \times 10^0$ & $3.441 \times 10^{-4}$ \\
         Core wall cooling annulus & $4.318 \times 10^{-5}$ & $1.43 \times 10^1$ & $3.095 \times 10^{-4}$ \\
         Core graphite (exposed to salt) & $5.334 \times 10^{-6}$ & $1.36 \times 10^2$ & $3.637 \times 10^{-4}$ \\
@@ -195,8 +194,8 @@ The incident neutron energy spectrum directly affects the \gls{DNP} group parame
 However, it would be computationally expensive to generate new \gls{DNP} group parameters for every unique incident neutron energy spectrum.
 Some coarser resolution is required, so it is of interest to determine a reasonable categorization of the \gls{DNP} group parameters for different energy spectra.
 
-This sensitivity study will investigate different levels of fidelity for organizing the energy spectra: fine, middling, coarse, and single-value spectra.
-The approach uses the 0D flow model, with changes only to the neutron source energy spectra.
+This sensitivity study could investigate different levels of fidelity for organizing the energy spectra: fine, middling, coarse, and single-value spectra.
+The approach can use the 0D flow model, with changes only to the neutron source energy spectra.
 The fine, middling, and coarse spectra include the full incident neutron energy spectra but with different bin sizes.
 The single-value spectra include several categories: neutron energy classification, mean energy, and median energy.
 The neutron energy classification is provided in Table \ref{tab:neutronenergyspectra}, recreated from \cite{l2003nuclear}.
@@ -209,10 +208,10 @@ The study will also examine hand-crafted spectra where the mean and median remai
     \hline
         Category & Energy Range $[MeV]$ \\
     \hline
-      Cold   & $< 3 \times 10^9$ \\
-      Thermal & $3 \times 10^9 - 4 \times 10^7$ \\
-      Epithermal & $4 \times 10^7 - 1 \times 10^4$ \\
-      Intermediate & $1 \times 10^4 - 2 \times 10^{-1}$ \\
+      Cold   & $< 3 \times 10^{-9}$ \\
+      Thermal & $3 \times 10^{-9} - 4 \times 10^{-7}$ \\
+      Epithermal & $4 \times 10^{-7} - 1 \times 10^{-4}$ \\
+      Intermediate & $1 \times 10^{-4} - 2 \times 10^{-1}$ \\
       Fast & $2 \times 10^{-1} - 1 \times 10^1$ \\
       Relativistic & $> 1 \times 10^1$ \\
     \hline
@@ -220,6 +219,6 @@ The study will also examine hand-crafted spectra where the mean and median remai
     \label{tab:neutronenergyspectra}
 \end{table}
 
-This sensitivity study will determine the necessary level of detail in the incident neutron energy spectrum for generating \gls{DNP} group parameters.
+This sensitivity study can determine the necessary level of detail in the incident neutron energy spectrum for generating \gls{DNP} group parameters.
 Organizing by category or mean energy is expected to suffice for most cases.
 For cases where this approach is inadequate, a more robust method can be selectively applied.

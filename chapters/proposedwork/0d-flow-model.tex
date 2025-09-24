@@ -1,5 +1,5 @@
-The new model which will be developed beyond the 0D scaled model is the 0D flow model.
-The 0D scaled model only generates saturation irradiation results, scales the flux and chemical removal based on the fraction of salt in-core and ex-core, and does not track decays of nuclides into \glspl{DNP} during the decay of the sample after irradiation.
+The new model that will be developed beyond the 0D scaled model is the 0D flow model.
+The 0D scaled model generates saturation irradiation results and scales the flux and chemical removal based on the fraction of salt in-core and ex-core, but it does not track decays of nuclides into \glspl{DNP} during the decay of the sample after irradiation.
 However, the 0D scaled model offers a fast simulation, which does enable rapid development and simulation of many different parameters with ease.
 
 The 0D flow model improves the fidelity of the 0D scaled model by offering both saturation and pulse irradiation results, handles in-core and ex-core regions in time rather than simply scaling the flux, and enables tracking of decay parents for \glspl{DNP}.
@@ -42,7 +42,7 @@ The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of
 \subsection{Data Source Analysis}
 Huynh et al. compare the effects of cumulative fission yields and emission probabilities from \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
 A similar comparison can also be found in the \gls{JEFF} report 17 \cite{bank2000jef}.
-Mathieu et al. investigate additional datasets, including the \gls{NNDC} website (which sources data from \gls{ENSDF}) and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+Mathieu et al. investigate the \gls{NNDC} website, which sources data from \gls{ENSDF}, and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
 
 These comparisons can be expanded to include the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and other data compilations for emission probabilities (delayed neutron branching ratios), half-lives, fission yields, and cross sections.
 Comparing these data sources clarifies the uncertainty caused by differences in the data.
@@ -105,7 +105,7 @@ If non-negligible differences exist, the more costly full depletion method will 
 \subsection{Verification and Validation}
 Verifying and validating the \gls{DNP} group parameters is essential to ensure their practical utility.
 Verification with the literature is important to ensure that the fundamental approach is working as expected.
-Since the literature does not contain \gls{DNP} group parameters which include \gls{MSR} physical phenomena, this verification with the literature will only be for the stationary solve.
+Since the literature does not contain \gls{DNP} group parameters that include \gls{MSR} physical phenomena, this verification with the literature will only be for the stationary solve.
 
 After this, although the group parameters are verified with the literature, that does not necessarily mean they capture all physical phenomena of interest.
 Validation identifies potential weaknesses in the approach by highlighting discrepancies between predicted and experimental results.
