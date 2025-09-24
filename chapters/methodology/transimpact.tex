@@ -30,8 +30,8 @@ The first stage compares the irradiated sample’s delayed neutron count rate to
 If the count rates do not match, the issue lies in the data or the aggregation of individual \glspl{DNP} into the count rate.
 If the count rate is accurately predicted, the formulation is considered valid.
 The second stage validates the improved \gls{DNP} group parameters using \gls{MSRE} pump start-up and coast-down experimental data to assess their accuracy in modeling reactivity changes from \glspl{DNP} \cite{prince1968zero}.
-This experiment has been studied using Moltres and Quasimolto, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
-However, previous models excluded the inlet and outlet plena, leading to discrepancies with experimental data.
+This experiment has been studied using Moltres and Quasimolto\footnote{Quasimolto is an open-source multiphysics code that models multi-group neutron transport, \gls{DNP} balance, and energy balance.}, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
+However, previous models excluded the inlet and outlet plena in the \gls{MSRE}, leading to discrepancies with experimental data.
 A model including the plena, combined with updated \gls{DNP} group parameters, should yield results closer to the experimental data.
 
 \subsection{Safety}
@@ -63,7 +63,7 @@ The improved \gls{DNP} group parameters in this work affect the effective delaye
 Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the improved parameters.
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
-To investigate this, diversion scenarios are studied for a single significant quantity of $^{235}$U and Pu removed over the course of one year, simulated using OpenMC.
+To investigate this, diversion scenarios are studied for a single significant quantity of $^{235}$U and plutonium removed over the course of one year, simulated using OpenMC.
 The change in the fuel salt composition affects the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
 The importance and fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
 If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.
