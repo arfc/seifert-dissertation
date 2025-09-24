@@ -102,7 +102,7 @@ Of interest are the node distribution, number of nodes, sample decay time, and c
 
 \subsubsection{Distribution}
 Two time node distributions are compared: logarithmic spacing from 0.01 to 600 seconds and linear spacing from 0 to 600 seconds.
-With 300 time nodes, linear spacing does not capture behavior in the first 2 seconds but provides higher resolution at longer time scales.
+With 300 time nodes, linear spacing does not capture behavior in the first two seconds but provides higher resolution at longer time scales.
 This longer time scale resolution is less useful, as many relevant \glspl{DNP} quickly drop off at longer time scales, as discussed in Section \ref{sec:important-dnp}.
 
 Figure \ref{fig:time-distribution} compares \gls{DNP} group parameters for logarithmic and linear spacing.
@@ -157,7 +157,7 @@ These results indicate that 300 nodes provide sufficiently accurate yields, with
 \begin{tabular}{cccccccc}
 \hline
       & \multicolumn{6}{c}{Yield Difference {[}\%{]}} &              \\
-Nodes & 1     & 2     & 3     & 4     & 5     & 6     & Cost {[}s{]} \\
+Nodes & 1     & 2     & 3     & 4     & 5     & 6     & Time $[s]$ \\
 \hline
 50    & 0.30                  & 0.90                  & 0.53                  & 0.75                  & 0.99                  & 0.59                  & 297          \\
 100   & 0.17                  & 0.49                  & 0.25                  & 0.39                  & 0.46                  & 0.77                  & 297          \\
@@ -174,7 +174,7 @@ Nodes & 1     & 2     & 3     & 4     & 5     & 6     & Cost {[}s{]} \\
 \subsubsection{Total Decay Time}
 \label{sec:total-decay-time}
 Increasing total decay time produces two simultaneous effects: decreasing time node density, discussed in Section \ref{sec:time-tot-and-node}, and increasing the number of nodes evaluated at longer times.
-Because the longest-lived \gls{DNP}\footnote{$^{211}$Tl, $^{210}$Tl, and $^{210}$Hg are longer-lived and have non-zero emission probabilities, but they live only tens of seconds longer and generally have negligible concentrations.}, $^{87}$Br, has a half-life of approximately one minute, it is reasonable to assume that the default final time of ten minutes offers sufficient data on all \gls{DNP} decays.
+Because the longest-lived \gls{DNP}\footnote{The \glspl{DNP} $^{211}$Tl, $^{210}$Tl, and $^{210}$Hg are longer-lived and have non-zero emission probabilities, but they live only tens of seconds longer and generally have negligible concentrations.}, $^{87}$Br, has a half-life of approximately one minute, it is reasonable to assume that the default final time of ten minutes offers sufficient data on all \gls{DNP} decays.
 
 Figure \ref{fig:time-tot-dec-time} shows this assumption is not accurate.
 The \gls{DNP} group parameters approach asymptotic values as the total decay time increases, with the decay time of 1200 seconds, or 20 minutes, being the smallest decay time after which longer decay times do not change the results.
@@ -264,7 +264,7 @@ The other six-group \gls{DNP} parameters plotted include Keepin (1.0, as the plo
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/Keepin_counts.png}
+    \includegraphics[width=0.75\linewidth]{images/Keepin_counts.png}
     \caption{The delayed neutron count rate for thermal fission of $^{235}$U normalized to the Keepin et al. six-group \gls{DNP} group parameters.}
     \label{fig:keepin-counts-0dscaled}
 \end{figure}
@@ -277,7 +277,7 @@ Figure \ref{fig:keepin-counts-0dscaled-mod} shows this modified set of \gls{DNP}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/Keepin_counts_modified.png}
+    \includegraphics[width=0.75\linewidth]{images/Keepin_counts_modified.png}
     \caption{The delayed neutron count rate for thermal fission of $^{235}$U normalized to the Keepin et al. six-group \gls{DNP} group parameters.}
     \label{fig:keepin-counts-0dscaled-mod}
 \end{figure}
@@ -293,7 +293,7 @@ For example, because group 1 is dominated by $^{87}$Br, changes to its half-life
 
 The number of Monte Carlo simulations is increased to 5000 to provide sufficient data for each \gls{DNP}, ensuring differences in \gls{DNP} group parameters are statistically significant.
 To find the nuclides with the most impactful sensitivities, a linear regression fits the slope of the relative change in \gls{DNP} group parameters to the relative change in the individual \gls{DNP} nuclear data, while also calculating the \gls{PCC}.
-The \gls{PCC} quantifies the linear relationship between two variables, with -1 representing perfect negative correlation, +1 perfect positive correlation, and 0 no correlation \cite{frey2018sage}.
+The \gls{PCC} quantifies the linear relationship between two variables: -1 indicates perfect negative correlation, +1 indicates perfect positive correlation, and 0 indicates no correlation \cite{frey2018sage}.
 Changes in the nuclear data include emission probability $P_n$, fission yields (affecting concentration $N$), and half-lives $\tau$.
 
 Sensitivities of interest have absolute \gls{PCC} values greater than 0.2.
