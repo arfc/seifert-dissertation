@@ -53,3 +53,9 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
     - Improved group spectra (important for betaeff)
     - 3s transient simulations 
     - Gantt Chart
+
+
+## Slide Notes
+### What are delayed neutrons
+- Emission probability contains probability of beta- decay and then probability of that decay emitting a delayed neutron.
+- The number of atoms depends on fission yields, cross-sections, and decay chains.
