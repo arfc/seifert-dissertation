@@ -9,11 +9,15 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ## Slide Structure
 - Title
 - Outline
-- Introduction
+- Introduction - something people care about, a problem, how it can be solved
+    - What are DNPs? (some of timeline)
+    - What are DNP groups and parameters? (some of timeline) (brief mention of macro/micro approaches) (all are static)
+    - Delayed neutron precursor group parameters are important for transient simulations (3 S's)
     - Importance of safety, security, and safeguards (use of transient sims)
+    - Discuss how MSRs have effects that are not captured by existing parameters
+     (pretend 100\% removal and other simple example)
     - Discuss MSR transient modeling usage of DNP group params
-    - Discuss how these params were formed using static samples 
-    - Demonstrate that if an MSR existed that chemically removed all elements, the group params would be wrong
+    - Objectives
 - Background
     - DNPs
         - Timeline discussion (micro vs macroscopic equations)

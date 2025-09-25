@@ -1,5 +1,5 @@
 manuscript = main
-references = ../$(wildcard *.bib)
+references = $(wildcard ../*.bib)
 latexopt   = -halt-on-error -file-line-error -shell-escape
 
 all: all-via-pdf
