@@ -10,10 +10,11 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Title
 - Outline
 - Introduction - something people care about, a problem, how it can be solved
-    - What are DNPs? (some of timeline)
-    - What are DNP groups and parameters? (some of timeline) (brief mention of macro/micro approaches) (all are static)
+    - What are DNPs?
+    - What are DNP groups and parameters?
+    - What are safety, security, and safeguards by design?
+
     - Delayed neutron precursor group parameters are important for transient simulations (3 S's)
-    - Importance of safety, security, and safeguards (use of transient sims)
     - Discuss how MSRs have effects that are not captured by existing parameters
      (pretend 100\% removal and other simple example)
     - Discuss MSR transient modeling usage of DNP group params
@@ -56,6 +57,13 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 
 
 ## Slide Notes
-### What are delayed neutrons
+### What are delayed neutron precursors
 - Emission probability contains probability of beta- decay and then probability of that decay emitting a delayed neutron.
 - The number of atoms depends on fission yields, cross-sections, and decay chains.
+### What are DNPs groups and parameters
+- The delayed neutron yield contains the concentration and emission probability data
+- There are hundreds of DNPs, but in reality 99% of delayed neutrons come from about 90 of them. 50% come from about 4 DNPs.
+### 3SBD
+- Critical for cost savings, timely deployment, and regulatory requirements
+- Security, I am only looking at sabotage for this work.
+
