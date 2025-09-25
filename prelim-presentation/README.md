@@ -10,22 +10,22 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Title
 - Outline
 - Introduction - something people care about, a problem, how it can be solved
-    - What are DNPs?
-    - What are DNP groups and parameters?
-    - What are safety, security, and safeguards by design?
-
-    - Delayed neutron precursor group parameters are important for transient simulations (3 S's)
-    - Discuss how MSRs have effects that are not captured by existing parameters
-     (pretend 100\% removal and other simple example)
-    - Discuss MSR transient modeling usage of DNP group params
+    - Defining terms
+        - What are DNPs?
+        - What are DNP groups and parameters?
+        - What are safety, security, and safeguards by design?
+    - Motivation
+        - Discuss how MSRs have effects that are not captured by existing parameters
+        - Discuss MSR transient modeling usage of DNP group params
     - Objectives
+        - Objectives
 - Background
     - DNPs
         - Timeline discussion (micro vs macroscopic equations)
         - More detailed discussion of macro (pics, equations)
         - More detailed discussion of micro (pics, equations)
     - MSR Phenomena
-        - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current))
+        - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current)) (example with 100\% removal and one for residence times)
     - Safety, security, and safeguards
         - Transients for safety and security
         - Safeguards diversion scenarios
