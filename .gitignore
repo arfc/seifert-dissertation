@@ -12,6 +12,7 @@
 *.cb2
 .*.lb
 *.ist
+main.pdf
 
 *.DS_Store
 
