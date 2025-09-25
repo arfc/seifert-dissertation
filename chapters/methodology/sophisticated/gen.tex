@@ -11,7 +11,7 @@ Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially re
 \end{figure}
 
 The spatially resolved flow model introduces two new parameters absent in the 0D flow model.
-The first is the mesh, which defines the problem geometry.
+The first is the mesh, which defines the flow loop geometry.
 MOOSE provides built-in meshing tools, though complex geometries may require external tools such as Gmsh \cite{geuzaine2009gmsh}.
 The second is the thermal-hydraulics parameters, which capture physical phenomena enabled by spatial resolution, as discussed in Section \ref{sec:moltres}.
 Additionally, since the depletion happens in Moltres instead of OpenMC, OpenMC does not need as much data.
