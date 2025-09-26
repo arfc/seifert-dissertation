@@ -16,7 +16,6 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - What are safety, security, and safeguards by design?
     - Motivation
         - Discuss how MSRs have effects that are not captured by existing parameters
-        - Discuss MSR transient modeling usage of DNP group params
     - Objectives
         - Objectives
 - Background
