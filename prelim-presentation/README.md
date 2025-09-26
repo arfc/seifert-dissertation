@@ -24,6 +24,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - DNP groups were originally determined using macroscopic measurements
         - More detailed discussion of macro (pics, equations)
         - More detailed discussion of micro (pics, equations)
+        - Discuss fitting procedures
     - MSR Phenomena
         - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current)) (example with 100\% removal and one for residence times)
     - Safety, security, and safeguards
