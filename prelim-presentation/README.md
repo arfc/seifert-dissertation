@@ -20,7 +20,8 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - Objectives
 - Background
     - DNPs
-        - Timeline discussion (micro vs macroscopic equations)
+        - Define the process for calculating DNP group parameters
+        - DNP groups were originally determined using macroscopic measurements
         - More detailed discussion of macro (pics, equations)
         - More detailed discussion of micro (pics, equations)
     - MSR Phenomena
