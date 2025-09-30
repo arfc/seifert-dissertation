@@ -67,7 +67,7 @@ Experimental noise becomes significant after long periods of time relative to th
 The short-lived groups cannot be measured immediately after irradiation; they must first be transported to a delayed neutron counter.
 This transport time results in missing very short-lived counts.
 %Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation, so there is a gap between irradiation and when the sample can be moved to a delayed neutron counter.
-After a pulse irradiation, the long-lived groups form a background that interfere with measurement of the short-lived groups \cite{bank2000jef}.
+After a pulse irradiation, the long-lived groups form a background that interferes with measurement of the short-lived groups \cite{bank2000jef}.
 Due to these effects, the delayed neutron measurements are most accurate for intermediate times, while the short-lived and long-lived \glspl{DNP} have greater uncertainty.
 %Due to these effects, measurement of delayed neutrons from the sample is less accurate initially, becomes increasingly accurate, and then becomes less accurate again as the delayed neutron count rate decreases.
 
@@ -189,8 +189,8 @@ There is reasonable agreement between the different \gls{DNP} group parameters, 
 Not only did each approach use a slightly different experimental methodology via different energy spectra, data collection methods, sample transfer time between irradiation and measurement, sample size, and sample composition, but there are also differences in how the data was processed.
 There are several ways that the data was processed from delayed neutron count rates into \gls{DNP} group parameters among the works in these tables: simultaneous non-linear least squares fitting of saturation and pulse irradiation data, separate non-linear least squares fitting of pulse and saturation irradiation data and subsequent combination, non-linear least squares of an intermediate amount of time between a pulse and saturation, and exponential stripping.
 
-Keepin et al. used both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
-The separate fitting of four groups were normalized at the second group, and Keepin et al. report that this method gave better results than the simultaneous fit \cite{keepin1957delayed}.
+Keepin et al. use both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
+The separate fitting of four groups is normalized at the second group, and Keepin et al. report that this method gives better results than the simultaneous fit \cite{keepin1957delayed}.
 
 Charlton et al. use the equation for an intermediate amount of time that is not infinite or a pulse, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
 They also only use five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
@@ -215,15 +215,15 @@ It is not made clear if pulse or saturation irradiations are used, as the conclu
 The other approach used to measure \glspl{DNP} is the microscopic -- also referred to in the literature as the aggregate or summation -- approach, which uses data from individual nuclides summed together to form a simulated delayed neutron count rate.
 This count rate can then be used to generate \gls{DNP} group parameters, the same as in the count rate from the macroscopic method.
 
-This approach was investigated in detail in the 1990-2000's \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010's from more data becoming available \cite{mills2014calculation, huynh2014calculation}.
+This approach was investigated in detail in the 1990-2000s \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010's from more data becoming available \cite{mills2014calculation, huynh2014calculation}.
 Leconte et al. used this approach as recently as 2020 \cite{leconte2020new}.
 This approach requires experiments on individual \gls{DNP} nuclides, from which emission probabilities and half-lives can be measured.
 Typically, this involves rapid chemical extraction or isotope separation and magnetic tape to rapidly measure short lived nuclides, such as in the study by Björnstad et al. where an aluminized mylar tape is used \cite{bjornstad1981decay}.
 The magnetic tape is used to transport samples or remove longer-lived decay products \cite{shalev1974energy, rudstam1974delayed}.
-Experimental methods include the neutron-$\beta$ coincidence technique, separate counting of neutrons and $\beta$ particles, separate counting of neutrons and $\gamma$ rays, ion counting, fission yield from a set number of fissions, gamma counting of a long-lived daughter, and normalization of the neutron counter using a known precursor \cite{rudstam1974delayed}.
+Experimental methods include the neutron-$\beta^-$ coincidence technique, separate counting of neutrons and $\beta$ particles, separate counting of neutrons and $\gamma$ rays, ion counting, fission yield from a set number of fissions, gamma counting of a long-lived daughter, and normalization of the neutron counter using a known precursor \cite{rudstam1974delayed}.
 
 Other experimental methods used to study \glspl{DNP} include on-line mass spectrometry, helium-3 spectrometry, proton-recoil detectors, the time-of-flight method, and neutron scintillators \cite{das1993importance}.
-On-line mass spectrometry combined with a helium-3 ionization chamber and a proton-recoil detector allows for measurement of the delayed neutron energy spectrum \cite{shalev1972delayed, beyer2007proton}.   
+On-line mass spectrometry combined with a $^3$He ionization chamber and a proton-recoil detector allows for measurement of the delayed neutron energy spectrum \cite{shalev1972delayed, beyer2007proton}.   
 The time-of-flight technique consists of measuring the flight time of a neutron over a known distance to calculate the velocity, including a neutron scintillator \cite{beyer2007proton, chulick1971energy, garcia2012monster, chrysochoides1971measurement}.
 \begin{comment}
 An example of the time-of-flight experimental setup is shown in Figure \ref{fig:micromeasure}.
@@ -237,10 +237,10 @@ An example of the time-of-flight experimental setup is shown in Figure \ref{fig:
 \end{comment}
 
 This microscopic measurement data is exceptionally useful, as it allows for treatment of \glspl{DNP} on a nuclide-by-nuclide basis.
-This is particularly important for \glspl{MSR}, where the spatial \gls{DNP} concentration depends on half-lives, yields, thermo-chemistry, and thermal-hydraulics.
+This is particularly important for \glspl{MSR}, where the spatial \gls{DNP} concentration depends on half-lives, fission yields, thermo-chemistry, and thermal-hydraulics.
 With data on individual nuclides, higher fidelity treatment of \glspl{DNP} becomes possible.
 
-There have been many new measurements in the past several decades on these nuclides.
+There have been many new measurements in the past several decades investigating these nuclides.
 The \gls{IAEA} has compiled and evaluated this data in a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
 This data, when combined with a depletion simulation, can be used to model the \glspl{DNP} explicitly rather than using groups.
 This is particularly useful for understanding what nuclides have the greatest impact, as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.

@@ -3,32 +3,30 @@ The results verify the \gls{DNP} group parameters using stationary thermal fissi
 These preliminary results investigate individual \glspl{DNP}, \gls{DNP} group parameter sensitivities, and \gls{DNP} group parameter verification.
 
 Of the \gls{MSR} physical phenomena considered, only chemical removal has an impact on the 0D scaled model.
-In-core and ex-core residence times do not change delayed neutron yield per fission because the number of fission events producing that count rate also varies.
-In the simplified 0D scaled model, each \gls{DNP} source scales linearly at the same rate as the number of fissions.
-The proposed 0D flow model will not have this linear response, as it accounts for time-dependent decays and parasitic absorptions.
-
-Specifically, for the scaled flux method applied to the cumulative fission yield, the scaling term for both is the same.
-Although this approach is rapid and enables more simulations, it does not incorporate fuel salt circulation into improved \gls{DNP} group parameter generation.
-Approximate measured in-core and ex-core residence times for the \gls{MSRE} are 9 seconds and 16 seconds, respectively \cite{hanauer1967neutron}.
+Varying the in-core and ex-core residence times does not affect the 0D scaled model because the scaling factor of the fission rate is identical to the scaling factor of the \gls{DNP} generation rate.
+Because no decay chains are considered, the in-core and ex-core residence times do not have any effect.
+The proposed 0D flow model will be able to model the effects of residence time, as it accounts for time-dependent decays and parasitic absorptions.
+Although the 0D scaled model is rapid and enables more simulations, it does not incorporate fuel salt circulation into improved \gls{DNP} group parameter generation.
 
 An additional consideration is that the pulse irradiation results are not included.
 Whether combined via simultaneous solution of a larger matrix or solved separately and then combined, pulse irradiation results improve \gls{DNP} group parameters for shorter-lived groups \cite{keepin1957delayed}.
 A simple investigation into the effects of pulse and saturation data is given in Appendix \ref{sec:appendixD}.
-Longer-lived groups are expected to be more accurate than shorter-lived groups in the 0D scaled model, as it excludes pulse irradiation results.
+Parameters formulated for longer-lived groups are expected to be more accurate than for shorter-lived groups in the 0D scaled model, as it excludes pulse irradiation results.
+The 0D scaled model cannot model pulse irradiations because the cumulative fission yields do not provide accurate concentrations for non-equilibrium concentrations.
 Section \ref{sec:irrad-combine} discusses this further.
 
-These results use the parameters in Table \ref{tab:default-0dsacled}, unless otherwise specified.
+The following results use the model parameters in Table \ref{tab:default-0dsacled}, unless otherwise specified.
 The row labeled "sampled simulations" shows the number of non-linear least squares solves used in the Monte Carlo sampling.
 Each sampled simulation uses emission probabilities, half-lives, and fission yields within uncertainties from a normal distribution based on the nuclear data.
 
 \begin{table}[]
     \centering
     \caption{Default parameters for 0D scaled model simulations.}
-    \begin{tabular}{cc}
+    \begin{tabular}{lr}
         \hline
         Parameter & Value \\
         \hline
-        Fissile Nuclide & $^{235}$U [-]\\
+        \rule{0pt}{2ex}\vspace{0.1 mm}Fissile Nuclide & \vspace{0.1 mm}$^{235}$U [-]\\
         Incident Neutron Energy & $0.0253\; [eV]$\\
         Fission Yields & ENDF/B-VII.1 \cite{chadwick2011endf}\\
         Half-lives & IAEA \cite{DIMITRIOU2021144}\\
@@ -37,6 +35,8 @@ Each sampled simulation uses emission probabilities, half-lives, and fission yie
         Decay Time Spacing & Logarithmic\\
         Decay Time Nodes & 300\\
         Sampled Simulations & 1000\\
+        $\tau_{in}$ & 9 $[s]$ \cite{hanauer1967neutron}\\
+        $\tau_{ex}$ & 16 $[s]$ \cite{hanauer1967neutron}\\
         \hline
     \end{tabular}
     \label{tab:default-0dsacled}

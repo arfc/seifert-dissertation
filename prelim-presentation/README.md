@@ -67,4 +67,9 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### 3SBD
 - Critical for cost savings, timely deployment, and regulatory requirements
 - Security, I am only looking at sabotage for this work.
-
+### MSR not captured
+### This work captures
+### Two ways to create DNP groups
+### Macroscopic
+- Nobody has used this approach with an MSR
+- Need shielding and distance between irradiation and measurement, but minimize time to capture short-lived DNPs

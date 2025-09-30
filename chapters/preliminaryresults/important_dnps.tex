@@ -30,21 +30,22 @@ This may result from the 0D scaled model simplifications, such as excluding para
 \begin{figure}[!ht]
 \centering
 \subfloat[Delayed neutron yield contributions.]{
-  \includegraphics[width=0.45\linewidth]{images/dnp_yield.png}
+  \includegraphics[width=0.45\linewidth]{images/0dnp_yield.png}
 }
 \hspace{0.05\linewidth}
 \subfloat[Delayed neutron count rate contributions.]{
-  \includegraphics[width=0.45\linewidth]{images/dnp_yield_full_irrad.png}
+  \includegraphics[width=0.45\linewidth]{images/1dnp_yield.png}
 }
 \hspace{0.05\linewidth}
 \subfloat[\gls{DNP} relative concentrations.]{
-  \includegraphics[width=0.45\linewidth]{images/dnp_conc.png}
+  \includegraphics[width=0.45\linewidth]{images/2dnp_yield.png}
 }
 \caption{Delayed neutron contributions from each \gls{DNP} after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
 \label{fig:delnu-dnp-contributions}
 \end{figure}
 
 Figure \ref{fig:delnu-counts-stacked-rates} shows the delayed neutron count rate in Figure \ref{fig:delnu-counts-stacked-rates}(a), as well as the integrated form in Figures \ref{fig:delnu-counts-stacked-rates}(b) and \ref{fig:delnu-counts-stacked-rates}(c), representing the total delayed neutron counts at each time.
+The \gls{DNP} presented in this figure are based on the delayed neutron count rate; at each time step, the two \glspl{DNP} with the largest delayed neutron count rate are added to the list of \glspl{DNP} to be included in the figure.
 Figure \ref{fig:delnu-counts-stacked-rates}(a) shows the $^{86}$Ge count rate dominates at short time scales due to its short half-life, but it becomes less important after a tenth of a second.
 This again demonstrates how saturation irradiation enables better analysis of the longer-lived \glspl{DNP}, but reduces the relative importance of shorter-lived \glspl{DNP}.
 Figure \ref{fig:delnu-counts-stacked-rates}(b) shows total counts varying over time on a log scale.
@@ -65,18 +66,18 @@ The total delayed neutron count contribution is dominated by longer lived \glspl
 \subfloat[A stack plot of the total delayed neutron counts.]{
   \includegraphics[width=0.45\linewidth]{images/individual_nuclide_counts_stacked.png}
 }
-\caption{Delayed neutron count rate contributions from the top two most contributing \glspl{DNP} at each time step after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
+\caption{Delayed neutron counts and count rate contributions after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
 \label{fig:delnu-counts-stacked-rates}
 \end{figure}
 
-Another analysis of interest with the individual \gls{DNP} data is calculation of the delayed neutron yield and average half-life, shown in Table \ref{tab:indiv-dnp-params}.
+Another analysis of interest with the individual \gls{DNP} data is calculation of the delayed neutron yield $\bar{\nu}_{d}$ and average half-life $\bar{\tau}$, shown in Table \ref{tab:indiv-dnp-params}.
 These values are calculated and then compared with the six group \gls{DNP} group parameters formulated from those \glspl{DNP}.
 Ideally, these values would be identical, but the six-group fit cannot fully capture all decaying \glspl{DNP} behavior, producing small differences.
 These differences are small relative to the uncertainty bounds for each term.
 
 \begin{table}[!ht]
     \centering
-    \caption{The delayed neutron yield and average half-life calculated by summing individual \glspl{DNP} and from the 6 \gls{DNP} group parameters.}
+    \caption{The delayed neutron yield $\bar{\nu}_{d}$ and average half-life $\bar{\tau}$ calculated by summing individual \glspl{DNP} and from the 6 \gls{DNP} group parameters.}
     \begin{tabular}{ccc}
     \hline
        Term & \gls{DNP} & Group \\
