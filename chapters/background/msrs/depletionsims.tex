@@ -1,6 +1,6 @@
 There are many approaches to simulating depletion with different computational costs and levels of accuracy. Building a computational tool to handle depletion requires two components: the depletion matrix and a numerical solver.
 
-Depletion is the process of fission, transmutation, decay, and the changes to material compositions this process causes.
+%Depletion is the process of fission, transmutation, decay, and the changes to material compositions this process causes.
 Simulating depletion requires specific information, such as decay constants, fission yields, and fission and transmutation cross-section data.
 The fission and transmutation cross-section data can come from a transport calculation, while the other data can be read from a data library \cite{leppanen_development_2007}.
 Simulating depletion entails numerically solving the Bateman equations; a generalized form of which is given as  \cite{leppanen_development_2007}:
@@ -53,13 +53,38 @@ The matrix form of Equation \eqref{eq:Bateman_default} is given as:
 \end{equation}
 where
 \begin{align}
-    \vec{N} =& \text{ the vector of material compositions [$atoms \cdot cm^{-3}$]} \nonumber\\
+    \vec{N} =& \text{ the vector of material composition [$atoms \cdot cm^{-3}$]} \nonumber\\
     A =& \text{ the depletion matrix [$s^{-1}$].} \nonumber
 \end{align}
-The depletion matrix contains the gain and loss terms for each nuclide in $N$, which vary continuously as a function of time and depend on the concentrations as well.
+The depletion matrix contains the gain and loss terms for each nuclide in the material of interest, which vary continuously as a function of time and depend on the concentrations as well.
+If there are transfers between two different materials, such as the fuel salt $N_{f}$ sending chemically removed nuclides to a waste tank $N_{w}$, then Equation \eqref{eq:mat_Bate_chem} gives the concentrations as:
+\begin{equation}
+    \dot{
+    \begin{bmatrix}
+    N_{f} \\
+    N{w}
+    \end{bmatrix}
+    }
+    = 
+    \begin{bmatrix}
+        A_f-T_{f \rightarrow w} & 0 \\
+        T_{f \rightarrow w} & A_w
+    \end{bmatrix}
+        \begin{bmatrix}
+    N_{f} \\
+    N{w}
+    \end{bmatrix},
+    \label{eq:mat_Bate_chem}
+\end{equation}
+where
+\begin{align}
+    A_f &= \text{ the fuel salt depletion matrix [$s^{-1}$]} \nonumber \\
+    A_w &= \text{ the waste tank depletion matrix [$s^{-1}$]} \nonumber \\
+    T_{f \rightarrow w} &= \text{ the transfer matrix of nuclides from the fuel salt to waste tank $[s^{-1}]$} \nonumber .
+\end{align}
 %Further documentation on these terms can be found in the OpenMC documentation, an open source Monte Carlo transport code which has built-in depletion solvers \cite{romano_openmc_2015}.
 
-There are several approaches to solving this equation, such as the Transmutation Trajectory Analysis (TTA) method and the Chebyshev Rational Approximation Method (CRAM) \cite{leppanen_serpent_2015}.
+There are several approaches to solving these equations, such as the Transmutation Trajectory Analysis (TTA) method and the Chebyshev Rational Approximation Method (CRAM) \cite{leppanen_serpent_2015}.
 Other codes may use external software to compute depletion, such as REM, an in-house code used by Nuttin et al. \cite{nuttin_potential_2005} to implement $4^{th}$ order Runge–Kutta.
 Codes may also use a power series approximation of the matrix exponential, as discussed by Aufiero et al. \cite{aufiero_extended_2013}.
 
@@ -123,13 +148,12 @@ Spatial refinement can be added to this equation based on the specific approach,
 %\item $\vec{u}$ is the fluid velocity field
 %\end{description}
 
-As previously mentioned, the main challenge in solving this problem is its high computational cost.
-Numerous studies have proposed methods to mitigate this issue.
+Since the main challenge in solving this problem is its high computational cost, many studies have proposed methods to mitigate this issue.
 One common approach, the scaled flux method, is computationally inexpensive \cite{betzler_liquid-fueled_2021}.
 However, this method does not model the in-core and ex-core regions in a physical manner.
 The scaled flux method scales the flux by the fraction of fuel salt in-core compared to ex-core.
-This approach does not model the in-core and ex-core regions explicitly, and instead assumes the salt is perfectly mixed in the primary loop.
-Generally, this this approximation does not introduce significant error in the concentrations of nuclides \cite{seifert_luke_computationally_2025}.
+This approach does not model the in-core and ex-core regions explicitly, but instead assumes the salt is perfectly mixed in the primary loop.
+This approximation does not introduce significant error in the concentrations of nuclides unless there are large chemical removal rates or near-stationary flow rates \cite{seifert_luke_computationally_2025}.
 An example implementation of this approach is given in Appendix \ref{sec:appendixB}.
 
 Another approach has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
