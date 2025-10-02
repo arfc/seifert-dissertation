@@ -1,7 +1,7 @@
-The 0D flow model rapidly generates improved \gls{DNP} group parameters, but it simplifies the treatment of flow.
-Instead of modeling the actual fuel salt flow, it estimates fuel circulation using residence times for each region.
+The 0D flow model will rapidly generate improved \gls{DNP} group parameters, but it simplifies the treatment of flow.
+Instead of modeling the actual fuel salt flow, it will estimate fuel circulation using residence times for each region.
 A spatially resolved model is useful for capturing the effects that the 0D flow model only capture with residence times for specific \gls{MSR} geometries.
-Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially resolved model, which models the flow using Moltres.
+Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially resolved model, which could model the flow using Moltres.
 
 \begin{figure}[H]
     \centering
@@ -14,9 +14,9 @@ The spatially resolved flow model introduces two new parameters absent in the 0D
 The first is the mesh, which defines the flow loop geometry.
 MOOSE provides built-in meshing tools, though complex geometries may require external tools such as Gmsh \cite{geuzaine2009gmsh}.
 The second is the thermal-hydraulics parameters, which capture physical phenomena enabled by spatial resolution, as discussed in Section \ref{sec:moltres}.
-Additionally, since the depletion happens in Moltres instead of OpenMC, OpenMC does not need as much data.
+Additionally, since the depletion would happen in Moltres instead of OpenMC, OpenMC does not need as much data.
 
-In the spatially resolved model, the in-core and ex-core residence times are outputs rather than inputs.
+In the spatially resolved model, the in-core and ex-core residence times would be outputs rather than inputs.
 These times derive from the movement of the irradiated sample over time in the fuel salt.
 The in-core and ex-core residence times vary as the irradiated sample diffuses and mixes further into the fuel salt.
 The net residence time, $\tau_{net}$, remains constant unless the model changes, such as an increased temperature difference or induced flow rate.

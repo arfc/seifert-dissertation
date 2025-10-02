@@ -117,9 +117,9 @@ However, there is one additional \gls{MSR} phenomenon required to complete the m
 
 \subsubsection{Ex-core and In-core Coupling}
 
-Moltres treats the ex-core region as a tightly-coupled 1D pipe geometry with coupling using Picard iterations and the inlet/outlet boundary conditions.
+While Moltres treats the in-core region as described above with 2D or 3D resolution, Moltres treats the ex-core region as a tightly-coupled 1D pipe geometry with coupling using Picard iterations and the inlet/outlet boundary conditions.
 The specific equations to treat the variables of interest in this geometry can be derived from their full forms.
-For example, the flux and eddy viscosity are zero in the ex-core region, leading to the precursor concentration in the ex-core region:
+For example, the flux and eddy viscosity are zero in the ex-core region, leading to the precursor concentration in that region:
 \begin{equation}
     \frac{\partial C_i}{\partial t} = - \lambda_i C_i - u_x \frac{\partial C_i}{\partial x}.
     \label{eq:prec-conc-ex}

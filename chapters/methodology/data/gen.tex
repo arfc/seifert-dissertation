@@ -37,15 +37,5 @@ This concentration is then combined with emission probabilities and decay consta
 A non-linear least squares solve then fits the improved \gls{DNP} group parameters to the delayed neutron count rate, generating the group yields and half-lives, given as blue squares in Figure \ref{fig:data-model}.
 
 This model is only valid for saturation irradiation simulations, as the concentration calculated in Equation \eqref{eq:cfy-conc} is the equilibrium concentration.
-For a pulse irradiation, this approach is not valid.
-There are three potential options to handle pulse irradiations with the 0D scaled model: reduce net decay measurement time, use independent fission yields, or simply do not use the shortest-lived groups typically generated from a pulse irradiation since they are unlikely to be changed by \gls{MSR} physical phenomena.
-Although these approaches warrant discussion, the 0D scaled model cannot accurately model a pulse irradiation.
-The 0D scaled model instead serves as a useful tool for qualitative analysis on the effects of recirculation and chemical removal on the longer-lived \gls{DNP} group parameters.
-
-The first approach, reducing the net decay time, does not improve the fundamental issue of insufficient data on short-lived \glspl{DNP}, as the longer-lived \glspl{DNP} will accumulate far more rapidly.
-Instead, this approach will overfit the short-lived groups, leading to less accurate results.
-The second approach, using only the shortest-lived groups with independent fission yields means that the decay chains will not be handled, but the initial pulse concentration should be accurate.
-However, the concentrations will quickly become less accurate as the decays of various nuclides into \glspl{DNP} will not be treated, so this approach could only be potentially viable for the shortest lived group.
-The final approach would entail only using the longer-lived \gls{DNP} group parameters from a saturation irradiation, while recognizing that the short-lived groups are less accurate.
-Because the \gls{MSR} physical phenomena that cause non-negligible influence on the \glspl{DNP} take at least several seconds to come into effect, it is reasonable to focus on the longer-lived groups with the 0D scaled model.
-The 0D flow model will provide more accurate data for the shorter-lived \glspl{DNP}.
+For a pulse irradiation, this approach is not valid, which means that the non-equilibrium pulse irradiations cannot be simulated with the 0D scaled model.
+The proposed 0D flow model can simulate pulse irradiations and will provide more accurate data for the shorter-lived \glspl{DNP}.

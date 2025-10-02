@@ -23,14 +23,19 @@ This treatment reduces both the covariance and the $\chi^2$ of the fit.
 \end{comment}
 The residual of the solve is given in Equation \eqref{eq:residual}, recreated here as:
 \begin{equation}
-    r = min_x \left| \left| \frac{b - Ax}{b + \epsilon} \right| \right|_2^2. \nonumber
+    r = min_x \left| \left| \frac{b - Ax}{b + \epsilon} \right| \right|_2^2, \nonumber
 \end{equation}
-Half-life bounds are set from 1 millisecond to 1000 seconds, while the yield bounds are from 0 to 1.
+with bounds of:
+\begin{align}
+    \tau_k &\in [1\; ms, 1000 \;s] \nonumber \\
+    \bar{\nu}_{d,k} & \in [0, 1] \nonumber.
+\end{align}
 Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
 
 The final consideration in \gls{DNP} group reconstruction is uncertainty.
 This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.
-These uncertainties fission yields, half-lives, and emission probabilities.
+These uncertainties are in the cumulative fission yields $CFY$, half-lives $\tau$, and emission probabilities $P_n$ for the 0D scaled model.
+For the 0D flow model, only uncertainties in the emission probabilities and half-lives for the delayed neutron count rate calculation will be propagated.
 The uncertainties are propagated through the count rate calculation, but for the non-linear least squares solve, Monte Carlo sampling is used.
 Each count rate is generated using randomly sampled fission yields, half-lives, and emission probabilities within their uncertainty bounds for each \gls{DNP}.
 This enables formation of a normal distribution of group parameters, from which the mean and standard deviation of the mean can be extracted.

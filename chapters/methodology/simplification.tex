@@ -1,7 +1,7 @@
 %Generating \gls{DNP} group parameter data in a reactor-agnostic manner requires a reactor-agnostic generation process.
 Current \gls{DNP} group parameters are tabulated by fissile nuclide and incident neutron energy.
 For the improved \gls{DNP} group parameters, it is challenging to continue using tabulated parameters due to the number of variables involved in fuel salt recirculation and chemical removal rates.
-Fully detailing the flow with a large number of parameters is computationally infeasible.
+Fully detailing the flow with a large number of parameters is out of scope.
 Instead, the flow can be simplified to two parameters: an in-core average residence time, $\tau_{in}$, and an ex-core residence time, $\tau_{ex}$.
 
 This approach captures fuel salt advection around the primary loop and approximates turbulent and diffusive mixing.
@@ -12,11 +12,12 @@ Chemical removal rates are challenging to represent with only a small number of 
 For any given set of removal rates for a reprocessing scheme, \gls{DNP} group parameters can be generated.
 This does not provide easily tabulated data for every \gls{MSR} parameter, but offers greater accuracy for specific reprocessing schemes.
 
-Online refueling is not of interest in this work as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
-For example, if the irradiated sample is $^{235}$U and the refuel is $^{239}$Pu, then the addition of $^{239}$Pu to the system would only change the fission-weighting and not the actual \gls{DNP} concentrations from each fissile nuclide.
-Additionally, even if the same fissile nuclide is added, this could simply be treated as many identical individual samples circulating in the system.
-Similarly, if chemical removal removes some amount of fissile nuclide, that is also not important for this analysis.
-This is because the \gls{DNP} group parameters are normalized per fission, so the only differences from adding or removing fissile nuclides are on the fission-weighting.
+Although online reprocessing is of interest for this work, only the removal of non-fissile nuclides is considered.
+Online refueling is not examined, as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
+For example, if the irradiated sample is $^{235}$U and the refuel material is $^{239}$Pu, then the addition of $^{239}$Pu would only alter the fission-weighting and not the actual \gls{DNP} concentrations from each fissile nuclide.
+Even if $^{235}$U is added as a refuel material, this could simply be treated as multiple identical individual samples circulating in the system or as a change in the sample's mass.
+Similarly, the chemical removal of some fissile nuclide does not impact this analysis, since the \gls{DNP} group parameters are normalized per fission.
+Overall, the addition or removal of fissile nuclides only affects the fission-weighting, while the addition or removal of non-fissile nuclides will affect the \gls{DNP} group parameters.
 
 An irradiation time of approximately seven minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
 Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:large-tcyc}.
@@ -24,6 +25,7 @@ Elements with changes on the order of seconds to days contribute sufficiently an
 
 The \gls{MSBR} reprocessing scheme serves as the basis for analyzing the largest cycle times in this work.
 This is because the \gls{MSBR} presents very large chemical removal rates, providing useful conservative estimates as to the impact these large removal rates could have on \gls{DNP} group parameters.
+Because the \gls{MSRE} is the primary reactor of interest in this work, the \gls{MSBR} reprocessing scheme is only used for isolated analysis on the effects of large chemical removal rates in Section \ref{sec:chemrem-msbr}.
 These chemical removal rates are given in Table \ref{tab:msbr_cycle_times}.
 Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have small removal rates relative to the time scales of interest for saturation irradiations.
 Section \ref{sec:large-tcyc} examines these longer cycle times, the inverse of the removal rates, to confirm their negligible impact.
