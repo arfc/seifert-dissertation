@@ -1,3 +1,6 @@
+The current work is important for safety-related transients, as the \gls{MSR} specific \gls{DNP} group parameters will impact the results of these transients.
+Depending on the properties of the specific reactor, which affect the group parameters, the static \gls{DNP} group parameter transient simulation may generate overly or insufficiently conservative results.
+
 An important part of ensuring safe reactor operation is making sure safety-related transient events do not disrupt safe reactor operations.
 These transients can be caused by \glspl{PIE}, which are defined in the \gls{IAEA} Safety Standard Series No. NS-R-1 \cite{international2000iaea}.
 Of particular importance are \glspl{PIE} that potentially lead to \glspl{DBA}.
@@ -12,14 +15,13 @@ Alternatively, dependent events could potentially occur at the same time.
 
 
 Safety-related transients for \glspl{MSR} include \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} \cite{li2015transient, daher2022improvement}.
-An \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, causing a loss of cooling of the reactor.
+A \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, causing a loss of cooling of the reactor.
 For the \gls{MSFR}, Brovchenko et al. have shown that slow \gls{ULOHS} transients that take place over a minute or longer minimize the increase in fuel salt temperature \cite{brovchenko2013design}.
-An {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
-An \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
-A \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
+A {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
+A \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
+An \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
 
-The current work is important for safety-related transients, as the \gls{MSR} specific \gls{DNP} group parameters will impact the results of these transients.
-Depending on the properties of the specific reactor, which affect the group parameters, the static \gls{DNP} group parameter transient simulation may generate overly or insufficiently conservative results.
+
 %These safety-related transients are important for the current work, as the tabulated \gls{DNP} group parameters can be used to more rapidly simulated these transients.
 %Additionally, due to the coupling of the neutronics and thermal-hydraulics in calculation of the tabulated effective group parameters, the results are more accurate than they would be using more traditional transient analysis methods.
 %The method used to simulate the transient is also an important consideration.
