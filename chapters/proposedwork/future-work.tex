@@ -29,7 +29,7 @@ If the results are within the uncertainty bounds of each other, then this indica
 If they do not match, then a spatially resolved approach may be necessary to properly generate the \gls{MSR} \gls{DNP} group parameters.
 
 \subsubsection{Sensitivity to Number of DNPs}
-The number of \glspl{DNP} to track is of particular interest for the spatially resolved flow model.
+Because each nuclide tracked in the spatially resolved model increases computational cost, it would be useful to determine the sensitivity of the simulation to the number of tracked \glspl{DNP}.
 The 0D flow model's computational cost increases negligibly with more \glspl{DNP}, while the spatially resolved flow model requires significantly more memory and operations to track each \gls{DNP} over space and time.
 To improve computational efficiency, minimizing the number of \glspl{DNP} is desirable.
 If the 0D flow model generates \gls{DNP} group parameters with negligible differences compared to the spatially resolved flow model, minimizing the number of \glspl{DNP} becomes less critical.
@@ -65,11 +65,12 @@ Further investigation may also be warranted to determine if there is potential f
 
 
 \subsection{MSR Uncertainties}
-Several sources of uncertainty are considered, including half-lives, emission probabilities, cross-sections, and fission yields.
-These uncertainties propagate into the \gls{DNP} group and kinetics parameters \cite{radaideh2019new}.
-However, uncertainties also arise from \gls{MSR} physical phenomena, including flow rate and reprocessing rates, where the reprocessing rate is correlated with the flow rate.
-These uncertainties are important because they propagate to the \gls{DNP} group parameters, which affect the reactor's response to different transients.
-It is important to understand this for safety, security, and safeguards design, as the design should account for these uncertainties.
+This analysis would add additional uncertainty tracking relevant to \gls{MSR} recirculation and chemical removal.
+Although several sources of uncertainty are currently considered, including half-lives, emission probabilities, cross-sections, and fission yields, uncertainties also arise from \gls{MSR} physical phenomena, including flow rate and reprocessing rates, where the reprocessing rate is correlated with the flow rate.
+%These uncertainties propagate into the \gls{DNP} group and kinetics parameters .
+%However, uncertainties also arise from \gls{MSR} physical phenomena, including flow rate and reprocessing rates, where the reprocessing rate is correlated with the flow rate.
+These uncertainties are important because they propagate to the \gls{DNP} group parameters, which affect the reactor's response to different transients \cite{radaideh2019new}.
+It would be useful to understand this for safety, security, and safeguards design, as the design should account for these uncertainties.
 In particular, uncertainties of interest are in the residence times and chemical removal rates.
 
 The residence time correlates linearly with the flow rate, which is dependent on the temperature.
@@ -80,10 +81,10 @@ For the 0D flow model, the residence time uncertainties can be conservatively ap
 Assuming a constant mass flow rate, the density change due to the large temperature uncertainty provides a velocity uncertainty, which determines the variance in the residence time.
 If this conservative approach to temperature uncertainty results in negligible residence time uncertainty, it can be neglected for the spatially resolved flow model.
 Otherwise, the spatially resolved flow model can account for this uncertainty using the \textsc{Stochastic Tools} module to directly determine residence time uncertainties.
-The \textsc{Stochastic Tools} module is a toolbox designed for performing stochastic analysis for \gls{MOOSE}-based applications.
+The \textsc{Stochastic Tools} module is a toolbox designed for performing stochastic analysis for \gls{MOOSE}-based applications \cite{slaughter2023moose}.
 The \textsc{Stochastic Tools} module enables setting a range of temperatures and simulating each temperature, which can be used to generate a histogram of residence times as a function of core temperature.
 
-The chemical removal uncertainty is challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
+The chemical removal uncertainty would be challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
 The removal efficiency of xenon in a gas separation system is given by \cite{peebles1968removal, rykhlevskii2020fuel} as:
 \begin{equation}
     \epsilon = \frac{1-e^{-k_LaA_CL \left(\frac{1}{Q_{salt}}+\frac{RT}{H} \frac{1}{Q_{He}} \right) }}{1+\frac{RT}{H} \frac{Q_{salt}}{Q_{He}}},
@@ -99,7 +100,7 @@ where
     k_L &= \text{the liquid phase mass transfer coefficient $[m \cdot s^{-1}]$} \nonumber \\
     a &= \text{the gas-liquid interfacial area per unit volume $[m^{-1}]$} \nonumber \\
     A_C &= \text{the contactor cross-section $[m^{2}]$ } \nonumber \\
-    L &= \text{the contractor length $[m]$.} \nonumber
+    L &= \text{the contactor length $[m]$.} \nonumber
 \end{align}
 
 The liquid-liquid reductive extraction, such as with bismuth, has distribution coefficients and equilibrium constants dependent on the element, temperature, and concentration \cite{moriyama1984reductive}.
@@ -109,8 +110,8 @@ However, the distribution coefficient changes with temperature and flow rate dif
 
 Propagating the uncertainty in the chemical removal of elements from the fuel salt is challenging, as there are many variables to consider.
 These include the fuel salt composition, flow rate, redox potential, hydrostatic pressure, interfacial tension, and temperature \cite{shahbazi2022survey, thoma1971chemical}.
-Thus, generic equations are not formulated for each possible combination of variables.
-Instead, only the chemical removal of noble gases and noble metals from the \gls{MSRE} are investigated \cite{lo2022application}.
+Thus, generic equations would not formulated for each possible combination of variables.
+Instead, only the chemical removal of noble gases and noble metals from the \gls{MSRE} would be investigated, as in Lo et al. \cite{lo2022application}.
 The noble gases are actively pumped out via the off-gas system while noble metals, including molybdenum, technetium, ruthenium, rhodium, palladium, silver, and antimony plate out via reduction by UF$_6$.
 Some elements, specifically selenium, niobium, and tellurium, vary in their behavior.
 These elements only sometimes plates out based on the redox potential of the salt; a well reduced salt causes them to plate out, otherwise they act as salt seekers \cite{kedl1972migration, lo2022application}.
@@ -128,7 +129,7 @@ where
 For the \gls{MSRE}, the values are a salt flow rate of 0.003153, a total salt volume of 1.996, and a removal efficiency of 0.026 \cite{robertson1965msre}.
 For the 0D flow model, this removal occurs while the sample is in the ex-core region and stops while the sample is in the in-core region.
 This is because the removal occurs in the pump bowl and not inside the core.
-For the spatially resolved flow model, this removal also occurs in the ex-core region.
+For the spatially resolved flow model, this removal would also occur in the ex-core region.
 
 The removal rate, $\lambda_{i, l, r}$, of noble metal $i$ to waste stream $l$ via plate-out is \cite{lo2022application}:
 \begin{align}

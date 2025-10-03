@@ -41,9 +41,9 @@ The motivation for studying safety is to protect the public and meet regulatory 
 Safety is discussed in detail in Section \ref{sec:safety}, though the general takeaway is that many safety-related transients exist.
 The \gls{DNP} group parameters are critical in these transients, as they influence the reactor period, power, and temperature.
 
-The transients investigated are \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
-For each transient, the reactor period, power response, maximum temperature, minimum temperature, and reactivity response are recorded.
-The reactor period is critical, as it reflects the reactor’s controllability.
+The transients that will be investigated are \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
+Each transient will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
+For each transient, the power response, maximum temperature, minimum temperature, and reactivity response will be recorded.
 The power response shows how changes in the \gls{DNP} group parameters affect other responses, such as temperature.
 It is important to make sure differences in the \gls{DNP} parameters don't lead to temperature changes or oscillations which result in unsafe reactor conditions.
 
@@ -56,6 +56,7 @@ If static \gls{DNP} group parameters predict safe operation while improved param
 Since the safety study covers most transients relevant to sabotage, additional considerations can be incorporated into these transients.
 As sabotage may initiate multiple safety-related transients simultaneously, it is reasonable to investigate such scenarios.
 With four unique transients, this results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten security-related sabotage-initiated transients.
+Each of these transients will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
 
 \subsection{Safeguards}
 \label{sec:safeguards-trans}
@@ -65,7 +66,15 @@ The improved \gls{DNP} group parameters in this work affect the effective delaye
 Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts less accurate reactivity responses than the improved parameters.
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
-To investigate this, diversion scenarios are studied for a single significant quantity of $^{235}$U and plutonium removed over the course of one year, simulated using OpenMC.
-The change in the fuel salt composition affects the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
-The importance and fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients, where the following four sets of data are compared: static group parameters without diversion, static group parameters with diversion, improved group parameters without diversion, and improved group parameters with diversion.
-If the difference between the static group parameters with and without diversion is smaller or similar to the difference between the static and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.
+To investigate this, diversion scenarios will be studied for a single significant quantity of $^{235}$U and plutonium removed over the course of one year, simulated using OpenMC.
+The diversion will be from the \gls{MSRE} from a fresh fuel salt over the course of one year at nominal power. 
+The change in the fuel salt composition will affect the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
+The fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients.
+The following four sets of fission-weighted \gls{DNP} group parameters will be compared: existing parameters without diversion, existing parameters with diversion, improved parameters without diversion, and improved parameters with diversion.
+A simple step reactivity insertion will be simulated for each set of \gls{DNP} group parameters, from which the power responses can be compared.
+
+The power responses will demonstrate if power response fingerprinting could be obfuscated if an \gls{MSR} transient does not use improved \gls{DNP} groups.
+If the existing \gls{DNP} group parameters with diversion is within uncertainty of no diversion with improved \gls{DNP} group parameters, then there may be false positives if transient simulations do not use improved \gls{DNP} groups.
+Using the improved \gls{DNP} groups would reduce this false positive rate by accounting for the recirculation and chemical removal, improving the accuracy of using power response to identify material diversion.
+
+%If the difference in the power response between the existing group parameters with and without diversion is smaller or within uncertainty to the power response difference between the existing and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.
