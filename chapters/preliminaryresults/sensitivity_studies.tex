@@ -11,6 +11,7 @@ To propagate these uncertainties to \gls{DNP} group parameters, the non-linear l
 As shown in Appendix \ref{sec:appendixB}, the fraction of fuel salt in the ex-core region determines the scaling of the chemical removal rate.
 This analysis assumes an ex-core fraction, $f_{ex}$, of 0.5.
 This value is based on the core zone I, core zone II, and annulus salt volumes relative to primary system salt volume in the \gls{MSBR} \cite{robertson_conceptual_1971}.
+The justification for using the \gls{MSBR} reprocessing scheme is discussed in Section \ref{sec:delnu-groupgen}.
 Table \ref{tab:msbr_cycle_times} shows the \gls{MSBR} chemical reprocessing scheme used in this analysis, recreated here.
 
 \begin{table}[H]
@@ -264,10 +265,11 @@ Further 0D flow model analyses should make this analysis more easily verifiable 
 This work uses a Monte Carlo approach to propagate the uncertainties in nuclear data and evaluate the sensitivity of the \gls{DNP} group parameters to these uncertainties.
 For each nuclear data variable in the 0D scaled model, such as the $^{87}$Br half-life, a random value is sampled from a normal distribution.
 This process is repeated for every \gls{DNP} fission yield, half-life, and emission probability.
+For the analyses in this section, 5000 Monte Carlo non-linear least squares solves are used with 800 decay time nodes each.
 
 \subsubsection{Count Rate}
 Figure \ref{fig:keepin-counts-0dscaled} shows the count rate normalized to the Keepin et al. count rate.
-The red lines show count rates from sampled simulations, while the blue dashed line shows the \gls{DNP} group parameters and uncertainty based on 1000 Monte Carlo non-linear least squares solves.
+The red lines show count rates from sampled simulations, while the blue dashed line shows the 
 The black X's indicate the mean count rate at each point.
 The other six-group \gls{DNP} parameters plotted include Keepin (1.0, as the plot is normalized to Keepin values), Brady, and Synetos \cite{keepin1957delayed, brady1989delayed, synetos1983delayed}.
 
@@ -293,14 +295,13 @@ Figure \ref{fig:keepin-counts-0dscaled-mod} shows this modified set of \gls{DNP}
 
 The modified \gls{DNP} group parameters are not a perfect comparison, as the non-linear least squares solve adjusts each group’s yield relative to the yields and half-lives of other groups.
 This indicates excluding pulse irradiation data also affects longer-lived groups, though less than it affects shorter-lived groups.
-Adjusting the shorter-lived groups improves agreement with the literature for the 0D scaled model, paeachrticularly at times less than one second.
+Adjusting the shorter-lived groups improves agreement with the literature for the 0D scaled model, particularity at times less than one second.
 
 \FloatBarrier
 \subsubsection{Individual \glspl{DNP}}
 The Monte Carlo sampling of each \gls{DNP}'s nuclear data performed in this work enables sensitivity analyses on how each change affects the \gls{DNP} group parameters.
 For example, because group one is dominated by $^{87}$Br, changes to its half-life, emission probability, or fission yield noticeably affect the group one \gls{DNP} half-life and yield.
 
-The number of Monte Carlo simulations is increased to 5000 to provide sufficient data for each \gls{DNP}, ensuring differences in \gls{DNP} group parameters are statistically significant.
 To find the most sensitive \glspl{DNP} that experience the most difference in \gls{DNP} group parameters $\tau_{k}$ and $\bar{\nu}_{d,k}$, a linear regression fits the slope of the relative change in \gls{DNP} group parameters to the relative change in the individual \gls{DNP} nuclear data, while also calculating the \gls{PCC}.
 The \gls{PCC} quantifies the linear relationship between two variables: -1 indicates perfect negative correlation, +1 indicates perfect positive correlation, and 0 indicates no correlation \cite{frey2018sage}.
 Changes in the nuclear data include emission probability $P_n$, fission yields (affecting concentration $N$), and half-lives $\tau$.
@@ -360,9 +361,12 @@ $^{137}$Sb & $\tau_5 [s]$ & $N_i [-]$ & -0.299691 \\
 \end{table}
 
 One of the most predictable sensitivities in Table \ref{tab:pcc-analysis} is $^{87}$Br’s effect on group one half-life and yield, as it dominates this group.
-Specifically, $^{87}$Br, with a half-life of $55.64 \pm 0.15$ seconds, has correlations with a \glspl{PCC} greater than 0.2 that affect group parameters as follows: emission probability on group yield, concentration on group yield, and half-life on group half-life.
-Figure \ref{fig:br87-sens-0dscaled} shows how group one parameters vary with $^{87}$Br data, as well as less strongly correlated data, such as $^{87}$Br emission probability on the group three half-life.
+Specifically, $^{87}$Br, with a half-life of $55.64 \pm 0.15$ seconds, has correlations with a \glspl{PCC} greater than 0.2 that have impact group parameters: $^{87}$Br's emission probability and concentration affect the group one yield and $^{87}$Br's half-life affects the group one half-life.
+Figure \ref{fig:br87-sens-0dscaled} shows how group one parameters vary with $^{87}$Br data.
+The figure also shows an example of weakly correlated data using the $^{87}$Br emission probability on the group three half-life, though even this weak correlation has some non-negligible impact.
+
 Although it may seem counterintuitive, changes to the $^{87}$Br emission probability affect the group three half-life, showing a non-negligible correlation.
+The impact of $^{87}$Br on group one is expected, as well as some differences in group two, but even changes to the emission probability of $^{87}$Br has an effect on the half-life of group three.
 This is because the \gls{DNP} group parameters cannot be considered in isolation; they form a collective set that best fits the delayed neutron count rate curve.
 Changes to that curve propagate to all group parameters, with varying magnitudes across groups and parameters.
 

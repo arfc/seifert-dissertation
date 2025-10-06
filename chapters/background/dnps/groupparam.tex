@@ -70,12 +70,8 @@ Moving from the group parameters to the kinetics parameters, there is a convenie
 The effective multiplication factor, $k_{eff}$, is an important term in reactor physics.
 This term represents the scaling of the number of neutrons over each generation in a finite reactor system.
 The infinite multiplication factor, $k_{\infty}$, represents the multiplication without considering leakage terms.
-This is analogous to the delayed neutron fraction, $\beta$, and mean generation time, $\Lambda$, terms, where the effective form of the term requires information on the specific reactor geometry.
-
-The adjoint flux, $\phi^\dagger$, is important for calculating the effective form of many kinetics parameters.
-The adjoint flux is not a physical quantity, but rather an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
-For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
-The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development, truchet2015computing}.
+This is analogous to the delayed neutron fraction, $\beta$, where the effective form of the term requires information on the specific reactor geometry.
+%This is analogous to the delayed neutron fraction, $\beta$, and mean generation time, $\Lambda$, terms, where the effective form of the term requires information on the specific reactor geometry.
 
 The delayed neutron fraction, $\beta$, represents the ratio of delayed neutron production over all neutron production \cite{meulekamp2006calculating}.
 Related to the delayed neutron fraction is the effective delayed neutron fraction, $\beta_{eff}$.
@@ -87,8 +83,13 @@ More specifically, the effective delayed neutron fraction represents the ratio b
 Alternatively, it can be thought of as the ratio of the spectrum weighted and adjoint weighted delayed neutron production over all spectrum weighted and adjoint weighted neutron production \cite{meulekamp2006calculating}.
 For \glspl{MSR}, the movement of the fuel salt also affects the effective delayed neutron fraction, as the integrated adjoint neutron flux is reduced due to movement of the \glspl{DNP} out of the core and into less neutronically-important regions.
 
+The adjoint flux, $\phi^\dagger$, is important for calculating the effective form of many kinetics parameters.
+The adjoint flux is not a physical quantity, but rather an importance, or weighting, function, describing the importance of the neutron flux in the reactor.
+For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
+The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development, truchet2015computing}.
+
 The mean neutron generation time, $\Lambda$, is the mean time between generation of a neutron and fission induced by that neutron \cite{romero2022calculation}.
-This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weighted form.
+This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weighted form, similar to $\beta_{eff}$.
 The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
 In contrast, the effective delayed neutron fraction, $\beta_{eff}$, varies by approximately 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
 
