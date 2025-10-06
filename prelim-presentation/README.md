@@ -79,3 +79,4 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Groupping
 ### Recirculation
 - Explicit modeling can entail using time (irradiate for in-core, decay ex-core) or space (such as a 1D advection model). Some way of representing the different regions and having them happen at the correct time.
+- The scaled flux method would be the same as a stationary irradiation.
