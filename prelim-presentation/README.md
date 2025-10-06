@@ -73,3 +73,5 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Macroscopic
 - Nobody has used this approach with an MSR
 - Need shielding and distance between irradiation and measurement, but minimize time to capture short-lived DNPs
+### Microscopic
+- The concentrations come from depletion simulations or cumulative fission yields
