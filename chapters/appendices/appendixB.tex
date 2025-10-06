@@ -12,17 +12,17 @@ This derivation begins with the Bateman equation, given in Equation \eqref{eq:Ba
 \end{equation}
 where
 \begin{align}
-N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
-\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
+N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{\#}{cm^3}\right]$ } \nonumber \\ 
+\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ [-]} \nonumber \\ 
 \sigma_{f, i} &= \mbox{ the microscopic fission cross-section of isotope $i$ $\left[cm^2\right]$ } \nonumber \\ 
-\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{neutrons}{cm^2 s}\right]$ } \nonumber \\ 
+\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{\#}{cm^2 s}\right]$ } \nonumber \\ 
 \lambda _{i \rightarrow j} &= \mbox{ the decay constant of decay $i \rightarrow j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_{i \rightarrow j} &= \mbox{ the microscopic transmutation cross-section of reaction $i \rightarrow j$ $\left[cm^2\right]$ } \nonumber \\ 
-N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{atoms}{cm^3}\right]$ } \nonumber \\ 
+N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{\#}{cm^3}\right]$ } \nonumber \\ 
 \lambda_j &= \mbox{ the decay constant of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \lambda_{r, j} &= \mbox{ the removal constant for removal of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_j &= \mbox{ the microscopic total transmutation cross-section of isotope $j$ $\left[cm^2\right]$ } \nonumber \\ 
-\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\frac{atoms}{cm^3 \cdot s}\right]$ .} \nonumber
+\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\frac{\#}{cm^3 \cdot s}\right]$ .} \nonumber
 \end{align}
 
 This can be rewritten to the simplified form given in Equation \eqref{eq:bate-flow-simple}, recreated here as:
@@ -32,7 +32,7 @@ This can be rewritten to the simplified form given in Equation \eqref{eq:bate-fl
 where
 \begin{align}
 S_j &= \mbox{ the source term for nuclide $j$, } \nonumber\\
-& \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{atoms}{cm^3 s}$]} \nonumber \\
+& \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{\#}{cm^3 s}$]} \nonumber \\
 \lambda_{net, j} &= \mbox{ the loss term for nuclide $j$,} \nonumber\\
 & \;\;\;\;\; \mbox{ containing decay and transmutation losses [$s^{-1}$] .} \nonumber
 \end{align}
@@ -45,9 +45,9 @@ This changes Equation \eqref{eq:bate-stat-simple} to Equation \eqref{eq:simple-s
 \end{equation}
 where
 \begin{align}
-    f_{in} &= \text{the fraction of fuel salt in the core} \nonumber \\
-    f_{ex} &= \text{the fraction of fuel salt not in the core} \nonumber \\
-    \lambda_{r, j} &= \text{the chemical removal rate of $j$.} \nonumber
+    f_{in} &= \text{the fraction of fuel salt in the core [-]} \nonumber \\
+    f_{ex} &= \text{the fraction of fuel salt not in the core [-]} \nonumber \\
+    \lambda_{r, j} &= \text{the chemical removal rate of $j$ [$s^{-1}$].} \nonumber
 \end{align}
 
 The source term, $S_j$, can then be written using the cumulative fission yield as shown in Equation \eqref{eq:source-rewrite}.
@@ -60,7 +60,7 @@ Additionally, parasitic absorption is neglected in this derivation, which leads 
 \end{equation}
 where
 \begin{align}
-    CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
+    CFY_i &= \text{the cumulative fission yield of nuclide $i$ [-]}. \nonumber
 \end{align}
 
 Finally, the fission reaction rate term, $\phi \Sigma_f$, is assumed to be equal to 1.

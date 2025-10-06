@@ -15,7 +15,8 @@ where
 \begin{align}
     \beta_{eff} &= \text{the effective delayed neutron fraction [-]} \nonumber \\
     \rho &= \text{the reactivity [-]} \nonumber \\
-    \lambda_{eff} &= \text{the one \gls{DNP} group decay constant [$s^{-1}$]}. \nonumber
+    \tau_e &= \text{the reactor period $[s]$} \nonumber \\
+    \lambda_{eff} &= \text{the group one \gls{DNP} decay constant [$s^{-1}$]}. \nonumber
 \end{align}
 The effective delayed neutron fraction is discussed in more detail in Section \ref{sec:gandkparams}.
 The one \gls{DNP} group approximation is not used in this study, so this approximation is not discussed in greater detail.
@@ -28,11 +29,11 @@ Equation \eqref{eq:dnpsingleeq} shows the time-dependent rate of delayed neutron
 \end{equation}
 \begin{align}
 \intertext{where}
-\dot{n}_{d, i} &= \mbox{ the delayed neutron activity, or count rate, from \gls{DNP} $i$ $\left[n \cdot s^{-1}\right]$} \nonumber \\
+\dot{n}_{d, i} &= \mbox{ the delayed neutron activity, or count rate, from \gls{DNP} $i$ $\left[\# \cdot s^{-1}\right]$} \nonumber \\
 P_{n, i} &= \mbox{ the average number of delayed neutrons emitted from} \nonumber\\
-& \;\;\;\;\;\; \mbox{decay of nuclide $i$, or the emission probability [-]} \nonumber \\
+& \;\;\;\;\;\; \mbox{decay of nuclide $i$, or the emission probability [$\#$]} \nonumber \\
 \lambda_i &= \mbox{ the decay constant of \gls{DNP} $i$ $[s^{-1}]$} \nonumber \\
-N_i(t) &= \mbox{ the number of atoms of \gls{DNP} $i$ $\left[atoms\right]$.} \nonumber
+N_i(t) &= \mbox{ the number of atoms of \gls{DNP} $i$ $\left[\#\right]$.} \nonumber
 \end{align}
 
 %\begin{itemize}

@@ -13,17 +13,17 @@ Simulating depletion entails numerically solving the Bateman equations; a genera
 \hfill\label{eq:Bateman_default} \end{equation}
 where
 \begin{align}
-N_j &= \mbox{ the atomic density of isotope $j$ $\left[atoms \cdot cm^{-3}\right]$ } \nonumber \\ 
-\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ } \nonumber \\ 
+N_j &= \mbox{ the atomic density of isotope $j$ $\left[\# \cdot cm^{-3}\right]$ } \nonumber \\ 
+\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ [-]} \nonumber \\ 
 \sigma_{f, i} &= \mbox{ the microscopic fission cross-section of isotope $i$ $\left[cm^2\right]$ } \nonumber \\ 
-\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[n \cdot cm^{-2} \cdot s^{-1}\right]$ } \nonumber \\ 
+\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\# \cdot cm^{-2} \cdot s^{-1}\right]$ } \nonumber \\ 
 \lambda _{i \rightarrow j} &= \mbox{ the decay constant of decay $i \rightarrow j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_{i \rightarrow j} &= \mbox{ the microscopic transmutation cross-section of reaction $i \rightarrow j$ $\left[cm^2\right]$ } \nonumber \\ 
-N_i &= \mbox{ the atomic density of isotope $i$ $\left[atoms \cdot cm^{-3}\right]$ } \nonumber \\ 
+N_i &= \mbox{ the atomic density of isotope $i$ $\left[\# \cdot cm^{-3}\right]$ } \nonumber \\ 
 \lambda_j &= \mbox{ the decay constant of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \lambda_{r, j} &= \mbox{ the removal constant for removal of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
 \sigma_j &= \mbox{ the microscopic total transmutation cross-section of isotope $j$ $\left[cm^2\right]$ } \nonumber \\ 
-\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[atoms \cdot cm^{-3} \cdot s^{-1}\right]$ .} \nonumber
+\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\# \cdot cm^{-3} \cdot s^{-1}\right]$ .} \nonumber
 \end{align}
 
 Equation \eqref{eq:Bateman_default} includes a continuous reprocessing method, where the chemical removal rate, $\lambda_{r, j}$, is part of the differential equation.
@@ -53,7 +53,7 @@ The matrix form of Equation \eqref{eq:Bateman_default} is given as:
 \end{equation}
 where
 \begin{align}
-    \vec{N} =& \text{ the vector of material composition [$atoms \cdot cm^{-3}$]} \nonumber\\
+    \vec{N} =& \text{ the vector of material composition [$\# \cdot cm^{-3}$]} \nonumber\\
     A =& \text{ the depletion matrix [$s^{-1}$].} \nonumber
 \end{align}
 The depletion matrix contains the gain and loss terms for each nuclide in the material of interest, which vary continuously as a function of time and depend on the concentrations as well.
@@ -103,7 +103,7 @@ However, for the purposes of a streamlined comparison with circulating fuel, the
 where
 \begin{align}
 S_j &= \text{the source term for nuclide $j$, } \nonumber\\
-& \;\;\;\;\; \text{containing fission, decay, and transmutation sources [$atoms \cdot cm^{-3} \cdot s^{-1}$]} \nonumber \\
+& \;\;\;\;\; \text{containing fission, decay, and transmutation sources [$\# \cdot cm^{-3} \cdot s^{-1}$]} \nonumber \\
 \lambda_{net, j} &= \text{the loss term for nuclide $j$,} \nonumber\\
 & \;\;\;\;\; \text{containing decay and transmutation losses [$s^{-1}$] .} \nonumber
 \end{align}
@@ -180,8 +180,8 @@ Numerical stability of the problem, when using an explicit-time solving scheme, 
 \end{equation}
 where
 \begin{align}
-    \Delta t =& \text{the time step size [s]} \nonumber \\
-    \Delta z =& \text{the length between spatial nodes [cm].} \nonumber
+    \Delta t =& \text{ the time step size [s]} \nonumber \\
+    \Delta z =& \text{ the length between spatial nodes [cm].} \nonumber
 \end{align}
 The Courant number must be less than or equal to 1 for the Courant–Friedrichs–Lewy convergence condition in an explicit finite differencing scheme \cite{courant1928partiellen}.
 This equation limits the time step size based on the flow rate and spatial mesh size.

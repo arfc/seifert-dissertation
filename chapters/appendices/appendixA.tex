@@ -15,8 +15,8 @@ where
 \begin{align}
 T &= \mbox{ the length of the fission history [$s$]} \nonumber \\
 t &= \mbox{ the decay time from the end of the fission history [$s$]} \nonumber \\
-R(t) &= \mbox{ the probability of delayed neutron emission at time $t$ $[n \cdot s^{-1}]$} \nonumber \\
-F(\tau) &= \mbox{ the fission rate history [$\frac{fissions}{s}$].} \nonumber
+R(t) &= \mbox{ the probability of delayed neutron emission at time $t$ $[\# \cdot s^{-1}]$} \nonumber \\
+F(\tau) &= \mbox{ the fission rate history [$\frac{\#}{s}$].} \nonumber
 \end{align}
 Because the results are normalized to a single delayed neutron, the $\bar{\nu}_d$ term is divided out.
 
@@ -38,8 +38,8 @@ where
 \begin{align}
     H =& \text{ the Heaviside function [-]} \nonumber \\
     J =& \left\lceil \frac{T}{\tau_{in} + \tau_{ex}} \right\rceil \nonumber \\
-     =& \text{ the minimum number of cycles to meet the irradiation time, $T$ [-]} \nonumber \\
-    F_0 =& \text{ the magnitude of the constant fission rate [$\frac{fissions}{s}$].} \nonumber
+     =& \text{ the minimum number of cycles to meet the irradiation time, $T$ [$\#$]} \nonumber \\
+    F_0 =& \text{ the magnitude of the constant fission rate [$\frac{\#}{s}$].} \nonumber
 \end{align}
 
 Plugging this into Equation \eqref{eq:wilson-n} for group $k$ yields:

@@ -30,7 +30,7 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
         $\bar{\nu}_{d, i}$ & The delayed neutron yield for \gls{DNP} $i$ & [-]\\
         $\chi_k$ & The spectra of \gls{DNP} group $k$& [-]\\
         $\chi_i$ & The spectra of \gls{DNP} $i$ & [-]\\
-        $P_{n, i}$ & The delayed neutron emission probability for nuclide $i$ & [-]\\
+        $P_{n, i}$ & The delayed neutron emission probability for nuclide $i$ & [$\#$]\\
         $\bar{\tau}$ & The mean half-life & $[s]$\\
         $\bar{\nu}_d$ & The total delayed neutron yield & [-]\\
         \hline
@@ -121,9 +121,9 @@ This equation gives the delayed neutron count rate as:
 \end{equation}
 The terms in Equations \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, and \eqref{eq:delnu-fit-intermediate} are defined as follows:
 \begin{align}
-K &= \mbox{ the number of \gls{DNP} groups [-]} \nonumber \\ 
+K &= \mbox{ the number of \gls{DNP} groups [$\#$]} \nonumber \\ 
 \lambda_k &= \mbox{ the decay constant of \gls{DNP} group \textit{k} [$s^{-1}$] } \nonumber \\ 
-F_s &= \mbox{ the total number of fission events in the pulse irradiation [-]} \nonumber \\ 
+F_s &= \mbox{ the total number of fission events in the pulse irradiation [$\#$]} \nonumber \\ 
 \dot{F}_s &= \mbox{ the fission rate for a saturation irradiation [$s^{-1}$]} \nonumber \\ 
 \bar{\nu}_{d, k} &= \mbox{ the group yield for group \textit{k} [-] .} \nonumber
 \end{align}
@@ -255,8 +255,8 @@ Once this group data is generated, and if there are multiple fissioning nuclides
 \end{equation}
 where
 \begin{align}
-    \lambda_k^{(F)} =& \text{ the decay constant of \gls{DNP} group $k$ from fission of nuclide $F$} \nonumber \\
-    \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$. } \nonumber
+    \lambda_k^{(F)} =& \text{ the decay constant of \gls{DNP} group $k$ from fission of nuclide $F$ [$s^{-1}$]} \nonumber \\
+    \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$ [-]. } \nonumber
 \end{align}
 
 This approach is effectively a fission-weighting, which can be written in a more general manner.
@@ -295,12 +295,12 @@ The fission-weighted values can also be multiplied by an importance term to acco
 This is used for kinetics simulations that do not explicitly model \glspl{DNP} in the transport solve, such as in \glspl{PRK}.
 Equation \eqref{eq:nubar-fw} becomes:
 \begin{equation}
-    \bar{\nu}_{d, k} = \bar{\nu}^{(FW)}_{d, k} \frac{\int \chi_{d, k}(E) \phi^*(E) dE}{\int \chi(E) \phi^*(E) dE},
+    \bar{\nu}_{d, k}^{(AW)} = \bar{\nu}^{(FW)}_{d, k} \frac{\int \chi_{d, k}(E) \phi^\dagger(E) dE}{\int \chi(E) \phi^\dagger(E) dE},
     \label{eq:yield-fw-import}
 \end{equation}
 and Equation \eqref{eq:decayconst-fw} becomes:
 \begin{equation}
-    \lambda_{k} = \lambda^{(FW)}_{k} \beta_{eff} \left(\sum_{k=1}^K \frac{\beta_k}{\lambda_k} \right)^{-1},
+    \lambda_{k}^{(AW)} = \lambda^{(FW)}_{k} \beta_{eff} \left(\sum_{k=1}^K \frac{\beta_k}{\lambda_k} \right)^{-1},
     \label{eq:decay-fw-import}
 \end{equation}
 where
@@ -308,8 +308,10 @@ where
     \beta_{eff} &= \text {the effective delayed neutron fraction $[-]$} \nonumber \\
     \beta_{k} &= \text{ the delayed neutron fraction of group $k$ [-]} \nonumber \\
     \chi_{d, k} &= \text{ the delayed neutron fission spectrum for \gls{DNP} group $k$ [-]} \nonumber \\
+    \bar{\nu}^{(AW)}_{d, k} &= \text{the adjoint-weighted \gls{DNP} group $k$ delayed neutron yield [-]} \nonumber \\
+    \lambda_{k}^{(AW)} &= \text{the adjoint-weighted \gls{DNP} group $k$ decay constant $[s^{-1}]$} \nonumber \\
     \chi &= \text{ the total fission spectrum [-]} \nonumber \\
-    \phi^* &= \text{ the adjoint flux $[cm^{-2} \cdot s^{-1}]$} \nonumber.
+    \phi^\dagger &= \text{ the adjoint flux $[ \# \cdot cm^{-2} \cdot s^{-1}]$} \nonumber.
 \end{align}
 
 
@@ -327,8 +329,8 @@ Including the energy in the delayed neutron count rate requires the energy spect
 \end{equation}
 where
 \begin{align}
-    \tilde{F}_s =& \text{ the generic fission term [- or $s^{-1}$] } \nonumber \\
-    A_k =& \text{ the generic matrix term [$s^{-1}$ or -]  } \nonumber \\
+    \tilde{F}_s =& \text{ the generic fission term [$\#$ or $\# \cdot s^{-1}$] } \nonumber \\
+    A_k =& \text{ the generic matrix term [$\# \cdot s^{-1}$ or $\#$]  } \nonumber \\
     \chi_{d, k}(E) =& \text{ the delayed neutron energy spectrum of \gls{DNP} group $k$ [-]. } \nonumber
 \end{align}
 This is the general form of the saturation and pulse irradiation equations, where $A_k$ represents $\bar{\nu}_{d, k} \lambda_k$ for a pulse irradiation or $\bar{\nu}_{d, k}$ for saturation irradiation.
@@ -397,7 +399,7 @@ Otherwise, the nuclide will have some fraction of its concentration or spectra g
 The fractional contribution, or weight, of nuclide $i$ to each group is represented with $f_{i, k}$ and $f_{i, k+1}$. 
 The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as:
 \begin{equation}
-    f_{i, k} + f_{i+1, k} = 1.
+    f_{i, k} + f_{i, k+1} = 1.
     \label{eq:fracsum}
 \end{equation}
 
@@ -479,7 +481,7 @@ After dividing by the total number of fission events, Equation \eqref{eq:delnu-n
 \end{equation}
 where
 \begin{align}
-    CFY_i &= \text{the cumulative fission yield of nuclide $i$}. \nonumber
+    CFY_i &= \text{the cumulative fission yield of nuclide $i$ [-]}. \nonumber
 \end{align}
 This also means that the delayed neutron yield of each contributing \gls{DNP} can be calculated.
 
@@ -507,18 +509,18 @@ This can be calculated using a time-dependent version of a Monte Carlo code alon
 Finally, the effective parameters are introduced: the effective delayed neutron fraction, $\beta_{eff}$, and the effective mean neutron generation time, $\Lambda_{eff}$. The parameter $\beta_{eff}$ is the spectrum- and adjoint-weighted ratio of delayed-neutron-induced fissions to the total induced fissions from all neutrons \cite{romero2022calculation}.
 This is given in Equation \eqref{eq:betaeff-exact} as:
 \begin{equation}
-    \beta_{eff} = \frac{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \Phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \Phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
+    \beta_{eff} = \frac{\int \phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
     \label{eq:betaeff-exact}
 \end{equation}
 where
 \begin{align}
-\Phi^\dagger &= \mbox{ the adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$]} \nonumber \\ 
+\phi^\dagger &= \mbox{ the adjoint neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$]} \nonumber \\ 
 \chi_d &= \mbox{ the delayed neutron energy spectrum [-]} \nonumber \\ 
 \chi &= \mbox{ the neutron energy spectrum [-]} \nonumber \\ 
 \beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\ 
 \bar{\nu} &= \mbox{ the average number of neutrons released per fission [-]} \nonumber \\ 
 \Sigma_f &= \mbox{ the macroscopic fission cross section [$cm^{-1}$]} \nonumber \\
-\Phi &= \mbox{ the neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$].} \nonumber
+\phi &= \mbox{ the neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$].} \nonumber
 \end{align}
 
 
@@ -536,13 +538,13 @@ where
 $\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the time between the birth of a neutron and the subsequent absorption that induces fission.
 This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte}:
 \begin{equation}
-    \Lambda_{eff} = \frac{\int \Phi_0^\dagger \frac{1}{v} \Phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \Phi_0^\dagger F_0 \Phi_0 \; dE d\vec{\Omega} d\vec{r}}
+    \Lambda_{eff} = \frac{\int \phi_0^\dagger \frac{1}{v} \phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \phi_0^\dagger F_0 \phi_0 \; dE d\vec{\Omega} d\vec{r}}
     \label{eq:lambdaeff-exact}
 \end{equation}
 where
 \begin{align}
-\Phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
-\Phi_0 &= \mbox{ the critical neutron flux [$n \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+\phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+\phi_0 &= \mbox{ the critical neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
 v &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
 F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
 \end{align}
