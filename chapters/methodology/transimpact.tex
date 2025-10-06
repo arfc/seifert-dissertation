@@ -1,4 +1,4 @@
-The impact of the \gls{DNP} groups on transients will be evaluated using Moltres with fluid-flow-velocity field coupled multi-group diffusion kinetics, as discussed in Section \ref{sec:mgd-kinetics}.
+The impact of the \gls{DNP} groups on transients will be evaluated using Moltres with fluid-flow-velocity field coupled multi-group diffusion kinetics, as discussed in Section \ref{sec:bg-trans-analysis-methods}.
 This approach provides high-fidelity results by coupling thermal-hydraulics and neutronics, a necessity for \gls{MSR} modeling.
 Modeling every \gls{DNP} in space and time would be prohibitively expensive, so they are instead modeled using \gls{DNP} group parameters.
 Moltres allows direct comparison between static \gls{DNP} group parameters, which do not account for \gls{MSR} phenomena, and parameters that do.
@@ -12,7 +12,7 @@ Each perspective involves a unique combination of motivation, proposed initiatin
 These are discussed in detail in their respective sections.
 
 The effective delayed neutron fraction $\beta_{eff}$ is also of interest and will be calculated.
-It can be calculated from Moltres using the prompt method, discussed in Section \ref{sec:calc-kinetic-param}.
+It can be calculated from Moltres using the prompt method, discussed in Section \ref{sec:gandkparams}.
 Moltres uses fission-weighted \gls{DNP} group parameters, and the effective multiplication factor will capture the spatial distribution of each \gls{DNP} group concentration.
 Adjoint-weighting is not used for these parameters because Moltres explicitly captures the delayed neutrons in the diffusion solve.
 The effective delayed neutron fraction will be compared between the improved \gls{DNP} groups and existing groups to offer more detail for comparison between the groups.
@@ -68,7 +68,7 @@ If the difference is significant, relying on static parameters may reduce the de
 
 To investigate this, diversion scenarios will be studied for a single significant quantity of $^{235}$U and plutonium removed over the course of one year, simulated using OpenMC.
 The diversion will be from the \gls{MSRE} from a fresh fuel salt over the course of one year at nominal power. 
-The change in the fuel salt composition will affect the \gls{DNP} group parameters, as discussed in Section \ref{sec:calc-group-param}.
+The change in the fuel salt composition will affect the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
 The fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients.
 The following four sets of fission-weighted \gls{DNP} group parameters will be compared: existing parameters without diversion, existing parameters with diversion, improved parameters without diversion, and improved parameters with diversion.
 A simple step reactivity insertion will be simulated for each set of \gls{DNP} group parameters, from which the power responses can be compared.
