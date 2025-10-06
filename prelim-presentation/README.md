@@ -24,9 +24,10 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - DNP groups were originally determined using macroscopic measurements
         - More detailed discussion of macro (pics, equations)
         - More detailed discussion of micro (pics, equations)
-        - Discuss fitting procedures
+        - Discuss fitting procedures (could include stripping, lsq, half-life)
     - MSR Phenomena
         - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current)) (example with 100\% removal and one for residence times)
+        - Define the scaled flux method
     - Safety, security, and safeguards
         - Transients for safety and security
         - Safeguards diversion scenarios
@@ -75,3 +76,6 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Need shielding and distance between irradiation and measurement, but minimize time to capture short-lived DNPs
 ### Microscopic
 - The concentrations come from depletion simulations or cumulative fission yields for a simulated irradiation
+### Groupping
+### Recirculation
+- Explicit modeling can entail using time (irradiate for in-core, decay ex-core) or space (such as a 1D advection model). Some way of representing the different regions and having them happen at the correct time.
