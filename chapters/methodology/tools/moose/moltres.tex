@@ -43,14 +43,14 @@ The time dependent \gls{DNP} concentration is given in Equation \eqref{eq:mg-n-d
 This is the primary equation of interest when validating the improved \gls{DNP} group parameters.
 A discussion of turbulence and how it affects the \gls{DNP} group parameters and transient simulations is given in Appendix \ref{sec:appendixC}.
 
-For the future work involving formulation of improved \gls{DNP} group parameters within Moltres for the spatially resolved model, this equation is less helpful.
+For the potential future work involving formulation of improved \gls{DNP} group parameters within Moltres for the spatially resolved model, this equation is less helpful.
 This is because it requires \gls{DNP} group parameters, which Moltres should be generating.
 To generate the \gls{DNP} group parameters, this equation is replaced by \eqref{eq:bate-flow-simple}, recreated here:
 \begin{equation}
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
     \nonumber
 \end{equation}
-The spatially resolved model will use spatially resolved depletion over the irradiation simulation.
+The spatially resolved model could use spatially resolved depletion over the irradiation simulation.
 The change to the equation results in tracking concentrations of the individual \glspl{DNP} instead of tracking concentrations of \gls{DNP} groups.
 
 \subsubsection{Thermal-Hydraulic Modeling}

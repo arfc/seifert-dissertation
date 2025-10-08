@@ -19,7 +19,7 @@ Even if $^{235}$U is added as a refuel material, this could simply be treated as
 Similarly, the chemical removal of some fissile nuclide does not impact this analysis, since the \gls{DNP} group parameters are normalized per fission.
 Overall, the addition or removal of fissile nuclides only affects the fission-weighting, while the addition or removal of non-fissile nuclides will affect the \gls{DNP} group parameters.
 
-An irradiation time of approximately seven minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
+An irradiation time of several minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
 Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:chemrem-msbr}.
 Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
 
@@ -56,7 +56,8 @@ Section \ref{sec:chemrem-msbr} scales the cycle times to analyze how reprocessin
 \end{table}
 
 With the chemical reprocessing scheme in place, the next step to generate the improved \gls{DNP} group parameters is to decide on the level of fidelity. 
-The three levels of fidelity are the 0D scaled model, the 0D flow model, and the spatially resolved model.
+The two levels of fidelity are the 0D scaled model and the 0D flow model.
+There is also another level of fidelity discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which could be interesting future work.
 The 0D scaled model is completed, the 0D flow model is planned, and the spatially resolved model is a potential future development.
 %scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.
 

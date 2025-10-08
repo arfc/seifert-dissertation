@@ -428,5 +428,50 @@ This widening likely arises from the absence of pulse irradiation data.
 Without the pulse irradiation data, short-lived group parameters $\tau_k$ and $\bar{\nu}_{d,k}$ are less accurate, so removing $^{86}$Ge produces a more consistent group six yield.
 As $^{86}$Ge becomes more impactful, possible group six yield values spread due to missing pulse irradiation data.
 
+A metric to compare the overall sensitivity of the group parameters to nuclear data for each \gls{DNP} is the summed magnitude of the \glspl{PCC}, $\sum \left|PCC \right|$.
+This value provides insight into how changing the nuclear data for a given \gls{DNP} affects all group parameters.
+Figure \ref{fig:summedpccs} shows these values for each \gls{DNP}, where the theoretical maximum value would be a magnitude of one for each group half-life and yield, resulting in a net value of 12.
+A value of 12 would indicate any change to the \gls{DNP}'s nuclear data results in a linear response in every \gls{DNP} group parameter.
+The largest value is for $^{86}$Ge, with a value of approximately 8.1, indicating that uncertainties in $^{86}$Ge will have a large impact on the \gls{DNP} group parameters.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/chart_PCC.png}
+    \caption{The sum of the \gls{PCC} magnitudes for each \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. The $^{86}$Ge summed value is noticeably larger than the others, indicating it has large uncertainties relative to its impact on group parameters.}
+    \label{fig:summedpccs}
+\end{figure}
+
+Table \ref{tab:pcc-summed} shows the same information as Figure \ref{fig:summedpccs}, but only for the top 10 \glspl{DNP}.
+This table makes it clear that $^{86}$Ge is an outlier, with a summed \gls{PCC} over twice as large as the next largest value.
+This is likely due to its large delayed neutron yield and short half-life, which leads to it affect more groups simultaneously.
+Nearly every \glspl{DNP} which appear in this table also appear in Table \ref{tab:pcc-analysis}, as to have a large magnitude of \glspl{PCC}, it makes sense that at least one of those magnitudes would be greater than 0.2.
+However, $^{100}$Rb does not appear in Table \ref{tab:pcc-analysis}.
+This is because it has a small fission yield, so each \gls{PCC} is small for each group, but the half-life is very short, which causes it to contribute some amount to each group.
+
+\begin{table}[!ht]
+    \centering
+    \caption{The sum of the \gls{PCC} magnitudes for the top 10 \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
+\begin{tabular}{lr}
+\hline
+Nuclide &  $\sum \left|PCC \right|$ \\
+\hline
+$^{86}$Ge & 8.06 \\
+$^{87}$Br & 3.82 \\
+$^{137}$I & 3.52 \\
+$^{85}$As & 3.14 \\
+$^{88}$Br & 2.77 \\
+$^{137}$Sb & 2.08 \\
+$^{86}$As & 1.97 \\
+$^{84}$Ga & 1.62 \\
+$^{98}$Y & 1.42 \\
+$^{100}$Rb & 1.22 \\
+\hline
+\end{tabular}
+\label{tab:pcc-summed}
+\end{table}
+
+
+
+
 
 \FloatBarrier

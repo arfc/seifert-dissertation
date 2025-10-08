@@ -81,18 +81,19 @@ Current \gls{DNP} group parameters in \glspl{MSR} simulations may overestimate t
 
 The recirculation and chemical removal in \glspl{MSR} can be incorporated into fissile sample irradiation simulations at varying levels of fidelity, with associated differences in cost and accuracy.
 This document describes three models that simulate irradiation of a fissile sample, from which \gls{DNP} group parameters can be calculated.
+Two types of irradiations are considered: saturation irradiations, in which long-lived \glspl{DNP} dominate, and pulse irradiations, in which short-lived \glspl{DNP} dominate.
 These models use different simplifications, but all of them simulate a incident neutron source that irradiates a target fissile sample consisting of a single fissile nuclide.
 After irradiation, the concentrations of the \glspl{DNP} are extracted and used to calculate the delayed neutron count rate of the sample.
 Then, some selected number of \gls{DNP} groups with decay constants $\lambda_k$ and yields $\bar{\nu}_{d, k}$ are used to fit that delayed neutron count rate.
 
-The least accurate and fastest model is the 0D scaled model, which has been completed for the preliminary results.
+The 0D scaled model has been completed for the preliminary results.
 This model neglects time dependence, decay chains, and cross-sections while scaling the flux and chemical removal rates based on the fraction of fuel salt in different regions of the primary loop.
-The intermediate approach is the 0D flow model, which is part of the proposed work.
+The 0D flow model is part of the proposed work.
 This model accounts for time dependence of \gls{DNP} concentrations and decay chains while applying the flux and chemical removal rates only in the relevant parts of the primary loop.
 It is referred to as the 0D flow model because it captures the effects of the fuel salt flow by using residence times.
-The most accurate and slowest approach is the spatially resolved model, which is discussed as potential future work.
-This model accounts for time and space dependence of \gls{DNP} concentrations across the entire primary loop.
-Two types of irradiations are considered: saturation irradiations, in which long-lived \glspl{DNP} dominate, and pulse irradiations, in which short-lived \glspl{DNP} dominate.
+There is also another model discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which is discussed as potential future work.
+This model would account for time and space dependence of \gls{DNP} concentrations across the entire primary loop.
+
 
 The preliminary results cover impactful \glspl{DNP}, \gls{DNP} group parameter sensitivity studies, and 0D scaled model verification.
 The results show the total delayed neutron yield ($\bar{\nu}$) and average half-life ($\tau_{1/2}$) values are within the propagated experimental uncertainty bounds between the raw \gls{DNP} data and the \gls{DNP} group parameters.

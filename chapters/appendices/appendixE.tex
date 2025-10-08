@@ -1,0 +1,43 @@
+\renewcommand{\theequation}{E\thechapter.\arabic{equation}}
+\label{sec:appendixE}
+
+The 0D flow model will rapidly generate improved \gls{DNP} group parameters, but it simplifies the treatment of flow.
+Instead of modeling the actual fuel salt flow, it will estimate fuel circulation using residence times for each region.
+A spatially resolved model is useful for capturing the effects that the 0D flow model only capture with residence times for specific \gls{MSR} geometries.
+Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially resolved model, which could model the flow using Moltres.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/spatial-model.png}
+    \caption{Flow diagram of spatially resolved flow model used to generate improved \gls{DNP} group parameters.}
+    \label{fig:sophisticated-model}
+\end{figure}
+
+The spatially resolved flow model introduces two new parameters absent in the 0D flow model.
+The first is the mesh, which defines the flow loop geometry.
+MOOSE provides built-in meshing tools, though complex geometries may require external tools such as Gmsh \cite{geuzaine2009gmsh}.
+The second is the thermal-hydraulics parameters, which capture physical phenomena enabled by spatial resolution, as discussed in Section \ref{sec:moltres}.
+Additionally, since the depletion would happen in Moltres instead of OpenMC, OpenMC does not need as much data.
+
+In the spatially resolved model, the in-core and ex-core residence times would be outputs rather than inputs.
+These times derive from the movement of the irradiated sample over time in the fuel salt.
+The in-core and ex-core residence times vary as the irradiated sample diffuses and mixes further into the fuel salt.
+The net residence time, $\tau_{net}$, remains constant unless the model changes, such as an increased temperature difference or induced flow rate.
+Equation \eqref{eq:incore-time} defines the in-core residence time as:
+\begin{equation}
+    \tau_{in} (t) = \frac{\int_{V_{in}} \int_{0}^t N(\vec{x}, \tau) d\tau d\vec{x}}{\int_{V} \int_{0}^t N(\vec{x}, \tau) d\tau d\vec{x}} \tau_{net},
+    \label{eq:incore-time}
+\end{equation}
+where
+\begin{align}
+V_{in} &= \mbox{ the in-core volume $[cm^3]$} \nonumber \\
+V &= \mbox{ the total primary volume $[cm^3]$} \nonumber \\
+N(\vec{x}, t) &= \mbox{ the time and space resolved sample concentration $[\# \cdot cm^{-3}]$} \nonumber \\
+\tau_{net} &= \mbox{ the net residence, or circulation, time of the fuel salt $[s]$.} \nonumber
+\end{align}
+
+The ex-core residence time can be calculated in the same way, or alternatively as shown in Equation \eqref{eq:excore-time} as:
+\begin{equation}
+    \tau_{ex} = \tau_{net} - \tau_{in}.
+    \label{eq:excore-time}
+\end{equation}
