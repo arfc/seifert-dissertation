@@ -77,8 +77,8 @@ Keepin et al. suggest a technique to correct for the sample self-multiplication.
 The sample self-multiplication require a correction factor of up to 3\% in the number of fissions.
 
 By the year 2000, 245 distinct sets of \gls{DNP} group parameters had been formulated for 20 different fissile nuclides \cite{Spriggs2000Summary}.
-Spriggs and Campbell go into significant detail, discussing the various analysis methods, neutron energies, fissile nuclides, counting intervals, and sample compositions for many of these \gls{DNP} group parameter formulations \cite{Spriggs2000Summary}.
-Tuttle also provides a detailed review of many macroscopic \gls{DNP} group parameters pre-1974, including details on the irradiated sample, reactor, counter, and travel time of the sample between irradiation and measurement \cite{tuttle1975delayed}.
+Spriggs and Campbell went into significant detail, discussing the various analysis methods, neutron energies, fissile nuclides, counting intervals, and sample compositions for many of these \gls{DNP} group parameter formulations \cite{Spriggs2000Summary}.
+Tuttle also provided a detailed review of many macroscopic \gls{DNP} group parameters pre-1974, including details on the irradiated sample, reactor, counter, and travel time of the sample between irradiation and measurement \cite{tuttle1975delayed}.
 Tables \ref{tab:macro-yields} through \ref{tab:macro-half-lives-delta} show some macroscopic \gls{DNP} group parameters from the literature for thermal fission of $^{235}$U \cite{parish1999status}.
 
 \begin{table}[!h]
@@ -189,21 +189,21 @@ There is reasonable agreement between the different \gls{DNP} group parameters, 
 Not only did each approach use a slightly different experimental methodology via different energy spectra, data collection methods, sample transfer time between irradiation and measurement, sample size, and sample composition, but there are also differences in how the data was processed.
 There are several ways that the data was processed from delayed neutron count rates into \gls{DNP} group parameters among the works in these tables: simultaneous non-linear least squares fitting of saturation and pulse irradiation data, separate non-linear least squares fitting of pulse and saturation irradiation data and subsequent combination, non-linear least squares of an intermediate amount of time between a pulse and saturation, and exponential stripping.
 
-Keepin et al. use both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
-The separate fitting of four groups is normalized at the second group, and Keepin et al. report that this method gives better results than the simultaneous fit \cite{keepin1957delayed}.
+Keepin et al. used both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
+The separate fitting of four groups is normalized at the second group, and Keepin et al. reported that this method gave better results than the simultaneous fit \cite{keepin1957delayed}.
 
-Charlton et al. use the equation for an intermediate amount of time that is not infinite or a pulse, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
-They also only use five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
+Charlton et al. used the equation for an intermediate amount of time that is not infinite or a pulse, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
+They also only used five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
 The shortest-lived \glspl{DNP} that would make up group six were not included, but Parish et al. added group six values for their own analysis \cite{parish1999status}.
-Charlton et al. use a least squares solve to determine the \gls{DNP} group parameters, according to Spriggs and Campbell \cite{Spriggs2000Summary}.
-Synetos and Williams use the same approach as Charlton et al. \cite{synetos1983delayed, spriggs20028}.
+Charlton et al. used a least squares solve to determine the \gls{DNP} group parameters, according to Spriggs and Campbell \cite{Spriggs2000Summary}.
+Synetos and Williams used the same approach as Charlton et al. \cite{synetos1983delayed, spriggs20028}.
 
-Saleh et al. use the equation for an intermediate amount of time, similar to Charlton et al., where the equation is described in Equation \eqref{eq:delnu-fit-intermediate}.
-However, instead of using a least squares solve, they use exponential stripping \cite{saleh1997measurements}.
+Saleh et al. used the equation for an intermediate amount of time, similar to Charlton et al., where the equation is described in Equation \eqref{eq:delnu-fit-intermediate}.
+However, instead of using a least squares solve, they used exponential stripping \cite{saleh1997measurements}.
 
-Tuttle formulates suggested values based on reviewing the literature and applying empirical correlations \cite{tuttle1975delayed}.
+Tuttle formulated suggested values based on reviewing the literature and applying empirical correlations \cite{tuttle1975delayed}.
 
-Waldo et al. apply a transit time correction using an empirical correlation, and the \gls{DNP} group parameters are fitted using a least squares solve \cite{waldo1981delayed}.
+Waldo et al. applied a transit time correction using an empirical correlation, and the \gls{DNP} group parameters were fitted using a least squares solve \cite{waldo1981delayed}.
 It is not made clear if pulse or saturation irradiations are used, as the conclusions indicate that the \gls{DNP} group parameters are less applicable for short times or short irradiations, implying that a saturation irradiation was used. 
 
 
@@ -335,15 +335,15 @@ Brady and England \cite{brady1989delayed} & - & - & - & - & - & - \\
 \end{table}
 
 ENDF/B-VI.8 pulls from Brady and England, as well as other works by England \cite{endf6, brady1989delayed, england1988status, brady1989validation}.
-This work and Brady and England's approach entails collecting 271 \glspl{DNP}, generating a delayed neutron count rate curve, and then using the two four group aggregation approach described by Keepin et al. \cite{keepin1957delayed, brady1989delayed}.
+The approaches in those studies collected 271 \glspl{DNP}, generated a delayed neutron count rate curve, and then used the two four group aggregation approach described by Keepin et al. \cite{keepin1957delayed, brady1989delayed}.
 
-Mills et al. use two different approaches: fitting all parameters simultaneously as described by Keepin et al. and using the Keepin et al. half-lives while fitting only the yields \cite{mills1991study, keepin1957delayed}.
+Mills et al. used two different approaches: fitting all parameters simultaneously as described by Keepin et al. and using the Keepin et al. half-lives while fitting only the yields \cite{mills1991study, keepin1957delayed}.
 The values presented here are from the approach where all parameters are fit simultaneously for all \gls{DNP} group parameters.
 
 \subsubsection{Comparison of Macroscopic and Microscopic Approaches}
 
-Huynh and Jouanne offer a very useful comparison between the macroscopic and microscopic approaches via different datasets \cite{huynh2014calculation}.
-Specifically, they compare the total delayed neutron yield from various data sources from macroscopic measurements to the calculated total delayed neutron yield from microscopic measurements.
+Huynh and Jouanne offered a useful comparison between the macroscopic and microscopic approaches via different datasets \cite{huynh2014calculation}.
+Specifically, they compared the total delayed neutron yield from various data sources from macroscopic measurements to the calculated total delayed neutron yield from microscopic measurements.
 This data can also be compared to the previously shown tables, from which the total delayed neutron yield can be calculated.
 The total data compilation is presented in Table \ref{tab:total-delnu-compare}.
 

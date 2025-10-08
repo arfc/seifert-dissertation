@@ -16,8 +16,8 @@ Additionally, having separate regions rather than scaling the flux with the time
 Analysis will be conducted comparing different methods for combining pulse and saturation irradiation data and different least squares techniques.
 A key aspect of the methodology is combining pulse and saturation irradiation \gls{DNP} group parameters.
 One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
-Brady uses the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
-Keepin et al. fit four groups with each irradiation, and then renormalize at the second group \cite{keepin1957delayed}.
+Brady used the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
+Keepin et al. fit four groups with each irradiation, and then renormalized at the second group \cite{keepin1957delayed}.
 
 Another approach to combining the pulse and saturation irradiation data is using a combined residual, as shown in Equation \eqref{eq:combresid} as:
 \begin{align}
@@ -48,17 +48,17 @@ The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of
 This proposed analysis will use different data sources to generate the improved \gls{DNP} group parameters.
 Huynh et al. compare the effects of cumulative fission yields and emission probabilities from \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
 A similar comparison can also be found in the \gls{JEFF} report 17 \cite{bank2000jef}.
-Mathieu et al. investigate the \gls{NNDC} website, which sources data from \gls{ENSDF}, and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+Mathieu et al. investigated the \gls{NNDC} website, which sources data from \gls{ENSDF}, and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
 
 These comparisons can be expanded to include the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and other data compilations for emission probabilities (delayed neutron branching ratios), half-lives, fission yields, and cross sections.
 Comparing these data sources clarifies the uncertainty caused by differences in the data.
 Table \ref{tab:datasources} shows the data sources used in the comparison.
 The "Concentration" column refers to data including fission yields and cross-sections that affect the \gls{DNP} concentration term.
 Although half-lives also influence concentration, data sources without a concentration contribution provide only half-life and emission probability data.
-Audi et al., Pfeiffer and Kratz, and Rudstam et al. present data from the literature rather than official databases.
-Audi et al. use \gls{ENSDF}, \gls{AME}, experimental data from the literature, and trends in neighboring nuclides.
-Pfeiffer and Kratz present experimental data, an update to the \gls{KHF}, and data from a unified macroscopic-microscopic model within the \gls{QRPA}.
-Rudstam et al. present experimental data.
+Audi et al., Pfeiffer and Kratz, and Rudstam et al. presented data from the literature rather than official databases.
+Audi et al. used \gls{ENSDF}, \gls{AME}, experimental data from the literature, and trends in neighboring nuclides.
+Pfeiffer and Kratz presented experimental data, an update to the \gls{KHF}, and data from a unified macroscopic-microscopic model within the \gls{QRPA}.
+Rudstam et al. presented experimental data.
 
 \begin{table}[H]
     \centering

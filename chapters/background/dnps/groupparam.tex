@@ -58,8 +58,8 @@ The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP
 With this data, the other group parameters can be derived, such as the total delayed neutron yield, $\bar{\nu}_d$, and delayed neutron fraction $\beta$.
 
 Although the groups are useful, there are times when individual \gls{DNP} data are needed.
-For example, in 1986, Perry et al. demonstrate that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
-In 1989, Brady and England also use the individual nuclides to compare with group data \cite{brady1989delayed}, and updated the six-group parameters based on the explicit \glspl{DNP}.
+For example, in 1986, Perry et al. demonstrated that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
+In 1989, Brady and England also used the individual nuclides to compare with group data \cite{brady1989delayed}, and updated the six-group parameters based on the explicit \glspl{DNP}.
 Updating the six-group parameters enabled greater consistency between experimental results and simulations.
 
 %Representing the \glspl{DNP} in group form also simplifies the calculation of various kinetics parameters.
@@ -153,8 +153,8 @@ These equations are specifically for a single fissile nuclide, and the derivatio
 %\end{description}
 
 The pulse irradiation approach gives better statistics on the short-lived \glspl{DNP}, while the longer-lived \glspl{DNP} are better represented by saturation irradiation.
-Brady discusses this, and uses both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
-Specifically, Brady uses the four long-lived groups from the saturation irradiation and the four short-lived groups from the pulse irradiation renormalized at the second \gls{DNP} group.
+Brady discussed this, and used both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
+Specifically, Brady used the four long-lived groups from the saturation irradiation and the four short-lived groups from the pulse irradiation renormalized at the second \gls{DNP} group.
 %"...determination of four long-period groups from the infinite irradiation data and
 %four short-period groups from the prompt [pulse] data, later renormalizing the two sets
 %of yields at the second delayed neutron group."
@@ -170,7 +170,7 @@ Specifically, Brady uses the four long-lived groups from the saturation irradiat
 
 Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group yields and decays.
 For example, Brady used STEPIT, an algorithm for finding local minima of a continuous function, to handle the least squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation, chandler1969stepit}.
-Waldo et al. also solve the least squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
+Waldo et al. also solved the least squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
 Using Equation \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, or \eqref{eq:delnu-fit-intermediate}, the general form of the solve is given as:
 \begin{equation}
 A \vec{x} \approx \vec{b}.
@@ -451,7 +451,7 @@ The $k^{th}$ \gls{DNP} group delayed neutron fraction is calculated in Equation 
 \end{equation}
 
 A useful term for comparing \gls{DNP} group parameters is the average half-life \cite{piksaikin2002energy, piksaikin2007relative, leconte2020new}.
-Parish et al. also use the average half-life, but with a non-standard formulation which does not include the natural log of two \cite{parish1999status}.
+Parish et al. also used the average half-life, but with a non-standard formulation which does not include the natural log of two \cite{parish1999status}.
 Equation \eqref{eq:avg-hl} gives the average half-life as:
 \begin{equation}
     \bar{\tau} = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_k}.
@@ -488,10 +488,9 @@ This also means that the delayed neutron yield of each contributing \gls{DNP} ca
 
 The delayed neutron fraction can be written as:
 \begin{equation}
-    \beta = \frac{\bar{\nu}_d}{\bar{\nu}}
+    \beta = \frac{\bar{\nu}_d}{\bar{\nu}}.
     \label{eq:beta-finalform}
 \end{equation}
-
 The mean neutron generation time can be calculated as:
 \begin{equation}
     \Lambda = \frac{l}{k},
@@ -565,10 +564,10 @@ weighted, method \cite{keepin1965physics}; the eigenvalue, or perturbation, meth
 $\Lambda_{eff}$ can also be calculated using the pulsed method \cite{romero2022calculation}.
 %There is also the pulsed method for calculating $\Lambda_{eff}$, and the prompt method for calculating $\beta_{eff}$ \cite{romero2022calculation}.
 For $\beta_{eff}$, there are also the prompt, Meulekamp, and Spriggs methods which can be used \cite{romero2022calculation, meulekamp2006calculating}.
-Aufiero et al. have conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods.
-Their results show that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
+Aufiero et al. conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods.
+Their results showed that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
 
 For the effective parameters to account for the movement of the fuel salt, there is typically another step required in which the static parameters, calculated with no movement, are multiplied by another term.
-Aufiero et al. use an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
+Aufiero et al. used an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
 Another approach is to account for the decay of the \glspl{DNP} outside of the core, as shown by Nestor \cite{nestor1960reactor}.
 Generally, an advection term is introduced to account for the circulation of the \glspl{DNP}, after which the spatial distribution is incorporated into the effective parameter calculation.

@@ -160,10 +160,10 @@ Another approach has shown how spatial resolution can be investigated using a sy
 This approach can estimate the steady-state concentration of certain nuclides across a flow loop, but it does not account for temporal resolution \cite{shahbazi_steady-state_2022}.
 
 Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of Griffin, a deterministic neutron transport code, with Pronghorn, a thermal fluids code, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
-Tano et al.\ present an approach where only insoluble, medium-lived, and high concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
+Tano et al.\ presented an approach in which only insoluble, medium-lived, and high concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
 
 Spatially and temporally resolved approaches, such as the one used by Tano et al., are more computationally expensive than those that only require solving a system of ordinary differential equations.
-However, Tano et al.\ have shown that including circulation of the fuel salt in depletion directly affects the equilibrium concentration of $^{135}$Xe by approximately 45\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
+However, Tano et al.\ showed that including circulation of the fuel salt in depletion directly affects the equilibrium concentration of $^{135}$Xe by approximately 45\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
 This indicates there may be a need for spatially resolved depletion simulations to get accurate fuel salt compositions.
 
 
@@ -189,4 +189,5 @@ Although using an implicit time solver can work around this condition, the overa
 
 For a short depletion simulation, such as a saturation irradiation of a fuel sample, capturing these effects is computationally tractable.
 Because the depletion lasts only for several minutes instead of several years, the computational cost is orders of magnitude smaller.
-A high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment is feasible to generate improved \gls{DNP} group parameters. 
+A high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment is feasible to generate improved \gls{DNP} group parameters.
+However, it may be sufficient to use the scaled flux method or some other approximation to reduce computational cost.
