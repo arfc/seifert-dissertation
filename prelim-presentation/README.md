@@ -29,15 +29,12 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current)) (example with 100\% removal and one for residence times)
         - Define the scaled flux method
 	- Discuss chemical removal
-    - Safety, security, and safeguards
-        - Transients for safety and security
-        - Safeguards diversion scenarios
 - Methodology
     - MoSDeN package
     - General modeling approach (several slides) (uncertainty tracking and Monte Carlo approach)
     - 0D scaled model (several slides) (limitations)
     - 0D flow model (several slides) 
-    - Transient modeling (Moltres, several slides)
+    - Transient modeling (Moltres, several slides) (relate to 3s's) (diversion depletion simulations)
     - Discuss ORNL, ANL, and INL work (motivation behind the problem)
 - 0D Scaled Model Results
     - DNPs of interest
