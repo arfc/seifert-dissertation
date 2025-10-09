@@ -4,16 +4,17 @@
                 \column[t]{5cm}
                 Although normalized per fission, changes in the fission rate due to recirculation changes transmutation rates which could affect \gls{DNP} concentrations.
                 
-                \begin{block}{In-core and ex-core salt circulation can be modeled using:}
+                \begin{block}{In-core and ex-core salt recirculation can be modeled using:}
                     \begin{itemize}
-                        \item Explicit modeling
                         \item Scaled flux method \cite{betzler_liquid-fueled_2021}
+			\item \textbf{Piecewise 0D method}
+			\item Spatially resolved method \cite{tano2023coupled}
                     \end{itemize}
                 \end{block}
 
                 \vspace{2mm}
 
-                \textbf{For a circulating fissile sample, the scaled flux method may not be sufficient, as it is not intended for short time scales \cite{betzler_liquid-fueled_2021}.}
+                \textbf{For a recirculating fissile sample, the piecewise 0D model offers a good balance of accuracy and speed.}
 
                 \column[t]{5cm}
         \begin{figure}[htbp!]

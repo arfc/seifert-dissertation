@@ -28,6 +28,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
     - MSR Phenomena
         - ANL paper (chemical removal rate and residence time for perfect mix (static) and no mix (current)) (example with 100\% removal and one for residence times)
         - Define the scaled flux method
+	- Discuss chemical removal
     - Safety, security, and safeguards
         - Transients for safety and security
         - Safeguards diversion scenarios
@@ -80,3 +81,8 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Recirculation
 - Explicit modeling can entail using time (irradiate for in-core, decay ex-core) or space (such as a 1D advection model). Some way of representing the different regions and having them happen at the correct time.
 - The scaled flux method would be the same as a stationary irradiation.
+- Scaled flux scales by fraction of time in the core
+- The scaled flux method accurately captures concentrations that change linearly with the flux
+- Explicitly capturing this will be more accurate, comparing with scaled flux could be interesting
+### Reprocessing
+
