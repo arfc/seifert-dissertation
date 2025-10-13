@@ -89,7 +89,8 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Residual
 - The 2-norm is the square root of the sum of the squares, squaring it makes it faster to calculate and doesn't change the minimized solution
 ### Uncertainty
-### 
+### MoSDeN group form
+- The orange bit is new, the rest exists in the T,t form of the equation normally derived. The new bit represents the in-core and ex-core regions
 ### 0D scaled
 ### 0D scaled limitations
 - DNPs have negligible cross sections so this should be okay

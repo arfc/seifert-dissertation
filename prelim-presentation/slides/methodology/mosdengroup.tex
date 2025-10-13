@@ -3,7 +3,7 @@
   Assuming the sample experiences a square-wave power history during in-core and ex-core times, an \gls{MSR} specific group fit equation can be derived.
 
   \begin{align}
-\dot{n}_{d}(T, t) =& \;F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{-\lambda_k (T - j \cdot \tau_{in} - (j-1)\cdot \tau_{ex})} \right),
+\dot{n}_{d}(T, t) =& \;F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} +  \textcolor{orange}{\left( 1-e^{\lambda_k \tau_{ex}} \right) \sum_{j=1}^J e^{-\lambda_k (T - j \cdot \tau_{in} - (j-1)\cdot \tau_{ex})}} \right),
 \intertext{where}
 T =& \text{ the total irradiation time} \nonumber \\
 J =& \left\lceil \frac{T}{\tau_{in} + \tau_{ex}} \right\rceil \nonumber \\
