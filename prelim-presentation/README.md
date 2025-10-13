@@ -33,10 +33,10 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
     - MoSDeN overview
         - MoSDeN package
         - Residual, least squares, uncertainty tracking
-        - 0D scaled model overview
     - 0D scaled model
-        - Limitations
+        - 0D scaled model overview
         - Scaled flux and CFY
+        - Limitations
 - 0D Scaled Model Results
     - DNPs of interest
     - Sensitivity Studies
@@ -88,3 +88,4 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Least squares
 ### Residual
 - The 2-norm is the square root of the sum of the squares, squaring it makes it faster to calculate and doesn't change the minimized solution
+### Uncertainty
