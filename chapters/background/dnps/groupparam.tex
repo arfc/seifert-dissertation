@@ -197,10 +197,10 @@ Equation \eqref{eq:lambda} gives the coefficient matrix for a pulse irradiation 
 \begin{equation}
 A = \epsilon F_s
 \begin{bmatrix}
-\lambda_1 e^{-\lambda_1 t_0} & \lambda_2 e^{-\lambda_2 t_0} & \hdots &  \lambda_n e^{-\lambda_n t_0}\\
-\lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_n e^{-\lambda_n t_1}\\
+\lambda_1 e^{-\lambda_1 t_0} & \lambda_2 e^{-\lambda_2 t_0} & \hdots &  \lambda_K e^{-\lambda_K t_0}\\
+\lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_K e^{-\lambda_K t_1}\\
 \vdots                       & \vdots                       & \ddots &  \vdots                      \\
-\lambda_1 e^{-\lambda_1 t_m} & \lambda_2 e^{-\lambda_2 t_m} &  \hdots  & \lambda_n e^{-\lambda_n t_m}\\
+\lambda_1 e^{-\lambda_1 t_m} & \lambda_2 e^{-\lambda_2 t_m} &  \hdots  & \lambda_K e^{-\lambda_K t_m}\\
 \end{bmatrix}.
 \label{eq:lambda}
 \end{equation}
@@ -222,10 +222,10 @@ The target vector contains the delayed neutron count rate data, shown in Equatio
 \begin{equation}
 \vec{b} = 
 \begin{bmatrix}
- n_d(t_0)  \\
- n_d(t_1) \\
+ \dot{n}_d(t_0)  \\
+ \dot{n}_d(t_1) \\
 \vdots\\
-n_d(t_m)\\
+\dot{n}_d(t_m)\\
 \end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
@@ -233,7 +233,7 @@ Using ordinary least squares, with a non-relative residual, would lead to early 
 One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
 Another way to resolve this is to use a relative residual, given by Equation \eqref{eq:residual} as:
 \begin{equation}
-    r = min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|_2^2,
+    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|_2^2,
     \label{eq:residual}
 \end{equation}
 where
