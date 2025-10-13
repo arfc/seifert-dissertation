@@ -30,8 +30,13 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
         - Define the scaled flux method
 	- Discuss chemical removal
 - Methodology
-    - MoSDeN package
-    - 0D scaled model (several slides) (limitations) (uncertainty tracking and Monte Carlo) (scaled flux) (cumulative fission yield) (residual and least squares equation)
+    - MoSDeN overview
+        - MoSDeN package
+        - Residual, least squares, uncertainty tracking
+        - 0D scaled model overview
+    - 0D scaled model
+        - Limitations
+        - Scaled flux and CFY
 - 0D Scaled Model Results
     - DNPs of interest
     - Sensitivity Studies
