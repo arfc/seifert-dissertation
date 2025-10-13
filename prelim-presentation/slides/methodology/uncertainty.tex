@@ -1,0 +1,18 @@
+\begin{frame}
+  \frametitle{Uncertainties are tracked using Monte Carlo sampling}
+  \begin{block}{The process for uncertainty tracking is as follows:}
+    \begin{enumerate}
+        \item Normally sample $P_{n,i}$, $\tau_i$, and $N_i(t)$ within their uncertainties for every \gls{DNP}
+        \item Calculate the \gls{DNP} group parameters using non-linear least squares
+        \item Record the results and repeat
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{After all simulations finish:}
+    \begin{enumerate}
+        \item Groups are defined based on half-lives (e.g. longest lived half-life and yield are group one)
+        \item The mean values and standard deviations are calculated
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
