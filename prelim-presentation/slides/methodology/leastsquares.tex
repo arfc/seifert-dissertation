@@ -1,0 +1,34 @@
+\begin{frame}
+  \frametitle{The saturation irradiation is a non-linear least squares problem}
+  \textbf{The group parameters are calculated by equating the delayed neutron count rates.}
+
+  \begin{equation}
+    \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t} \approx \sum_{i}^{I} P_{n, i} \lambda_i N_i(t)
+  \end{equation}
+
+    \begin{equation}
+        A \vec{x} \approx \vec{b}
+    \end{equation}
+
+    \begin{equation}
+    \dot{F_s}
+    \begin{bmatrix}
+    e^{-\lambda_1 t_0} & \hdots &  e^{-\lambda_K t_0}\\
+    \vdots                                     & \ddots &  \vdots                      \\
+    e^{-\lambda_1 t_m} &  \hdots  & e^{-\lambda_K t_m}\\
+    \end{bmatrix}
+    \begin{bmatrix}
+    \bar{\nu}_{d, 1}\\
+    \vdots\\
+    \bar{\nu}_{d, K}\\
+    \end{bmatrix}
+    \approx
+    \begin{bmatrix}
+    \dot{n}_d(t_0)  \\
+    \vdots\\
+    \dot{n}_d(t_m)\\
+    \end{bmatrix}
+    \label{eq:lambda}
+    \end{equation}
+
+\end{frame}
