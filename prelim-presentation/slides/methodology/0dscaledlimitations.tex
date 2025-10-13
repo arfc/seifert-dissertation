@@ -1,0 +1,24 @@
+\begin{frame}
+  \frametitle{The 0D scaled model is fast but uses many approximations}
+    The equilibrium concentration of each \gls{DNP} is calculated for the 0D scaled model as \cite{huynh2014calculation}:
+
+    \begin{equation}
+        N_i = \frac{f_{in} CFY_i}{\lambda_i},
+        \label{eq:cfy-conc}
+    \end{equation}
+    where
+    \begin{align}
+        f_{in} &= \text{the fraction of fuel-salt in the core [-]} \nonumber \\
+        CFY_{i} &= \text{the cumulative fission yield of nuclide $i$ [-].} \nonumber
+    \end{align}
+
+    \begin{block}{The limitations of the 0D model include:}
+        \begin{itemize}
+            \item Concentration calculation does not include cross sections
+            \item The concentration is only available at equilibrium
+            \item The depletion chain is not tracked, so chemical removal is underestimated
+        \end{itemize}
+    
+    \end{block}
+
+\end{frame}

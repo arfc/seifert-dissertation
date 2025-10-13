@@ -33,6 +33,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
     - MoSDeN overview
         - MoSDeN package
         - Residual, least squares, uncertainty tracking
+        - Explicit group solve form
     - 0D scaled model
         - 0D scaled model overview
         - Scaled flux and CFY
@@ -84,8 +85,13 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Explicitly capturing this will be more accurate, comparing with scaled flux could be interesting
 ### Reprocessing
 ### Mosden
-### 0D scaled
 ### Least squares
 ### Residual
 - The 2-norm is the square root of the sum of the squares, squaring it makes it faster to calculate and doesn't change the minimized solution
 ### Uncertainty
+### 
+### 0D scaled
+### 0D scaled limitations
+- DNPs have negligible cross sections so this should be okay
+- Equilibrium means no pulse irradiation (challenging for data)
+- Chemical removal misses intermediate elements, such as not capturing I removal for Xe conc
