@@ -31,11 +31,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 	- Discuss chemical removal
 - Methodology
     - MoSDeN package
-    - General modeling approach (several slides) (uncertainty tracking and Monte Carlo approach)
-    - 0D scaled model (several slides) (limitations)
-    - 0D flow model (several slides) 
-    - Transient modeling (Moltres, several slides) (relate to 3s's) (diversion depletion simulations)
-    - Discuss ORNL, ANL, and INL work (motivation behind the problem)
+    - 0D scaled model (several slides) (limitations) (uncertainty tracking and Monte Carlo) (scaled flux) (cumulative fission yield) (residual and least squares equation)
 - 0D Scaled Model Results
     - DNPs of interest
     - Sensitivity Studies
@@ -52,7 +48,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
     - Varying data sources
     - Verification and Validation using MSRE
     - Improved group spectra (important for betaeff)
-    - 3s transient simulations 
+    - Transient modeling (Moltres, several slides) (relate to 3s's) (diversion depletion simulations)
     - Gantt Chart
 
 
@@ -82,5 +78,5 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - The scaled flux method accurately captures concentrations that change linearly with the flux
 - Explicitly capturing this will be more accurate, comparing with scaled flux could be interesting
 ### Reprocessing
-### mosden
-
+### Mosden
+### 0D scaled
