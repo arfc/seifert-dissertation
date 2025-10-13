@@ -1,14 +1,11 @@
 \begin{frame}
-	\frametitle{Chemical reprocessing affects \glspl{DNP} concentrations}
-	\begin{block}{Online chemical reprocessing includes:}
-	\begin{itemize}
-		\item Fission product removal
-		\item Fresh fuel addition
-	\end{itemize}
-	\end{block}
+  \frametitle{The 0D scaled model is implemented in MoSDeN}
+  \textbf{MoSDeN uses simulation parameters and external data to generate improved \gls{DNP} parameters.}
 
-	Existing \gls{DNP} group parameters do not account for these effects.
-	\vspace{2mm}
-
-	\textbf{For example, a reprocessing scheme with 100\% of all \glspl{DNP} chemically removed should \textit{not} have the same \gls{DNP} groups.}
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{../images/data-driven.png}
+    \caption{Flow diagram of 0D scaled model used to generate improved \ac{DNP} group parameters.}
+    \label{fig:data-model}
+  \end{figure}
 \end{frame}
