@@ -1,10 +1,11 @@
 \begin{frame}
   \frametitle{There are two common irradiation types used to generate groups}
   The $I$ \glspl{DNP} are condensed into $K$ groups.
-  \begin{equation}
-    \dot{n}_{d}(t) = \sum_{i}^{I} P_{n, i} \lambda_i N_i(t)
-    \label{eq:dnpsingleeq}
-  \end{equation}
+  \begin{block}{Intermediate Irradiation}
+    \begin{align}
+\dot{n}_{d}(T, t) \approx \dot{F}_s \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} \right)
+\end{align}
+  \end{block}
     \begin{columns}
             \column[t]{0.45\textwidth}
             \begin{block}{Pulse irradiation}
