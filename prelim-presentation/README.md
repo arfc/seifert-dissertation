@@ -106,3 +106,8 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Different DNPs from yield
 - Ge86 dominates early, but most delayed neutrons after saturation come from I137
 - Talk about pulse vs saturation irradiation
+### Long Cycle
+### Chem bool
+- 0.57\% difference, or 12 pcm, difference in the yield.
+- This is expected to be higher with the 0D flow model.
+### 
