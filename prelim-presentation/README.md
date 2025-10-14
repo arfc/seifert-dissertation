@@ -96,3 +96,12 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - DNPs have negligible cross sections so this should be okay
 - Equilibrium means no pulse irradiation (challenging for data)
 - Chemical removal misses intermediate elements, such as not capturing I removal for Xe conc
+### Params
+### Yields
+- Talk about what the yield represents
+- Talk about how Br87 isn't here
+- Talk about how 2/3rds of yield is from 6 DNPs
+### Counts
+- Different DNPs from yield
+- Ge86 dominates early, but most delayed neutrons after saturation come from I137
+- Talk about pulse vs saturation irradiation
