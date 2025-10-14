@@ -110,4 +110,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Chem bool
 - 0.57\% difference, or 12 pcm, difference in the yield.
 - This is expected to be higher with the 0D flow model.
-### 
+### Time spacing
+- The total delayed neutron yield does not change between linear and log
+### Number of time nodes
+- Computational cost roughly constant as number of time nodes varies (strange)
