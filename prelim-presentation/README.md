@@ -97,6 +97,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Equilibrium means no pulse irradiation (challenging for data)
 - Chemical removal misses intermediate elements, such as not capturing I removal for Xe conc
 ### Params
+- Orange highlights show ~4 orders of magnitude larger chemical removal rates in the MSBR
 ### Yields
 - Talk about what the yield represents
 - Talk about how Br87 isn't here
