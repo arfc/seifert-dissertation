@@ -1,8 +1,9 @@
 In Section \ref{sec:measurementofdnps}, the various methods for experimentally understanding delayed neutron precursors were discussed.
 The next stage of understanding these precursors is to understand how they are used in kinetics models, as well as the various ways they are represented.
-The microscopic and macroscopic experimental approaches provide the necessary data to create more easily handled forms.
+The microscopic and macroscopic experimental approaches provide the necessary data to create more easily handled forms via groups.
 By summing the contributions from each \gls{DNP} in the microscopic approach, the macroscopic and microscopic approaches can be said to provide data in the form of a delayed neutron count rate over time.
 This section discusses the least squares approach to convert this data into several \gls{DNP} groups.
+These groups are used in kinetics methods, which are also discussed in this section.
 
 The \glspl{DNP} are commonly represented in six groups.
 These groups were developed originally for computational efficiency and due to a lack of data for individual precursors.
@@ -12,8 +13,7 @@ Their study shows that increasing the number of \gls{DNP} groups alone does not 
 Representing the \glspl{DNP} in group form also simplifies the calculation of reactor kinetics, as without the groups the hundreds of \glspl{DNP} would each require their own equations.
 Tracking all the \glspl{DNP} becomes particularly computationally expensive when tracking all their concentrations over both space and time.
 
-Various kinetics parameters are introduced in Section \ref{sec:bg-trans-analysis-methods}, though without detail regarding the purpose of each variable.
-This section provides more information on what these kinetics and delayed neutron group parameters physically represent and how they are calculated.
+This section provides information on what the kinetics and delayed neutron group parameters physically represent and how they are calculated.
 The \gls{DNP} group parameters directly affect many of the kinetics parameters, and both sets of data are used in kinetics and dynamics problems.
 Table \ref{tab:dnpgandk} goes through each of the terms of importance for this section.
 
@@ -127,7 +127,7 @@ F_s &= \mbox{ the total number of fission events in the pulse irradiation [$\#$]
 \dot{F}_s &= \mbox{ the fission rate for a saturation irradiation [$s^{-1}$]} \nonumber \\ 
 \bar{\nu}_{d, k} &= \mbox{ the group yield for group \textit{k} [-] .} \nonumber
 \end{align}
-More information on the derivation of these equations can be found in Appendix \ref{ref:appendixA}.
+%More information on the derivation of these equations can be found in Appendix \ref{ref:appendixA}.
 These equations are specifically for a single fissile nuclide, and the derivation can be found in the work of Wilson and England \cite{wilson2002delayed}.
 %To make this equation generic, the $\bar{\nu}_{d, k} \lambda_k$ term and $\bar{\nu}_{d, k}$ term can instead be written as $A_k$.
 %Additionally, the fission term can be written as $\tilde{F}_s$, to represent either the fission rate or the net number of fissions.

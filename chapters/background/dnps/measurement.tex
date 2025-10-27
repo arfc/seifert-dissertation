@@ -1,6 +1,7 @@
-Macroscopic and microscopic approaches are used for measuring \glspl{DNP} \cite{parish1999status, rudstam2002delayed}.
+This section discusses the methods used to formulate \gls{DNP} groups.
+Macroscopic and microscopic approaches are used for formulating \gls{DNP} groups \cite{parish1999status, rudstam2002delayed}.
 %There are two approaches used for measurement of \glspl{DNP}, referred to as the macroscopic and microscopic measurement approaches \cite{parish1999status, rudstam2002delayed}.
-The macroscopic approach uses a fissile sample irradiation to get the delayed neutron count rate.
+The macroscopic approach uses an experimental fissile sample irradiation to get the delayed neutron count rate.
 %The approaches differ initially, as the macroscopic approach uses a fissile sample irradiation to get delayed neutron counts which can be approximated using groups.
 The microscopic approach uses the data from many experiments combined together to simulate a fissile sample irradiation and generate the delayed neutron count rate.
 Although the microscopic approach can be more challenging due to dependence on the work of many individual experiments, it offers more detail on the delayed neutron count rate.
@@ -9,7 +10,12 @@ After the delayed neutron count rate is collected, both approaches then try to a
 These groups consist of decay constants $\lambda_k$ and yields $\bar{\nu}_{d, k}$.
 These groups have historically been formed based on the \gls{DNP} half-lives or based on what parameters best fit the delayed neutron count rate.
 
-\subsubsection{Macroscopic Measurement of DNPs}
+The macroscopic formulation is important in this thesis for verification and validation, as the delayed neutron count rate data are experimentally collected and can be used for comparison.
+The microscopic formulation is important in this thesis because this work uses this approach.
+The microscopic approach is used because there is no delayed neutron count rate data for an irradiated sample in an \gls{MSR}.
+Additionally, the microscopic approach provides useful information on how each \gls{DNP} contributes and how chemical removal of certain elements affects the \glspl{DNP}.
+
+\subsubsection{Macroscopic Formulation of DNPs}
 \label{sec:macro-eval}
 The macroscopic approach entails irradiating a sample containing a single fissile nuclide at or near a given neutron energy.
 This delayed neutron count rate from this sample can then be measured and used to formulate \gls{DNP} group parameters.
@@ -52,7 +58,8 @@ I &= \mbox{ the total number of \glspl{DNP} [$\#$] } \nonumber \\
 Once this delayed neutron count rate is generated, the data is used to generate \gls{DNP} group parameters, $\lambda_k$ and $\bar{\nu}_{d, k}$, for that fissile nuclide and neutron energy.
 Three different approaches have been used to generate \gls{DNP} group parameters from macroscopic data: exponential stripping (or peeling) \cite{brunson1955measurement, keepin1955delayed}, least squares \cite{brady1988evaluation, keepin1957delayed}, and half-lives of specific \glspl{DNP} \cite{saphier1977evaluated}.
 Some approaches have even used a combination, such as least squares fitting with specific half-lives \cite{spriggs20028}.
-The exponential stripping, or peeling, method is a more subjective form of least squares fitting, where exponential curves are subtracted away from the raw data from right to left \cite{price2020review}.
+The exponential stripping, or peeling, method is a more subjective form of least squares fitting, in which exponential curves are subtracted away from the raw data \cite{price2020review}.
+A semi-log form of the equation has the tail-end of the decay curve fit with a straight line, has that new exponential function subtracted off, and then the process repeats for the remaining data \cite{spriggs20028}.
 The use of specific half-lives to form the \gls{DNP} groups is less subjective and offers a more physical interpretation of the groups.
 The least squares approaches are the most objective approach and generate groups which physically do not embody a single \gls{DNP}.
 Instead, they group together the \glspl{DNP} and effectively capture the overall physical effect.
@@ -210,9 +217,9 @@ It is not made clear if pulse or saturation irradiations are used, as the conclu
 
 
 
-\subsubsection{Microscopic Measurement of DNPs}
+\subsubsection{Microscopic Formulation of DNPs}
 \label{sec:micro-eval}
-The other approach used to measure \glspl{DNP} is the microscopic -- also referred to in the literature as the aggregate or summation -- approach, which uses data from individual nuclides summed together to form a simulated delayed neutron count rate.
+The other approach used to formulate \gls{DNP} groups is the microscopic -- also referred to in the literature as the aggregate or summation -- approach, which uses data from individual nuclides summed together to form a simulated delayed neutron count rate.
 This count rate can then be used to generate \gls{DNP} group parameters, the same as in the count rate from the macroscopic method.
 
 This approach was investigated in detail in the 1990-2000s \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010's from more data becoming available \cite{mills2014calculation, huynh2014calculation}.
@@ -247,7 +254,11 @@ This is particularly useful for understanding what nuclides have the greatest im
 
 
 Tables \ref{tab:micro-yields} through \ref{tab:micro-half-lives-delta} show some microscopic \gls{DNP} group parameters from the literature for thermal fission of $^{235}$U \cite{parish1999status}.
-There is reasonable agreement between the different \gls{DNP} group parameters, though it should be noted that Brady and England may be closer to ENDF/B-VI.8 because ENDF/B-VI.8 uses the Brady and England results in its formulation.
+There is mostly reasonable agreement between the different \gls{DNP} group parameters, though it should be noted that Brady and England may be closer to ENDF/B-VI.8 because ENDF/B-VI.8 uses the Brady and England results in its formulation.
+Some of the half-lives differ more than others, such as the group one half-lives ranging from 51.7 to 55.3 seconds, while the macroscopic range was 54.6 to 56.4 seconds.
+The group three half-lives also vary noticeable, with a range of 5.7 to 7.7, while the macroscopic range was 6.0 to 7.0 seconds.
+The larger range can be attributed to the variety of data and methods used in formation of the delayed neutron count rate as well as the fitting of the \gls{DNP} group parameters, whereas the macroscopic groups have a smaller range because the delayed neutron count rate is experimentally measured and the variation is from experimental uncertainty and fitting of the group parameters.
+
 
 
 \begin{table}[!h]
@@ -334,11 +345,14 @@ Brady and England \cite{brady1989delayed} & - & - & - & - & - & - \\
 \end{threeparttable}
 \end{table}
 
+
 ENDF/B-VI.8 pulls from Brady and England, as well as other works by England \cite{endf6, brady1989delayed, england1988status, brady1989validation}.
 The approaches in those studies collected 271 \glspl{DNP}, generated a delayed neutron count rate curve, and then used the two four group aggregation approach described by Keepin et al. \cite{keepin1957delayed, brady1989delayed}.
-
 Mills et al. used two different approaches: fitting all parameters simultaneously as described by Keepin et al. and using the Keepin et al. half-lives while fitting only the yields \cite{mills1991study, keepin1957delayed}.
 The values presented here are from the approach where all parameters are fit simultaneously for all \gls{DNP} group parameters.
+
+\FloatBarrier
+
 
 \subsubsection{Comparison of Macroscopic and Microscopic Approaches}
 
@@ -375,7 +389,7 @@ The total data compilation is presented in Table \ref{tab:total-delnu-compare}.
     \label{tab:total-delnu-compare}
 \end{table}
 
-Table \ref{tab:total-delnu-compare} shows that the total delayed neutron yield for thermal fission of $^{235}$U ranges from 0.01477 to 0.01905 (or 100 times that for 100 fissions, which makes the data more legible).
+Table \ref{tab:total-delnu-compare} shows that the total delayed neutron yield, or the number of delayed neutrons emitted per fission event, for thermal fission of $^{235}$U ranges from 0.01477 to 0.01905 (or 100 times that for 100 fissions, which makes the data more legible).
 The microscopic values range from 1.477 to 1.905, capturing the minimum and maximum of the range of values seen in the table.
 The macroscopic values range from 1.510 to 1.700, presenting a tighter range of values.
 Another point of interest is that there does not appear to be a consistent difference between the microscopic and macroscopic values for the same dataset.

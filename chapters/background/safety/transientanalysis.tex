@@ -21,13 +21,13 @@ The general form of the coupling is given as \cite{wooten2018review}:
     \begin{split}
     \frac{1}{\bar{\nu}_g} \frac{\partial \phi_g}{\partial t} = & \; \nabla \cdot D_g \nabla \phi_g + \sum_{g' \neq g}^G \Sigma_{s, g' \rightarrow g} \phi_{g'} \\
     & + (1-\beta) \chi_{p, g} \sum_{g'=1}^{G} (\nu \Sigma_f)_{g'} \phi_{g'}\\
-    & \sum_{i=1}^I \chi_{d, g, i} \lambda_i C_i - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g},
+    & \sum_{k=1}^K \chi_{d, g, k} \lambda_k C_k - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g},
     \label{eq:mg-n-diff}
     \end{split}
 \end{equation}
 and,
 \begin{equation}
-    \frac{\partial C_i}{\partial t} = \beta_i \sum_{g=1}^G (\bar{\nu}_g \Sigma_f)_g \phi_g - \lambda_i C_i - \nabla \cdot (C_i \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_i,
+    \frac{\partial C_k}{\partial t} = \beta_k \sum_{g=1}^G (\bar{\nu}_g \Sigma_f)_g \phi_g - \lambda_k C_k - \nabla \cdot (C_k \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_k,
     \label{eq:mg-n-diff-Ci}
 \end{equation}
 where
@@ -38,8 +38,8 @@ D_g &=\mbox{ the group \textit{g} diffusion term [$cm$]}\nonumber\\
 G &= \mbox{ the total number of energy groups [$\#$]} \nonumber\\
 \Sigma_{s, g' \rightarrow g} &= \mbox{the macroscopic scattering cross section from group \textit{g'} to group \textit{g} [$cm^{-1}$]} \nonumber\\
 \chi_{p, g} &= \mbox{the fraction of prompt neutrons born in group \textit{g} [-]} \nonumber\\
-\chi_{d, g, i} &= \mbox{the fraction of delayed neutrons from precursor group \textit{i} born in group \textit{g} [-]} \nonumber\\
-C_i &= \mbox{the concentration of \glspl{DNP} in group \textit{i} [$\# \cdot cm^{-3}$]} \nonumber\\
+\chi_{d, g, k} &= \mbox{the fraction of delayed neutrons from precursor group \textit{k} born in group \textit{g} [-]} \nonumber\\
+C_k &= \mbox{the concentration of \glspl{DNP} in group \textit{k} [$\# \cdot cm^{-3}$]} \nonumber\\
 \vec{u} &= \mbox{the velocity profile [$cm \cdot s^{-1}$]} \nonumber\\
 \Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
 \nu_T &= \mbox{the eddy viscosity [$cm^2 \cdot s^{-1}$]} \nonumber\\
@@ -77,12 +77,12 @@ Because the non-turbulent diffusion in molten salts is small relative to other s
 
 \Gls{PRK} equations are a simpler approach to modeling a transient, with the basic form given as:
 \begin{equation}
-    \frac{dn(t)}{dt} = \frac{\rho(t) - \beta_{eff}}{\Lambda} n(t) + \sum_{i=1}^I \lambda_i C_i(t),
+    \frac{dn(t)}{dt} = \frac{\rho(t) - \beta_{eff}}{\Lambda} n(t) + \sum_{k=1}^K \lambda_k C_k(t),
     \label{eq:prk-n}
 \end{equation}
 and,
 \begin{equation}
-    \frac{dC_i(t)}{dt} = \frac{\beta_{eff, i}}{\Lambda} n(t) - \lambda_i C_i(t),
+    \frac{dC_k(t)}{dt} = \frac{\beta_{eff, k}}{\Lambda} n(t) - \lambda_k C_k(t),
     \label{eq:prk-C}
 \end{equation}
 where
@@ -113,18 +113,18 @@ Wooten et al. provided four different publications which use modified point kine
 The work by Guo et al. analyzed \gls{ULOHS} and \gls{ULOF} transients in \gls{MOSART}.
 The \gls{PRK} equations are modified into the delayed point reactor kinetics equations, which model precursor concentrations in-core and ex-core, with the primary set of equations given as:
 \begin{equation}
-    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{i=1}^{I} \lambda_i C_{i, c} (t),
+    \frac{dn(t)}{dt} = \frac{\rho - \tilde{\beta}_{eff}}{\Lambda} n(t) + \sum_{k=1}^{K} \lambda_k C_{k, c} (t),
     \label{eq:dpk-n}
 \end{equation}
 \begin{equation}
 \begin{split}
-    \frac{dC_{i, c}(t)}{dt} =& \frac{\beta_i}{\Lambda} n(t) - \left(\lambda_i + \frac{1}{\tau_{c}} \right) C_{i, c}(t)\\
-    & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{i, l} (t - \tau_{l}),
+    \frac{dC_{k, c}(t)}{dt} =& \frac{\beta_k}{\Lambda} n(t) - \left(\lambda_k + \frac{1}{\tau_{c}} \right) C_{k, c}(t)\\
+    & + \frac{1}{\tau_{l}} \left(\frac{V_{l}}{V_{c}}\right) C_{k, l} (t - \tau_{l}),
     \label{eq:dpk-cin}
 \end{split}
 \end{equation}
 \begin{equation}
-    \frac{dC_{i, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{i, c} (t) - \left(\lambda_i + \frac{1}{\tau_{l}} \right) C_{i, l}(t).
+    \frac{dC_{k, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{k, c} (t) - \left(\lambda_k + \frac{1}{\tau_{l}} \right) C_{k, l}(t).
     \label{eq:dpk-cex}
 \end{equation}
 These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are used in standard software, such as in \gls{RELAP}.
@@ -137,7 +137,7 @@ Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex}
     \label{eq:dpk-betaeff}
 \end{equation}
 \begin{equation}
-    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{i=1}^I \lambda_i C_{i, l},
+    \beta_{loss} = \frac{\Lambda(t)}{n(t)} \sum_{k=1}^K \lambda_k C_{k, l},
     \label{eq:dpk-betaloss}
 \end{equation}
 \begin{equation}
@@ -219,12 +219,12 @@ These primary equations are given as:
 \begin{split}
     \frac{1}{\bar{\nu}} \frac{\partial \psi (\vec{x}, t)}{\partial t} + \frac{1}{\bar{\nu} \phi_A} \frac{d \phi_A}{dt} \psi (\vec{x}, t) + M(t) \psi (\vec{x}, t) = & \\
     (1 - \beta) \chi_p F(t) \psi (\vec{x}, t)
-    + \frac{1}{\phi_A} \chi_d \sum_{i=1}^I \lambda_i C_i (\vec{x}, t) + \frac{1}{\phi_A} Q (\vec{x}, t) & ,
+    + \frac{1}{\phi_A} \chi_d \sum_{k=1}^K \lambda_k C_k (\vec{x}, t) + \frac{1}{\phi_A} Q (\vec{x}, t) & ,
     \label{eq:rineiski-flux}
 \end{split}
 \end{equation}
 \begin{equation}
-    \frac{\partial C_i (\vec{x}, t)}{\partial t} = \phi_A \beta_i F \psi (\vec{x}, t) - \lambda_i C_i (\vec{x}, t) - \nabla ( \vec{u} (\vec{x}, t) C_i (\vec{x}, t)).
+    \frac{\partial C_k (\vec{x}, t)}{\partial t} = \phi_A \beta_k F \psi (\vec{x}, t) - \lambda_k C_k (\vec{x}, t) - \nabla ( \vec{u} (\vec{x}, t) C_k (\vec{x}, t)).
     \label{eq:rineiski-big-C}
 \end{equation}
 
@@ -232,11 +232,11 @@ Within these "shape" steps are also sub-steps referred to as "reactivity" steps.
 At each of these "reactivity" steps, the \gls{PRK} parameters and flux amplitude are calculated.
 The equations used in the "reactivity" steps are recreated here as:
 \begin{equation}
-    \frac{d \phi_A}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) \phi_A + q_{eff} + \sum_{i=1}^I \lambda_i \left( c_{s, i} + c_{m, i} \right),
+    \frac{d \phi_A}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) \phi_A + q_{eff} + \sum_{k=1}^K \lambda_k \left( c_{s, k} + c_{m, k} \right),
     \label{eq:rineiski-n}
 \end{equation}
 \begin{equation}
-    \frac{dc_{s, i}}{dt} = \frac{\beta_{eff}}{\Lambda} \phi_A - \lambda_i C_{s, i},
+    \frac{dc_{s, k}}{dt} = \frac{\beta_{eff}}{\Lambda} \phi_A - \lambda_k C_{s, k},
     \label{eq:rineiski-cs}
 \end{equation}
 where,
@@ -245,17 +245,17 @@ where,
     \label{eq:rineiski-rho}
 \end{equation}
 \begin{equation}
-    c_{m, i} = \frac{\left\langle W(\vec{x}), \chi_d C_{m, i} \right\rangle}{\Lambda \left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}.
+    c_{m, k} = \frac{\left\langle W(\vec{x}), \chi_d C_{m, k} \right\rangle}{\Lambda \left\langle W(\vec{x}), \chi F(t) \psi  (\vec{x}, t) \right\rangle}.
     \label{eq:rineiski-cm}
 \end{equation}
 
 Intermediate terms used in Equations \eqref{eq:rineiski-n} through \eqref{eq:rineiski-cm} are given as:
 \begin{equation}
-    \frac{\partial C_{m, i}(\vec{x}, t)}{\partial t} = - \nabla \left( \vec{u}(\vec{x}, t) C_{s, i} (\vec{x}, t) \right) - \lambda_i C_{m, i}(\vec{x}, t) - \nabla \left( \vec{u}(\vec{x}, t) C_{m, i}(\vec{x}, t)\right),
+    \frac{\partial C_{m, k}(\vec{x}, t)}{\partial t} = - \nabla \left( \vec{u}(\vec{x}, t) C_{s, k} (\vec{x}, t) \right) - \lambda_k C_{m, k}(\vec{x}, t) - \nabla \left( \vec{u}(\vec{x}, t) C_{m, k}(\vec{x}, t)\right),
     \label{eq:rineiski-big-cm}
 \end{equation}
 \begin{equation}
-    \frac{\partial C_{s, i}(\vec{x}, t)}{\partial t} = \phi_A(t) \beta_i F(t) \psi (\vec{x}, t) - \lambda_i C_{s, i}(\vec{x}, t).
+    \frac{\partial C_{s, k}(\vec{x}, t)}{\partial t} = \phi_A(t) \beta_k F(t) \psi (\vec{x}, t) - \lambda_k C_{s, k}(\vec{x}, t).
     \label{eq:rineiski-big-cs}
 \end{equation}
 The $C_s(\vec{x}, t)$ term is computed at steady state by setting the left-hand side of both Equation \eqref{eq:rineiski-flux} and \eqref{eq:rineiski-big-C} to zero as well as the fluid velocity to zero at t=0.
@@ -265,14 +265,14 @@ The terms in Equations \eqref{eq:flux-treatment-rineiski} through \eqref{eq:rine
 M(t) &= \mbox{ the neutron disappearance operator [$cm^{-1}$] } \nonumber \\
 F(t) &= \mbox{ the neutron production operator [$cm^{-1}$]} \nonumber \\
 \chi_p &= \mbox{ the prompt neutron energy spectra [-]} \nonumber \\
-C_i(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{i} [$\# \cdot cm^{-3}$] } \nonumber \\
+C_k(\vec{x}, t) &= \mbox{ the concentration of \gls{DNP} group \textit{k} [$\# \cdot cm^{-3}$] } \nonumber \\
 Q(\vec{x}, t) &= \mbox{ the external neutron source [$\# \cdot cm^{-3} \cdot s^{-1}$] } \nonumber \\
 \vec{u}(\vec{x}, t) &= \mbox{ the \gls{DNP} velocity [$cm \cdot s^{-1}$]} \nonumber \\
-C_{s, i}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{i} [$\# \cdot cm^{-3}$] } \nonumber \\
-C_{m, i}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{i} [$\# \cdot cm^{-3}$] } \nonumber \\
+C_{s, k}(\vec{x}, t) &= \mbox{ the "standard" precursor concentration of group \textit{k} [$\# \cdot cm^{-3}$] } \nonumber \\
+C_{m, k}(\vec{x}, t) &= \mbox{ the "movable" precursor concentration of group \textit{k} [$\# \cdot cm^{-3}$] } \nonumber \\
 \rho &= \mbox{ the reactivity [-]} \nonumber \\
-c_{s, i} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $i$ [$\#$]} \nonumber \\
-c_{m, i} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $i$ [$\#$]} \nonumber \\
+c_{s, k} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $k$ [$\#$]} \nonumber \\
+c_{m, k} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $k$ [$\#$]} \nonumber \\
 q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$\# \cdot s^{-1}$] } \nonumber \\
 \Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber \\
 W(x) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\

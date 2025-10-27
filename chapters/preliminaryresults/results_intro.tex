@@ -22,21 +22,21 @@ Each sampled simulation uses emission probabilities, half-lives, and fission yie
 \begin{table}[]
     \centering
     \caption{Default parameters for 0D scaled model simulations.}
-    \begin{tabular}{lr}
+    \begin{tabular}{lrl}
         \hline
-        Parameter & Value \\
+        Parameter & Value & Units\\
         \hline
-        \rule{0pt}{2ex}\vspace{0.1 mm}Fissile Nuclide & \vspace{0.1 mm}$^{235}$U [-]\\
-        Incident Neutron Energy & $0.0253\; [eV]$\\
-        Fission Yields & ENDF/B-VII.1 \cite{chadwick2011endf}\\
-        Half-lives & IAEA \cite{DIMITRIOU2021144}\\
-        Emission Probability & IAEA \cite{DIMITRIOU2021144}\\
-        Final Decay Time & $1200\; [s]$\\
-        Decay Time Spacing & Logarithmic\\
-        Decay Time Nodes & 300\\
-        Sampled Simulations & 1000\\
-        $\tau_{in}$ & 9 $[s]$ \cite{hanauer1967neutron}\\
-        $\tau_{ex}$ & 16 $[s]$ \cite{hanauer1967neutron}\\
+        \rule{0pt}{2ex}\vspace{0.1 mm}Fissile Nuclide & \vspace{0.1 mm}$^{235}$U & [-]\\
+        Incident Neutron Energy & $0.0253$ &$ [eV]$\\
+        Fission Yields & ENDF/B-VII.1 \cite{chadwick2011endf} & [-]\\
+        Half-lives & IAEA \cite{DIMITRIOU2021144} & [-]\\
+        Emission Probability & IAEA \cite{DIMITRIOU2021144} & [-]\\
+        Final Decay Time & $1200$ & $[s]$\\
+        Decay Time Spacing & Logarithmic & [-]\\
+        Decay Time Nodes & 300 & [-]\\
+        Sampled Simulations & 1000 & [-]\\
+        $\tau_{in}$ & 9 \cite{hanauer1967neutron} & $[s]$\\
+        $\tau_{ex}$ & 16 \cite{hanauer1967neutron} & $[s]$\\
         \hline
     \end{tabular}
     \label{tab:default-0dsacled}

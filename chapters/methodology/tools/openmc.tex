@@ -1,10 +1,13 @@
 OpenMC is an open-source Monte Carlo neutral particle transport code.
-Its Python \gls{API} offers functionality that simplifies interfacing with \gls{MoSDeN}, an in-house developed open-source Python package.
-The irradiating the fissile sample is straightforward and configurable, as users can adjust parameters through an input file.
-OpenMC also offers useful feature in depletion, where a zero-power depletion step is rapidly calculated since only decay is tracked.
+The preliminary work on the 0D scaled model uses OpenMC only for accessing nuclear data, but the 0D flow model will rely more heavily on OpenMC to simulate a fixed-source simulation.
+OpenMC offers many useful features that are particularly helpful for the use cases presented in this work.
+
+Its Python \gls{API} offers functionality that simplifies interfacing with \gls{MoSDeN}.
+OpenMC also offers configurable options in depletion, such as a zero-power depletion step which rapidly calculates nuclide concentrations since only decay is tracked.
 This feature allows resolving ex-core residence time depletion steps quickly.
-Additionally, OpenMC’s transfer rate functionality during depletion enables simulation of chemical removal in an \gls{MSR}.
+Additionally, transport-independent depletion can be used to further speed up the irradiation simulation.
+OpenMC’s transfer rate functionality during depletion enables simulation of chemical removal in an \gls{MSR}.
 
 For this work, \gls{MoSDeN} by default uses the \gls{ENDF}/B-VII.1 based depletion chains provided by OpenMC and \gls{ENDF}/B-VII.1 cross section data.
 The thermal spectrum chain applies to neutron irradiation below $1 \; eV$, the fast spectrum chain applies to neutron irradiation above thermal and below $5 \; MeV$, and anything above that is not treated in this work \cite{Spriggs2000Summary}.
-The models by default assume monoenergetic neutrons irradiate the sample.
+The models by default assume monoenergetic neutrons at thermal energy, $0.0253 \; eV$, irradiate the sample.

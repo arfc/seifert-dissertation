@@ -9,6 +9,21 @@ Figure \ref{fig:msre1d} shows the 1D in-core and ex-core flow paths, which this 
 \end{figure}
 The fission history function is a square wave, with a constant fission rate during the in-core residence time and no fission during the ex-core residence time.
 This approximation simplifies the analytical form of the fission history for creating the non-linear least squares problem, as shown in Appendix \ref{ref:appendixA}.
+Appendix \ref{ref:appendixA} derives Equation \eqref{eq:msr-group}, given here as:
+\begin{equation}
+    \dot{n}_{d, k}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right),
+    \label{eq:msr-group}
+\end{equation}
+where,
+\begin{align}
+    F_0 &= \text{the constant fission rate $[\# \cdot s^{-1}]$} \nonumber \\
+    T &= \text{the total fission history time $[s]$} \nonumber \\
+    J &= \left\lfloor \frac{T}{\tau_{net}} \right\rfloor \nonumber \\
+    &= \text{the number of recirculations $[\#]$} \nonumber \\
+    J_{in} &= \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
+    &= \text{the number of recirculated in-core irradiations $[\#]$} \nonumber \\
+    d &= e^{\lambda_k \tau_{net}}. \nonumber \\
+\end{align}
 
 Figure \ref{fig:simplified-model} shows the flow diagram for a fission history to simulate irradiation on a fissile sample circulating in the primary loop.
 The model passes eight parameters into OpenMC \cite{romano_openmc_2015}: in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.

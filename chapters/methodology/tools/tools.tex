@@ -1,4 +1,7 @@
+
 Several software tools are used to evaluate and generate the improved \gls{DNP} group parameters.
-The in-house Python package \gls{MoSDeN} collects and consolidates data, OpenMC parses nuclear data and will be used for higher-fidelity analysis, and the \gls{MOOSE} application Moltres evaluates the parameters through transient simulations \cite{python, romano_openmc_2015, lindsay_introduction_2018}.
+The Python package \gls{MoSDeN} is in-progress, but it collects and consolidates data while handling calculations of delayed neutron count rates and group parameter equation solves \cite{python}.
+OpenMC is used to parse nuclear data to be passed into \gls{MoSDeN}, and it will also be used for the higher-fidelity 0D flow model \cite{romano_openmc_2015}.
+The \gls{MOOSE} application Moltres takes the \gls{DNP} groups from \gls{MoSDeN} and OpenMC and uses them in transient simulations \cite{lindsay_introduction_2018}.
 Preliminary results use \gls{MoSDeN} to generate the improved \gls{DNP} group parameters with support from OpenMC, while the proposed work will use OpenMC more heavily in simulations and Moltres for transient simulations.
 Each tool is described in detail in its corresponding sub-section.
