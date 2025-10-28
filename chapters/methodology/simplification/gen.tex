@@ -11,7 +11,7 @@ The fission history function is a square wave, with a constant fission rate duri
 This approximation simplifies the analytical form of the fission history for creating the non-linear least squares problem, as shown in Appendix \ref{ref:appendixA}.
 Appendix \ref{ref:appendixA} derives Equation \eqref{eq:msr-group}, given here as:
 \begin{equation}
-    \dot{n}_{d, k}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right),
+    \dot{n}_{d}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right),
     \label{eq:msr-group}
 \end{equation}
 where,
@@ -23,6 +23,11 @@ where,
     J_{in} &= \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
     &= \text{the number of recirculated in-core irradiations $[\#]$} \nonumber \\
     d &= e^{\lambda_k \tau_{net}}. \nonumber \\
+\end{align}
+However, this closed-form solution has numerical instabilities for very short ex-core irradiation times.
+Although computationally slower to solve, Equation \eqref{eq:sumform} offers a more stable form, recreated here as:
+\begin{align}
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} - e^{-\lambda_k t} + e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right) \nonumber \\ &+ \sum_{j=J_{in}+1}^{J} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right).
 \end{align}
 
 Figure \ref{fig:simplified-model} shows the flow diagram for a fission history to simulate irradiation on a fissile sample circulating in the primary loop.

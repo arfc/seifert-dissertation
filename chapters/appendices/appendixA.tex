@@ -76,6 +76,7 @@ where
 which, because $J_{in}$ is always less than $J$, can be further simplified to:
 \begin{align}
 \frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} - e^{-\lambda_k t} + e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right) \nonumber \\ &+ \sum_{j=J_{in}+1}^{J} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right).
+\label{eq:sumform}
 \end{align}
 This equation can be further simplified to:
 \begin{align}
@@ -107,8 +108,10 @@ However, as previously mentioned, this infinite approach will not work for the s
 For example, if an in-core residence time is selected which is relatively small compared to the ex-core residence time, Equation \eqref{eq:wilseng-examp} would not vary at all, even though the fission rate history would be significantly different.
 By isolating the delayed neutron count rate and summing over all groups, the finalized equation can be formulated as:
 \begin{align}
-\dot{n}_{d, k}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right).
+\dot{n}_{d}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right).
 \end{align}
+This equation is not stable for all in-core and ex-core residence times, and blows up when the ex-core time goes to zero.
+The summation form given in Equation \eqref{eq:sumform} is stable for general problems.
 This is similar to the form presented by Wilson and England for an arbitrary irradiation time:
 \begin{equation}
     \dot{n}_{d}(T, t) = F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1 - e^{-\lambda_k T}\right)
