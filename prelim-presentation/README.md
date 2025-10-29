@@ -52,7 +52,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Proposed Work
     - 0D flow model with differing residual treatments
     - Varying data sources
-    - Verification and Validation using MSRE
+    - Verification and Validation using MSRE (OpenMC sim for spectrum, cross sections, depletion)
     - Improved group spectra (important for betaeff)
     - Transient modeling (Moltres, several slides) (relate to 3s's) (diversion depletion simulations)
     - Gantt Chart

@@ -1,8 +1,8 @@
 %Generating \gls{DNP} group parameter data in a reactor-agnostic manner requires a reactor-agnostic generation process.
 Current \gls{DNP} group parameters are tabulated by fissile nuclide and incident neutron energy.
 For the improved \gls{DNP} group parameters, it is challenging to continue using tabulated parameters due to the number of variables involved in fuel salt recirculation and chemical removal rates.
-Fully detailing the flow with a large number of parameters is out of scope.
-Instead, the flow can be simplified to two parameters: an in-core average residence time, $\tau_{in}$, and an ex-core residence time, $\tau_{ex}$.
+%Fully detailing the flow with a large number of parameters is out of scope.
+In this work, the flow is simplified to two parameters: an in-core average residence time, $\tau_{in}$, and an ex-core residence time, $\tau_{ex}$.
 
 This approach captures fuel salt advection around the primary loop and approximates turbulent and diffusive mixing.
 The terms derive from the averaged behavior of a fuel salt control volume, treating thermal-hydraulic effects, such as vortices, as changes in residence times.
@@ -12,15 +12,12 @@ Chemical removal rates are challenging to represent with only a small number of 
 For any given set of removal rates for a reprocessing scheme, \gls{DNP} group parameters can be generated.
 This does not provide easily tabulated data for every \gls{MSR} parameter, but offers greater accuracy for specific reprocessing schemes.
 
-Although online reprocessing is of interest for this work, only the removal of non-fissile nuclides is considered.
-Online refueling is not examined, as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
-For example, if the irradiated sample is $^{235}$U and the refuel material is $^{239}$Pu, then the addition of $^{239}$Pu would only alter the fission-weighting and not the actual \gls{DNP} concentrations from each fissile nuclide.
-Even if $^{235}$U is added as a refuel material, this could simply be treated as multiple identical individual samples circulating in the system or as a change in the sample's mass.
-Similarly, the chemical removal of some fissile nuclide does not impact this analysis, since the \gls{DNP} group parameters are normalized per fission.
-Overall, the addition or removal of fissile nuclides only affects the fission-weighting, while the addition or removal of non-fissile nuclides will affect the \gls{DNP} group parameters.
+In this work, two different models are considered using \gls{MoSDeN}: the 0D scaled and the 0D flow model.
+The 0D scaled model has been completed, and offers a rapid but less accurate approach to calculate the improved \gls{DNP} group parameters that account for fuel salt recirculation and chemical removal.
+The 0D flow model will be completed, providing a slower but more accurate approach to calculating the improved \gls{DNP} group parameters.
 
-An irradiation time of several minutes suffices to reach equilibrium \glspl{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
-Elements with cycle times on the order of months to years exhibit negligible changes, as discussed in Section \ref{sec:chemrem-msbr}.
+An irradiation time of several minutes suffices to reach equilibrium \gls{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
+Elements with cycle times on the order of months to years exhibit negligible changes, as Section \ref{sec:chemrem-msbr} shows.
 Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
 
 The \gls{MSBR} reprocessing scheme serves as the basis for analyzing the largest cycle times in this work.
@@ -59,6 +56,14 @@ With the chemical reprocessing scheme in place, the next step to generate the im
 The two levels of fidelity are the 0D scaled model and the 0D flow model.
 There is also another level of fidelity discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which could be interesting future work.
 The 0D scaled model is completed, the 0D flow model is planned, and the spatially resolved model is a potential future development.
+
+Although online reprocessing is of interest for this work, only the removal of non-fissile nuclides is considered.
+Online refueling is not examined, as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
+For example, if the irradiated sample is $^{235}$U and the refuel material is $^{239}$Pu, then the addition of $^{239}$Pu would only alter the fission-weighting and not the actual \gls{DNP} concentrations from each fissile nuclide.
+Even if $^{235}$U is added as a refuel material, this could simply be treated as multiple identical individual samples circulating in the system or as a change in the sample's mass.
+Similarly, the chemical removal of some fissile nuclide does not impact this analysis, since the \gls{DNP} group parameters are normalized per fission.
+Overall, the addition or removal of fissile nuclides only affects the fission-weighting, while the addition or removal of non-fissile nuclides will affect the \gls{DNP} group parameters.
+
 %scaling terms to approximate different spatial volumes, accounting for flow using time differences and simulating the salt differently at different times where reprocessing can occur in different volumetric regions, and finally a model with spatial resolution where chemical processing can occur at specific spatial nodes.
 
 A Monte Carlo sampling approach is used to propagate uncertainties in the various inputs, such as in emission probabilities, half-lives, fission yields, reprocessing terms, or residence times.
@@ -67,7 +72,7 @@ The data itself must be perturbed, and not the delayed neutron count rate itself
 This is because the uncertainties in the delayed neutron count rate are not independent from time step to time step, but instead they all depend on the underlying data which changes the shape of the delayed neutron count rate at all times.
 
 For generation of the improved \gls{DNP} group parameters, the main goal is to formulate them for individual fissile nuclides.
-For some of the analyses presented in this work, the fissions do not come from a single fissile nuclide.
+For some of the analyses that will be conducted in this work, the fissions do not come from a single fissile nuclide.
 For these analyses, a fission-weighted approach is used, where the \gls{DNP} group parameters are scaled based on the fraction of fissions that lead to those group parameters.
 Equations \eqref{eq:nubar-fw} and \eqref{eq:decayconst-fw} show how the fission-weighted \gls{DNP} group parameters can be calculated.
 The fission-weighted values can then be multiplied by an importance term to account for the difference between the delayed and prompt neutron fission spectra, as shown in Equations \eqref{eq:yield-fw-import} and \eqref{eq:decay-fw-import} \cite{radaideh2019new}.
