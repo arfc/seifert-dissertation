@@ -470,8 +470,52 @@ $^{100}$Rb & 1.22 \\
 \label{tab:pcc-summed}
 \end{table}
 
+These \glspl{PCC} can be combined with the relative uncertainty associated with each \gls{DNP} to capture the nuclides which both impact the \gls{DNP} group parameters most significantly and have large uncertainties.
+Specifically, this is calculated as the sum of the relative uncertainties times the magnitude of the \gls{PCC} for that given uncertainty, or $U$:
+\begin{equation}
+    U= \sum_{i=1}^I \frac{\sigma_i}{x_i} |PCC_{i,x}|,
+\end{equation}
+where
+\begin{align}
+    U &= \text{the summed \gls{PCC} scaled relative uncertainty [-]} \nonumber \\
+    \sigma_i &= \text{the uncertainty in the measurement $x$ for \gls{DNP} $i$ [-]} \nonumber \\
+    x_i &= \text{the half-life, emission probability, or concentration of \gls{DNP} $i$ [-]} \nonumber \\
+    PCC_{i, x} &= \text{the \gls{PCC} for \gls{DNP} $i$ and measurement $x$ [-]} \nonumber \\
+\end{align}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/chart_PCC_uncertainty.png}
+    \caption{The sum of the \gls{PCC} magnitudes times the relative uncertainties for each \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. The $^{86}$Ge summed value is slightly larger than the others, though there are many \glspl{DNP} which can use improved data.}
+    \label{fig:summedscaledpccs}
+\end{figure}
+
+Figure \ref{fig:summedscaledpccs} shows that, once again, $^{86}$Ge is the largest value, indicating that not only do the uncertainties in its data have a large effect on the \gls{DNP} group parameters, but it also has large relative uncertainties.
+When compared to Figure \ref{fig:summedpccs}, it is noticeable that the values are generally much smaller due to scaling by the relative uncertainties.
+Table \ref{tab:pcc-summedscaled} gives more insight into these values, in which $^{86}$Ge is approximately four times larger than the next largest value.
+This table shows the most \glspl{DNP} that require improved data due to the combination of their importance to \gls{DNP} group parameter calculation and their current uncertainties.
 
 
-
+\begin{table}[!ht]
+    \centering
+    \caption{The sum of the relative uncertainties scaled by the \gls{PCC} magnitudes for the top 10 \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
+\begin{tabular}{lr}
+\hline
+Nuclide &  $\sum \left|PCC \right|$ \\
+\hline
+$^{86}$Ge & 1.71 \\
+$^{124}$Ag & 0.41 \\
+$^{120}$Ag & 0.36 \\
+$^{114}$Tc & 0.36 \\
+$^{147}$Xe & 0.34 \\
+$^{104}$Nb & 0.29 \\
+$^{111}$Mo & 0.27 \\
+$^{122}$Pd & 0.27 \\
+$^{98}$Y & 0.26 \\
+$^{103}$Zr & 0.26 \\
+\hline
+\end{tabular}
+\label{tab:pcc-summedscaled}
+\end{table}
 
 \FloatBarrier
