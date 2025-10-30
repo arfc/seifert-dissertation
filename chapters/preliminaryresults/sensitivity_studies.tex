@@ -12,32 +12,33 @@ As shown in Appendix \ref{sec:appendixB}, the fraction of fuel salt in the ex-co
 This analysis assumes an ex-core fraction, $f_{ex}$, of 0.5.
 This value is based on the core zone I, core zone II, and annulus salt volumes relative to primary system salt volume in the \gls{MSBR} \cite{robertson_conceptual_1971}.
 The justification for using the \gls{MSBR} reprocessing scheme is discussed in Section \ref{sec:delnu-groupgen}.
-Table \ref{tab:msbr_cycle_times} shows the \gls{MSBR} chemical reprocessing scheme used in this analysis, recreated here.
+Table \ref{tab:msbr_cycle_times} shows the \gls{MSBR} chemical reprocessing scheme used in this analysis, recreated here with an additional column including the ex-core fraction scaling.
 
 \begin{table}[H]
 \renewcommand{\arraystretch}{1.25}
 \caption{MSBR Online Reprocessing Removal Rates from \cite{robertson_conceptual_1971}.}
 \begin{center}
-\begin{tabular}{ l p{\dimexpr 0.25\linewidth-2\tabcolsep} r}
+\begin{tabular}{ l p{\dimexpr 0.25\linewidth-2\tabcolsep} r r}
  \hline
- Reprocessing Group & Element(s) & Removal Rate $[s^{-1}]$\\
+ Reprocessing Group & Element(s) & Removal Rate $[s^{-1}]$ & Scaled Removal Rate $[s^{-1}]$\\
  \hline
- Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & $2.32 \times 10^{-7}$\\
- Rare Earths & Eu & $2.32 \times 10^{-8}$\\
- Noble Metals  & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & $5.00 \times 10^{-2}$\\
- Seminoble Metals & Zr, Cd, In, Sn &  $5.79 \times 10^{-8}$\\
- Gases & Kr, Xe & $5.00 \times 10^{-2}$\\
- Volatile Fluorides & Br, I & $1.93 \times 10^{-7}$\\
- Discard & Rb, Sr, Cs, Ba & $3.37 \times 10^{-9}$\\
- Salt Discard & Th, Li, Be, F & $3.37 \times 10^{-9}$\\
- Protactinium & Pa & $3.86 \times 10^{-6}$\\
- Higher Nuclides & Np, Pu & $1.98 \times 10^{-9}$\\
+ Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & $2.32 \times 10^{-7}$ & $1.16 \times 10^{-7}$\\
+ Rare Earths & Eu & $2.32 \times 10^{-8}$ & $1.16 \times 10^{-8}$\\
+ Noble Metals  & Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te & $5.00 \times 10^{-2}$ & $2.50 \times 10^{-2}$\\
+ Seminoble Metals & Zr, Cd, In, Sn &  $5.79 \times 10^{-8}$ &  $2.90 \times 10^{-8}$\\
+ Gases & Kr, Xe & $5.00 \times 10^{-2}$ & $2.50 \times 10^{-2}$\\
+ Volatile Fluorides & Br, I & $1.93 \times 10^{-7}$ & $9.65 \times 10^{-8}$\\
+ Discard & Rb, Sr, Cs, Ba & $3.37 \times 10^{-9}$ & $1.69 \times 10^{-9}$\\
+ Salt Discard & Th, Li, Be, F & $3.37 \times 10^{-9}$ & $1.69 \times 10^{-9}$\\
+ Protactinium & Pa & $3.86 \times 10^{-6}$ & $1.93 \times 10^{-6}$\\
+ Higher Nuclides & Np, Pu & $1.98 \times 10^{-9}$ & $9.9 \times 10^{-10}$\\
  \hline
+ \label{tab:msbr_cycle_times_scaled}
 \end{tabular}
 \end{center}
 \end{table}
 
-One consideration is that the 0D scaled model underestimates chemical removal rate effects.
+One consideration is that the 0D scaled model, discussed in Section \ref{sec:data-model}, underestimates chemical removal rate effects.
 This is because it only chemically removes from the cumulative fission yield of the element in the reprocessing scheme, and does not account for decay chains which may have chemical removal rates included.
 For example, $^{137}$I has a cycle time of 60 days, corresponding to a chemical removal rate of $1.9\times 10^{-7}$ $[s^{-1}]$.
 However, antimony and tellurium, which decay into iodine, have a chemical removal rate of 0.05 $[s^{-1}]$, many orders of magnitude larger than the iodine removal rate.
@@ -47,10 +48,10 @@ The 0D scaled model, with cumulative fission yields and no decay chain, does not
 \subsubsection{Long Cycle Time Evaluation}
 \label{sec:large-tcyc}
 
-Table \ref{tab:msbr_cycle_times} lists many elements to consider.
+Table \ref{tab:msbr_cycle_times_scaled} lists the various elements with a chemical removal rate in the \gls{MSBR}.
 Since the sample is irradiated only for a few minutes, it is useful to assess the significance of smaller removal rates, such as the 500-day cycle time of rare earths.
-This analysis considers only 20-second cycle time elements, the noble metals and gases.
-Figure \ref{fig:chem-long} shows the difference between the full \gls{MSBR} reprocessing scheme and the partial scheme considering only 20-second cycle time elements.
+This analysis compares removal of only 20-second cycle time elements, the noble metals and gases, to removal of all elements given in Table \ref{tab:msbr_cycle_times_scaled}.
+Figure \ref{fig:chem-long} shows the difference between the full \gls{MSBR} reprocessing scheme, given in Table \ref{tab:msbr_cycle_times_scaled}, and the partial scheme, which only uses noble metals and gases.
 \begin{figure}[!ht]
 \centering
 \subfloat[Half-life $\tau_k$ for each \gls{DNP} group $k$.]{
@@ -60,9 +61,10 @@ Figure \ref{fig:chem-long} shows the difference between the full \gls{MSBR} repr
 \subfloat[Delayed neutron yield $\bar{\nu}_{d,k}$ for each \gls{DNP} group $k$.]{
   \includegraphics[width=0.45\linewidth]{images/yields_chem_long.png}
 }
-\caption{Delayed neutron contributions from each \gls{DNP} with and without long cycle time chemical removal rates in the \gls{MSBR} after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. The differences induced by exclusion of removal rates with cycle times longer than 20 seconds are minimal and well within uncertainty bounds.}
+\caption{Delayed neutron group parameters calculated with and without long cycle time chemical removal rates in the \gls{MSBR} after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. The differences induced by exclusion of removal rates with cycle times longer than 20 seconds are minimal and well within uncertainty bounds.}
 \label{fig:chem-long}
 \end{figure}
+
 The differences between each \gls{DNP} group parameter, $\bar{\nu}_{d,k}$ and $\lambda_k$, are less than 0.001\%.
 This analysis shows elements with cycle times longer than 20 seconds do not affect \gls{DNP} group parameters for thermal saturation irradiation of $^{235}$U using the 0D scaled model.
 
@@ -72,7 +74,8 @@ This analysis shows elements with cycle times longer than 20 seconds do not affe
 \label{sec:repr-scale}
 
 It is also of interest to determine the sensitivity of the \gls{DNP} group parameters to the chemical reprocessing scheme.
-The 0D scaled model underestimates chemical removal effects due to the use of cumulative fission yields without explicit nuclide tracking, but this analysis still demonstrates the general chemical reprocessing impact.
+As previously discussed, the 0D scaled model underestimates chemical removal effects due to the use of cumulative fission yields without explicit nuclide tracking.
+This analysis still demonstrates the general chemical reprocessing impact, albeit conservatively.
 The comparison of \gls{DNP} group parameters with and without the \gls{MSBR} reprocessing scheme is given in Figure \ref{fig:chem-bool}.
 The figure shows the half-lives are similar, while yields without removal are slightly higher.
 
@@ -85,7 +88,7 @@ The figure shows the half-lives are similar, while yields without removal are sl
 \subfloat[Delayed neutron yield $\bar{\nu}_{d,k}$ for each \gls{DNP} group $k$.]{
   \includegraphics[width=0.45\linewidth]{images/yields_chem_bool.png}
 }
-\caption{Delayed neutron contributions from each \gls{DNP} with and without the \gls{MSBR} chemical removal rates after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. Neglecting chemical removal rates generally leads to larger yields, though all differences are within uncertainty bounds.}
+\caption{Delayed neutron group parameters with and without the \gls{MSBR} chemical removal rates after a thermal saturation irradiation of $^{235}$U using the 0D scaled model. Neglecting chemical removal rates generally leads to larger yields, though all differences are within uncertainty bounds.}
 \label{fig:chem-bool}
 \end{figure}
 
@@ -103,15 +106,15 @@ Of interest are the node distribution, number of nodes, sample decay time, and c
 
 \subsubsection{Distribution}
 Two time node distributions are compared: logarithmic spacing from 0.01 to 600 seconds and linear spacing from 0 to 600 seconds.
-With 300 time nodes, linear spacing does not capture behavior in the first two seconds but provides higher resolution at longer time scales.
+These distributions of nodes are compared because capturing short-lived \glspl{DNP} while maintaining sufficient resolution at longer time steps is of interest.
+Comparing these node distributions can inform if logarithmic spacing provides sufficient accuracy for long-lived \gls{DNP} while capturing short-lived \gls{DNP}, as linear spacing will struggle to capture short-lived \gls{DNP}.
+For example, linear spacing does not capture behavior in the first two seconds with 300 time nodes but provides higher resolution at longer time scales.
 This longer time scale resolution is less useful, as many relevant \glspl{DNP} quickly drop off at longer time scales, as discussed in Section \ref{sec:important-dnp}.
 
 Figure \ref{fig:time-distribution} compares \gls{DNP} group parameters for logarithmic and linear spacing.
 Half-lives of shorter-lived groups are larger for linear spacing, consistent with expectations.
 Linear spacing has no data between zero and two seconds, and it places greater weight on longer-lived groups due to the data distribution.
 This causes shorter-lived groups to capture a larger yield, with yields shifted from groups two, three, and four to groups five and six.
-The total \gls{DNP} yield differs by approximately 0.1\%, so changing time node spacing does not alter macroscopic \gls{DNP} group behavior.
-Instead, it affects the distribution of delayed neutrons over time, with logarithmic spacing more accurate by capturing shorter-lived \glspl{DNP} effects.
 
 \begin{figure}[!ht]
 \centering
@@ -126,10 +129,13 @@ Instead, it affects the distribution of delayed neutrons over time, with logarit
 \label{fig:time-distribution}
 \end{figure}
 
+The total \gls{DNP} yield differs by approximately 0.1\%, so changing time node spacing does not alter macroscopic \gls{DNP} group behavior.
+Instead, it affects the distribution of delayed neutrons over time, with logarithmic spacing more accurate by capturing shorter-lived \glspl{DNP} effects.
+
 \FloatBarrier
 \subsubsection{Number of Time Nodes}
 \label{sec:numer-nodes}
-Figure \ref{fig:time-nodes} shows how varying the number of nodes affects the results.
+Figure \ref{fig:time-nodes} shows how varying the number of nodes with a logarithmic distribution affects the results.
 It appears there is not a significant difference between the results when varying the number of nodes.
 The main difference appears in the yields of groups four and five, with increasing nodes increasing the yield of group four and decreasing the yield of group five.
 There are also some smaller differences, such as the yield of group six decreasing and the yields of groups two and three increasing with an increasing number of nodes.
