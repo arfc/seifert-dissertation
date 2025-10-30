@@ -30,7 +30,7 @@ For this derivation, the sample is assumed to exist as a point at the core inlet
 This means the full cycle consists of an in-core residence time of fission followed by an ex-core residence time of decay, after which the cycle repeats until the net irradiation time is met.
 The fission rate history is therefore given as:
 \begin{align}
-    \frac{F(\tau)}{F_0} = \sum_{j=0}^{J} H(\tau - j\cdot \tau_{net}) - H(\tau - j \cdot\tau_{net} -\tau_{in}),
+    \frac{F(\tau)}{F_0} = \sum_{j=0}^{J_{in}} H(\tau - j\cdot \tau_{net}) - H(\tau - j \cdot\tau_{net} -\tau_{in}),
     \label{eq:pos-square}
 \end{align}
 where
@@ -38,54 +38,54 @@ where
     H =& \text{ the Heaviside function [-]} \nonumber \\
     \tau_{net} =& \;\tau_{in} + \tau_{ex} \nonumber \\
     =& \text{ the total time per circulation [$s$]} \nonumber \\
-    J =& \left\lfloor \frac{T}{\tau_{net}} \right\rfloor \nonumber \\
-     =& \text{ the number of recirculations [$\#$]} \nonumber \\
+    J_{in} =& \left\lfloor \frac{T}{\tau_{net}} \right\rfloor \nonumber \\
+     =& \text{ the number of times the sample enters the core minus one [$\#$]} \nonumber \\
     F_0 =& \text{ the magnitude of the constant fission rate [$\frac{\#}{s}$].} \nonumber
 \end{align}
-This function could be made to sum over infinity instead of $J-1$, since any Heaviside in which the value of $j \tau_{net}$ is larger than $T$ would become zero.
-However, to make the equation cleaner, this clearer limit of $J-1$ is used.
+This function could be made to sum over infinity instead of $J_{in}$, since any Heaviside in which the value of $j \tau_{net}$ is larger than $T$ would become zero.
+However, to make the equation cleaner, this clearer limit of $J_{in}$ is used.
 
 Plugging this into Equation \eqref{eq:wilson-n} for group $k$ yields:
 \begin{align}
-\dot{n}_{d, k}(T, t) =& \int_{0}^{T} \sum_{j=0}^{J} H(\tau - j\cdot \tau_{net}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
-& - \int_{0}^{T} \sum_{j=0}^{J} H(\tau - j \cdot\tau_{net} - \tau_{in}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau,
+\dot{n}_{d, k}(T, t) =& \int_{0}^{T} \sum_{j=0}^{J_{in}} H(\tau - j\cdot \tau_{net}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
+& - \int_{0}^{T} \sum_{j=0}^{J_{in}} H(\tau - j \cdot\tau_{net} - \tau_{in}) \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k (T-\tau+t)} d\tau,
 \end{align}
 which can be simplified to:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \int_{0}^{T} \sum_{j=0}^{J} H(\tau - j\cdot \tau_{net})   e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
-& - \int_{0}^{T} \sum_{j=0}^{J} H(\tau - j \cdot\tau_{net} - \tau_{in}) e^{-\lambda_k (T-\tau+t)} d\tau
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \int_{0}^{T} \sum_{j=0}^{J_{in}} H(\tau - j\cdot \tau_{net})   e^{-\lambda_k (T-\tau+t)} d\tau \nonumber\\
+& - \int_{0}^{T} \sum_{j=0}^{J_{in}} H(\tau - j \cdot\tau_{net} - \tau_{in}) e^{-\lambda_k (T-\tau+t)} d\tau
 \end{align}
 
 Solving the integrals yields:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \sum_{j=0}^{J} \frac{H(T- j \cdot \tau_{net})}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right) \nonumber\\
-& - \sum_{j=0}^{J} \frac{H(T- j \cdot \tau_{net} - \tau_{in})}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net} -  \tau_{in})} \right).
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k} \lambda_k} =& \sum_{j=0}^{J_{in}} \frac{H(T- j \cdot \tau_{net})}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right) \nonumber\\
+& - \sum_{j=0}^{J_{in}} \frac{H(T- j \cdot \tau_{net} - \tau_{in})}{\lambda_k} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net} -  \tau_{in})} \right).
 \end{align}
 The Heaviside function in the first summation resolves to unity while the cycle is within range of the net irradiation time, and become 0 when the cycle time goes beyond the net irradiation time.
 The second Heaviside is modified by $\tau_{in}$, so a modified summation must be used.
 The problem becomes:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right) \nonumber\\
-& - \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right),
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right) \nonumber\\
+& - \sum_{j=0}^{J_{ex}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right),
 \end{align}
 where
 \begin{align}
-    J_{in} =& \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
-     =& \text{ the number of recirculated in-core irradiations [$\#$]} \nonumber
+    J_{ex} =& \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
+     =& \text{ the number of times the sample exits the core minus one [$\#$]} \nonumber
 \end{align}
-which, because $J_{in}$ is always less than $J$, can be further simplified to:
+which, because $J_{ex}$ is always less than $J$, can be further simplified to:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} - e^{-\lambda_k t} + e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right) \nonumber \\ &+ \sum_{j=J_{in}+1}^{J} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right).
-\label{eq:sumform}
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& \sum_{j=0}^{J_{ex}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} - e^{-\lambda_k t} + e^{-\lambda_k (t + T - j \cdot \tau_{net} - \tau_{in})} \right) \nonumber \\ &+ \sum_{j=J_{ex}+1}^{J_{in}} \left( e^{-\lambda_k t} - e^{-\lambda_k (t + T - j \cdot \tau_{net})} \right).
 \end{align}
 This equation can be further simplified to:
 \begin{align}
-\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} &= e^{-\lambda_k t} \sum_{j=0}^{J_{in}} \left( e^{-\lambda_k (T - \tau_{in} - j \cdot \tau_{net})} - e^{-\lambda_k (T - j \cdot \tau_{net})}  \right) \nonumber \\ &+ e^{-\lambda_k t} \sum_{j=J_{in}+1}^{J} \left( 1 - e^{-\lambda_k (T - j \cdot \tau_{net})} \right).
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} &= e^{-\lambda_k t} \sum_{j=0}^{J_{ex}} \left( e^{-\lambda_k (T - \tau_{in} - j \cdot \tau_{net})} - e^{-\lambda_k (T - j \cdot \tau_{net})}  \right) \nonumber \\ &+ e^{-\lambda_k t} \sum_{j=J_{ex}+1}^{J_{in}} \left( 1 - e^{-\lambda_k (T - j \cdot \tau_{net})} \right).
+\label{eq:sumform}
 \end{align}
 
 The closed form of the geometric series can be calculated, which enables the summation terms to collapse and be written as:
 \begin{align}
-    \frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& e^{-\lambda_kt} \left( \left(J-J_{in}\right) + \frac{e^{-\lambda_kT}}{d-1}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right),
+    \frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} =& e^{-\lambda_kt} \left( \left(J_{in}-J_{ex}\right) + \frac{e^{-\lambda_kT}}{d-1}  \left( e^{\lambda_k\tau_{in}}d^{J_{ex}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J_{in}+1} \right) \right),
 \end{align}
 where
 \begin{align}
@@ -108,7 +108,7 @@ However, as previously mentioned, this infinite approach will not work for the s
 For example, if an in-core residence time is selected which is relatively small compared to the ex-core residence time, Equation \eqref{eq:wilseng-examp} would not vary at all, even though the fission rate history would be significantly different.
 By isolating the delayed neutron count rate and summing over all groups, the finalized equation can be formulated as:
 \begin{align}
-\dot{n}_{d}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J-J_{in}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{in}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J+1} \right) \right).
+\dot{n}_{d}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J_{in}-J_{ex}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{ex}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J_{in}+1} \right) \right).
 \end{align}
 This equation is not stable for all in-core and ex-core residence times, and blows up when the ex-core time goes to zero.
 The summation form given in Equation \eqref{eq:sumform} is stable for general problems.
