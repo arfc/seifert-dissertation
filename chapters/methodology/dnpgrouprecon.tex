@@ -31,6 +31,8 @@ with bounds of:
     \bar{\nu}_{d,k} & \in [0, 1] \nonumber.
 \end{align}
 Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
+The \gls{TRF} method, which allows for bounds to be included for the parameters, is used to solve this least squares problem \cite{branch1999subspace}.
+Another least squares fitting technique is the Levenberg-Marquardt method, though the bounds cannot be set with this method \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
 
 The final consideration in \gls{DNP} group reconstruction is uncertainty.
 This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.

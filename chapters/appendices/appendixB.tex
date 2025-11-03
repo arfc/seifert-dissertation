@@ -1,12 +1,13 @@
 \renewcommand{\theequation}{B\thechapter.\arabic{equation}}
 \label{sec:appendixB}
-
+This derivation shows how the equilibrium concentration for a given nuclide can be calculated, particularly for \glspl{DNP}.
+This is used for the 0D scaled model which is intended to study only the long-lived \gls{DNP}.
 This derivation begins with the Bateman equation, given in Equation \eqref{eq:Bateman_default} and recreated here as:
 \begin{equation} \hfill
 \begin{split}
 %\frac{dN}{dt} = \sum_j \lambda_j N_j + \gamma \Sigma_f \phi + \Sigma_k \phi - \lambda N - \Sigma \phi - C
-\frac{dN_j}{dt} =& \sum_{i \neq j}  \left [ \left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right) N_i \right ]\\
- & - \left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right) N_j + \dot{N}_{f, j},
+\frac{dN_j}{dt} =& \sum_{i \neq j}  \left [ \overbrace{\left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right)}^\text{Source} N_i \right ]\\
+ & - \overbrace{\left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right)}^\text{Loss} N_j + \dot{N}_{f, j},
 \end{split}
 \hfill \nonumber
 \end{equation}
@@ -25,7 +26,7 @@ N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{\#}{cm^3}\right]$ }
 \dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\frac{\#}{cm^3 \cdot s}\right]$ .} \nonumber
 \end{align}
 
-This can be rewritten to the simplified form given in Equation \eqref{eq:bate-flow-simple}, recreated here as:
+This can be rewritten to the simplified form given in Equation \eqref{eq:bate-flow-simple} by collapsing the source and loss terms and assuming a feed rate of zero, recreated here as:
 \begin{equation}
     \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t), \nonumber
 \end{equation}
@@ -38,7 +39,8 @@ S_j &= \mbox{ the source term for nuclide $j$, } \nonumber\\
 \end{align}
 
 This can be rewritten using the scaled flux method, which is useful for flowing fuel reactors as it scales the flux term by the fraction of fuel salt in the core.
-This changes Equation \eqref{eq:bate-stat-simple} to Equation \eqref{eq:simple-scaled}, assuming chemical removal only in the ex-core region, given as:
+Additionally, the transmutation term is small for \glspl{DNP}, and is assumed to be negligible.
+This changes Equation \eqref{eq:bate-flow-simple} to Equation \eqref{eq:simple-scaled}, assuming chemical removal only in the ex-core region, given as:
 \begin{equation}
     \frac{dN_j}{dt} = f_{in} S_j(t) - \lambda_{j} N_j(t) - f_{ex} \lambda_{r, j}N_j(t),
     \label{eq:simple-scaled}
@@ -60,6 +62,8 @@ Additionally, parasitic absorption is neglected in this derivation, which leads 
 \end{equation}
 where
 \begin{align}
+    \phi &= \text{ the neutron flux $[\# \cdot cm^{-2} \cdot s^{-1}]$} \nonumber \\
+    \Sigma_f &= \text{ the macroscopic fission cross section $[cm^{-1}]$} \nonumber \\
     CFY_i &= \text{the cumulative fission yield of nuclide $i$ [-]}. \nonumber
 \end{align}
 
@@ -81,7 +85,7 @@ As previously mentioned, the cumulative fission yield gives the total amount of 
 For a saturation irradiation however, the sample is irradiated for a sufficiently long time such that all \glspl{DNP} reach equilibrium.
 This means that the equation should be taken as time approaches infinity, which leads to the form \cite{huynh2014calculation}:
 \begin{equation}
-    N_j(t) = \frac{CFY_j}{\lambda_j}.
+    N_j(\infty) = \frac{CFY_j}{\lambda_j}.
 \end{equation}
 
 For the case of a nuclide in a circulating fuel reactor with a non-zero chemical removal rate, the concentration as a function of time comes out as:
@@ -92,5 +96,5 @@ For the case of a nuclide in a circulating fuel reactor with a non-zero chemical
 
 Equation \eqref{eq:cfy-solved-ode-repr} can also be taken as time goes to infinity, resulting in:
 \begin{equation}
-    N_j(t_{\infty}) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j}
+    N_j(\infty) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j}
 \end{equation}

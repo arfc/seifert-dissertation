@@ -1,24 +1,38 @@
-Completion of the proposed work will result in a complete analysis, from start to finish, of improved \gls{DNP} group parameters for thermal fission of $^{235}$U and the effects of these improved parameters on transient simulations.
-\Gls{MoSDeN}, which will be completed with this work, will serve as a tool to investigate the \gls{DNP} group parameters with \gls{MSR} physical phenomena included.
+Completion of the proposed work will result in a comprehensive analysis of improved \gls{DNP} group parameters for thermal fission of $^{235}$U in the \gls{MSRE} and the effects of these improved parameters on transient simulations.
+\Gls{MoSDeN}, which will be completed with this work, has and will continue to serve as a tool to investigate the effects of \gls{DNP} group parameters with \gls{MSR} physical phenomena included.
 The proposed work is not exhaustive, and will not investigate every fissile nuclide, nor every irradiation energy.
-Work identified as interesting but out of scope for this thesis has been included in Section \ref{sec:future-work}, Future Work.
+However, it will serve as a basis from which other analyses can be conducted, such as described in Section \ref{sec:future-work}.
+
+The preliminary results have shown that the current 0D scaled model can capture some of the results of interest, but fails to fully capture residence time effects, chemical removal, and short-lived \gls{DNP} groups.
+Additionally, the preliminary work has provided analysis on time node distributions, number of nodes, length of decay time, and node density, all of which will be useful for use in the 0D flow model.
+Sensitivity of the \gls{DNP} group parameters due to individual \gls{DNP} nuclear data was also presented, which can be replicated using the 0D flow model to provide more accurate results.
+Because the 0D scaled model runs much faster than the 0D flow model is expected to run, it will be useful to compare their results and determine for what use cases the 0D scaled model can be used so that computational cost can be minimized.
 
 The proposed work includes developing the 0D flow model, validating and verifying the results of the 0D flow model, generating improved group spectra along with the \gls{DNP} group parameters, and finally using the \gls{DNP} group parameters in transient simulations.
+The development of the 0D flow model will provide more complete time dependent data, enabling non-equilibrium irradiations and residence time analyses.
+Validation and verification of the 0D flow model is critical to ensure the results align with experiments and the literature.
+The improved \gls{DNP} group spectra is used for calculation of the effective delayed neutron fraction, so developing functionality for \gls{MoSDeN} to generate the improved group spectra is useful.
+The transient simulations will provide insight into the impact of the improved \gls{DNP} groups as well as detail on under what circumstances these changed groups may have more significant changes to expected reactor behavior.
+
 The potential future work includes development of the spatially resolved model, uncertainty tracking of \gls{MSR} physical phenomena in the \gls{DNP} group parameters, and investigation into the effects of varying the incident neutron energy spectrum on the \gls{DNP} group parameters.
+The spatially resolved model could be used for modeling chemical removal or diversion at specific points of interest within the reactor or for more accurately modeling vortices and other thermal-hydraulic effects.
+Uncertainty tracking could incorporate more than nuclear data uncertainty, and could account for uncertainty in chemical removal rates and thermal-hydraulic effects.
+Investigating the incident neutron energy's effect on the \gls{DNP} groups would be interesting because the literature presents the groups for broad classes of energy spectra, such as thermal or fast.
+Sensitivity studies could be conducted to see how much the \gls{DNP} group parameters can vary while changing the energy spectrum, such as emulating the spectral evolution over the reactor lifetime.
 
 Figure \ref{fig:gantt-prelim} shows the critical work path, divided into development, simulation, writing, and review categories.
-The categories which require more focus are development and writing, whereas simulation and review are generally a more passive process.
+%The categories which require more focus are development and writing, whereas simulation and review are generally a more passive process.
 Most tasks take one month, but three tasks are assumed to take two months: development of the \gls{MSRE} Moltres model, running the various \gls{MSRE} transients, and writing the results and conclusions chapters.
 Development of the Moltres model is expected to take longer because there may be unexpected issues with the meshing of the upper and lower plena, data collection, or model development itself.
-The \gls{MSRE} transient simulations are given two months of simulation time because there are 12 transient simulations for safety, security, and safeguards simulations.
-These transient simulations also require five transport solves: three for standard \gls{MSRE} operation prior to a transient with higher and lower temperatures, one with one \gls{SQ} removal of $^{235}$U over one year, and one with one \gls{SQ} removal of plutonium over one year.
+The \gls{MSRE} transient simulations are given two months of simulation time because there are two transient simulations for validation, four for safety, ten for security, and two for safeguards, as discussed in Section \ref{sec:transimpact}.
+As will be discussed, these transient simulations also require nine transport solves: three for standard \gls{MSRE} operation prior to a transient with higher and lower temperatures, three with one \gls{SQ} removal of $^{235}$U over one year, and three with one \gls{SQ} removal of plutonium over one year.
 The diversion scenarios both require a depletion simulation, which also slightly increases the cost of the simulations.
 The results chapter is given two months because there will be many new results to discuss, whereas the other chapters will not have significant changes.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.9\linewidth]{images/gantt-phd.png}
-    \caption{Gantt chart of proposed work and the time frame for each part of that work.}
+    \caption{Gantt chart of proposed work.}
     \label{fig:gantt-prelim}
 \end{figure}
 

@@ -1,10 +1,11 @@
 \renewcommand{\theequation}{E\thechapter.\arabic{equation}}
 \label{sec:appendixE}
 
+The spatially resolved model is potential future work that could extend from the 0D flow model and analyses in this work.
 The 0D flow model will rapidly generate improved \gls{DNP} group parameters, but it simplifies the treatment of flow.
 Instead of modeling the actual fuel salt flow, it will estimate fuel circulation using residence times for each region.
-A spatially resolved model is useful for capturing the effects that the 0D flow model only capture with residence times for specific \gls{MSR} geometries.
-Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially resolved model, which could model the flow using Moltres.
+A spatially resolved model would be useful for capturing the effects that the 0D flow model only capture with residence times for specific \gls{MSR} geometries.
+Figure \ref{fig:sophisticated-model} shows the flow diagram for the spatially resolved model, which could model irradiation of a target fissile sample using Moltres.
 
 \begin{figure}[H]
     \centering
@@ -21,7 +22,7 @@ Additionally, since the depletion would happen in Moltres instead of OpenMC, Ope
 
 In the spatially resolved model, the in-core and ex-core residence times would be outputs rather than inputs.
 These times derive from the movement of the irradiated sample over time in the fuel salt.
-The in-core and ex-core residence times vary as the irradiated sample diffuses and mixes further into the fuel salt.
+The in-core and ex-core residence times vary as the irradiated sample diffuses and mixes further into the surrounding salt.
 The net residence time, $\tau_{net}$, remains constant unless the model changes, such as an increased temperature difference or induced flow rate.
 Equation \eqref{eq:incore-time} defines the in-core residence time as:
 \begin{equation}
@@ -30,6 +31,7 @@ Equation \eqref{eq:incore-time} defines the in-core residence time as:
 \end{equation}
 where
 \begin{align}
+\tau_{in} &= \text{ the in-core residence time $[s]$} \nonumber \\
 V_{in} &= \mbox{ the in-core volume $[cm^3]$} \nonumber \\
 V &= \mbox{ the total primary volume $[cm^3]$} \nonumber \\
 N(\vec{x}, t) &= \mbox{ the time and space resolved sample concentration $[\# \cdot cm^{-3}]$} \nonumber \\
