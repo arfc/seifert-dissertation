@@ -1,22 +1,32 @@
 \renewcommand{\theequation}{C\thechapter.\arabic{equation}}
 \label{sec:appendixC}
 
+Section \ref{sec:moltres} discusses the proposed use of Moltres to simulate transients in the \gls{MSRE}, including how the \glspl{DNP} can be modeled.
+The recirculation of \glspl{DNP} could include the effects of turbulence, though such an effect is not necessary for the comparison between stationary and improved \gls{DNP} group parameters.
+However, including turbulence would be useful for verification of transient responses to experimental data.
+
+\begin{comment}
 The proposed spatially resolved model will use Moltres to simulate circulation of a fissile sample in molten salt.
 The spatially resolved model requires turbulent modeling to capture vortices and other thermal-hydraulic effects that influence the residence time of fissile material in different regions.
 In contrast, the 0D scaled and 0D flow models approximate these effects by varying residence times and applying sensitivity analyses to assess the impact of prolonged residence in the ex-core or in-core regions on the \gls{DNP} group parameters.
+\end{comment}
 
-The proposed transient simulations using Moltres could also include the turbulence effects.
+The proposed transient simulations, discussed in Section \ref{sec:transimpact}, using Moltres, discussed in Section \ref{sec:moltres}, could include turbulent effects.
 Turbulence would not affect the \gls{DNP} group parameters, but it would affect the concentration distribution for each group.
-Since only the \gls{MSRE} is studied in these transients, turbulent modeling may not be necessary to capture the effects of interest.
+The recirculation of \glspl{DNP} could include the effects of turbulence, though such an effect is not necessary for the comparison between stationary and improved \gls{DNP} group parameters.
+However, including turbulence would be useful for verification of transient responses to experimental data.
 The in-core region of the \gls{MSRE} consists of flow through channels, which would not have large residence time differences from turbulence.
 Turbulence would cause mixing in the upper and lower plena, so the Moltres simulation without turbulence will assume perfect mixing in those regions.
 
-In the proposed transient simulations, neglecting turbulence may affect residence time in the upper and lower plena, slightly increasing the ex-core residence time relative to the in-core residence time.
+In the proposed transient simulations, neglecting turbulence may affect residence time in the upper and lower plena.
+Specifically, turbulent effects would increase the ex-core residence time relative to the in-core residence time.
 Because Moltres can model turbulence using the Spalart-Allmaras turbulence model, it is straightforward to include in the transient simulations, though it does introduce more variables \cite{spalart_one-equation_1992, park_advancements_2025}.
 The purpose of the transient simulations is to demonstrate the difference between simulations using improved \gls{DNP} group parameters compared to existing group parameters.
 Modeling turbulence would not significantly change this difference, but would improve the simulation accuracy.
 
 For these reasons, modeling turbulence in the Moltres transient simulations will be treated as an optional extension.
+The models without turbulence will assume perfect mixing in the upper and lower plena.
 If sufficient time is available, turbulent modeling will be included.
-If a small amount of additional time is available, a sensitivity analysis of the difference between transients with and without turbulence will be conducted.
+This will also include an analysis of the difference between transients with and without turbulence will be conducted for the \gls{MSRE} pump start-up and shut-down transients.
+This analysis will compare the reactivity difference and any changes in the in-core and ex-core residence times with and without turbulence modeled.
 If insufficient time is available, this analysis will be moved to the future work section.

@@ -58,7 +58,7 @@ This will be modeled in Moltres by changing the inlet temperature to match the o
 A {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
 This will be modeled in Moltres by slowing the velocity field of the precursors.
 A \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
-This will be modeled in Moltres by having a step decrease in the removal cross section.
+This will be modeled in Moltres by having a step decrease in the removal cross section, which will represent a control rod withdrawal.
 An \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
 This will be modeled in Moltres by decreasing the inlet fuel salt temperature.
 
@@ -75,7 +75,8 @@ If static \gls{DNP} group parameters predict safe operation while improved param
 
 Since the safety study covers most transients relevant to sabotage, additional considerations can be incorporated into these transients.
 As sabotage may initiate multiple safety-related transients simultaneously, it is reasonable to investigate such scenarios.
-With four unique transients, this results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten security-related sabotage-initiated transients.
+The four unique transients that will be considered are the \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
+Combining them results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten combined security-related sabotage-initiated transients.
 Each of these transients will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
 
 These security analyses will demonstrate if certain combinations of transients predicted to be safe, and non-disruptive, with previous \gls{DNP} groups may actually be disruptive when using the improved \gls{DNP} groups.

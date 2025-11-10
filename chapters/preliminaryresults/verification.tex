@@ -4,6 +4,27 @@ These values are calculated and then compared with the six group \gls{DNP} group
 Ideally, these values would be identical, but the six-group fit cannot fully capture all decaying \glspl{DNP} behavior, producing small differences.
 These differences are small relative to the uncertainty bounds for each term, which verifies that the group fit is accurately capturing the general behavior of the \glspl{DNP}.
 
+
+\begin{comment}
+\begin{table}[!ht]
+    \centering
+    \caption{Comparison of the \gls{IAEA} database and \gls{ENDF}/B-VII.1 data and their effects on the delayed neutron yield per 100 fissions and the average half-life.}
+    \begin{tabular}{ccccc}
+        \hline
+        $P_{n, i}$ & $\tau_i$ & $CFY_i$ & $\bar{\nu}_{d}$ & $\bar{\tau}$ $[s]$ \\
+        \hline
+        \gls{IAEA} database \cite{DIMITRIOU2021144} & \gls{IAEA} database \cite{DIMITRIOU2021144} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & $2.24 \pm 0.13$ & $6.40\pm0.34$\\
+        \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & \gls{IAEA} database \cite{DIMITRIOU2021144} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & $1.84$ & $7.52$\\
+        \gls{IAEA} database \cite{DIMITRIOU2021144} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & $2.25$ & $6.33$\\
+        \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & \gls{ENDF}/B-VII.1 \cite{chadwick2011endf} & $1.91 \pm 0.11$ & $7.21 \pm 0.25$\\
+        \hline
+    \end{tabular}
+    \label{tab:data-compare}
+\end{table}
+\end{comment}
+
+
+
 \begin{table}[!ht]
     \centering
     \caption{The delayed neutron yield $\bar{\nu}_{d}$ and average half-life $\bar{\tau}$ calculated by summing individual \glspl{DNP} and from the 6 \gls{DNP} group parameters.}
@@ -46,6 +67,7 @@ Synetos and Williams \cite{synetos1983delayed}\tnote{*} & 0.00051 & 0.00328 & 0.
 Tuttle \cite{tuttle1975delayed}    & 0.00065 & 0.00362 & 0.00320 & 0.00692 & 0.00218 & 0.00044 \\
 Waldo et al.\cite{waldo1981delayed}    & 0.00055 & 0.00366 & 0.00327 & 0.00660 & 0.00192 & 0.00070 \\
 0D scaled model & 0.00052 & 0.00297 & 0.00146 & 0.00650 & 0.00597 & 0.00500\\
+%0D scaled model (ENDF/B-VII.1) & 0.00053 & 0.00270 & 0.00139 & 0.00559 & 0.00446 & 0.00188\\
 \hline
 \label{tab:macro-yields-net}
 \end{tabular}
@@ -74,6 +96,7 @@ Synetos and Williams \cite{synetos1983delayed}\tnote{*} & 0.00004 & 0.00020 & 0.
 Tuttle \cite{tuttle1975delayed}    & 0.00007 & 0.00013 & 0.00041 & 0.00019 & 0.00021 & 0.00007  \\
 Waldo et al.\cite{waldo1981delayed}    & 0.00006 & 0.00041 & 0.00041 & 0.00038 & 0.00017 & 0.00009 \\
 0D scaled model & 0.00002 & 0.00009 & 0.00006 & 0.00056 & 0.00051 & 0.00111\\
+%0D scaled model (ENDF/B-VII.1) & 0.00001 & 0.00008 & 0.00004 & 0.00027 & 0.00064 & 0.00012\\
 \hline
 \label{tab:macro-yield-delta-net}
 \end{tabular}
@@ -102,6 +125,7 @@ Synetos and Williams \cite{synetos1983delayed}\tnote{*} & 56.35343 & 22.35959 & 
 Tuttle \cite{tuttle1975delayed}    & 54.57852 & 21.86584 & 6.02737 & 2.22877 & 0.49511 & 0.17911 \\
 Waldo et al.\cite{waldo1981delayed}    & 54.57852 & 21.86584 & 6.02737 & 2.22877 & 0.49511 & 0.17911 \\
 0D scaled model & 55.52977 & 23.54278 & 10.43942 & 3.14523 & 1.12586 & 0.25015\\
+%0D scaled model (ENDF/B-VII.1) & 55.63689 & 23.73790 & 11.98641 & 3.45933 & 1.30876 & 0.23145\\
 \hline
 \label{tab:macro-half-lives-net}
 \end{tabular}
@@ -130,6 +154,7 @@ Synetos and Williams \cite{synetos1983delayed}\tnote{*} & 0.45816 & 0.28851 & 0.
 Tuttle \cite{tuttle1975delayed}    & 1.28926 & 0.82773 & 0.20965 & 0.08600 & 0.04244 & 0.02545 \\
 Waldo et al.\cite{waldo1981delayed}    & 1.28926 & 0.82773 & 0.20965 & 0.08600 & 0.04244 & 0.02545 \\
 0D scaled model & 0.15676 & 0.12560 & 0.44990 & 0.12771 & 0.07629 & 0.02325\\
+%0D scaled model (ENDF/B-VII.1) & 0.12849 & 0.22758 & 0.41552 & 0.10551 & 0.10453 & 0.01504\\
 \hline
 \label{tab:macro-half-lives-delta-net}
 \end{tabular}
@@ -162,8 +187,8 @@ The modified 0D scaled model, using Keepin et al. \gls{DNP} group parameters for
         Microscopic & ENDF/B-VI.8 \cite{endf6}   & $1.670$ \\
         Microscopic & Mills et al. \cite{mills1991study}    & $1.645 \pm 0.07$ \\
         Microscopic & Brady and England \cite{brady1989delayed} & $1.780 \pm 0.05$\\
-        Microscopic & 0D scaled model data & $2.254 \pm 0.15$\\
         Microscopic & 0D scaled model & $2.256 \pm 0.13$ \\
+        %Microscopic & 0D scaled model (ENDF/B-VII.1) & $1.655 \pm 0.07$\\
         Hybrid & Modified 0D scaled model & $1.531 \pm 0.09$\\
         Macroscopic & JEF-2.2 \cite{bank2000jef} & $1.655$\\
         Macroscopic & JEF-3.1.1 \cite{santamarina2009jeff} & $1.620$\\
@@ -194,8 +219,8 @@ This again indicates the importance of pulse irradiation data to capture short-l
         Microscopic & ENDF/B-VI.8 \cite{endf6}   & $7.66$ \\
         Microscopic & Mills et al. \cite{mills1991study}    & $8.63 \pm 0.52$ \\
         Microscopic & Brady and England \cite{brady1989delayed} & $7.90 \pm 0.34$\\
-        Microscopic & 0D scaled model data & $6.39 \pm 0.38$\\
         Microscopic & 0D scaled model & $6.39 \pm 0.34$ \\
+        %Microscopic & 0D scaled model (ENDF/B-VII.1) & $8.22 \pm 0.30$\\
         Hybrid & Modified 0D scaled model & $8.74 \pm 0.46$\\
         Macroscopic & Keepin et al. \cite{keepin1957delayed} & $9.03 \pm 0.63$ \\
         Macroscopic & Charlton et al. \cite{charlton1996delayed}\tnote{*} & $8.92 \pm 0.28$\\
