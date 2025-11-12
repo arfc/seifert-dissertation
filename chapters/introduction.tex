@@ -16,7 +16,7 @@ When fission events occur, \glspl{DNP} are formed and circulate alongside the fu
 
 \Glspl{DNP} are nuclides that undergo $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
 Without properly modeling the \glspl{DNP}, reactor simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
-Reactor physics simulations typically do not model \glspl{DNP} explicitly, but instead represent them in an aggregate form using a smaller number of artificial groups, which preserve the same physical effect at much lower computational cost.
+Reactor physics simulations typically do not model \glspl{DNP} explicitly, but instead represent them in an aggregate form using a smaller number of artificial groups, which approximates the delayed neutron emission rate at much lower computational cost.
 
 These artificial groups are referred to as \gls{DNP} groups and are organized into $k$ groups.
 Each group is represented using three parameters: a decay constant $\lambda_k$, a neutron energy spectrum $\chi_{d,k}$, and an average yield of delayed neutrons per fission event $\bar{\nu}_{d,k}$.
@@ -97,14 +97,14 @@ This model neglects time dependence, decay chains, and cross-sections while scal
 The 0D flow model is part of the proposed work and is also discussed in Section \ref{sec:delnu-groupgen}.
 This model accounts for time dependence of \gls{DNP} concentrations and decay chains while applying the flux and chemical removal rates only in the relevant parts of the primary loop.
 It is referred to as the 0D flow model because it captures the effects of the fuel salt flow by using residence times.
-The purpose of the 0D flow model is to capture short and long-lived groups slower but more accurately than the 0D flow model.
+The purpose of the 0D flow model is to capture short and long-lived groups slower but more accurately than the 0D scaled model.
 There is also another model discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which is discussed as potential future work.
 This model would account for time and space dependence of \gls{DNP} concentrations across the entire primary loop.
 
 
 The preliminary results, in Section \ref{sec:prelim-results}, cover impactful \glspl{DNP}, \gls{DNP} group parameter sensitivity studies, and 0D scaled model verification.
-The results show the total delayed neutron yield ($\bar{\nu}$) and average half-life ($\tau_{1/2}$) values are within the propagated experimental uncertainty bounds between the raw \gls{DNP} data and the \gls{DNP} group parameters.
-The match between the raw data and the group parameters shows the effect of each \gls{DNP} is captured in the \gls{DNP} group parameters.
+The results show the total delayed neutron yield ($\bar{\nu}_d$) and average half-life ($\tau$) are within uncertainty bounds between the data used in the model and the improved \gls{DNP} group parameters generated with the model.
+The match between the input data and the group parameters shows the effect of each \gls{DNP} is captured in the \gls{DNP} group parameters.
 Sensitivity studies reveal each \gls{DNP} affects multiple \gls{DNP} group parameters, not only the group with the most similar half-life.
 Verification with the literature shows the 0D scaled model works well for longer-lived groups but poorly for shorter-lived groups.
 The 0D scaled model only simulates saturation irradiations, which provide less data for shorter-lived \glspl{DNP} than pulse irradiations.

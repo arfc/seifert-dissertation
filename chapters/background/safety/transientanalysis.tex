@@ -9,13 +9,13 @@ In general, although these methods have varying accuracy and costs, none of them
 Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches applied to transient problems, surpassed only by transport methods.
 Hurwitz and Ehrlich provided a standard formulation of multi-group diffusion written in 1953  \cite{hurwitz1953multigroup}.
 
-Examples of software that use fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling using \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
+Examples of software that use fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling using the \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
 Other examples can be found in the review by Wooten at al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development} and elsewhere in the literature \cite{zhang2009analysis, yamamoto2006transient, nicolino2008coupled, park_advancements_2025}.
 %Even more studies which use the multi-group diffusion method can be found in the literature \cite{zhang2009analysis, yamamoto2006transient, krepel2007dyn3d, nicolino2008coupled, park_advancements_2025}.
 These studies typically used Picard iteration with multi-group neutron diffusion coupled with thermal-hydraulics to accurately capture the multi-physics effects of the reactor.
 However, this accuracy also comes with a higher computational cost than simpler methods.
 %The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} \cite{wooten2018review}.
-The general form of the coupling is given as \cite{wooten2018review}:
+The general form of the coupling is given by Wooten and Powers for the neutron flux \cite{wooten2018review}:
 
 \begin{equation}
     \begin{split}
@@ -25,7 +25,7 @@ The general form of the coupling is given as \cite{wooten2018review}:
     \label{eq:mg-n-diff}
     \end{split}
 \end{equation}
-and,
+and for the group $k$ precursor concentration,
 \begin{equation}
     \frac{\partial C_k}{\partial t} = \beta_k \sum_{g=1}^G (\bar{\nu}_g \Sigma_f)_g \phi_g - \lambda_k C_k - \nabla \cdot (C_k \vec{u}) + \nabla \cdot \frac{\nu_T}{Sc_T} \nabla C_k,
     \label{eq:mg-n-diff-Ci}
@@ -49,7 +49,7 @@ Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 These equations solve neutron transport using multi-group neutron diffusion and solve for the \gls{DNP} precursor concentrations over space and time.
 The precursor concentrations account for the flow field via the velocity vector and turbulent mixing using the Schmidt number and eddy viscosity.
 The ratio of the eddy viscosity to the turbulent Schmidt number represents diffusivity via turbulent mixing.
-Because the non-turbulent diffusion in molten salts is small relative to other spatial effects, it is not included in this equation.
+Although the turbulent diffusion can be significant, the non-turbulent diffusion in molten salts is small relative to other spatial effects; it is not included in this equation.
 
 %The terms in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} are defined as follows:
 %\begin{description}
@@ -124,12 +124,21 @@ The \gls{PRK} equations are modified into the delayed point reactor kinetics equ
 \end{split}
 \end{equation}
 \begin{equation}
-    \frac{dC_{k, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{k, c} (t) - \left(\lambda_k + \frac{1}{\tau_{l}} \right) C_{k, l}(t).
+    \frac{dC_{k, l}(t)}{dt} = \frac{1}{\tau_{c}} \left(\frac{V_{c}}{V_{l}}\right) C_{k, c} (t) - \left(\lambda_k + \frac{1}{\tau_{l}} \right) C_{k, l}(t),
     \label{eq:dpk-cex}
 \end{equation}
+where
+\begin{align}
+V_{l} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
+V_{c} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
+C_{k,l} &= \mbox{ the concentration of \glspl{DNP} in group $k$ in the loop [$\# \cdot cm^{-3}$]} \nonumber \\ 
+C_{k,c} &= \mbox{ the concentration of \glspl{DNP} in group $k$ in the core [$\# \cdot cm^{-3}$].} \nonumber
+\end{align}
+
 These equations, shown in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} (recreated from \cite{guo2013simulations, shi2016development}), are used in standard software, such as in \gls{RELAP}.
 Shi et al. simulated a load demand change, primary flow transient, secondary flow transient, and reactivity transient in the \gls{MSBR} \cite{shi2016development}.
-The modified point kinetics approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects during power operation and loss-of-flow conditions, but it does not accurately capture all oscillatory effects \cite{wooten2018review}.
+The modified point kinetics approach enables modeling of ex-core decay of \glspl{DNP}, capturing effects during power operation and loss-of-flow conditions.
+However, it does not accurately capture all oscillatory effects, such as power oscillations from a flow-induced transient \cite{wooten2018review}.
 
 Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex} are shown in Equations \eqref{eq:dpk-betaeff} through \eqref{eq:dpk-tauloop} as:
 \begin{equation}
@@ -145,13 +154,11 @@ Intermediate terms used in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-cex}
     \label{eq:dpk-taucore}
 \end{equation}
 \begin{equation}
-    \tau_{l} = \frac{M_{l}}{\dot{M}(t)}.
+    \tau_{l} = \frac{M_{l}}{\dot{M}(t)},
     \label{eq:dpk-tauloop}
 \end{equation}
-The terms in Equations \eqref{eq:dpk-n} through \eqref{eq:dpk-tauloop} are defined as follows:
+where
 \begin{align}
-V_{l} &= \mbox{ the volume of the loop [$cm^3$]} \nonumber \\ 
-V_{c} &= \mbox{ the volume of the core [$cm^3$]} \nonumber \\ 
 \beta_{static} &= \mbox{ the value of $\beta_{eff}$ without flow [-]} \nonumber \\ 
 M_{c} &= \mbox{ the mass in the core [$kg$]} \nonumber \\ 
 M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\ 
@@ -171,12 +178,12 @@ M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\
 A similar method is also used by Suzuki and Shimazu for analyzing a reactivity initiated accident in the FUJI-12 reactor \cite{suzuki2008reactivity}.
 That work uses a simpler form of the equations, without dividing the precursor concentrations into core and loop regions.
 
-The work by Merle-Lucotte et al. used the "IPK method," which may stand for the "Improved Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}.
+The work by Merle-Lucotte et al. used the IPK method\footnote{The "IPK method" may stand for the "Improved Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}}.
 This method uses a fixed mesh for neutronics and a mobile mesh for fluid properties.
 Merle-Lucotte et al. found that the \gls{PRK} method without any modifications was able to match the IPK method for general trends and end-states, but was unable to capture reactivity oscillations properly.
 The IPK method was able to capture these oscillations, but assumes uniform fission and instantaneous heat transfer \cite{merle2015physical}.
 
-The work by Zanetti et al. extended the TRACE code, a finite volume code used for \gls{LWR} transients \cite{zanetti2015extension}.
+The work by Zanetti et al. extended the TRACE\footnote{TRACE stands for the "TRAC/RELAP Advanced Computational Engine", where TRAC stands for the "Transient Reactor Analysis Code" and RELAP stands for the "Reactor Excursion and Leak Analysis Program" \cite{zhang2021development,TRAC1985guide}.} code, a finite volume code used for \gls{LWR} transients \cite{zanetti2015extension}.
 The \gls{DNP} concentration, dependent on both space and time, is discretized with an upwind scheme in space and a backward Euler method in time.
 Adjoint-weighted quantities discretized with the trapezoidal rule are then passed to the \gls{PRK} equation.
 The set of \gls{DNP} concentration and power, or neutron density, equations are resolved using LU factorization.
@@ -212,8 +219,8 @@ where
 The neutron flux shape function can be approximated as time-independent, but Rineiski et al. did not use this approximation.
 
 Rineiski et al. solved "shape" steps to handle the neutronics and \gls{DNP} spatial concentrations.
-The equations used in the "shape" steps are recreated here in Equations \eqref{eq:rineiski-flux} and \eqref{eq:rineiski-big-C}.
-These equations were solved by time-discretizing Equation \eqref{eq:rineiski-flux} into a set of steady-state-like equations, which are then treated using the DANTSYS module of SIMMER \cite{alcouffe1995dantsys}.
+The equations used in the shape steps are recreated here in Equations \eqref{eq:rineiski-flux} and \eqref{eq:rineiski-big-C}.
+These equations were solved by time-discretizing Equation \eqref{eq:rineiski-flux} into a set of steady-state-like equations, which are then treated using the DANTSYS module of SIMMER, which provides diffusion accelerated transport \cite{alcouffe1995dantsys}.
 These primary equations are given as:
 \begin{equation}
 \begin{split}
@@ -228,9 +235,9 @@ These primary equations are given as:
     \label{eq:rineiski-big-C}
 \end{equation}
 
-Within these "shape" steps are also sub-steps referred to as "reactivity" steps.
-At each of these "reactivity" steps, the \gls{PRK} parameters and flux amplitude are calculated.
-The equations used in the "reactivity" steps are recreated here as:
+Within these shape steps are also sub-steps referred to as "reactivity" steps.
+At each of these reactivity steps, the \gls{PRK} parameters and flux amplitude are calculated.
+The equations used in the reactivity steps are recreated here as:
 \begin{equation}
     \frac{d \phi_A}{dt} = \left( \frac{\rho - \beta_{eff}}{\Lambda} \right) \phi_A + q_{eff} + \sum_{k=1}^K \lambda_k \left( c_{s, k} + c_{m, k} \right),
     \label{eq:rineiski-n}
@@ -280,7 +287,7 @@ W(x) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\
 \end{align}
 
 The quasi-statics approach provides an intermediate approach between modified point kinetics and fluid-flow-velocity field coupled multi-group diffusion.
-Quasi-static methods use occasional multi-group diffusion with \gls{PRK} parameters, offering higher accuracy that \gls{PRK} methods and less cost than full multi-group diffusion.
+Quasi-static methods use occasional multi-group diffusion with \gls{PRK} parameters, offering higher accuracy than \gls{PRK} methods and less cost than full multi-group diffusion.
 
 
 %\begin{description}

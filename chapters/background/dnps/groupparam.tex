@@ -1,9 +1,8 @@
 In Section \ref{sec:measurementofdnps}, the various methods for experimentally understanding delayed neutron precursors were discussed.
-The next stage of understanding these precursors is to understand how they are used in kinetics models, as well as the various ways they are represented.
+The next stage of understanding these precursors, discussed in this section, is to understand how they are used in kinetics models, as well as the various ways they are represented.
 The microscopic and macroscopic experimental approaches provide the necessary data to create more easily handled forms via groups.
 By summing the contributions from each \gls{DNP} in the microscopic approach, the macroscopic and microscopic approaches can be said to provide data in the form of a delayed neutron count rate over time.
 This section discusses the least squares approach to convert this data into several \gls{DNP} groups.
-These groups are used in kinetics methods, which are also discussed in this section.
 
 The \glspl{DNP} are commonly represented in six groups.
 These groups were developed originally for computational efficiency and due to a lack of data for individual precursors.
@@ -45,7 +44,7 @@ Table \ref{tab:dnpgandk} goes through each of the terms of importance for this s
     \label{tab:dnpgandk}
 \end{table}
 
-The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, and the group yields, $\bar{\nu}_{d, k}$.
+The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, the group yields, $\bar{\nu}_{d, k}$, and the group spectra $\chi_k$ for \gls{DNP} group $k$.
 % (or $\beta_i$).
 The group yields are also known as group abundances, and can be found represented using $a_k$, $b_k$, $\nu_{d,k}$, and $\alpha_k$ in the literature \cite{keepin1957delayed, williams1996choice, ott1985introductory, brady1989delayed}.
 These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event, as shown in Equation \eqref{eq:betai} as:
@@ -54,8 +53,7 @@ These group yields can be converted to group delayed neutron fractions, $\beta_k
     \label{eq:betai}
 \end{equation}
 The group yields represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
-The $\beta_k$ and $\lambda_k$ terms are the defining parameters for the \gls{DNP} groups, along with the group spectra, $\chi_k$, for \gls{DNP} group $k$.
-With this data, the other group parameters can be derived, such as the total delayed neutron yield, $\bar{\nu}_d$, and delayed neutron fraction $\beta$.
+With this data, the other terms can be calculated, such as the total delayed neutron yield, $\bar{\nu}_d$, and delayed neutron fraction $\beta$.
 
 Although the groups are useful, there are times when individual \gls{DNP} data are needed.
 For example, in 1986, Perry et al. demonstrated that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
@@ -90,8 +88,8 @@ The adjoint flux can be calculated by taking the adjoint of the Boltzmann transp
 
 The mean neutron generation time, $\Lambda$, is the mean time between generation of a neutron and fission induced by that neutron \cite{romero2022calculation}.
 This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weighted form, similar to $\beta_{eff}$.
-The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
-In contrast, the effective delayed neutron fraction, $\beta_{eff}$, varies by approximately 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
+The effective mean neutron generation time can vary by hundreds of percent from the mean neutron generation time \cite{verboomen2006monte}.
+The effective delayed neutron fraction generally does not differ from the delayed neutron fraction as significantly, though in an \gls{MSR} the fuel circulation can cause the effective delayed neutron fraction to reduce by approximately 50\% \cite{aufiero2014calculating}.
 
 \subsubsection{Calculation of DNP Group Parameters}
 \label{sec:calc-group-param}
@@ -154,7 +152,9 @@ These equations are specifically for a single fissile nuclide, and the derivatio
 
 The pulse irradiation approach gives better statistics on the short-lived \glspl{DNP}, while the longer-lived \glspl{DNP} are better represented by saturation irradiation.
 Brady discussed this, and used both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
-Specifically, Brady used the four long-lived groups from the saturation irradiation and the four short-lived groups from the pulse irradiation renormalized at the second \gls{DNP} group.
+Specifically, Brady used the four long-lived groups from the saturation irradiation and the four short-lived groups from the pulse irradiation renormalized at the second \gls{DNP} group, the same method discussed by Keepin et al. \cite{keepin1957delayed}.
+The half-lives for the first two groups and the ratio of the first two group yields come from the saturation irradiation, while the other values come from the pulse irradiation data.
+
 %"...determination of four long-period groups from the infinite irradiation data and
 %four short-period groups from the prompt [pulse] data, later renormalizing the two sets
 %of yields at the second delayed neutron group."
@@ -229,7 +229,8 @@ The target vector contains the delayed neutron count rate data, shown in Equatio
 \end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
-Using ordinary least squares, with a non-relative residual, would lead to early time step count rates dominating due to their larger magnitudes.
+The non-linear least squares solve enables simultaneous solution of both the $\lambda_k$ and $\bar{\nu}_{d,k}$ values.
+Using least squares with a non-relative residual would lead to early time step count rates dominating due to their larger magnitudes.
 One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
 Another way to resolve this is to use a relative residual, given by Equation \eqref{eq:residual} as:
 \begin{equation}
@@ -405,7 +406,7 @@ The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as
 
 To solve for the fractions, the following least-squares minimization problem is used \cite{brady1988evaluation}:
 \begin{equation}
-    \int_{0}^{\infty} \left( \lambda_i e^{-\lambda_i t} -  f_{i, k} \lambda_k e^{-\lambda_k t} - f_{i, k+1} \lambda_{k+1} e^{-\lambda_{k+1} t}   \right)^2 dt.
+    \min_{f_{i,k}, f_{i,k+1}} \int_{0}^{\infty} \left( \lambda_i e^{-\lambda_i t} -  f_{i, k} \lambda_k e^{-\lambda_k t} - f_{i, k+1} \lambda_{k+1} e^{-\lambda_{k+1} t}   \right)^2 dt.
     \label{eq:fracmin}
 \end{equation}
 Solving this equation for where the partial derivatives are zero for each fraction, $f_{i, k}$ and $f_{i, k+1}$, combined with Equation \eqref{eq:fracsum}, yields the overdetermined system of equations as:

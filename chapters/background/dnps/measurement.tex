@@ -71,11 +71,13 @@ The specifics of the least squares approach used to form the \gls{DNP} parameter
 Challenges associated with collecting experimental data include experimental noise and signal obfuscation due to moderation \cite{bank2000jef}. 
 %Experimental noise becomes significant after long periods of time relative to the half-life of the longest-lived \gls{DNP}, around 1 minute from $^{87}$Br, as the delayed neutron counts decrease.
 Experimental noise becomes significant after long periods of time relative to the half-life of the longest-lived \gls{DNP}, as the delayed neutron counts decrease exponentially.
-The short-lived groups cannot be measured immediately after irradiation; they must first be transported to a delayed neutron counter.
+The short-lived \glspl{DNP} cannot be measured immediately after irradiation; they must first be transported to a delayed neutron counter.
 This transport time results in missing very short-lived counts.
 %Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation, so there is a gap between irradiation and when the sample can be moved to a delayed neutron counter.
 After a pulse irradiation, the long-lived groups form a background that interferes with measurement of the short-lived groups \cite{bank2000jef}.
-Due to these effects, the delayed neutron measurements are most accurate for intermediate times, while the short-lived and long-lived \glspl{DNP} have greater uncertainty.
+Due to these effects, the delayed neutron emission measurements are most accurate for intermediate times, while the short-lived and long-lived \glspl{DNP} have greater uncertainty.
+Although the emission measurements have the largest uncertainty in the short-lived and long-lived \glspl{DNP}, the least squares solve for the \gls{DNP} group parameters leads to increased uncertainty in the intermediate-lived groups.
+This is because small changes in the intermediate-lived groups affect each other more directly, whereas the longest- and shortest-lived groups are less affected by small differences in the other group half-lives and yields.
 %Due to these effects, measurement of delayed neutrons from the sample is less accurate initially, becomes increasingly accurate, and then becomes less accurate again as the delayed neutron count rate decreases.
 
 Similarly, uncertainty arises from the measurement of the number of fissions.
@@ -123,14 +125,15 @@ Waldo et al.\cite{waldo1981delayed}    & 0.00055 & 0.00366 & 0.00327 & 0.00660 &
  & \multicolumn{6}{c}{Group [-]} \\
 Source & 1 & 2 & 3 & 4 & 5 & 6 \\
 \hline
-Keepin et al. \cite{keepin1957delayed}   & 0.00006 & 0.00025 & 0.00041 & 0.00047 & 0.00019 & 0.00013 \\
-Charlton et al. \cite{charlton1996delayed}\tnote{*} & 0.00003 & 0.00005 & 0.00024 & 0.00013 & 0.00014 & 0.00014 \\
+Keepin et al. \cite{keepin1957delayed}   & $\pm0.00006$ & $\pm0.00025$ & $\pm0.00041$ & $\pm0.00047$ & $\pm0.00019$ & $\pm0.00013$ \\
+Charlton et al. \cite{charlton1996delayed}\tnote{*} & $\pm0.00003$ & $\pm0.00005$ & $\pm0.00024$ & $\pm0.00013$ & $\pm0.00014$ & $\pm0.00014$ \\
 %ENDF-B/VI.8 \cite{endf6}   & - & - & - & - & - & - \\
-%Mills et al. \cite{mills1991study}    & 0.00005 & 0.00003 & 0.00015 & 0.00023 & 0.00028 & 0.00008\\
-Saleh et al. \cite{saleh1997measurements} & 0.00005 & 0.00032 & 0.00027 & 0.00104 & 0.00015 & 0.00012 \\
-Synetos and Williams \cite{synetos1983delayed}\tnote{*} & 0.00004 & 0.00020 & 0.00036 & 0.00037 & 0.00029 & 0.00012 \\
-Tuttle \cite{tuttle1975delayed}    & 0.00007 & 0.00013 & 0.00041 & 0.00019 & 0.00021 & 0.00007  \\
-Waldo et al.\cite{waldo1981delayed}    & 0.00006 & 0.00041 & 0.00041 & 0.00038 & 0.00017 & 0.00009 \\
+%Mills et al. \cite{mills1991study}    & $\pm0.00005$ & $\pm0.00003$ & $\pm0.00015$ & $\pm0.00023$ & $\pm0.00028$ & $\pm0.00008$\\
+Saleh et al. \cite{saleh1997measurements} & $\pm0.00005$ & $\pm0.00032$ & $\pm0.00027$ & $\pm0.00104$ & $\pm0.00015$ & $\pm0.00012$ \\
+Synetos and Williams \cite{synetos1983delayed}\tnote{*} & $\pm0.00004$ & $\pm0.00020$ & $\pm0.00036$ & $\pm0.00037$ & $\pm0.00029$ & $\pm0.00012$ \\
+Tuttle \cite{tuttle1975delayed}    & $\pm0.00007$ & $\pm0.00013$ & $\pm0.00041$ & $\pm0.00019$ & $\pm0.00021$ & $\pm0.00007$  \\
+Waldo et al.\cite{waldo1981delayed}    & $\pm0.00006$ & $\pm0.00041$ & $\pm0.00041$ & $\pm0.00038$ & $\pm0.00017$ & $\pm0.00009$ \\
+
 \hline
 \label{tab:macro-yield-delta}
 \end{tabular}
