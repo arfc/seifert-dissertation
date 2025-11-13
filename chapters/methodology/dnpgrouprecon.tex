@@ -31,13 +31,15 @@ with bounds of:
     \bar{\nu}_{d,k} & \in [0, 1] \nonumber.
 \end{align}
 Convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
-The \gls{TRF} method, which allows for bounds to be included for the parameters, is used to solve this least squares problem \cite{branch1999subspace}.
+The Trust Region Reflective method, which allows for bounds to be included for the parameters, is used to solve this least squares problem \cite{branch1999subspace}.
 Another least squares fitting technique is the Levenberg-Marquardt method, though the bounds cannot be set with this method \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
 
 The final consideration in \gls{DNP} group reconstruction is uncertainty.
 This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.
 These uncertainties are in the cumulative fission yields $CFY$, half-lives $\tau$, and emission probabilities $P_n$ for the 0D scaled model.
 For the 0D flow model, only uncertainties in the emission probabilities and half-lives for the delayed neutron count rate calculation will be propagated.
+OpenMC does not propagate concentration uncertainties through depletion, and developing this extension is out of scope for this work.
+
 The uncertainties are propagated through the count rate calculation, but for the non-linear least squares solve, Monte Carlo sampling is used.
 Each count rate is generated using randomly sampled fission yields, half-lives, and emission probabilities within their uncertainty bounds for each \gls{DNP}.
 This enables formation of a normal distribution of group parameters, from which the mean and standard deviation of the mean can be extracted.

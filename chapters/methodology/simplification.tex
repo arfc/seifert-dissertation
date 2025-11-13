@@ -17,15 +17,16 @@ The 0D scaled model has been completed, and offers a rapid but less accurate app
 The 0D flow model will be completed, providing a slower but more accurate approach to calculating the improved \gls{DNP} group parameters.
 
 An irradiation time of several minutes suffices to reach equilibrium \gls{DNP} concentrations, as the saturation time frame is on the order of multiple half-lives of the longest-lived \gls{DNP}.
-Elements with cycle times on the order of months to years exhibit negligible changes, as Section \ref{sec:chemrem-msbr} shows.
-Elements with changes on the order of seconds to days contribute sufficiently and must be included for accurate data generation.
+Elements with cycle times on the order of months to years contribute to negligible changes, as Section \ref{sec:chemrem-msbr} shows.
+Elements with cycle times on the order of seconds have greater effects and must be included for accurate data generation.
+The cycle time refers to a linear approximation of the time it takes for an element to be completely removed from a volume, and it is equivalent to the inverse of the removal rate.
 
 The \gls{MSBR} reprocessing scheme serves as the basis for analyzing the largest cycle times in this work.
 This is because the \gls{MSBR} presents very large chemical removal rates, providing useful conservative estimates as to the impact these large removal rates could have on \gls{DNP} group parameters.
 Because the \gls{MSRE} is the primary reactor of interest in this work, the \gls{MSBR} reprocessing scheme is only used for isolated analysis on the effects of large chemical removal rates in Section \ref{sec:chemrem-msbr}.
 These chemical removal rates are given in Table \ref{tab:msbr_cycle_times}.
-Rare earths, semi-noble metals, volatile fluorides, discard, and higher nuclides have small removal rates relative to the time scales of interest for saturation irradiations.
-Section \ref{sec:chemrem-msbr} examines these longer cycle times, the inverse of the removal rates, to confirm their negligible impact.
+Rare earths, semi-noble metals, volatile fluorides, and higher nuclides have small removal rates relative to the time scales of interest for saturation irradiations.
+Section \ref{sec:chemrem-msbr} examines these longer cycle times to confirm their negligible impact.
 Section \ref{sec:chemrem-msbr} scales the cycle times to analyze how reprocessing rates influence the group parameters.
 
 \begin{table}[H]
@@ -53,9 +54,8 @@ Section \ref{sec:chemrem-msbr} scales the cycle times to analyze how reprocessin
 \end{table}
 
 With the chemical reprocessing scheme in place, the next step to generate the improved \gls{DNP} group parameters is to decide on the level of fidelity. 
-The two levels of fidelity are the 0D scaled model and the 0D flow model.
-There is also another level of fidelity discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which could be interesting future work.
-The 0D scaled model is completed, the 0D flow model is planned, and the spatially resolved model is a potential future development.
+The two levels of fidelity are the 0D scaled model, which is complete, and the 0D flow model, which is proposed.
+There is also another level of fidelity discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which could be developed as future work.
 
 Although online reprocessing is of interest for this work, only the removal of non-fissile nuclides is considered.
 Online refueling is not examined, as it only affects the fission-weighting of the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
@@ -68,7 +68,7 @@ Overall, the addition or removal of fissile nuclides only affects the fission-we
 
 A Monte Carlo sampling approach is used to propagate uncertainties in the various inputs, such as in emission probabilities, half-lives, fission yields, reprocessing terms, or residence times.
 The sampling approach simply repeats the process for generating the \gls{DNP} group yields, but with randomly sampled input data.
-The data itself must be perturbed, and not the delayed neutron count rate itself.
+The data itself must be perturbed, even though uncertainties propagated to the delayed neutron count rate could in theory be perturbed instead.
 This is because the uncertainties in the delayed neutron count rate are not independent from time step to time step, but instead they all depend on the underlying data which changes the shape of the delayed neutron count rate at all times.
 
 For generation of the improved \gls{DNP} group parameters, the main goal is to formulate them for individual fissile nuclides.

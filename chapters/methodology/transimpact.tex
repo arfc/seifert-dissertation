@@ -2,6 +2,7 @@ The impact of the \gls{DNP} groups on transients will be evaluated using Moltres
 This approach provides high-fidelity results by coupling thermal-hydraulics and neutronics, a necessity for \gls{MSR} modeling.
 Modeling every \gls{DNP} in space and time would be prohibitively expensive, so they are instead modeled using \gls{DNP} group parameters.
 Moltres allows direct comparison between static \gls{DNP} group parameters, which do not account for \gls{MSR} phenomena, and parameters that do.
+This comparison will be made by changing the \gls{DNP} group parameters in Moltres and simulating the same transient, followed by comparison of temperature and power responses.
 
 The results of interest from this analysis include the reactivity and power responses to various initiating events.
 The initiating events and transients vary, as different reactor responses are studied.
@@ -55,6 +56,7 @@ The \gls{DNP} group parameters are critical in these transients, as they influen
 The transients that will be investigated in the \gls{MSRE} are \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} events \cite{li2015transient, daher2022improvement}.
 A \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, causing a loss of cooling of the reactor.
 This will be modeled in Moltres by changing the inlet temperature to match the outlet temperature, rather than using a constant inlet temperature.
+This will simulate a loss of heat sink, as rather than the inlet temperature being constant and lower than the outlet temperature, it will simulate no cooling.
 A {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
 This will be modeled in Moltres by slowing the velocity field of the precursors.
 A \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
@@ -65,7 +67,8 @@ This will be modeled in Moltres by decreasing the inlet fuel salt temperature.
 Each transient will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
 For each transient, the power response, maximum temperature, minimum temperature, and reactivity response will be recorded.
 The power response shows how changes in the \gls{DNP} group parameters affect other responses, such as temperature.
-It is important to make sure differences in the \gls{DNP} parameters don't lead to temperature changes or oscillations which result in unsafe reactor conditions.
+It is important to evaluate if \glspl{MSR} may have unexpected unsafe temperatures.
+This could occur if traditional \gls{DNP} group parameters predict safe operation while the improved parameters predict unsafe operation.
 
 \subsection{Security}
 Security is discussed in detail in Section \ref{sec:security}, which details that, for this work, scenarios of interest are actors using an insider to disrupt the reactor using sabotage.
@@ -75,8 +78,16 @@ If static \gls{DNP} group parameters predict safe operation while improved param
 
 Since the safety study covers most transients relevant to sabotage, additional considerations can be incorporated into these transients.
 As sabotage may initiate multiple safety-related transients simultaneously, it is reasonable to investigate such scenarios.
+Specifically, the attack scenario assumes that multiple simultaneous events are instantiated by an insider in combination with a hostile actor \cite{iaea_national_2021}.
+This aligns with specifications provided in 10 CFR 73.1 on a design basis threat, which includes an internal threat for radiological sabotage as a diversionary action \cite{CFR2022}.
+The radiological sabotage design basis threat includes well-trained, armed, and informed individuals with insider assistance, an internal threat, and a cyber attack.
+
 The four unique transients that will be considered are the \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
 Combining them results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten combined security-related sabotage-initiated transients.
+However, some of these combinations do not result in a change, such as the \gls{ULOF} and \gls{ULOHS}, as the loss of heat sink would not be important for a stationary fuel salt that does not circulate out of the core to the heat exchanger.
+The combinations that will be considered are each transient on its own and the \gls{UTOP} combined with each other transient.
+This results in four single transients and three double transients, totaling seven transient simulations that will be analyzed.
+It is feasible that the attack scenario for the radiological sabotage design basis threat could cause these seven transients in an attempt to disrupt operations and divert attention.
 Each of these transients will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
 
 These security analyses will demonstrate if certain combinations of transients predicted to be safe, and non-disruptive, with previous \gls{DNP} groups may actually be disruptive when using the improved \gls{DNP} groups.
@@ -93,14 +104,26 @@ Using static \gls{DNP} group parameters to detect \gls{SNM} diversion predicts l
 If the difference is significant, relying on static parameters may reduce the detection probability of a diversion scenario.
 
 To investigate this, diversion scenarios will be studied for a single significant quantity of $^{235}$U and another scenario of a single significant quantity of plutonium removed over the course of one year, simulated using OpenMC.
-The diversion will be from the \gls{MSRE} from a fresh fuel salt over the course of one year at nominal power. 
+The diversion will be from the $^{235}$U-fueled \gls{MSRE} from a fresh fuel salt over the course of one year at nominal power. 
 The change in the fuel salt composition will affect the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
 The fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients.
 The following four sets of fission-weighted \gls{DNP} group parameters will be compared: existing parameters without diversion, existing parameters with diversion, improved parameters without diversion, and improved parameters with diversion.
-A simple step reactivity insertion will be simulated for each set of \gls{DNP} group parameters, from which the power responses can be compared.
+A simple negative step reactivity insertion will be simulated for each set of \gls{DNP} group parameters, from which the power responses can be compared.
 
-The power responses will demonstrate if power response fingerprinting could be obfuscated if an \gls{MSR} transient does not use improved \gls{DNP} groups.
-If the existing \gls{DNP} group parameters with diversion is within uncertainty of no diversion with improved \gls{DNP} group parameters, then there may be false positives if transient simulations do not use improved \gls{DNP} groups.
-Using the improved \gls{DNP} groups would reduce this false positive rate by accounting for the recirculation and chemical removal, improving the accuracy of using power response to identify material diversion.
+The power responses will demonstrate if power response fingerprinting could be obfuscated for an \gls{MSR} model that does not use improved \gls{DNP} groups.
+This obfuscation will be investigated by comparing power responses, which are dependent on the delayed neutron fraction.
+The delayed neutron yield, and therefore the delayed neutron fraction, will be smaller when accounting for chemical removal and recirculation, which will also be true for measured responses in the \gls{MSR}.
+This smaller delayed neutron fraction will cause a larger power response, which will more accurately model what would be measured in an \gls{MSR}.
+A model using existing \gls{DNP} groups would have a larger delayed neutron fraction than it should, which would lead to a smaller than expected power response.
+
+If there is a diversion of uranium, then there will be more plutonium fission, which will decrease the effective delayed neutron fraction.
+This will lead to a larger power response.
+The opposite is true for a $^{235}$U diversion, which will lead to smaller power response.
+
+Based on these effects, a case with no diversion while using existing \gls{DNP} group parameters would have a model that predicts a smaller power response than the reactor will measure.
+This will increase the false-positive detection probability for $^{235}$U diversion.
+Additionally, a plutonium diversion would lead to the measured reactor power response aligning with the response using existing \gls{DNP} groups. 
+By using the improved \gls{DNP} group parameters, this difference between the modeled and actual delayed neutron fraction can be reduced, allowing the power response to more accurately fingerprint diversion of nuclear material.
+
 
 %If the difference in the power response between the existing group parameters with and without diversion is smaller or within uncertainty to the power response difference between the existing and improved group parameters, then this means detection of that diversion scenario requires models to account for the \gls{MSR} physical phenomena when generating \gls{DNP} group parameters.
