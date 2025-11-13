@@ -4,8 +4,8 @@ The proposed work is not exhaustive, and will not investigate every fissile nucl
 However, it will serve as a basis from which other analyses can be conducted, such as described in Section \ref{sec:future-work}.
 
 The preliminary results have shown that the current 0D scaled model can capture some of the results of interest, but fails to fully capture residence time effects, chemical removal, and short-lived \gls{DNP} groups.
-Additionally, the preliminary work has provided analysis on time node distributions, number of nodes, length of decay time, and node density, all of which will be useful for use in the 0D flow model.
-Sensitivity of the \gls{DNP} group parameters due to individual \gls{DNP} nuclear data was also presented, which can be replicated using the 0D flow model to provide more accurate results.
+Additionally, the preliminary work has provided analysis on time node distributions, number of nodes, length of decay time, and node density, all of which will be useful in the 0D flow model.
+Sensitivities of the \gls{DNP} group parameters due to individual \gls{DNP} nuclear data were also presented, which can be replicated using the 0D flow model to provide more accurate results.
 Because the 0D scaled model runs much faster than the 0D flow model is expected to run, it will be useful to compare their results and determine for what use cases the 0D scaled model can be used so that computational cost can be minimized.
 
 The proposed work includes developing the 0D flow model, validating and verifying the results of the 0D flow model, generating improved group spectra along with the \gls{DNP} group parameters, and finally using the \gls{DNP} group parameters in transient simulations.
@@ -24,7 +24,7 @@ Figure \ref{fig:gantt-prelim} shows the critical work path, divided into develop
 %The categories which require more focus are development and writing, whereas simulation and review are generally a more passive process.
 Most tasks take one month, but three tasks are assumed to take two months: development of the \gls{MSRE} Moltres model, running the various \gls{MSRE} transients, and writing the results and conclusions chapters.
 Development of the Moltres model is expected to take longer because there may be unexpected issues with the meshing of the upper and lower plena, data collection, or model development itself.
-The \gls{MSRE} transient simulations are given two months of simulation time because there are two transient simulations for validation, four for safety, ten for security, and two for safeguards, as discussed in Section \ref{sec:transimpact}.
+The \gls{MSRE} transient simulations are given two months of simulation time because there are two transient simulations for validation (\gls{MSRE} pump start-up and coast-down), four for safety (\gls{ULOF}, \gls{UTOP}, \gls{ULOHS}, and \gls{FSOC}), three for security (\gls{UTOP} combined with each of the others), and two for safeguards (one \gls{SQ} diversion of plutonium and a diversion of $^{235}$U), as discussed in Section \ref{sec:transimpact}.
 As will be discussed, these transient simulations also require nine transport solves: three for standard \gls{MSRE} operation prior to a transient with higher and lower temperatures, three with one \gls{SQ} removal of $^{235}$U over one year, and three with one \gls{SQ} removal of plutonium over one year.
 The diversion scenarios both require a depletion simulation, which also slightly increases the cost of the simulations.
 The results chapter is given two months because there will be many new results to discuss, whereas the other chapters will not have significant changes.

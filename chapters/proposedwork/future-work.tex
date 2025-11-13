@@ -40,7 +40,7 @@ However, it is of interest to optimize the spatially resolved flow model for pot
 
 The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, replicated here:
 \begin{equation}
-    \bar{\nu}_{d, i} = P_{n, i} \lambda_i N_{i, 0}.
+    \bar{\nu}_{d, i} = P_{n, i} N_{i}(0).
     \nonumber
 \end{equation}
 Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
@@ -60,8 +60,9 @@ The impact of the incident neutron energy spectra is discussed in Section \ref{s
 Additionally, the fuel salt and fuel temperature in the \gls{MSFR} will be replaced with those from the \gls{MSRE}.
 
 The two different reactor simulations would have all of the same input parameters aside from the geometry and thermal-hydraulic parameters.
-If the \gls{DNP} group parameters have negligible differences, then the geometry and thermal-hydraulic parameters are not necessary when generating the group parameters.
-Instead, all that is needed are the other input parameters, meaining the work does not need to be replicated for every different reactor geometry and thermal-hydraulic configuration.
+If the \gls{DNP} group parameters have negligible differences, then the geometry and thermal-hydraulic parameters are not necessary for these two exceedingly different \gls{MSR} designs when generating the group parameters.
+This would indicate that any \gls{MSR} of a similar design would also not require geometry and thermal-hydraulic parameters to generate the improved \gls{DNP} group parameters.
+Instead, all that is needed are the other input parameters, meaning the work does not need to be replicated for every different reactor geometry and thermal-hydraulic configuration.
 If the \gls{DNP} group parameters have non-negligible differences, then each \gls{MSR} needs to have \gls{DNP} group parameters generated for its own specific geometry and flow conditions.
 Further investigation may also be warranted to determine if there is potential for a reduced order model in which one or two parameters which could be used to capture these differences, thus reducing the total amount of work necessary to model all \gls{MSR} designs.
 
@@ -82,9 +83,9 @@ The temperature is influenced by the fission rate, which has uncertainties from 
 For the 0D flow model, the residence time uncertainties can be conservatively approximated by treating the difference between the inlet and outlet temperatures as the temperature uncertainty.
 Assuming a constant mass flow rate, the density change due to the large temperature uncertainty provides a velocity uncertainty, which determines the variance in the residence time.
 If this conservative approach to temperature uncertainty results in negligible residence time uncertainty, it can be neglected for the spatially resolved flow model.
-Otherwise, the spatially resolved flow model can account for this uncertainty using the \textsc{Stochastic Tools} module to directly determine residence time uncertainties.
-The \textsc{Stochastic Tools} module is a toolbox designed for performing stochastic analysis for \gls{MOOSE}-based applications \cite{slaughter2023moose}.
-The \textsc{Stochastic Tools} module enables setting a range of temperatures and simulating each temperature, which can be used to generate a histogram of residence times as a function of core temperature.
+Otherwise, the spatially resolved flow model can account for this uncertainty using the Stochastic Tools module to directly determine residence time uncertainties.
+The Stochastic Tools module is a toolbox designed for performing stochastic analysis for \gls{MOOSE}-based applications \cite{slaughter2023moose}.
+The Stochastic Tools module enables setting a range of temperatures and simulating each temperature, which can be used to generate a histogram of residence times as a function of core temperature.
 
 The chemical removal uncertainty would be challenging to treat, as there are different chemical processes for removing elements, such as sparging the fuel salt in the core, filtering elements with a nickel filter, and removing elements via liquid-liquid reductive extraction \cite{rykhlevskii2020fuel}.
 The removal efficiency of xenon in a gas separation system is given by \cite{peebles1968removal, rykhlevskii2020fuel} as:
@@ -112,11 +113,11 @@ However, the distribution coefficient changes with temperature and flow rate dif
 
 Propagating the uncertainty in the chemical removal of elements from the fuel salt is challenging, as there are many variables to consider.
 These include the fuel salt composition, flow rate, redox potential, hydrostatic pressure, interfacial tension, and temperature \cite{shahbazi2022survey, thoma1971chemical}.
-Thus, generic equations would not formulated for each possible combination of variables.
+To stay within scope, propagation of uncertainty would not account for every variable in every elemental chemical removal.
 Instead, only the chemical removal of noble gases and noble metals from the \gls{MSRE} would be investigated, as in Lo et al. \cite{lo2022application}.
 The noble gases are actively pumped out via the off-gas system while noble metals, including molybdenum, technetium, ruthenium, rhodium, palladium, silver, and antimony plate out via reduction by UF$_6$.
 Some elements, specifically selenium, niobium, and tellurium, vary in their behavior.
-These elements only sometimes plates out based on the redox potential of the salt; a well reduced salt causes them to plate out, otherwise they act as salt seekers \cite{kedl1972migration, lo2022application}.
+These elements only sometimes plate out based on the redox potential of the salt; a well reduced salt causes them to plate out, otherwise they act as salt seekers \cite{kedl1972migration, lo2022application}.
 
 The removal rate, $\lambda_r$, of noble gases from the pump bowl via the off-gas system is \cite{jr2020modeling, lo2022application}:
 \begin{align}
@@ -128,7 +129,7 @@ where
     V =& \text{ the total volume of salt in the primary loop $[m^3]$} \nonumber \\
     \epsilon =& \text{ the removal efficiency [-]}. \nonumber
 \end{align}
-For the \gls{MSRE}, the values are a salt flow rate of 0.003153, a total salt volume of 1.996, and a removal efficiency of 0.026 \cite{robertson1965msre}.
+For the \gls{MSRE}, the values are a salt flow rate of 0.003153 $m^3 \cdot s^{-1}$, a total salt volume of 1.996 $m^3$, and a removal efficiency of 0.026 \cite{jr2020modeling, robertson1965msre}.
 For the 0D flow model, this removal occurs while the sample is in the ex-core region and stops while the sample is in the in-core region.
 This is because the removal occurs in the pump bowl and not inside the core.
 For the spatially resolved flow model, this removal would also occur in the ex-core region.
@@ -197,7 +198,7 @@ The incident neutron energy spectrum directly affects the \gls{DNP} group parame
 However, it would be computationally expensive to generate new \gls{DNP} group parameters for every unique incident neutron energy spectrum.
 Some coarser resolution is required, so it is of interest to determine a reasonable categorization of the \gls{DNP} group parameters for different energy spectra.
 
-This sensitivity study could investigate different levels of fidelity for organizing the energy spectra: fine, middling, coarse, and single-value spectra.
+This sensitivity study could investigate different levels of fidelity for organizing the energy spectra: fine, intermediate, coarse, and single-value spectra.
 The approach can use the 0D flow model, with changes only to the neutron source energy spectra.
 The fine, middling, and coarse spectra include the full incident neutron energy spectra but with different bin sizes.
 The single-value spectra include several categories: neutron energy classification, mean energy, and median energy.
