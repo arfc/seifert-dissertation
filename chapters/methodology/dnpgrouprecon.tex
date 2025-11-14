@@ -21,9 +21,9 @@ The normalized count rate is then passed into the non-linear least squares fitti
 The linearization is handled by taking the natural logarithm of the delayed neutron count rate.
 This treatment reduces both the covariance and the $\chi^2$ of the fit.
 \end{comment}
-The chi-squared term to minimize with the solve is given in Equation \eqref{eq:chi-square}, recreated here as:
+The residual to minimize with the solve is given in Equation \eqref{eq:residual}, recreated here as:
 \begin{equation}
-    \chi^2 = \sum_i \left( \frac{b_i - (Ax)_i}{\sigma_i} \right)^2, \nonumber
+    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b}} \right| \right|_2^2,
 \end{equation}
 with bounds of:
 \begin{align}

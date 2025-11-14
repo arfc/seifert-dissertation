@@ -22,28 +22,26 @@ Comparison will be made between different methods for combining pulse and satura
 This comparison will provide insight into if and when the pulse irradiation data is necessary, as well as insight into the differences in results based the chi-squared statistic.
 
 The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
-The group parameters will be evaluated by calculating the chi-squared statistic for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
+The group parameters will be evaluated by calculating the relative residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
 
 There are different methodologies for combining pulse and saturation irradiation \gls{DNP} group parameters that will be compared.
 One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
 Brady used the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
 Keepin et al. fit four groups with each irradiation, and then renormalized at the second group \cite{keepin1957delayed}.
-Another approach to combining the pulse and saturation irradiation data is combining the data to formulate the chi-squared statistic to minimize, as shown in Equation \eqref{eq:combresid} as:
+Another approach to combining the pulse and saturation irradiation data is combining the data to formulate the relative residual to minimize, as shown in Equation \eqref{eq:combresid} as:
 \begin{equation}
-\chi^{2}
-= \sum_{i} \left( \frac{b_{p,i} - (A_{p} x)_{i}}{\sigma_{p,i}} \right)^{2}
-+ \sum_{i} \left( \frac{b_{s,i} - (A_{s} x)_{i}}{\sigma_{s,i}} \right)^{2},
+    r = \min_x \left| \left| \frac{\vec{b_p} - A_p\vec{x}}{\vec{b_p}} \right| \right|_2^2 + \left| \left| \frac{\vec{b_s} - A_s\vec{x}}{\vec{b_s}} \right| \right|_2^2,
     \label{eq:combresid}
 \end{equation}
 where
 \begin{align}
-    \chi^2 &= \text{the chi-squared statistic [-]} \nonumber \\
+    r &= \text{the minimization function of the problem [-]} \nonumber \\
     A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_{p,i} &= \text{the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
-    \sigma_{p,i} &= \text{the standard deviation in the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{p} &= \text{the pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    %\sigma_{p,i} &= \text{the standard deviation in the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
     A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_{s,i} &= \text{the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
-    \sigma_{s,i} &= \text{the standard deviation in the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{s} &= \text{the saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    %\sigma_{s,i} &= \text{the standard deviation in the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
     x &= \text{the solution vector containing group yields [-].} \nonumber
 \end{align}
 This formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.

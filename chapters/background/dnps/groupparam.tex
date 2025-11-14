@@ -243,7 +243,7 @@ where the Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm
     \label{eq:euc-norm}
 \end{equation}
 
-Another approach is to account for the uncertainty in the target vector $b$ by minimizing $\chi^{2}$, given in Equation \eqref{eq:chi-square} \cite{Bevington2003Data}:
+Another approach that accounts for the uncertainty in the target vector $b$ by minimizing $\chi^{2}$, given in Equation \eqref{eq:chi-square} \cite{Bevington2003Data}:
 \begin{equation}
     \chi^2 = \sum_i \left( \frac{b_i - (Ax)_i}{\sigma_i} \right)^2,
     \label{eq:chi-square}
@@ -256,6 +256,7 @@ where
     \sigma_{i} &= \text{the standard deviation in the $i^{th}$ delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
 \end{align}
 By accounting for the uncertainty, this gives a more informed result that accounts for uncertainties in the data.
+However, there can be numerical instabilities with this approach if the uncertainties are sufficiently small.
 
 By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
