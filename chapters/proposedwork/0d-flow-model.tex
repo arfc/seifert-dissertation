@@ -8,13 +8,13 @@ The 0D flow model will improve on the fidelity offered by the 0D scaled model by
 Modeling the decay chains improves the accuracy of the formulated concentrations when they are not at equilibrium, which is especially important for pulse irradiations.
 Additionally, having separate regions rather than scaling the flux with the time dependence of the decay chains means that nuclides with larger cross-sections will have the correct amount of time to decay between irradiations, rather than experiencing a constant scaled irradiation.
 
-This section presents the proposed work for the 0D flow model, including its development, inclusion of both pulse and saturation irradiation data in the least squares residual, use of a greater variety of data sources, and verification and validation.
+This section presents the proposed work for the 0D flow model, including its development, inclusion of both pulse and saturation irradiation data in the least squares solve, use of a greater variety of data sources, and verification and validation.
 
 %There is also the option of using the 0D scaled model with the scaled flux approximation but with the decay chain modeled.
 %This improved fidelity comes at an increased computational cost, but it is still not exceedingly expensive and can be run on a desktop.
 %The neutron transport solve is relatively inexpensive, as the model only requires a fixed-source irradiation of the sample.
 
-\subsection{Least Squares Residual Treatment}
+\subsection{Least Squares Treatment}
 \label{sec:irrad-combine}
 
 The 0D scaled model did not account for pulse irradiation data, and instead only used saturation irradiation data.
@@ -22,24 +22,28 @@ Comparison will be made between different methods for combining pulse and satura
 This comparison will provide insight into if and when the pulse irradiation data is necessary, as well as insight into the differences in results based on how the residual is formed.
 
 The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
-The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of the residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
+The group parameters will be evaluated by calculating the chi-squared statistic for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
 
 There are different methodologies for combining pulse and saturation irradiation \gls{DNP} group parameters that will be compared.
 One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
 Brady used the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
 Keepin et al. fit four groups with each irradiation, and then renormalized at the second group \cite{keepin1957delayed}.
-Another approach to combining the pulse and saturation irradiation data is using a combined residual to formulate the , as shown in Equation \eqref{eq:combresid} as:
-\begin{align}
-    r &= \min_x \left| \left| \frac{A_px - b_p}{b_p} +  \frac{A_sx - b_s}{b_s}  \right| \right|^2_2,
+Another approach to combining the pulse and saturation irradiation data is combining the data to formulate the chi-squared statistic to minimize, as shown in Equation \eqref{eq:combresid} as:
+\begin{equation}
+\chi^{2}
+= \sum_{i} \left( \frac{b_{p,i} - (A_{p} x)_{i}}{\sigma_{p,i}} \right)^{2}
++ \sum_{i} \left( \frac{b_{s,i} - (A_{s} x)_{i}}{\sigma_{s,i}} \right)^{2},
     \label{eq:combresid}
-\end{align}
+\end{equation}
 where
 \begin{align}
-    r &= \text{the residual of the problem [-]} \nonumber \\
+    \chi^2 &= \text{the chi-squared statistic [-]} \nonumber \\
     A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_p &= \text{the pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{p,i} &= \text{the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    \sigma_{p,i} &= \text{the standard deviation in the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
     A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
-    b_s &= \text{the saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{s,i} &= \text{the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    \sigma_{s,i} &= \text{the standard deviation in the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
     x &= \text{the solution vector containing group yields [-].} \nonumber
 \end{align}
 This formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.

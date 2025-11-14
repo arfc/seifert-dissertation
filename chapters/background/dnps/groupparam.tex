@@ -232,21 +232,30 @@ The target vector contains the delayed neutron count rate data, shown in Equatio
 The non-linear least squares solve enables simultaneous solution of both the $\lambda_k$ and $\bar{\nu}_{d,k}$ values.
 Using least squares with a non-relative residual would lead to early time step count rates dominating due to their larger magnitudes.
 One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
-Another way to resolve this is to use a relative residual, given by Equation \eqref{eq:residual} as:
+Another way to resolve this is to use minimize a relative residual, given by Equation \eqref{eq:residual} as:
 \begin{equation}
-    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b} + \epsilon} \right| \right|_2^2,
+    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b}} \right| \right|_2^2,
     \label{eq:residual}
 \end{equation}
-where
-\begin{align}
-    \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
-    &= 1\times10^{-12}. \nonumber
-\end{align}
-The Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm} as:
+where the Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm} as:
 \begin{equation}
     ||\vec{x}||_2 = \sqrt{x_1^2 + \cdots + x_n^2}.
     \label{eq:euc-norm}
 \end{equation}
+
+Another approach is to account for the uncertainty in the target vector $b$ by minimizing $\chi^{2}$, given in Equation \eqref{eq:chi-square} \cite{Bevington2003Data}:
+\begin{equation}
+    \chi^2 = \sum_i \left( \frac{b_i - (Ax)_i}{\sigma_i} \right)^2,
+    \label{eq:chi-square}
+\end{equation}
+where
+\begin{align}
+    \chi^2 &= \text{the chi-squared statistic [-]} \nonumber \\
+    (Ax)_i &= \text{the \gls{DNP} group delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{i} &= \text{the $i^{th}$ delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    \sigma_{i} &= \text{the standard deviation in the $i^{th}$ delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+\end{align}
+By accounting for the uncertainty, this gives a more informed result that accounts for uncertainties in the data.
 
 By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
 Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
