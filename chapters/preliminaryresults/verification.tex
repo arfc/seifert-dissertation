@@ -43,10 +43,10 @@ These differences are small relative to the uncertainty bounds for each term, wh
 
 Verification with the data from literature, introduced in Section \ref{sec:measurementofdnps}, is combined and recreated here with this work’s results.
 Tables \ref{tab:macro-yields-net}, \ref{tab:macro-yield-delta-net}, \ref{tab:macro-half-lives-net}, and \ref{tab:macro-half-lives-delta-net} show the \gls{DNP} group parameters from literature and how they compare to the 0D scaled model \gls{DNP} group parameters.
-As discussed, the 0D scaled model excludes pulse irradiation data, so shorter-lived groups are less accurate.
+As discussed, the 0D scaled model short-lived groups do not align with results in the literature, which may be from a combination of the current \gls{DNP} data and from exclusion of pulse irradiation data.
 This appears in the yields: groups five and six differ significantly, while groups one and two match the literature more closely.
 The group half-lives generally agree with the literature, though groups three and five are outliers.
-This likely arises from missing pulse irradiation data, as both group half-lives are approximately twice as large as the values in the literature.
+This could be because the cumulative fission yield of short-lived \glspl{DNP}, such as $^{86}$Ge are too large in ENDF/B-VII.1, the emission probabilities in the \gls{IAEA} database for short-lived \gls{DNP} are too large, or because the lack of pulse irradiation data leads to overestimation of the contribution of the short-lived \glspl{DNP}.
 
 
 \begin{table}[!h]
@@ -172,7 +172,8 @@ It can be seen that the data is not within uncertainty bounds of each other, and
 Differences between microscopic and macroscopic delayed yields occur for many fissile nuclides, not only $^{235}$U \cite{mathieu2012new}.
 The 0D scaled model yield exceeds other literature values, but this is a data issue and not a fitting issue. 
 The summed \gls{DNP} data gives approximately the same yield as shown in Table \ref{tab:indiv-dnp-params}.
-This indicates no issue with \gls{DNP} group parameter formulation; rather, pulse irradiation data is needed to capture smaller yields of shorter-lived \gls{DNP} groups.
+This indicates no issue with \gls{DNP} group parameter formulation; rather, different fission yields, half-lives, or emission probabilities may provide more consistent results with the literature. 
+Additionally, pulse irradiation data may be needed to capture the smaller yields of shorter-lived \gls{DNP} groups.
 This can be seen in Table \ref{tab:macro-yields-net}, where the group 5 and 6 yields are greatly over-valued relative to other \gls{DNP} group yields in the literature.
 The modified 0D scaled model, using Keepin et al. \gls{DNP} group parameters for groups three through six, produces a yield more consistent with literature values.
 
@@ -210,7 +211,7 @@ The modified 0D scaled model, using Keepin et al. \gls{DNP} group parameters for
 Table \ref{tab:avg-halflife-net} compares average half-lives between the 0D scaled model and the literature.
 The 0D scaled model average half-life is too short, primarily due to overvalued group five and six yields that give those half-lives greater weight.
 The modified 0D scaled model, with groups three through six replaced by Keepin et al. \gls{DNP} group parameters, aligns much more closely with literature.
-This again indicates the importance of pulse irradiation data to capture short-lived \gls{DNP} behavior.
+This again indicates the potential importance of the \gls{DNP} data, including emission probabilities, half-lives, and fission yields; as well as the potential importance of pulse irradiation data to capture short-lived \gls{DNP} behavior.
 
 \begin{table}[!h]
     \centering

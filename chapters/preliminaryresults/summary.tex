@@ -10,10 +10,13 @@ This causes the the in-core and ex-core residence times to not have any effect i
 The proposed 0D flow model will be able to model the effects of residence time, as it accounts for time-dependent decays and parasitic absorptions.
 Although the 0D scaled model is rapid and enables more simulations, it does not incorporate fuel salt circulation into improved \gls{DNP} group parameter generation and fails to properly model short-lived \gls{DNP} groups.
 
-The failure to model short-lived \gls{DNP} groups is because the pulse irradiation results are not included.
-Whether combined via simultaneous solution of a larger matrix or solved separately and then combined, pulse irradiation results improve \gls{DNP} group parameters for shorter-lived groups \cite{keepin1957delayed}.
-A simple investigation into the effects of pulse and saturation data is given in Appendix \ref{sec:appendixD}.
-Parameters formulated for longer-lived groups are expected to be more accurate than for shorter-lived groups in the 0D scaled model, as it excludes pulse irradiation results.
+The failure to model short-lived \gls{DNP} groups may be due to a combination of issues in the fission yields, half-lives, or emission probabilities as well as the lack of pulse irradiation data.
+The proposed work will investigate both of these possibilities, as described in Chapter \ref{sec:proposed-work}.
+Whether combined via simultaneous solution of a larger matrix or solved separately and then combined, the macroscopic approach indicates pulse irradiation results improve \gls{DNP} group parameters for shorter-lived groups \cite{keepin1957delayed}.
+The proposed work will indicate if this holds true for microscopic approach as well.
+A simple investigation into the effects of pulse and saturation data is given in Appendix \ref{sec:appendixD}. 
+The investigation shows that the saturation irradiation generally captures more \glspl{DNP} than the pulse irradiation, though as fewer groups are used, the saturation irradiation has a larger average half-life while the pulse irradiation's is shorter.
+There may be contributing factors from the lack of pulse irradiation data and in the \gls{DNP} data used that lead to the short-lived \glspl{DNP} having a larger yield than expected.
 The 0D scaled model cannot model pulse irradiations because the cumulative fission yields do not provide accurate concentrations for non-equilibrium concentrations.
 Section \ref{sec:irrad-combine} discusses this further.
 

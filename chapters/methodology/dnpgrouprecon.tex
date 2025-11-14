@@ -53,11 +53,10 @@ This enables formation of a normal distribution of group parameters, from which 
 %\end{description}
 
 Once the \gls{DNP} group parameters and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
-Saturation irradiation provides better statistics for longer-lived groups, while pulse irradiation is better for shorter-lived groups.
+In macroscopic measurements, saturation irradiation provides better statistics for longer-lived groups, while pulse irradiation is better for shorter-lived groups.
 Brady combines the results by using four long-period groups from saturation irradiation and four short-period groups from pulse irradiation.
 The groups are renormalized at the second group, where the two longest-lived group half-lives and yield ratios use the saturation results \cite{brady1988evaluation}.
 The remaining groups use the pulse irradiation results.
 
-This work uses a similar but slightly simplified approach.
-The group parameters are first calculated for both pulse and saturation irradiation.
-Then, the two longest-lived groups use the saturation irradiation results, while the four shortest-lived groups use the pulse irradiation results.
+The 0D scaled model uses only saturation irradiation data for the least squares solve.
+However, the 0D flow model will enable pulse irradiations to be simulated, so the proposed work includes analysis of how inclusion of pulse irradiation data changes the \gls{DNP} group parameters.

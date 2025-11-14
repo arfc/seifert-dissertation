@@ -305,10 +305,10 @@ The other six-group \gls{DNP} parameters plotted include Keepin (1.0, as the plo
 \end{figure}
 
 Beyond approximately three seconds, the current \gls{DNP} group parameters agree within uncertainty bounds with most literature results, with Brady parameters showing a noticeable difference at longer times.
-Short time scales are inaccurate in the 0D scaled model due to the lack of pulse irradiation data, as discussed in the chapter introduction.
-Adding this data is expected to improve the fit at earlier times.
-To demonstrate this, the first two groups are used while the shorter-lived groups three through six are replaced with the Keepin et al. \gls{DNP} group parameters \cite{keepin1957delayed}.
+Short time scales are inaccurate in the 0D scaled model, potentially due to the combination of issues in the \gls{DNP} data used and lack of pulse irradiation data.
+To compare only the longer-lived group parameters, the first two groups are used while the shorter-lived groups three through six are replaced with the Keepin et al. \gls{DNP} group parameters \cite{keepin1957delayed}.
 Figure \ref{fig:keepin-counts-0dscaled-mod} shows this modified set of \gls{DNP} group parameters.
+A more thorough analysis of the pulse irradiation data and \gls{DNP} data will be conducted, as discussed in Chapter \ref{sec:proposed-work}.
 
 \begin{figure}[!ht]
     \centering
@@ -318,7 +318,7 @@ Figure \ref{fig:keepin-counts-0dscaled-mod} shows this modified set of \gls{DNP}
 \end{figure}
 
 The modified \gls{DNP} group parameters are not a perfect comparison, as the non-linear least squares solve adjusts each group’s yield relative to the yields and half-lives of other groups.
-This indicates excluding pulse irradiation data also affects longer-lived groups, though less than it affects shorter-lived groups.
+This indicates the potential combination of \gls{DNP} data with the missing pulse irradiation data also affects longer-lived groups, though less than it affects shorter-lived groups.
 Adjusting the shorter-lived groups improves agreement with the literature for the 0D scaled model, particularly at times less than one second.
 
 \FloatBarrier
@@ -444,9 +444,7 @@ These groups capture fewer short-lived \glspl{DNP} as the $^{86}$Ge half-life in
 
 Another interesting sensitivity is the $^{86}$Ge emission probability $P_n$ on the group six yield, showing a narrow spread for small emission probabilities that widens for larger emission probabilities.
 Increasing the emission probability for the short-lived $^{86}$Ge corresponds to an increase in the short-lived group 6 yield.
-This widening likely arises from the absence of pulse irradiation data.
-Without the pulse irradiation data, short-lived group parameters $\tau_k$ and $\bar{\nu}_{d,k}$ are less accurate, so removing $^{86}$Ge produces a more consistent group six yield.
-As $^{86}$Ge becomes more impactful, possible group six yield values spread due to missing pulse irradiation data.
+This larger spread indicates a smaller magnitude of the \gls{PCC}, which means that as $^{86}$Ge emits more delayed neutrons, its marginal impact on group six becomes smaller.
 
 A metric to compare the overall sensitivity of the group parameters to nuclear data for each \gls{DNP} is the summed magnitude of the \glspl{PCC}, $\sum \left|PCC \right|$.
 This value provides insight into how changing the nuclear data for a given \gls{DNP} affects all group parameters.
