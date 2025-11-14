@@ -48,7 +48,7 @@
 \def\author#1{\gdef\@author{#1}\MakeUppercase{\protect\@mkupauthor{#1}}}
 \def\phdthesis{\def\@degree{Doctor of Philosophy}
     \def\degree{Ph.D.}
-    \def\@thesisname{DISSERTATION}
+    \def\@thesisname{PRELIMINARY EXAM}
     \def\@committeename{Doctoral Committee:}
     }
 \def\msthesis{\def\@degree{Master of Science}
