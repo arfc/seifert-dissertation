@@ -14,7 +14,7 @@ Validation and verification of the 0D flow model is critical to ensure the resul
 The improved \gls{DNP} group spectra is used for calculation of the effective delayed neutron fraction, so developing functionality for \gls{MoSDeN} to generate the improved group spectra is useful.
 The transient simulations will provide insight into the impact of the improved \gls{DNP} groups as well as detail on under what circumstances these changed groups may have more significant changes to expected reactor behavior.
 
-The potential future work includes development of the spatially resolved model, uncertainty tracking of \gls{MSR} physical phenomena in the \gls{DNP} group parameters, and investigation into the effects of varying the incident neutron energy spectrum on the \gls{DNP} group parameters.
+Potential future work of interest includes development of the spatially resolved model, uncertainty tracking of \gls{MSR} physical phenomena in the \gls{DNP} group parameters, and investigation into the effects of varying the incident neutron energy spectrum on the \gls{DNP} group parameters.
 The spatially resolved model could be used for modeling chemical removal or diversion at specific points of interest within the reactor or for more accurately modeling vortices and other thermal-hydraulic effects.
 Uncertainty tracking could incorporate more than nuclear data uncertainty, and could account for uncertainty in chemical removal rates and thermal-hydraulic effects.
 Investigating the incident neutron energy's effect on the \gls{DNP} groups would be interesting because the literature presents the groups for broad classes of energy spectra, such as thermal or fast.
@@ -22,10 +22,12 @@ Sensitivity studies could be conducted to see how much the \gls{DNP} group param
 
 Figure \ref{fig:gantt-prelim} shows the critical work path, divided into development, simulation, writing, and review categories.
 %The categories which require more focus are development and writing, whereas simulation and review are generally a more passive process.
-Most tasks take one month, but three tasks are assumed to take two months: development of the \gls{MSRE} Moltres model, running the various \gls{MSRE} transients, and writing the results and conclusions chapters.
+Most tasks take one month, but four tasks are assumed to take two months: verifying the 0D flow model, setting up the transient simulations, running the various \gls{MSRE} transients, and writing the results and conclusions chapters.
+Verifying the 0D flow model is expected to take two months because the simulation time will be slower than the 0D scaled model, and will include analysis of multiple datasets as well as different combinations of pulse and saturation irradiation data.
+Setting up the transient simulations is expected to take two months because it will require depletion simulations for the safeguards diversion scenarios as well as multiple OpenMC solves of the \gls{MSRE} for cross-section data to pass into Moltres.
 Development of the Moltres model is expected to take longer because there may be unexpected issues with the meshing of the upper and lower plena, data collection, or model development itself.
 The \gls{MSRE} transient simulations are given two months of simulation time because there are two transient simulations for validation (\gls{MSRE} pump start-up and coast-down), four for safety (\gls{ULOF}, \gls{UTOP}, \gls{ULOHS}, and \gls{FSOC}), three for security (\gls{UTOP} combined with each of the others), and two for safeguards (one \gls{SQ} diversion of plutonium and a diversion of $^{235}$U), as discussed in Section \ref{sec:transimpact}.
-As will be discussed, these transient simulations also require nine transport solves: three for standard \gls{MSRE} operation prior to a transient with higher and lower temperatures, three with one \gls{SQ} removal of $^{235}$U over one year, and three with one \gls{SQ} removal of plutonium over one year.
+As will be discussed, these transient simulations also require nine transport solves: three for fresh fuel salt in the \gls{MSRE} prior to a transient with higher and lower temperatures, three with one \gls{SQ} removal of $^{235}$U over one year, and three with one \gls{SQ} removal of plutonium over one year.
 The diversion scenarios both require a depletion simulation, which also slightly increases the cost of the simulations.
 The results chapter is given two months because there will be many new results to discuss, whereas the other chapters will not have significant changes.
 
