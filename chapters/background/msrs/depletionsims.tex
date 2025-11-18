@@ -62,7 +62,7 @@ If there are transfers between two different materials, such as the fuel salt $N
     \dot{
     \begin{bmatrix}
     N_{f} \\
-    N{w}
+    N_{w}
     \end{bmatrix}
     }
     = 
@@ -72,7 +72,7 @@ If there are transfers between two different materials, such as the fuel salt $N
     \end{bmatrix}
         \begin{bmatrix}
     N_{f} \\
-    N{w}
+    N_{w}
     \end{bmatrix},
     \label{eq:mat_Bate_chem}
 \end{equation}
@@ -95,8 +95,8 @@ Codes may also use a power series approximation of the matrix exponential, as di
 \label{sec:bateman}
 
 For stationary fuel, the Bateman equation as shown previously in Equation \eqref{eq:Bateman_default} is sufficient to simulate depletion.
-For circulating fuel, it is important to evaluate to understand how fuel depletion can be calculated and how that relates to formulation of \gls{DNP} group parameters.
-For instance, if spatial dependence is necessary to accurately model depletion of circulating fuel, then that will make formation of \glspl{DNP} in a circulating fuel sample more computationally expensive. 
+For circulating fuel, it is important to understand how fuel depletion can be calculated and how that relates to formulation of \gls{DNP} group parameters.
+For instance, if spatial dependence is necessary to accurately model depletion of circulating fuel, then that will make the formation of \glspl{DNP} in a circulating fuel sample more computationally expensive. 
 For the purposes of a streamlined comparison with circulating fuel, the Bateman equation can be rewritten as:
 \begin{equation}
     \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t),
@@ -119,7 +119,7 @@ The loss term, $\lambda_{net, j}$, does not vary with time in this equation.
 %\item $\lambda_{net, j}$ is the loss term for nuclide $j$, containing decay and transmutation losses
 %\end{description}
 
-This form of the Bateman equation does not have space or energy resolution, which makes it simpler to understand and compare with the circulating fuel version.
+This form of the Bateman equation does not have spatial or energy resolution, which makes it simpler to understand and compare with the circulating fuel version.
 When solving this equation, the common approach is to have different material groupings, or blocks, in different spatial regions.
 Each of these material blocks will have different compositions and neutronic properties, such as flux, used for that entire material.
 This way, the spatial resolution is represented by the material blocks, and the system of ordinary differential equations can be solved rapidly.
@@ -127,10 +127,10 @@ This way, the spatial resolution is represented by the material blocks, and the 
 %\subsubsection{Circulating fuel}
 %\label{sec:circ-fuel-dep}
 
-Circulating fuel is more complex, as instead of solving a system of ordinary differential equations, a system of partial differential equations must be solved.
+Circulating fuel is more complex, as instead of solving a system of ordinary differential equations, one must solve a system of partial differential equations.
 The simplified static Bateman equation can be modified to include advection and diffusion terms, yielding:
 \begin{equation}
-    \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
+    \frac{dN_j(\vec{r}, t)}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right),
     \label{eq:bate-flow-simple}
 \end{equation}
 where
@@ -158,11 +158,11 @@ This approach does not model the in-core and ex-core regions explicitly, but ins
 This approximation does not introduce significant error in the spatially averaged concentrations of nuclides unless there are large chemical removal rates or near-stationary flow rates \cite{seifert_luke_computationally_2025}.
 An example implementation of this approach is given in Appendix \ref{sec:appendixB}.
 
-Another approach has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
-This approach can estimate the steady-state concentration of certain nuclides across a flow loop, but it does not account for temporal resolution \cite{shahbazi_steady-state_2022}.
+Another study has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
+This study showed an approach that for estimating the steady-state concentration of certain nuclides across a flow loop, but the approach did not account for temporal resolution \cite{shahbazi_steady-state_2022}.
 
 Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of Griffin, a deterministic neutron transport code, with Pronghorn, a thermal fluids code, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
-Tano et al.\ presented an approach in which only insoluble, medium-lived, and high concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
+Tano et al.\ presented an approach in which only insoluble, medium-lived, and high-concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
 
 Spatially and temporally resolved approaches, such as the one used by Tano et al., are more computationally expensive than those that only require solving a system of ordinary differential equations.
 However, Tano et al.\ showed that including circulation of the fuel salt in depletion directly reduces the equilibrium concentration of $^{135}$Xe by 44\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
@@ -175,7 +175,7 @@ This spatially resolved system of partial differential equations (PDEs) requires
 These small time steps cause multi-year depletion simulations to be exceedingly expensive.
 The use of small time steps is also important for numerical stability.
 
-The numerical stability of the problem, when using an explicit-time solving scheme, uses the Courant number, $C$:
+The numerical stability of the problem, when using an explicit time-integration scheme, uses the Courant number, $C$:
 \begin{equation}
     C = \frac{u \Delta t}{\Delta z},
 \label{eq:num-stab}
@@ -192,5 +192,5 @@ Although using an implicit time solver can work around this condition, the overa
 
 For a short depletion simulation, such as a saturation irradiation of a fuel sample, capturing these effects is computationally tractable.
 Because the depletion lasts only for several minutes instead of several years, the computational cost is orders of magnitude smaller.
-A high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment is feasible to generate improved \gls{DNP} group parameters.
+A high-fidelity, spatially resolved depletion simulation of an \gls{MSR} sample irradiation experiment is feasible for generating improved \gls{DNP} group parameters.
 However, it may be sufficient to use the scaled flux method or other approximations to reduce computational cost.

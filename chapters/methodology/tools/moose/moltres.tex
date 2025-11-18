@@ -5,8 +5,8 @@ Since the initial demonstration, Park et al. have noted general agreement in res
 Additionally, Park has published a dissertation detailing 1-D, 2-D, and 3-D neutronic models of the \gls{MSRE} \cite{park_advancements_2025}.
 
 Moltres requires various data to model various physical phenomena in a reactor.
-The delayed neutron modeling requires delayed neutron fractions, $\beta_{k}$, and delayed neutron decay constants, $\lambda_k$, which are fission-weighted.
-Neutronics modeling requires cross-sections, prompt and delayed fission spectra, and other data to properly model those physical effects.
+The delayed neutron modeling requires delayed neutron fractions, $\beta_{k}$, and delayed neutron decay constants, $\lambda_k$.
+Neutronics modeling requires cross-sections, prompt fission spectrum $\chi_p$, delayed neutron spectrum $\chi_{d}$, and other data to properly model those physical effects.
 Moltres provides scripts which can parse various transport solvers, such as OpenMC and Serpent, to automatically collect this information and format it for use in Moltres.
 In this work, the required data for Moltres will be collected from OpenMC and \gls{MoSDeN}.
 
@@ -18,7 +18,7 @@ This is of interest for future work, which may use higher-fidelity multi-physics
 
 \subsubsection{Neutron Flux Modeling}
 
-Neutron flux modeling determines the energy of neutrons interacting with the sample and the number of interactions.
+The neutron flux modeling is important for this work because it determines the energy of neutrons interacting with the fissile sample and the number of interactions.
 It determines the fission rate and the resulting fission product concentrations, including the initial locations of \glspl{DNP}.
 In this work, modeling the neutron flux in Moltres is not important for irradiation of the sample, but it is relevant for transient modeling to capture the changes in power.
 The time-dependent multi-group neutron diffusion equation used in Moltres appears in Equation \eqref{eq:mg-n-diff}, recreated here:
@@ -26,7 +26,7 @@ The time-dependent multi-group neutron diffusion equation used in Moltres appear
     \begin{split}
     \frac{1}{\nu_g} \frac{\partial \phi_g}{\partial t} = & \; \nabla \cdot D_g \nabla \phi_g + \sum_{g' \neq g}^G \Sigma_{s, g' \rightarrow g} \phi_{g'} \\
     & + (1-\beta) \chi_{p, g} \sum_{g'=1}^{G} (\nu \Sigma_f)_{g'} \phi_{g'}\\
-    & \sum_{k=1}^K \chi_{d, g, k} \lambda_k C_k - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g}
+    & + \sum_{k=1}^K \chi_{d, g, k} \lambda_k C_k - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g}
     \nonumber
     \end{split}
 \end{equation}
@@ -42,7 +42,7 @@ The time dependent \gls{DNP} concentration is given in Equation \eqref{eq:mg-n-d
     \nonumber
 \end{equation}
 This is the primary equation of interest when simulating a transient using the improved \gls{DNP} group parameters.
-This equation shows how the concentration of precursor group $k$ changes over time due to the source from fission, decay, movement in the flow field, and diffusivity via turbulent mixing.
+This equation shows how the concentration of precursor group $k$ changes over time due to the source from fission, decay, movement in the flow field, and turbulent diffusion.
 A discussion of turbulence and how it affects the \gls{DNP} group parameters and transient simulations is given in Appendix \ref{sec:appendixC}.
 The turbulent effects are not considered relevant to the desired outcomes of this work for analyzing the effects of the improved \gls{DNP} groups relative to the existing groups.
 However, it is useful to validate the results with the \gls{MSRE}, as otherwise the results may not match due to the upper and lower plena mixing.
@@ -55,7 +55,7 @@ To generate the \gls{DNP} group parameters using Moltres, Equation \eqref{eq:bat
     \frac{dN_j}{dt} = S(\vec{r}, t) - \lambda_{net, j} N_j(\vec{r}, t) + \nabla \cdot \left( D \nabla N_{j} (\vec{r}, t) - \vec{u}(\vec{r}, t) N_{j} (\vec{r}, t) \right)
     \nonumber
 \end{equation}
-This equation shows how the concentration of nuclide $j$ evolves over time due to various source, loss, diffusion, and advection terms.
+This equation shows how the concentration of nuclide $j$ evolves over time due to various source $S$, loss $\lambda_{net}$, diffusion $D$, and advection $\vec{u}$ terms.
 The spatially resolved model could use spatially resolved depletion over the irradiation simulation.
 Equation \eqref{eq:mg-n-diff-Ci} models \gls{DNP} groups, while Equation \eqref{eq:bate-flow-simple} can be used to model individual \glspl{DNP}.
 
@@ -82,7 +82,7 @@ where
 \begin{align}
     \rho =& \text{ fluid density $[kg \cdot m^{-3}]$} \nonumber \\
     p =& \text{ pressure $[Pa]$} \nonumber \\
-    \vec{u} =& \text{ flow rate $[m \cdot s^{-1}]$} \nonumber \\
+    \vec{u} =& \text{ salt velocity $[m \cdot s^{-1}]$} \nonumber \\
     \mu =& \text{ dynamic viscosity $[Pa \cdot s]$} \nonumber \\
     \alpha =& \text{ coefficient of thermal expansion $[K^{-1}]$} \nonumber \\
     \vec{g} =& \text{ gravitational force vector $[N]$} \nonumber \\
@@ -114,13 +114,10 @@ where
     c_p =& \text{ specific heat capacity of molten salt $[J \cdot kg^{-1} \cdot K^{-1}]$} \nonumber \\
     k =& \text{ effective thermal conductivity of molten salt $[W \cdot m^{-1} \cdot K^{-1}]$} \nonumber \\
     Q_f =& \text{ fission heat source $[W \cdot m^{-3}]$} \nonumber \\
-    \epsilon_g =& \text{ average fission energy released by neutrons in group
+    \epsilon_g =& \text{ average fission energy released per fission in group
     $g$ $[J]$} \nonumber \\
     Q_s =& \text{ heat sink/removal $[W \cdot m^{-3}]$.} \nonumber
 \end{align}
-
-With the combination of the flux modeling, precursor modeling, and thermal-hydraulic modeling, Moltres can almost simulate \glspl{MSR}.
-However, there is one additional \gls{MSR} phenomenon required to complete the model, the flow of the fuel salt between the in-core to ex-core regions.
 
 \subsubsection{Ex-core and In-core Coupling}
 

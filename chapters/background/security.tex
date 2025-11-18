@@ -1,7 +1,7 @@
 This work investigates the formulation of improved \gls{DNP} group parameters, which impact the reactor behavior during a transient.
-There may be security issues that arise during sabotage-initiated transients that would be improperly modeled without these improved \gls{DNP} group parameters.
-Specifically, an insider sabotaging reactor operations could compromise security measures.
-These improved \gls{DNP} group parameters will be used to evaluate under what conditions the previous parameters would indicate secure operations during security-related transients while the improved parameters indicate unsafe operation that would compromise site security.
+Sabotage-initiated transients, which are a security concern, may be improperly modeled without the improved \gls{DNP} group parameters.
+Specifically, an actor with access to an insider may sabotage reactor operations.
+These improved \gls{DNP} group parameters will be used to evaluate under what conditions the previous parameters would indicate a failed sabotage during security-related transients while the improved parameters indicate a successful sabotage that would compromise site security.
 
 The goal of security, or \gls{PP}, is to prevent actors from acquiring information, stealing nuclear material, or committing sabotage \cite{protection2011evaluation}.
 Security is enforced through physical protection systems, which detect, delay, and neutralize the adversarial actor before they can complete their objective \cite{army2001physical, garcia2007design}.
@@ -17,8 +17,8 @@ Based on the specifics of the actor type, their capabilities will vary significa
 
 Actor capabilities can be classified into five categories: knowledge, skills, weapons and tools, number of actors, and dedication.
 The knowledge of the actor will vary depending on if they have insider knowledge or not, and how much information that insider knows.
-The skills of the actor will affect their strategy they use to achieve their goals, though a large organization or non-host state can be assumed to have access to a wide variety of skills.
-The weapons and tools of the actor will affect their strategy, but access to an insider would grant more tools accessed with less effort.
+The skills of the actor will affect the strategy they use to achieve their goals, though a large organization or non-host state can be assumed to have access to a wide variety of skills.
+The weapons and tools of the actor will affect their strategy, but access to an insider would grant access to more more tools with less effort.
 The number of actors will vary with the specific strategy of that actor as well as their tactics, as a more discrete approach would require fewer actors than a forceful approach.
 The dedication of the actor is important to consider, as an insufficiently motivated actor may be deterred with sufficient security measures.
 

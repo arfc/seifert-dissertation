@@ -2,12 +2,11 @@ The impact of the \gls{DNP} groups on transients will be evaluated using Moltres
 This approach provides high-fidelity results by coupling thermal-hydraulics and neutronics, a necessity for \gls{MSR} modeling.
 Modeling every \gls{DNP} in space and time would be prohibitively expensive, so they are instead modeled using \gls{DNP} group parameters.
 Moltres allows direct comparison between static \gls{DNP} group parameters, which do not account for \gls{MSR} phenomena, and parameters that do.
-This comparison will be made by changing the \gls{DNP} group parameters in Moltres and simulating the same transient, followed by comparison of temperature and power responses.
+This comparison will be performed by varying the \gls{DNP} group parameters in Moltres and simulating the same transient, followed by comparison of temperature and power responses.
 
 The results of interest from this analysis include the reactivity and power responses to various initiating events.
 The initiating events and transients vary, as different reactor responses are studied.
-The events of interest depend on the perspective from which the reactor response is analyzed.
-
+The events of interest depend on the analytical perspective.
 Specifically, there are four different perspectives of interest in this work: validation, safety, security, and safeguards.
 Each perspective involves a unique combination of motivation, proposed initiating event, and investigated response.
 These are discussed in detail in their respective sections.
@@ -24,7 +23,7 @@ The fission weighting values will be generated using fission rate tallies in Ope
 
 \subsection{Validation}
 The motivation for validation is to confirm that the proposed methodology and results align with experimental data.
-This ensures the demonstrated improved \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
+This ensures that the demonstrated improved \gls{DNP} group parameters are applicable to actual \glspl{MSR}.
 Discrepancies between experimental results and the model highlight potential weaknesses in the approach.
 If no discrepancies exist, confidence in the results increases for problems similar to those validated.
 
@@ -36,14 +35,14 @@ If the parameters do not match, the issue lies in the data or the aggregation of
 If the parameters are accurately predicted, the formulation is considered valid.
 
 The second stage of the validation will use the \gls{MSRE} modeled in Moltres to compare the effective delayed neutron fraction.
-The literature reports an effective delayed neutron fraction in the \gls{MSRE} of 0.45 per 100 fissions, which will be compared to values calculated using the previous and improved \gls{DNP} group parameters.
+The literature reports an effective delayed neutron fraction in the \gls{MSRE} of 0.0045, which will be compared to values calculated using the previous and improved \gls{DNP} group parameters.
 To ensure the energy spectra of the \gls{MSRE} is properly captured in the \gls{DNP} group parameters, OpenMC will first be used to run a Monte Carlo k-eigenvalue solve.
 This will enable generation of four sets of \gls{DNP} groups: a stationary group using thermal neutrons, an improved group using thermal neutrons, and then the same two groups but with the \gls{MSRE} neutron spectrum.
 These results will then be compared with \gls{DNP} groups in the literature for the \gls{MSRE} to determine which set of parameters most closely fits the measured effective delayed neutron fraction \cite{lee2022transient}.
 
 The third stage of the validation that will be conducted in this work applies the improved \gls{DNP} group parameters to the \gls{MSRE} pump start-up and coast-down transient simulation to compare against experimental data on reactivity changes from \glspl{DNP} \cite{prince1968zero}.
 The purpose of this comparison is to demonstrate that the non-stationary model generates valid \gls{DNP} group parameters.
-This experiment was previously studied by Reynolds and Palmer as well as by Park using Moltres and Quasimolto\footnote{Quasimolto is an open-source multiphysics code that models multi-group neutron transport, \gls{DNP} balance, and energy balance.}, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
+This experiment was previously studied by Reynolds and Palmer, as well as by Park using Moltres and Quasimolto\footnote{Quasimolto is an open-source multiphysics code that models multi-group neutron transport, \gls{DNP} balance, and energy balance.}, allowing comparison with their results \cite{reynolds2023analysis, park_advancements_2025}.
 However, previous models excluded the inlet and outlet plena in the \gls{MSRE}, leading to discrepancies with experimental data.
 This work will develop a model including the plena, to be combined with updated \gls{DNP} group parameters, to generate delayed neutron reactivity responses closer to the experimental data.
 
@@ -53,15 +52,15 @@ The motivation for studying safety is to protect the public and meet regulatory 
 Safety is discussed in detail in Section \ref{sec:safety}, which showed that many safety-related transients exist.
 The \gls{DNP} group parameters are critical in these transients, as they influence the reactor period, power, and temperature.
 
-The transients that will be investigated in the \gls{MSRE} are \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} events \cite{li2015transient, daher2022improvement}.
-A \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, causing a loss of cooling of the reactor.
+The transients that will be investigated in the \gls{MSRE} are the \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} events \cite{li2015transient, daher2022improvement}.
+A \gls{ULOHS} transient can occur when the heat exchanger experiences a failure, possibly triggered by a pump failure in the intermediate loop, leading to a loss of cooling of the reactor.
 This will be modeled in Moltres by changing the inlet temperature to match the outlet temperature, rather than using a constant inlet temperature.
 This will simulate a loss of heat sink, as rather than the inlet temperature being constant and lower than the outlet temperature, it will simulate no cooling.
 A {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
-This will be modeled in Moltres by slowing the velocity field of the precursors.
+This will be modeled in Moltres by slowing the velocity field, which will alter both the temperature and \gls{DNP} distribution.
 A \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
 This will be modeled in Moltres by having a step decrease in the removal cross section, which will represent a control rod withdrawal.
-An \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
+An \gls{FSOC} transient occurs when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
 This will be modeled in Moltres by decreasing the inlet fuel salt temperature.
 
 Each transient will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
@@ -71,7 +70,7 @@ It is important to evaluate if \glspl{MSR} may have unexpected unsafe temperatur
 This could occur if traditional \gls{DNP} group parameters predict safe operation while the improved parameters predict unsafe operation.
 
 \subsection{Security}
-Security is discussed in detail in Section \ref{sec:security}, which details that, for this work, scenarios of interest are actors using an insider to disrupt the reactor using sabotage.
+Security is discussed in detail in Section \ref{sec:security}, which details that, for this work, scenarios of interest are when actors use an insider to disrupt the reactor through sabotage.
 This ties directly into the safety design study, as sabotage aims to create unsafe reactor conditions.
 Ensuring the \gls{MSR} operates safely after sabotage is critical.
 If static \gls{DNP} group parameters predict safe operation while improved parameters predict unsafe operation, correcting this discrepancy in the reactor design is essential.
@@ -83,14 +82,14 @@ This aligns with specifications provided in 10 CFR 73.1 on a design basis threat
 The radiological sabotage design basis threat includes well-trained, armed, and informed individuals with insider assistance, an internal threat, and a cyber attack.
 
 The four unique transients that will be considered are the \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC}.
-Combining them results in six double-transient combinations, three triple-transient combinations, and one quadruple-transient combination, totaling ten combined security-related sabotage-initiated transients.
+Combining them to form all unique combinations results in six double-transients, three triple-transients, and one quadruple-transient, totaling ten combined security-related sabotage-initiated transients.
 However, some of these combinations do not result in a change, such as the \gls{ULOF} and \gls{ULOHS}, as the loss of heat sink would not be important for a stationary fuel salt that does not circulate out of the core to the heat exchanger.
 The combinations that will be considered are each transient on its own and the \gls{UTOP} combined with each other transient.
 This results in four single transients and three double transients, totaling seven transient simulations that will be analyzed.
 It is feasible that the attack scenario for the radiological sabotage design basis threat could cause these seven transients in an attempt to disrupt operations and divert attention.
 Each of these transients will be simulated using Moltres in the \gls{MSRE} using existing \gls{DNP} groups and the improved \gls{DNP} groups.
 
-These security analyses will demonstrate if certain combinations of transients predicted to be safe, and non-disruptive, with previous \gls{DNP} groups may actually be disruptive when using the improved \gls{DNP} groups.
+These security analyses will demonstrate if certain combinations of transients predicted to be safe and non-disruptive with previous \gls{DNP} groups may actually be disruptive when using the improved \gls{DNP} groups.
 The transient will be considered disruptive if safety limits on temperature are exceeded.
 If there are sabotage events which are predicted to be non-disruptive by the previous groups but not by improved groups, then this would indicate an area of improvement for modeling and reactor design.
 If the improved \gls{DNP} groups do not demonstrate disruptive effects, then this analysis will still provide useful insight into how much variation in temperature could be expected due to different transient combinations.
@@ -108,19 +107,19 @@ The diversion will be from the $^{235}$U-fueled \gls{MSRE} from a fresh fuel sal
 The change in the fuel salt composition will affect the \gls{DNP} group parameters, as discussed in Section \ref{sec:gandkparams}.
 The fission-weighted \gls{DNP} group parameters can be used in Moltres, as discussed in Section \ref{sec:moltres}, for simple step reactivity insertion transients.
 The following four sets of fission-weighted \gls{DNP} group parameters will be compared: existing parameters without diversion, existing parameters with diversion, improved parameters without diversion, and improved parameters with diversion.
-A simple negative step reactivity insertion will be simulated for each set of \gls{DNP} group parameters, from which the power responses can be compared.
+The power responses will be compared using a simple negative step reactivity insertion will be simulated for each set of \gls{DNP} group parameters.
 
 The power responses will demonstrate if power response fingerprinting could be obfuscated for an \gls{MSR} model that does not use improved \gls{DNP} groups.
 This obfuscation will be investigated by comparing power responses, which are dependent on the delayed neutron fraction.
 The delayed neutron yield, and therefore the delayed neutron fraction, will be smaller when accounting for chemical removal and recirculation, which will also be true for measured responses in the \gls{MSR}.
-This smaller delayed neutron fraction will cause a larger power response, which will more accurately model what would be measured in an \gls{MSR}.
+This smaller delayed neutron fraction will cause a larger power response, which will more accurately reflect what would be measured in an \gls{MSR}.
 A model using existing \gls{DNP} groups would have a larger delayed neutron fraction than it should, which would lead to a smaller than expected power response.
 
 If there is a diversion of uranium, then there will be more plutonium fission, which will decrease the effective delayed neutron fraction.
 This will lead to a larger power response.
-The opposite is true for a $^{235}$U diversion, which will lead to smaller power response.
+The opposite is true for a $^{235}$U diversion, which will lead to a smaller power response.
 
-Based on these effects, a case with no diversion while using existing \gls{DNP} group parameters would have a model that predicts a smaller power response than the reactor will measure.
+Based on these effects, a case with no diversion while using existing \gls{DNP} group parameters would predict a smaller power response than the reactor will measure.
 This will increase the false-positive detection probability for $^{235}$U diversion.
 Additionally, a plutonium diversion would lead to the measured reactor power response aligning with the response using existing \gls{DNP} groups. 
 By using the improved \gls{DNP} group parameters, this difference between the modeled and actual delayed neutron fraction can be reduced, allowing the power response to more accurately fingerprint diversion of nuclear material.

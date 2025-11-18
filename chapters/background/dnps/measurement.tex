@@ -3,31 +3,31 @@ Macroscopic and microscopic approaches are used for formulating \gls{DNP} groups
 %There are two approaches used for measurement of \glspl{DNP}, referred to as the macroscopic and microscopic measurement approaches \cite{parish1999status, rudstam2002delayed}.
 The macroscopic approach uses an experimental fissile sample irradiation to get the delayed neutron count rate.
 %The approaches differ initially, as the macroscopic approach uses a fissile sample irradiation to get delayed neutron counts which can be approximated using groups.
-The microscopic approach uses the data from many experiments combined together to simulate a fissile sample irradiation and generate the delayed neutron count rate.
+The microscopic approach uses the data from many experiments combined to simulate a fissile sample irradiation and generate the delayed neutron count rate.
 Although the microscopic approach can be more challenging due to dependence on the work of many individual experiments, it offers more detail on the delayed neutron count rate.
 
-After the delayed neutron count rate is collected, both approaches then try to approximate the behavior of all the \glspl{DNP} with only a few artificial \glspl{DNP}, known as \gls{DNP} groups.
+After the delayed neutron count rate is collected, both approaches then approximate the behavior of all the \glspl{DNP} with only a few artificial \glspl{DNP}, known as \gls{DNP} groups.
 These groups consist of decay constants $\lambda_k$ and yields $\bar{\nu}_{d, k}$.
-These groups have historically been formed based on the \gls{DNP} half-lives or based on what parameters best fit the delayed neutron count rate.
+These groups have historically been formed based on the \gls{DNP} half-lives or the best fit to the delayed neutron count rate.
 
 The macroscopic formulation is important in this thesis for verification and validation, as the delayed neutron count rate data are experimentally collected and can be used for comparison.
-The microscopic formulation is important in this thesis because this work uses this approach.
-The microscopic approach is used because there is no delayed neutron count rate data for an irradiated sample in an \gls{MSR}.
+The microscopic formulation is important in this thesis because it is the methodology that enables simulation of effects that target specific elements, such as chemical removal in an \gls{MSR}.
+The microscopic approach is also used because there is no delayed neutron count-rate data for an irradiated sample in an \gls{MSR}.
 Additionally, the microscopic approach provides useful information on how each \gls{DNP} contributes and how chemical removal of certain elements affects the \glspl{DNP}.
 
 \subsubsection{Macroscopic Formulation of DNPs}
 \label{sec:macro-eval}
 The macroscopic approach entails irradiating a sample containing a single fissile nuclide at or near a given neutron energy.
 This delayed neutron count rate from this sample can then be measured and used to formulate \gls{DNP} group parameters.
-Analysis and collection of macroscopic experiment data is common in the literature \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant, conant1971measurement, seifert2025delayed}.
+Analysis and collection of macroscopic experiment data are common in the literature \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant, conant1971measurement, seifert2025delayed}.
 
 Small samples are used to minimize neutron multiplication within the sample to avoid spectral effects \cite{keepin1957delayed}.
 Spectral effects are caused by differing neutron energy spectra between each \gls{DNP} group and the incident irradiating neutrons \cite{keepin1957delayed}.
-Another reason for using a small sample is because of physical challenges associated with the experimental sample handling (rabbit) system \cite{brunson1955measurement}.
+Another reason for using a small sample is due to physical challenges associated with the experimental sample handling (rabbit) system \cite{brunson1955measurement}.
 
 Two different types of irradiation are typically used: pulse and infinite. 
-Pulse irradiation irradiates the sample with a pulse shorter than the shortest \gls{DNP} half-life, and captures the short-lived \glspl{DNP} with more accuracy than it does the long-lived \glspl{DNP} \cite{brady1988evaluation}.
-Infinite irradiation irradiates the sample for longer than several times the longest half-life, and it captures the long-lived \glspl{DNP} with more accuracy than the short-lived \glspl{DNP} \cite{brady1988evaluation}.
+A pulse irradiation exposes the sample to neutrons with a pulse shorter than the shortest \gls{DNP} half-life, and captures the short-lived \glspl{DNP} more accurately the long-lived \glspl{DNP} \cite{brady1988evaluation}.
+An infinite irradiation exposes the sample to neutrons for longer than several times the longest half-life, and it captures the long-lived \glspl{DNP} with more accuracy than the short-lived \glspl{DNP} \cite{brady1988evaluation}.
 After irradiation, the delayed neutrons from the sample are counted as a function of time.
 Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows an experimental setup for collecting delayed neutrons.
 The delayed neutron count rate as a function of time after irradiation, $n_d(t)$, is given as:
@@ -45,7 +45,7 @@ I &= \mbox{ the total number of \glspl{DNP} [$\#$] } \nonumber \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.80\linewidth]{images/keepin-setup-mod.png}
-    \caption{Simplified experimental setup for measuring delayed neutron emission from irradiation of a 3 gram sample in Godiva referenced from \cite{keepin1957delayed}.}
+    \caption{Simplified experimental setup for measuring delayed neutron emission from irradiation of a 3 gram sample in Godiva recreated from \cite{keepin1957delayed}.}
     \label{fig:keepin-setup}
 \end{figure}
 
@@ -55,17 +55,17 @@ I &= \mbox{ the total number of \glspl{DNP} [$\#$] } \nonumber \\
 %    \item $\epsilon$ is the detector efficiency
 %\end{description}
 
-Once this delayed neutron count rate is generated, the data is used to generate \gls{DNP} group parameters, $\lambda_k$ and $\bar{\nu}_{d, k}$, for that fissile nuclide and neutron energy.
+Once this delayed neutron count rate is generated, the data are used to generate \gls{DNP} group parameters, $\lambda_k$ and $\bar{\nu}_{d, k}$, for that fissile nuclide and neutron energy.
 Three different approaches have been used to generate \gls{DNP} group parameters from macroscopic data: exponential stripping (or peeling) \cite{brunson1955measurement, keepin1955delayed}, least squares \cite{brady1988evaluation, keepin1957delayed}, and half-lives of specific \glspl{DNP} \cite{saphier1977evaluated}.
-Some approaches have even used a combination, such as least squares fitting with specific half-lives \cite{spriggs20028}.
+Some approaches have even used a combination, such as least-squares fitting with specific half-lives \cite{spriggs20028}.
 The exponential stripping, or peeling, method is a more subjective form of least squares fitting, in which exponential curves are subtracted away from the raw data \cite{price2020review}.
-A semi-log form of the equation has the tail-end of the decay curve fit with a straight line, has that new exponential function subtracted off, and then the process repeats for the remaining data \cite{spriggs20028}.
+A semi-log form of the equation fits the tail-end of the decay curve fit with a straight line, subtracts that new exponential function off, and then repeats the process for the remaining data \cite{spriggs20028}.
 The use of specific half-lives to form the \gls{DNP} groups is less subjective and offers a more physical interpretation of the groups.
 The least squares approaches are the most objective approach and generate groups which physically do not embody a single \gls{DNP}.
 Instead, they group together the \glspl{DNP} and effectively capture the overall physical effect.
 For this work, a least squares approach is used, as it offers an objective formulation that can be generically applied.
 %The specifics of the methods used to form those parameters is discussed in Section \ref{sec:gandkparams}.
-The specifics of the least squares approach used to form the \gls{DNP} parameters is discussed in Section \ref{sec:gandkparams}.
+The specifics of the least squares approach used to form the \gls{DNP} parameters are discussed in Section \ref{sec:gandkparams}.
 
 
 Challenges associated with collecting experimental data include experimental noise and signal obfuscation due to moderation \cite{bank2000jef}. 
@@ -77,13 +77,13 @@ This transport time results in missing very short-lived counts.
 After a pulse irradiation, the long-lived groups form a background that interferes with measurement of the short-lived groups \cite{bank2000jef}.
 Due to these effects, the delayed neutron emission measurements are most accurate for intermediate times, while the short-lived and long-lived \glspl{DNP} have greater uncertainty.
 Although the emission measurements have the largest uncertainty in the short-lived and long-lived \glspl{DNP}, the least squares solve for the \gls{DNP} group parameters leads to increased uncertainty in the intermediate-lived groups.
-This is because small changes in the intermediate-lived groups affect each other more directly, whereas the longest- and shortest-lived groups are less affected by small differences in the other group half-lives and yields.
+This is because small changes in the intermediate-lived groups affect the other intermediate-lived groups more directly, whereas the longest- and shortest-lived groups are less affected by small differences in the other group half-lives and yields.
 %Due to these effects, measurement of delayed neutrons from the sample is less accurate initially, becomes increasingly accurate, and then becomes less accurate again as the delayed neutron count rate decreases.
 
 Similarly, uncertainty arises from the measurement of the number of fissions.
 Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, the fission chamber does not account for source multiplication within the irradiated sample.
 Keepin et al. suggest a technique to correct for the sample self-multiplication.
-The sample self-multiplication require a correction factor of up to 3\% in the number of fissions.
+The sample self-multiplication requires a correction factor of up to 3\% in the number of fissions.
 
 By the year 2000, 245 distinct sets of \gls{DNP} group parameters had been formulated for 20 different fissile nuclides \cite{Spriggs2000Summary}.
 Spriggs and Campbell went into significant detail, discussing the various analysis methods, neutron energies, fissile nuclides, counting intervals, and sample compositions for many of these \gls{DNP} group parameter formulations \cite{Spriggs2000Summary}.
@@ -197,25 +197,26 @@ Waldo et al.\cite{waldo1981delayed}    & $\pm1.28926$ & $\pm0.82773$ & $\pm0.209
 \end{table}
 
 There is reasonable agreement between the different \gls{DNP} group parameters, though there is variation among them.
-Not only did each approach use a slightly different experimental methodology via different energy spectra, data collection methods, sample transfer time between irradiation and measurement, sample size, and sample composition, but there are also differences in how the data was processed.
+Not only did each approach use a slightly different experimental methodology via different energy spectra, data collection methods, sample transfer time between irradiation and measurement, sample size, and sample composition, but there are also differences in how the data were processed.
 There are several ways that the data was processed from delayed neutron count rates into \gls{DNP} group parameters among the works in these tables: simultaneous non-linear least squares fitting of saturation and pulse irradiation data, separate non-linear least squares fitting of pulse and saturation irradiation data and subsequent combination, non-linear least squares of an intermediate amount of time between a pulse and saturation, and exponential stripping.
 
 Keepin et al. used both a simultaneous fitting of \gls{DNP} group parameters from pulse and saturation irradiation data as well as a separate fitting of four groups from each irradiation.
 The separate fitting of four groups is normalized at the second group, and Keepin et al. reported that this method gave better results than the simultaneous fit \cite{keepin1957delayed}.
 
-Charlton et al. used the equation for an intermediate amount of time that is not infinite or a pulse, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
-They also only used five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
+Charlton et al. used the equation for an intermediate irradiation time, neither pulse nor saturation, as shown in Equation \eqref{eq:delnu-fit-intermediate}.
+They used only five groups, as the sample took half a second to move from irradiation to the detector where delayed neutron counts could be measured.
 The shortest-lived \glspl{DNP} that would make up group six were not included, but Parish et al. added group six values for their own analysis \cite{parish1999status}.
 Charlton et al. used a least squares solve to determine the \gls{DNP} group parameters, according to Spriggs and Campbell \cite{Spriggs2000Summary}.
 Synetos and Williams used the same approach as Charlton et al. \cite{synetos1983delayed, spriggs20028}.
 
 Saleh et al. used the equation for an intermediate amount of time, similar to Charlton et al., where the equation is described in Equation \eqref{eq:delnu-fit-intermediate}.
-However, instead of using a least squares solve, they used exponential stripping \cite{saleh1997measurements}.
+However, instead of using a least squares solution, they used exponential stripping \cite{saleh1997measurements}.
 
 Tuttle formulated suggested values based on reviewing the literature and applying empirical correlations \cite{tuttle1975delayed}.
 
 Waldo et al. applied a transit time correction using an empirical correlation, and the \gls{DNP} group parameters were fitted using a least squares solve \cite{waldo1981delayed}.
-It is not made clear if pulse or saturation irradiations are used, as the conclusions indicate that the \gls{DNP} group parameters are less applicable for short times or short irradiations, implying that a saturation irradiation was used. 
+It is unclear whether pulse or saturation irradiations were used.
+The conclusions indicate that the \gls{DNP} group parameters are less applicable for short times or short irradiations, implying that a saturation irradiation was used. 
 
 
 
@@ -226,10 +227,10 @@ It is not made clear if pulse or saturation irradiations are used, as the conclu
 The other approach used to formulate \gls{DNP} groups is the microscopic -- also referred to in the literature as the aggregate or summation -- approach, which uses data from individual nuclides summed together to form a simulated delayed neutron count rate.
 This count rate can then be used to generate \gls{DNP} group parameters, the same as in the count rate from the macroscopic method.
 
-This approach was investigated in detail in the 1990-2000s \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010's from more data becoming available \cite{mills2014calculation, huynh2014calculation}.
+This approach was investigated in detail in the 1990-2000 period \cite{pfeiffer2002status, d2002review, rudstam2002delayed, wilson2002delayed, brady1989delayed}, with progress through the 2010s from more data becoming available \cite{mills2014calculation, huynh2014calculation}.
 Leconte et al. used this approach as recently as 2020 \cite{leconte2020new}.
 This approach requires experiments on individual \gls{DNP} nuclides, from which emission probabilities and half-lives can be measured.
-Typically, this involves rapid chemical extraction or isotope separation and magnetic tape to rapidly measure short lived nuclides, such as in the study by Björnstad et al. where an aluminized mylar tape is used \cite{bjornstad1981decay}.
+Typically, this involves rapid chemical extraction or isotope separation and magnetic tape to rapidly measure short-lived nuclides, such as in the study by Björnstad et al., in which an aluminized mylar tape is used \cite{bjornstad1981decay}.
 The magnetic tape is used to transport samples or remove longer-lived decay products \cite{shalev1974energy, rudstam1974delayed}.
 Experimental methods include the neutron-$\beta^-$ coincidence technique, separate counting of neutrons and $\beta$ particles, separate counting of neutrons and $\gamma$ rays, ion counting, fission yield from a set number of fissions, gamma counting of a long-lived daughter, and normalization of the neutron counter using a known precursor \cite{rudstam1974delayed}.
 
@@ -247,21 +248,21 @@ An example of the time-of-flight experimental setup is shown in Figure \ref{fig:
 \end{figure}
 \end{comment}
 
-This microscopic measurement data is exceptionally useful, as it allows for treatment of \glspl{DNP} on a nuclide-by-nuclide basis.
+These microscopic measurement data are exceptionally useful, as they allow for treatment of \glspl{DNP} on a nuclide-by-nuclide basis.
 This is particularly important for \glspl{MSR}, where the spatial \gls{DNP} concentration depends on half-lives, fission yields, thermo-chemistry, and thermal-hydraulics.
 With data on individual nuclides, higher fidelity treatment of \glspl{DNP} becomes possible.
 
 There have been many new measurements in the past several decades investigating these nuclides.
 The \gls{IAEA} has compiled and evaluated this data in a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
 This data, when combined with a depletion simulation, can be used to model the \glspl{DNP} explicitly rather than using groups.
-This is particularly useful for understanding what nuclides have the greatest impact, as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.
+This is particularly useful for understanding which nuclides have the greatest impact, as well as for simulating experimental configurations which have yet to be thoroughly investigated for \gls{DNP} group fitting.
 
 
 Tables \ref{tab:micro-yields} through \ref{tab:micro-half-lives-delta} show some microscopic \gls{DNP} group parameters from the literature for thermal fission of $^{235}$U \cite{parish1999status}.
-There is mostly reasonable agreement between the different \gls{DNP} group parameters, though it should be noted that Brady and England may be closer to ENDF/B-VI.8 because ENDF/B-VI.8 uses the Brady and England results in its formulation.
+There is generally reasonable agreement between the different \gls{DNP} group parameters, though it should be noted that Brady and England may be closer to ENDF/B-VI.8 because ENDF/B-VI.8 uses the Brady and England results in its formulation.
 Some of the half-lives differ more than others, such as the group one half-lives ranging from 51.7 to 55.3 seconds, while the macroscopic range was 54.6 to 56.4 seconds.
-The group three half-lives also vary noticeable, with a range of 5.7 to 7.7, while the macroscopic range was 6.0 to 7.0 seconds.
-The larger range can be attributed to the variety of data and methods used in formation of the delayed neutron count rate as well as the fitting of the \gls{DNP} group parameters, whereas the macroscopic groups have a smaller range because the delayed neutron count rate is experimentally measured and the variation is from experimental uncertainty and fitting of the group parameters.
+The group three half-lives also vary noticeably, with a range of 5.7 to 7.7, while the macroscopic range was 6.0 to 7.0 seconds.
+The larger range can be attributed to the variety of data and methods used for forming the delayed neutron count rate as well as the fitting of the \gls{DNP} group parameters, whereas the macroscopic groups have a smaller range because the delayed neutron count rate is experimentally measured and the variation is from experimental uncertainty and fitting of the group parameters.
 
 
 
@@ -362,7 +363,7 @@ The values presented here are from the approach where all parameters are fit sim
 
 Huynh and Jouanne offered a useful comparison between the macroscopic and microscopic approaches via different datasets \cite{huynh2014calculation}.
 Specifically, they compared the total delayed neutron yield from various data sources from macroscopic measurements to the calculated total delayed neutron yield from microscopic measurements.
-This data can also be compared to the previously shown tables, from which the total delayed neutron yield can be calculated.
+These data can also be compared to the previously shown tables, from which the total delayed neutron yield can be calculated.
 The total data compilation is presented in Table \ref{tab:total-delnu-compare}.
 
 \begin{table}[!ht]
@@ -398,4 +399,4 @@ The microscopic values range from 1.477 to 1.905, capturing the minimum and maxi
 The macroscopic values range from 1.510 to 1.700, presenting a tighter range of values.
 Another point of interest is that there does not appear to be a consistent difference between the microscopic and macroscopic values for the same dataset.
 For instance, JEF-2.2 has a larger microscopic yield, but JEF-3.1.1 has a larger macroscopic yield.
-The differences in the macroscopic yields do not change as much as the microscopic yields, indicating larger differences in the individual \gls{DNP} data that affected their concentrations, emission probabilities, or half-lives.
+Macroscopic yields vary less than microscopic yields, indicating larger differences in the individual \gls{DNP} data that affected their concentrations, emission probabilities, or half-lives.

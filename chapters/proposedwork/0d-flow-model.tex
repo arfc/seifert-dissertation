@@ -1,14 +1,15 @@
-The new model that will be developed beyond the 0D scaled model is the 0D flow model.
-The 0D scaled model generates saturation irradiation results and scales the flux and chemical removal based on the fraction of salt in-core and ex-core, but it does not track decays of nuclides into \glspl{DNP} during the decay of the sample after irradiation.
-Because the 0D scaled model uses cumulative fission yields to calculate concentrations, it is unable to capture non-equilibrium behavior and is unable to accurately capture residence time effects.
-The chemical removal results are smaller than expected in the 0D scaled model since intermediate nuclides cannot be removed, and the short-lived \glspl{DNP} are not captured as well.
-However, the 0D scaled model offers a fast simulation, which enables rapid development and simulation of many different parameters with ease.
+The next model developed beyond the 0D scaled model is the 0D flow model.
+The 0D scaled model generates saturation irradiation results and scales the flux and chemical removal based on the fraction of salt in-core and ex-core.
+It also does not track nuclide decays into \glspl{DNP} during post-irradiation decay.
+Because the 0D scaled model uses cumulative fission yields to calculate concentrations, it cannot capture non-equilibrium behavior and is unable to accurately capture residence time effects.
+The chemical removal results are smaller than expected in the 0D scaled model since intermediate nuclides cannot be removed.
+Despite these limitations, the 0D scaled model runs quickly and enables rapid testing of many parameter combinations.
 
 The 0D flow model will improve on the fidelity offered by the 0D scaled model by providing both saturation and pulse irradiation results, handling in-core and ex-core regions in time rather than simply scaling the flux, and modeling decay chains.
 Modeling the decay chains improves the accuracy of the formulated concentrations when they are not at equilibrium, which is especially important for pulse irradiations.
 Additionally, having separate regions rather than scaling the flux with the time dependence of the decay chains means that nuclides with larger cross-sections will have the correct amount of time to decay between irradiations, rather than experiencing a constant scaled irradiation.
 
-This section presents the proposed work for the 0D flow model, including its development, inclusion of both pulse and saturation irradiation data in the least squares solve, use of a greater variety of data sources, and verification and validation.
+This section outlines the proposed work for the 0D flow model, the combined use of pulse and saturation data in the least-squares solve, the use of multiple data sources, and the model’s verification and validation.
 
 %There is also the option of using the 0D scaled model with the scaled flux approximation but with the decay chain modeled.
 %This improved fidelity comes at an increased computational cost, but it is still not exceedingly expensive and can be run on a desktop.
@@ -18,8 +19,8 @@ This section presents the proposed work for the 0D flow model, including its dev
 \label{sec:irrad-combine}
 
 The 0D scaled model did not account for pulse irradiation data, and instead only used saturation irradiation data.
-Comparison will be made between different methods for combining pulse and saturation irradiation data.
-This comparison will provide insight into if and when the pulse irradiation data is necessary, as well as insight into the differences in results based the chi-squared statistic.
+The work will compare different methods for combining pulse and saturation irradiation data.
+This comparison will provide insight into if and when the pulse irradiation data is necessary, as well as insight into the differences in results based on the $l^2$-norm of the residual.
 
 The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
 The group parameters will be evaluated by calculating the relative residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
@@ -44,10 +45,10 @@ where
     %\sigma_{s,i} &= \text{the standard deviation in the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
     x &= \text{the solution vector containing group yields [-].} \nonumber
 \end{align}
-This formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.
+This formulation fits both pulse and saturation data simultaneously to generate improved \gls{DNP} group parameters.
 
 \subsection{Data Source Analysis}
-As shown in Section \ref{sec:verification}, experimental results for delayed neutron yields varies non-negligibly.
+As shown in Section \ref{sec:verification}, experimental results for delayed neutron yields vary non-negligibly.
 This proposed analysis will use different data sources to generate the improved \gls{DNP} group parameters.
 The purpose of this analysis is to provide a more robust understanding of the uncertainties and what differences can be expected due to the data source used.
 Huynh et al. compare the effects of cumulative fission yields and emission probabilities from \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
@@ -55,7 +56,7 @@ A similar comparison can also be found in the \gls{JEFF} report 17 \cite{bank200
 Mathieu et al. investigated the \gls{NNDC} website, which sources data from \gls{ENSDF}, and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
 
 These comparisons can be expanded to include the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and other data compilations for emission probabilities (delayed neutron branching ratios), half-lives, fission yields, and cross sections.
-Comparing these data sources clarifies the uncertainty caused by differences in the data.
+Comparing these sources will clarify the differences that arise from nuclear data discrepancies across datasets.
 Table \ref{tab:datasources} shows the data sources used in the comparison.
 The "Concentration" column refers to data including fission yields and cross-sections that affect the \gls{DNP} concentration term.
 Although half-lives also influence concentration, data sources without a concentration contribution provide only half-life and emission probability data.
@@ -85,8 +86,7 @@ Rudstam et al. presented experimental data.
     \label{tab:datasources}
 \end{table}
 
-The expected outcome is that recently updated data and official databases will be more accurate than collections from the literature.
-Recent data should be more accurate due to improved equipment and measurement techniques.
+Recently updated datasets and official databases are expected to be more accurate due to improved measurement techniques and broader validation.
 Official databases are expected to be more reliable, as they have many users reporting errors and have undergone extensive development over time.
 Investigating these data sources and comparing the \gls{DNP} group parameters generated from each will be useful when analyzing uncertainty.
 If the differences are large, understanding the uncertainty propagation will be important.
@@ -115,7 +115,7 @@ If non-negligible differences exist, the more costly full depletion method will 
 
 \subsection{Verification and Validation}
 Verifying and validating the \gls{DNP} group parameters is essential to ensure their practical utility.
-Verification with the literature is important to ensure that the fundamental approach is working as expected.
+Verification against the literature ensures that the fundamental approach behaves correctly.
 Since the literature does not contain \gls{DNP} group parameters that include \gls{MSR} physical phenomena, this thesis will include a verification with the literature only for the stationary solve.
 
 After this, although the group parameters will be verified with the literature, that does not necessarily mean they capture all physical phenomena of interest.

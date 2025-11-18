@@ -1,7 +1,7 @@
 This is a simple model that primarily serves as a way to verify the microscopic approach is working as expected by comparing with existing literature.
-This approach can only model saturation concentrations, as there is no decay chain tracking nuclides decaying into each other.
+This approach can only model saturation concentrations, as the decay chain is not modeled.
 It is called the 0D scaled model because it uses the scaled flux method, discussed in Section \ref{sec:bateman}.
-The \gls{CFY} is used to calculate the equilibrium \gls{DNP} concentrations, with a scaling term based on the amount of fuel salt in the core.
+The \gls{CFY} is used to calculate the equilibrium \gls{DNP} concentrations, with a scaling term based on the residence time of fuel salt in the core relative to the net residence time.
 The \gls{CFY} gives the amount of each nuclide that is formed from both fission and decay.
 An example solution with no reprocessing is shown in Equation \eqref{eq:cfy-conc} \cite{huynh2014calculation}:
 \begin{equation}
@@ -15,14 +15,16 @@ where
 \end{align}
 The derivation for this equation is given in Appendix \ref{sec:appendixB}.
 It is important to note that the flux is scaled when calculating the fission rate as well, by the same $f_{in}$ term that scales the cumulative fission yield.
-Effectively, this cancels the term out, resulting in no deviation in the results based on the in-core fuel salt fraction by reprocessing time.
+The $f_{in}$ term scaling the \gls{CFY} and fission rate cancels out when calculating the number of delayed neutrons per fission, which leads to no deviation in the results based on the residence time.
 
-No cross-sections are included in this model, nor is time dependent decay of nuclides into \glspl{DNP} included.
-There is a possible approach to include the effects of cross-sections in this model, but this approach is not used as the 0D flow model will account for cross-sections \cite{shahbazi_steady-state_2022, benedictnuclear}.
+No cross-sections are included in this model, nor is time-dependent decay of nuclides into \glspl{DNP} included.
+There is a possible approach to include the effects of \gls{DNP} absorption cross-sections in this model, but this approach is not used  \cite{shahbazi_steady-state_2022, benedictnuclear}.
+The 0D flow model will account for absorption and transmutation cross-sections.
 
-Figure \ref{fig:data-model} shows the how the different data is loaded into \gls{MoSDeN}, including external data and user defined input data.
+Figure \ref{fig:data-model} shows how the different data is loaded into \gls{MoSDeN}, including external data and user defined input data.
 The green circles represent input data required for generating the \gls{DNP} group parameters.
-The red diamond represents \gls{MoSDeN}, the tool takes in the data to simulate irradiation of the target fissile sample to generate the irradiated concentrations, the delayed neutron count rate, and finally the \gls{DNP} group parameters that fit that count rate.
+The red diamond represents \gls{MoSDeN}.
+\gls{MoSDeN} takes in the data to simulate irradiation of the target fissile sample to generate the irradiated concentrations, the delayed neutron count rate, and finally the \gls{DNP} group parameters that fit that count rate.
 The blue squares represent the outputs, in this case the \gls{DNP} group parameters: the \gls{DNP} group yields and the \gls{DNP} group half-lives.
 
 \begin{figure}[H]
@@ -37,5 +39,6 @@ This concentration is then combined with emission probabilities and decay consta
 A non-linear least squares solve then fits the improved \gls{DNP} group parameters to the delayed neutron count rate, generating the group yields and half-lives, given as blue squares in Figure \ref{fig:data-model}.
 
 This model is only valid for saturation irradiation simulations, as the concentration calculated in Equation \eqref{eq:cfy-conc} is the equilibrium concentration.
-For a pulse irradiation, this approach is not valid, which means that the non-equilibrium pulse irradiations cannot be simulated with the 0D scaled model.
-The proposed 0D flow model can simulate pulse irradiations and will be used to analyze if pulse irradiations provide more accurate yields and half-lives for the shorter-lived \glspl{DNP}.
+For a pulse irradiation, this approach is not valid.
+This prevents the 0D scaled model from simulating pulse irradiations.
+The proposed 0D flow model can simulate pulse irradiations, and it will be used to evaluate whether pulse irradiations provide more accurate yields and half-lives for the shorter-lived \glspl{DNP}.

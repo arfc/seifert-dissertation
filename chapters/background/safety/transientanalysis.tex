@@ -1,4 +1,4 @@
-There are several different methods which have been used for analyzing transients in \glspl{MSR}.
+There are several different methods that have been used for analyzing transients in \glspl{MSR}.
 These methods include multi-group neutron diffusion, \gls{PRK} schemes, and quasi-statics \cite{wooten2018review}.
 These methods are generally coupled, either tightly or loosely, to a thermal-hydraulics solver.
 In general, although these methods have varying accuracy and costs, none of them include \gls{MSR} specific phenomena when generating the \gls{DNP} group parameters.
@@ -9,19 +9,19 @@ In general, although these methods have varying accuracy and costs, none of them
 Multi-group diffusion kinetics methods are among the most accurate, and computationally expensive, approaches applied to transient problems, surpassed only by transport methods.
 Hurwitz and Ehrlich provided a standard formulation of multi-group diffusion written in 1953  \cite{hurwitz1953multigroup}.
 
-Examples of software that use fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling using the \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
-Other examples can be found in the review by Wooten at al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development} and elsewhere in the literature \cite{zhang2009analysis, yamamoto2006transient, nicolino2008coupled, park_advancements_2025}.
+Examples of software that used fluid-flow-velocity field coupled multi-group include GenFOAM and Griffin/Pronghorn coupling with the \gls{MOOSE} \cite{fiorina2015gen, tano2023coupled}.
+Other examples can be found in the review by Wooten et al. \cite{kvrepel2007dyn3d, fiorina2014modelling, kophazi2009development} and elsewhere in the literature \cite{zhang2009analysis, yamamoto2006transient, nicolino2008coupled, park_advancements_2025}.
 %Even more studies which use the multi-group diffusion method can be found in the literature \cite{zhang2009analysis, yamamoto2006transient, krepel2007dyn3d, nicolino2008coupled, park_advancements_2025}.
 These studies typically used Picard iteration with multi-group neutron diffusion coupled with thermal-hydraulics to accurately capture the multi-physics effects of the reactor.
 However, this accuracy also comes with a higher computational cost than simpler methods.
 %The general form of the coupling can be seen in Equations \eqref{eq:mg-n-diff} and \eqref{eq:mg-n-diff-Ci} \cite{wooten2018review}.
-The general form of the coupling is given by Wooten and Powers for the neutron flux \cite{wooten2018review}:
+The general form of the coupling was given by Wooten and Powers for the neutron flux \cite{wooten2018review}:
 
 \begin{equation}
     \begin{split}
     \frac{1}{\bar{\nu}_g} \frac{\partial \phi_g}{\partial t} = & \; \nabla \cdot D_g \nabla \phi_g + \sum_{g' \neq g}^G \Sigma_{s, g' \rightarrow g} \phi_{g'} \\
     & + (1-\beta) \chi_{p, g} \sum_{g'=1}^{G} (\nu \Sigma_f)_{g'} \phi_{g'}\\
-    & \sum_{k=1}^K \chi_{d, g, k} \lambda_k C_k - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g},
+    & + \sum_{k=1}^K \chi_{d, g, k} \lambda_k C_k - \Sigma_{a, g} \phi_g - \sum_{g' \neq g}^G \Sigma_{s, g \rightarrow g'} \phi_{g},
     \label{eq:mg-n-diff}
     \end{split}
 \end{equation}
@@ -41,7 +41,7 @@ G &= \mbox{ the total number of energy groups [$\#$]} \nonumber\\
 \chi_{d, g, k} &= \mbox{the fraction of delayed neutrons from precursor group \textit{k} born in group \textit{g} [-]} \nonumber\\
 C_k &= \mbox{the concentration of \glspl{DNP} in group \textit{k} [$\# \cdot cm^{-3}$]} \nonumber\\
 \vec{u} &= \mbox{the velocity profile [$cm \cdot s^{-1}$]} \nonumber\\
-\Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} [$cm^{-1}]$} \nonumber\\
+\Sigma_{a, g} &= \mbox{the macroscopic absorption cross section for group \textit{g} $[cm^{-1}]$} \nonumber\\
 \nu_T &= \mbox{the eddy viscosity [$cm^2 \cdot s^{-1}$]} \nonumber\\
 Sc_T &= \mbox{the turbulent Schmidt number [-].} \nonumber
 \end{align}
@@ -175,11 +175,11 @@ M_{l} &= \mbox{ the mass in the loop [$kg$]} \nonumber \\
 %    \item $w(t)$ is the mass flow rate
 %\end{description}
 
-A similar method is also used by Suzuki and Shimazu for analyzing a reactivity initiated accident in the FUJI-12 reactor \cite{suzuki2008reactivity}.
-That work uses a simpler form of the equations, without dividing the precursor concentrations into core and loop regions.
+A similar method is used by Suzuki and Shimazu for analyzing a reactivity initiated accident in the FUJI-12 reactor \cite{suzuki2008reactivity}.
+That work used a simpler form of the equations, without dividing the precursor concentrations into core and loop regions.
 
 The work by Merle-Lucotte et al. used the IPK method\footnote{The "IPK method" may stand for the "Improved Point-Kinetic method," though this is not explicitly stated \cite{merle2015physical}}.
-This method uses a fixed mesh for neutronics and a mobile mesh for fluid properties.
+This method used a fixed mesh for neutronics and a mobile mesh for fluid properties.
 Merle-Lucotte et al. found that the \gls{PRK} method without any modifications was able to match the IPK method for general trends and end-states, but was unable to capture reactivity oscillations properly.
 The IPK method was able to capture these oscillations, but assumes uniform fission and instantaneous heat transfer \cite{merle2015physical}.
 
@@ -202,9 +202,9 @@ The general formulation used for quasi-static methods is very similar among the 
 A complete derivation of the quasi-static method can be found in the work by Henry, who discusses the shape and amplitude flux functions, and the work by Devooght, who discussed the generalized quasi-static method \cite{henry1958application, devooght1980quasistatic}.
 There are also other studies which discuss the quasi-static method in detail \cite{becker1968generalized}.
 
-Wooten et al. introduced several different publications which have used quasi-statics \cite{wooten2018review}.
-One of these, from 2005 by Rineiski et al., covered the SIMMER code, which couples neutronics, thermal-hydraulics, and structure codes \cite{rineiski2005kinetics}.
-The neutron flux was constrained in the work by a term containing the phase-space integration and the weighting function used.
+Wooten et al. reviewed several publications which have used quasi-statics \cite{wooten2018review}.
+One of these, from 2005 by Rineiski et al., documented the SIMMER code, which coupled neutronics, thermal-hydraulics, and structure codes \cite{rineiski2005kinetics}.
+The neutron flux was constrained in that work by a term containing the phase-space integration and the weighting function used.
 The neutron flux is treated as:
 \begin{equation}
     \phi(\vec{x}, t) = \phi_A(t) \psi (\vec{x}, t),
@@ -282,7 +282,7 @@ c_{s, k} &= \mbox{ the \gls{PRK} "standard" precursor concentration of group $k$
 c_{m, k} &= \mbox{ the \gls{PRK} "movable" precursor concentration of group $k$ [$\#$]} \nonumber \\
 q_{eff} &= \mbox{ the \gls{PRK} external neutron source [$\# \cdot s^{-1}$] } \nonumber \\
 \Lambda &= \mbox{ the neutron generation time [$s$]} \nonumber \\
-W(x) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\
+W(\vec{x}) &= \mbox{ the weighting function (the default in SIMMER} \nonumber\\
 &\;\;\;\;\; \mbox{ is an adjoint flux computed at steady-state conditions) [-].} \nonumber
 \end{align}
 

@@ -1,9 +1,9 @@
-This section discusses what \glspl{DNP} are, how they are measured, how groups are formulated, how they relate to kinetics parameters, and how they are modeled in kinetics models.
+This section discusses what \glspl{DNP} are, how they are measured, how groups are formulated, how they relate to kinetics parameters, and how they are represented in kinetics models.
 Before delving deeper into the \gls{DNP} group parameters, it is useful to first understand \glspl{DNP} conceptually because they are an important consideration in nuclear reactors \cite{das1993importance}.
-\Glspl{DNP} are nuclides produced via fission which decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
+\Glspl{DNP} are nuclides produced via fission that decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
 %\glspl{DNP} are an important consideration in nuclear reactors \cite{das1993importance}.
 %An important consideration in nuclear reactors, especially in \glspl{MSR}, are \glspl{DNP}, discovered in 1939, with initial spectral measurements in 1946 \cite{roberts1939further, das1993importance, burgy1946energies}.
-In this work, the term \gls{DNP} will be solely used rather than referring to emitters.
+In this work, the term \gls{DNP} will be used exclusively rather than referring to emitters.
 Distinguishing between the emitter and the \gls{DNP} is not relevant for this work because the emission time of the neutron is dominated by the $\beta^{-}$ decay \cite{bohr1939mechanism, ott1985introductory}.
 
 
@@ -53,7 +53,7 @@ In \glspl{MSR}, the movement of the fuel salt necessitates spatial resolution fo
 Concentrations of nuclides vary spatially as short-lived nuclides decay and longer-lived nuclides are distributed outside the core.
 Modeling space and time together largely increases computational cost, making problems involving \glspl{DNP} in \glspl{MSR} more challenging than handling \glspl{DNP} in stationary fuels.
 
-Properly modeling the \glspl{DNP} in reactors is important, otherwise simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
+Properly modeling the \glspl{DNP} in reactors is important; otherwise simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
 Section \ref{sec:bg-trans-analysis-methods} shows how the power response depends on the \glspl{DNP}.
-The reactor controllability varies based on the available number of \glspl{DNP}.
-If there are fewer delayed neutrons available due to movement of the fuel salt, such as in an \gls{MSR}, then the reactor period becomes shorter, making the reactor harder to control.
+The reactor controllability varies based on the quantity of delayed neutrons in neutronically-important regions.
+If there are fewer neutronically-important delayed neutrons available due to the movement of the fuel salt, such as in an \gls{MSR}, then the reactor period becomes shorter, making the reactor harder to control.
