@@ -12,7 +12,7 @@ the group will have dozens or hundreds over time.
 - by Peter Czoschke (based on the original version by David Hull)
 
 ## Description
-uiucthesis2018 is a LaTex package for formatting theses in the format required by the University of Illinois at Urbana Champaign.
+uiucthesis2021 is a LaTex package for formatting theses in the format required by the University of Illinois at Urbana Champaign.
 
 ## To compile:
 Run `make` after making the appropriate edits to the `main.tex` file.
