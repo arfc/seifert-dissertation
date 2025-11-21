@@ -1,0 +1,47 @@
+\begin{frame}
+  \frametitle{The uncertainty-weighted \gls{PCC} shows critical data needs}
+  \begin{columns}
+    \column[t]{0.67\textwidth}
+    \begin{block}{Uncertainty-weighted PCC $U_i$: }
+    \begin{equation}
+    U_{i} = \sum_v \frac{\sigma_{i,v}}{x_{i,v}} \sum_g\left|PCC_{i,v,g}\right|,
+    \label{eq:Uiv}
+\end{equation}
+where
+\begin{align}
+    U_{i,v} &= \text{the uncertainty-weighted sensitivity of }\nonumber \\
+    & \text{\;\;\;\;\;\gls{DNP} value $v$ for \gls{DNP} $i$ [-]} \nonumber \\
+    \sigma_{i,v} &= \text{the uncertainty in the \gls{DNP} value $v$}\nonumber \\
+    & \text{\;\;\;\;\;for \gls{DNP} $i$ [-]} \nonumber \\
+    x_{i,v} &= \text{the \gls{DNP} value $v$, representing the half-life,}\nonumber \\
+    & \text{\;\;\;\;\;emission probability, or concentration of \gls{DNP} $i$ [-]} \nonumber \\
+    PCC_{i, v, g} &= \text{the \gls{PCC} for \gls{DNP} $i$ and value $v$ with}\nonumber \\
+    & \text{\;\;\;\;\;\gls{DNP} group parameter $g$ [-].} \nonumber
+\end{align}
+\end{block}
+    \column[t]{0.33\textwidth}
+    \begin{table}[!ht]
+    \centering
+    \caption{The largest summed uncertainty-weighted \gls{PCC} magnitudes after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
+\begin{tabular}{lr}
+\hline
+Nuclide &  $U_{i}$ \\
+\hline
+\textcolor{blue}{$^{86}$Ge} & 1.71 \\
+$^{124}$Ag & 0.41 \\
+$^{120}$Ag & 0.36 \\
+$^{114}$Tc & 0.36 \\
+$^{147}$Xe & 0.34 \\
+$^{104}$Nb & 0.29 \\
+$^{111}$Mo & 0.27 \\
+$^{122}$Pd & 0.27 \\
+\textcolor{blue}{$^{98}$Y} & 0.26 \\
+$^{103}$Zr & 0.26 \\
+\hline
+\end{tabular}
+\label{tab:pcc-summed}
+\end{table}
+  \end{columns}
+
+\end{frame}
+
