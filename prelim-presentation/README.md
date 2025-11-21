@@ -128,3 +128,4 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Discuss how Ge86 Pn in ENDFB71 is 5.2% without uncertainty, wheras IAEA uses 45+/-15%
 - Overlap with the previous table given in blue (only 2 out of 10 nuclides)
 - The non-overlapping DNPs have very large uncertainty even though the PCC values may not be as large
+### Verify
