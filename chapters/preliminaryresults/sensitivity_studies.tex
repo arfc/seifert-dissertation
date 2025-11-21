@@ -453,6 +453,30 @@ Figure \ref{fig:summedpccs} shows these values for each \gls{DNP}, where the the
 A value of 12 would indicate any change to the \gls{DNP}'s nuclear data results in a linear response in every \gls{DNP} group parameter.
 The largest value is for $^{86}$Ge, with a value of approximately 8.1, indicating that uncertainties in $^{86}$Ge will have a large impact on the \gls{DNP} group parameters.
 
+These \glspl{PCC} can be combined with the relative uncertainty associated with each \gls{DNP} to capture the nuclides which both impact the \gls{DNP} group parameters most significantly and have large uncertainties.
+Specifically, this is calculated as the relative uncertainties times the magnitude of the \gls{PCC} for a \gls{DNP} $i$ and \gls{DNP} value $v$, or $U_{i,v}$:
+\begin{equation}
+    U_{i,v} = \frac{\sigma_{i,v}}{x_{i,v}} \sum_g\left|PCC_{i,v,g}\right|,
+    \label{eq:Uiv}
+\end{equation}
+where
+\begin{align}
+    U_{i,v} &= \text{the uncertainty-weighted sensitivity of \gls{DNP} value $v$ for \gls{DNP} $i$ [-]} \nonumber \\
+    \sigma_{i,v} &= \text{the uncertainty in the \gls{DNP} value $v$ for \gls{DNP} $i$ [-]} \nonumber \\
+    x_{i,v} &= \text{the \gls{DNP} value $v$, representing the half-life, emission probability,} \nonumber \\
+    &\text{\;\;\;\;\;or concentration of \gls{DNP} $i$ [-]} \nonumber \\
+    PCC_{i, v, g} &= \text{the \gls{PCC} for \gls{DNP} $i$ and value $v$ with \gls{DNP} group parameter $g$ [-].} \nonumber \\
+\end{align}
+For a specific \gls{DNP} $i$, the total uncertainty-weighted sensitivity from the contribution of every \gls{DNP} value can be calculated as:
+\begin{equation}
+    U_{i} = \sum_v U_{i,v}.
+\end{equation}
+Similarly, the total \gls{PCC} for a specific \gls{DNP} $i$ can be represented as:
+\begin{equation}
+    PCC_{i} = \sum_v \sum_g \left|PCC_{i,v,g}\right|.
+\end{equation}
+
+
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.95\linewidth]{images/chart_PCC.png}
@@ -471,7 +495,7 @@ However, $^{100}$Rb does not appear in Table \ref{tab:pcc-analysis}, indicating 
     \caption{The sum of the \gls{PCC} magnitudes for the top 10 \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
 \begin{tabular}{lr}
 \hline
-Nuclide &  $\sum \left|PCC \right|$ \\
+Nuclide &  $PCC_{i}$ \\
 \hline
 $^{86}$Ge & 8.06 \\
 $^{87}$Br & 3.82 \\
@@ -488,18 +512,6 @@ $^{100}$Rb & 1.22 \\
 \label{tab:pcc-summed}
 \end{table}
 
-These \glspl{PCC} can be combined with the relative uncertainty associated with each \gls{DNP} to capture the nuclides which both impact the \gls{DNP} group parameters most significantly and have large uncertainties.
-Specifically, this is calculated as the relative uncertainties times the magnitude of the \gls{PCC} for a \gls{DNP} $i$ and \gls{DNP} value $v$, or $U_{i,v}$:
-\begin{equation}
-    U_{i,v} = \frac{\sigma_{i,v}}{x_{i,v}} \sum_g\left|PCC_{i,v,g}\right|,
-\end{equation}
-where
-\begin{align}
-    U_{i,v} &= \text{the uncertainty-weighted sensitivity of \gls{DNP} value $v$ for \gls{DNP} $i$ [-]} \nonumber \\
-    \sigma_{i,v} &= \text{the uncertainty in the \gls{DNP} value $v$ for \gls{DNP} $i$ [-]} \nonumber \\
-    x_{i,v} &= \text{the \gls{DNP} value of half-life, emission probability, or concentration ($v$) of \gls{DNP} $i$ [-]} \nonumber \\
-    PCC_{i, v, g} &= \text{the \gls{PCC} for \gls{DNP} $i$ and value $v$ with \gls{DNP} group parameter $g$ [-].} \nonumber \\
-\end{align}
 
 \begin{figure}[!ht]
     \centering
@@ -518,7 +530,7 @@ This table shows the most \glspl{DNP} that require improved data due to the comb
     \caption{The sum of the relative uncertainties scaled by the \gls{PCC} magnitudes for the top 10 \gls{DNP} on each group half-life $\tau_k$ and yield $\bar{\nu}_{d,k}$ after a thermal saturation irradiation of $^{235}$U using the 0D scaled model.}
 \begin{tabular}{lr}
 \hline
-Nuclide &  $\sum \left|PCC \right|$ \\
+Nuclide &  $U_{i}$ \\
 \hline
 $^{86}$Ge & 1.71 \\
 $^{124}$Ag & 0.41 \\
