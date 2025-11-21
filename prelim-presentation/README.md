@@ -129,3 +129,6 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Overlap with the previous table given in blue (only 2 out of 10 nuclides)
 - The non-overlapping DNPs have very large uncertainty even though the PCC values may not be as large
 ### Verify
+- This is conducted for a stationary sample such that results can be compared with literature
+### Verify 2
+- Lead into proposed work
