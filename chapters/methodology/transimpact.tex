@@ -35,9 +35,11 @@ If the parameters do not match, the issue lies in the data or the aggregation of
 If the parameters are accurately predicted, the formulation is considered valid.
 
 The second stage of the validation will use the \gls{MSRE} modeled in Moltres to compare the effective delayed neutron fraction.
-The literature reports an effective delayed neutron fraction in the \gls{MSRE} of 0.0045, which will be compared to values calculated using the previous and improved \gls{DNP} group parameters.
-To ensure the energy spectra of the \gls{MSRE} is properly captured in the \gls{DNP} group parameters, OpenMC will first be used to run a Monte Carlo k-eigenvalue solve.
-This will enable generation of four sets of \gls{DNP} groups: a stationary group using thermal neutrons, an improved group using thermal neutrons, and then the same two groups but with the \gls{MSRE} neutron spectrum.
+The literature reports the effective delayed neutron fraction reduced from 0.0045 by 230 to 304 $pcm$, which will be compared to values calculated using the previous and improved \gls{DNP} group parameters \cite{haubenreich1970experience, shi2021gen, prince1968zero}.
+%The circulation also led to a change in reactivity, specifically a 210 $pcm$ negative reactivity insertion from delayed neutron circulation, with 20 $pcm$ or less from gas bubble entrainment \cite{haubenreich1970experience}.
+%The effective delayed neutron fraction was 0.0045 as the $^{235}$U fuel circulated in the \gls{MSRE} \cite{haubenreich1970experience}.
+This stage will require OpenMC k-eigenvalue calculations to generate multi-group cross section data to pass into Moltres using a fresh fuel salt.
+This will enable generation of two sets of \gls{DNP} groups: a conventional and an improved set of \gls{DNP} group parameters.
 These results will then be compared with \gls{DNP} groups in the literature for the \gls{MSRE} to determine which set of parameters most closely fits the measured effective delayed neutron fraction \cite{lee2022transient}.
 
 The third stage of the validation that will be conducted in this work applies the improved \gls{DNP} group parameters to the \gls{MSRE} pump start-up and coast-down transient simulation to compare against experimental data on reactivity changes from \glspl{DNP} \cite{prince1968zero}.
