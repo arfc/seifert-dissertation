@@ -118,3 +118,9 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Time node density
 - The time node density of the 1200 second decay time with 800 nodes is two time nodes for every three seconds of decay; the time node density of the 2400 second decay time with 1600 nodes is the same. If the \ac{DNP} group parameters primarily depend on the node density, then these two different sets of decay times and time nodes should give the same set of \ac{DNP} group parameters. Instead, the results remain approximately constant with varying node numbers, with the main difference arising from the total decay time. This indicates the total decay time sensitivity analysis does not need to account for varying time node density.
 ### Nuclear data
+- PCC of 1.0 vs PCC of 0.19 (very strongly correlated vs weakly) (surprising there is any correlation)
+### PCC magnitudes
+- Ge86 is the bright yellow spot, some others can be seen around it
+- Iodine and antimony dominate the upper area
+- These nuclides have large PCCs because they either dominate a group (such as Br87), have large CFYs and emission probabilities, or a combination
+### Scaled PCC
