@@ -132,3 +132,6 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - This is conducted for a stationary sample such that results can be compared with literature
 ### Verify 2
 - Lead into proposed work
+### 0D flow
+### Validation
+- The prompt method is beta_eff \approx 1 - k_p/k_{eff} (using two monte carlo sims, one with and one without delayed neutrons)
