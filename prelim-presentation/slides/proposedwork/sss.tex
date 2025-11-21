@@ -1,14 +1,27 @@
 \begin{frame}
-  \frametitle{The MSRE will be used for safety, security, and safeguards analyses}
-    \begin{block}{The validation will proceed as follows:}
+  \frametitle{This work will demonstrate safety, security, and safeguards analyses}
+    \begin{block}{Safety analyses will investigate scenarios in which conventional parameters may be inaccurate:}
         \begin{itemize}
-            \item Calculation of improved \gls{DNP} group parameters for \gls{MSRE}
-            \item K-eigenvalue calculations of \gls{MSRE} for multi-group cross sections
-            \item Add approximate models of upper and lower plena to existing \gls{MSRE} Moltres model
-            \item Calculation of $\beta_{eff}$ using the prompt method for stationary and flowing fuel salt using improved and conventional \gls{DNP} group parameters
-            \item Comparison of $\beta_{eff}$ with experimental data \cite{haubenreich1970experience}
-            \item Simulate pump start-up and coast-down transients
-            \item Comparison of reactivity response with experimental data \cite{prince1968zero}
+            \item \Gls{ULOHS}
+            \begin{itemize}
+                \item Loss of cooling in the reactor due, potentially due to a heat exchanger failure
+                \item Modeled in Moltres by setting inlet temperature equal to outlet temperature
+            \end{itemize}
+            \item \Gls{ULOF}
+            \begin{itemize}
+                \item Flow rate decreases to zero due to a pump failure
+                \item Modeled in Moltres by changing flow field over time to match \gls{MSRE} pump shut-down
+            \end{itemize}
+            \item \Gls{UTOP}
+            \begin{itemize}
+                \item Reactivity insertion event, which could be caused by poison removal, fissile addition, or temperature change
+                \item Modeled in Moltres by having a step-decrease in the removal cross section, representing control rod withdrawal
+            \end{itemize}
+            \item \Gls{FSOC}
+            \begin{itemize}
+                \item Fuel salt temperature decreases, potentially caused by increased heat removal rate
+                \item Modeled in Moltres by reducing inlet temperature by 25\%
+            \end{itemize}
         \end{itemize}
     \end{block}
 \end{frame}
