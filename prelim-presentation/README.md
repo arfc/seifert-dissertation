@@ -148,3 +148,4 @@ with the response using existing DNP groups. By using the improved DNP group par
 the modeled and actual delayed neutron fraction can be reduced, allowing the power response to more accurately
 fingerprint diversion of nuclear material.
 ### Summary
+- The proposed work will complete the objectives
