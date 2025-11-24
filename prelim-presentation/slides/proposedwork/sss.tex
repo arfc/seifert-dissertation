@@ -1,6 +1,6 @@
 \begin{frame}
-  \frametitle{This work will analyze safety, security, and safeguards}
-    \begin{block}{Safety analyses will investigate scenarios in which conventional parameters may be inaccurate:}
+  \frametitle{Safety-related transients may disrupt safe reactor operation}
+    \begin{block}{Safety-related transients that will be modeled are:}
         \begin{itemize}
             \item \Gls{ULOHS}
             \begin{itemize}
@@ -28,7 +28,23 @@
 
 
 \begin{frame}
-  \frametitle{This work will analyze safety, security, and safeguards}
-    \begin{block}{Security analyses will investigate scenarios in which conventional parameters may be inaccurate:}
+  \frametitle{Security-related transients from sabotage may be used as a diversion}
+  This framework assumes a hostile actor and an insider with the objective to disrupt operations \cite{protection2011evaluation}.
+    \begin{block}{Sabotage-initiated transients that will be modeled are:}
+        \begin{itemize}
+            \item All safety-related transients as single events
+            \item Combined \Gls{UTOP} and \gls{ULOHS}
+            \begin{itemize}
+                \item This should cause a temperature increase that propagates due to lack of heat sink; reactivity should then decrease due to temperature increase
+            \end{itemize}
+            \item Combined \Gls{UTOP} and \gls{ULOF}
+            \begin{itemize}
+                \item This should cause a temperature increase with a peak maximum temperature due to stationary fuel salt; reactivity should then decrease due to temperature increase
+            \end{itemize}
+            \item Combined \Gls{UTOP} and \gls{FSOC}
+            \begin{itemize}
+                \item This should cause a temperature increase that is counteracted by the overcooled inlet fuel salt, leading to the largest reactivity change; temperature is not expected to change dramatically
+            \end{itemize}
+        \end{itemize}
     \end{block}
 \end{frame}

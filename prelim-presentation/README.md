@@ -136,4 +136,6 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Validation
 - The prompt method is beta_eff \approx 1 - k_p/k_{eff} (using two monte carlo sims, one with and one without delayed neutrons)
 ### Sss
+- The conventional parameters have a larger beta_eff and may predict safe/secure/safeguarded operation, whereas reality will align with the improved parameters
+- Only UTOP can be modeled with the other transients. ULOHS and FSOC would mean the fuel salt is not cooled but is also overcooled. ULOF and ULOHS would mean the fuel salt is not cooled but also is not recirculating anyways. ULOF and FSOC is similar to the other case, but with no recirculation it doesn't matter the incoming salt is cooler since it won't be added anyways.
 ### Summary
