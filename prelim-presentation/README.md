@@ -138,4 +138,13 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Sss
 - The conventional parameters have a larger beta_eff and may predict safe/secure/safeguarded operation, whereas reality will align with the improved parameters
 - Only UTOP can be modeled with the other transients. ULOHS and FSOC would mean the fuel salt is not cooled but is also overcooled. ULOF and ULOHS would mean the fuel salt is not cooled but also is not recirculating anyways. ULOF and FSOC is similar to the other case, but with no recirculation it doesn't matter the incoming salt is cooler since it won't be added anyways.
+- If there is a diversion of uranium, then there will be more plutonium fission, which will decrease the effective
+delayed neutron fraction. This will lead to a larger power response. The opposite is true for a 235 U diversion, which
+will lead to a smaller power response.
+Based on these effects, a case with no diversion while using existing DNP group parameters would predict a
+smaller power response than the reactor will measure. This will increase the false-positive detection probability for
+235 U diversion. Additionally, a plutonium diversion would lead to the measured reactor power response aligning
+with the response using existing DNP groups. By using the improved DNP group parameters, this difference between
+the modeled and actual delayed neutron fraction can be reduced, allowing the power response to more accurately
+fingerprint diversion of nuclear material.
 ### Summary
