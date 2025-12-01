@@ -1,6 +1,23 @@
 \begin{frame}
+  \frametitle{There is a general equation for sample irradiation}
+  The $I$ \glspl{DNP} are approximated by $K$ groups.
+  \begin{block}{Intermediate Irradiation}
+    \begin{align}
+\dot{n}_{d}(T, t) \approx \dot{F}_s \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} \right)
+\end{align}
+\begin{align}
+	\dot{F}_s &= \text{The fission rate in the sample $[\# \cdot s^{-1}]$ \nonumber \\
+	{F}_s &= \text{The number of fissions in the sample $[\#]$ \nonumber \\
+	T &= \text{The time over which the sample is irradiated $[s]$ \nonumber \\
+\end{align}
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}
   \frametitle{There are two common irradiation types used to generate groups}
-  The $I$ \glspl{DNP} are condensed into $K$ groups.
+  The $I$ \glspl{DNP} are approximated by $K$ groups.
   \begin{block}{Intermediate Irradiation}
     \begin{align}
 \dot{n}_{d}(T, t) \approx \dot{F}_s \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} \right)
