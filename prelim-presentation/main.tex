@@ -27,7 +27,8 @@
 \usepackage{microtype} % if using PDF
 \usepackage{bigints}
 \usepackage{progressbar}
-\usepackage{minted}
+\usepackage{mathtools}
+%\usepackage{minted}
 
 \newcommand{\units}[1] {\:\text{#1}}%
 \newcommand{\SN}{S$_N$}%{S$_\text{N}$}%{$S_N$}%
@@ -40,7 +41,7 @@
 %%%% Acronym support
 
 \usepackage[acronym,toc]{glossaries}
-\include{../acros}
+\include{acros}
 
 %\makeglossaries
 
@@ -148,7 +149,7 @@
 \input{slides/introduction/objectives}
 \input{slides/proposedwork/overview}
 \subsection{0D Flow Model}
-\input{slides/proposedwork/0Dflow}
+\input{slides/proposedwork/0dflow}
 \subsection{Validation}
 \input{slides/proposedwork/validation}
 \subsection{Transient Analyses}
