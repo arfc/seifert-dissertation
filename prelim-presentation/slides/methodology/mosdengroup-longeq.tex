@@ -1,0 +1,16 @@
+
+\begin{frame}
+  \frametitle{\Gls{MoSDeN} uses a newly-derived form of the group fit for \glspl{MSR}}
+  Assuming the sample experiences a square-wave power history during in-core and ex-core times, an \gls{MSR} specific group fit equation can be derived.
+
+
+
+\begin{align}
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d,k} } =& \overbrace{e^{-\lambda_k t}\sum_{j=0}^{J_{in}} \left( e^{-\lambda_k (T - j \cdot \tau_{net} - \tau_{in})} - e^{-\lambda_k (T - j \cdot \tau_{net})}\right)}^\text{\clap{Partial ex-core~}} \nonumber \\ +& \underbrace{e^{-\lambda_k t}\sum_{j=J_{in}+1}^{J} \left( 1 - e^{-\lambda_k (T - j \cdot \tau_{net})} \right)}_\text{\clap{Partial in-core~}}
+\intertext{where}
+T =& \text{ the total irradiation time} \nonumber \\
+J_{in} =& \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
+  =& \text{ the number of recirculated in-core irradiations [$\#$]} \nonumber
+\end{align}
+
+\end{frame}
