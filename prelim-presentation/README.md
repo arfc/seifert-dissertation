@@ -132,6 +132,10 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - This is conducted for a stationary sample such that results can be compared with literature
 ### Verify 2
 - Lead into proposed work
+# Overview
+- 0D flow model will reveal the effects of full depletion and explicit residence time modeling
+- Validation will demonstrate if improve parameters more accurately model the MSRE beta_eff and transients than conventional parameters
+- Analysis of transients will provide insight into the error of conventional parameters
 ### 0D flow
 ### Validation
 - The prompt method is beta_eff \approx 1 - k_p/k_{eff} (using two monte carlo sims, one with and one without delayed neutrons)
