@@ -1,0 +1,28 @@
+\begin{frame}
+  \frametitle{Sabotage may be used as a diversion}
+  This framework assumes a hostile actor and an insider with the objective to disrupt operations \cite{protection2011evaluation}.
+    \begin{block}{Sabotage-initiated transients that will be modeled are:}
+        \begin{itemize}
+            \item All safety-related transients as single events
+            \item Combined \Gls{UTOP} and \gls{ULOHS}
+            \item Combined \Gls{UTOP} and \gls{ULOF}
+            \item Combined \Gls{UTOP} and \gls{FSOC}
+        \end{itemize}
+    \end{block}
+\begin{table}[!ht]
+    \caption{Implementation of transients using temperature, reactivity, and velocity changes}
+    \centering
+    \begin{tabular}{lccc}
+    \hline
+	    Transient & $T$ & $\rho$ & $v$\\
+       \hline
+	    \gls{ULOHS} & $T_{in} = T_{out}$ & 0 & 0\\
+	    \gls{ULOF} & 0 & 0 & $v \approx e^{-t}$\\
+	    \gls{UTOP} & 0 & $\rho = 0.1\$ $ & 0\\
+	    \gls{FSOC} & $T_{in} = 0.5 T_{in, 0}$ & 0 & 0\\
+        \hline
+    \end{tabular}
+    \label{tab:total-delnu-compare}
+\end{table}
+\end{frame}
+

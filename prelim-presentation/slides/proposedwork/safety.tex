@@ -1,0 +1,29 @@
+\begin{frame}
+  \frametitle{Safety-related transients may disrupt safe reactor operation}
+    \begin{block}{Safety-related transients that will be modeled are:}
+        \begin{itemize}
+            \item \Gls{ULOHS}
+            \begin{itemize}
+                \item Loss of cooling in the reactor, potentially due to a heat exchanger failure
+                \item Modeled in Moltres by setting inlet temperature equal to outlet temperature
+            \end{itemize}
+            \item \Gls{ULOF}
+            \begin{itemize}
+                \item Flow rate decreases to zero due to a pump failure
+                \item Modeled in Moltres by changing flow field over time to match \gls{MSRE} pump shut-down
+            \end{itemize}
+            \item \Gls{UTOP}
+            \begin{itemize}
+                \item Reactivity insertion event, which could be caused by poison removal, fissile addition, or temperature change
+                \item Modeled in Moltres by having a step-decrease in the removal cross section, representing control rod withdrawal
+            \end{itemize}
+            \item \Gls{FSOC}
+            \begin{itemize}
+                \item Fuel salt temperature decreases, potentially caused by increased heat removal rate
+                \item Modeled in Moltres by reducing inlet temperature by 25\%
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
