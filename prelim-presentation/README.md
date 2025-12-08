@@ -82,9 +82,11 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - The scaled flux method would be the same as a stationary irradiation.
 - Scaled flux scales by fraction of time in the core
 - The scaled flux method accurately captures concentrations that change linearly with the flux
+- Because groups normalize per fission, scaled flux method does not fully capture the behavior
 - Explicitly capturing this will be more accurate, comparing with scaled flux could be interesting
 ### Reprocessing
 ### Mosden
+- Because of simplifications in the 0D scaled model, Equation 10 simplifies to the identical form as the scaled flux approximation, hence the name 0D scaled model.
 ### Least squares
 ### Residual
 - The 2-norm is the square root of the sum of the squares, squaring it makes it faster to calculate and doesn't change the minimized solution
