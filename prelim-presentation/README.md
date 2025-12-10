@@ -121,6 +121,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - The time node density of the 1200 second decay time with 800 nodes is two time nodes for every three seconds of decay; the time node density of the 2400 second decay time with 1600 nodes is the same. If the \ac{DNP} group parameters primarily depend on the node density, then these two different sets of decay times and time nodes should give the same set of \ac{DNP} group parameters. Instead, the results remain approximately constant with varying node numbers, with the main difference arising from the total decay time. This indicates the total decay time sensitivity analysis does not need to account for varying time node density.
 ### Nuclear data
 - PCC of 1.0 vs PCC of 0.19 (very strongly correlated vs weakly) (surprising there is any correlation)
+- Clearly explain x and y axes and what each plot is showing
 ### PCC magnitudes
 - Ge86 is the bright yellow spot, some others can be seen around it
 - Iodine and antimony dominate the upper area
@@ -130,9 +131,11 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Discuss how Ge86 Pn in ENDFB71 is 5.2% without uncertainty, wheras IAEA uses 45+/-15%
 - Overlap with the previous table given in blue (only 2 out of 10 nuclides)
 - The non-overlapping DNPs have very large uncertainty even though the PCC values may not be as large
+- Point out CFY peaks
 ### Verify
 - This is conducted for a stationary sample such that results can be compared with literature
 ### Verify 2
+- I have started on some of the proposed work (looking at alternative datasets), and the JEFF-3.1.1 CFYs align with the literature and do not have as large a yield of Ge86
 - Lead into proposed work
 # Overview
 - 0D flow model will reveal the effects of full depletion and explicit residence time modeling
@@ -141,6 +144,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### 0D flow
 ### Validation
 - The prompt method is beta_eff \approx 1 - k_p/k_{eff} (using two monte carlo sims, one with and one without delayed neutrons)
+- The MSRE model will be used for all transients, but only pump startup and coast down has experimental data to validate with
 ### Sss
 - The conventional parameters have a larger beta_eff and may predict safe/secure/safeguarded operation, whereas reality will align with the improved parameters
 - Only UTOP can be modeled with the other transients. ULOHS and FSOC would mean the fuel salt is not cooled but is also overcooled. ULOF and ULOHS would mean the fuel salt is not cooled but also is not recirculating anyways. ULOF and FSOC is similar to the other case, but with no recirculation it doesn't matter the incoming salt is cooler since it won't be added anyways.
@@ -153,5 +157,6 @@ smaller power response than the reactor will measure. This will increase the fal
 with the response using existing DNP groups. By using the improved DNP group parameters, this difference between
 the modeled and actual delayed neutron fraction can be reduced, allowing the power response to more accurately
 fingerprint diversion of nuclear material.
+- Diversion can be achieved via batch removal of salt, addition of F2 for UF6, separation of Pa (such as in the MSBR) via reductive bismuth-lithium extraction, or slow drip diversion
 ### Summary
 - The proposed work will complete the objectives
