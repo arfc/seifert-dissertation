@@ -68,15 +68,22 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### 3SBD
 - Critical for cost savings, timely deployment, and regulatory requirements
 - Security, I am only looking at sabotage for this work.
+- Safety - protect the public
+- Security - prevent theft or sabotage
+- Safeguards - Impede diversion/production for weapons
 ### MSR not captured
 ### This work captures
+- MSRE operated during the 1960's, had off-gas removal from the pump-bowl, and has experimental data that can be used for validation
 ### Two ways to create DNP groups
+- Go slower through these slides, be more detailed and descriptive
+- Describe how the groups are sorted (tuple of half-life and yield, sorted by half-life) (longest-lived are group 1)
 ### Macroscopic
 - Nobody has used this approach with an MSR
 - Need shielding and distance between irradiation and measurement, but minimize time to capture short-lived DNPs
 ### Microscopic
 - The concentrations come from depletion simulations or cumulative fission yields for a simulated irradiation
 ### Groupping
+- Talk more about each approach and when you would use each one (pros and cons)
 ### Recirculation
 - Explicit modeling can entail using time (irradiate for in-core, decay ex-core) or space (such as a 1D advection model). Some way of representing the different regions and having them happen at the correct time.
 - The scaled flux method would be the same as a stationary irradiation.
@@ -85,21 +92,26 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Because groups normalize per fission, scaled flux method does not fully capture the behavior
 - Explicitly capturing this will be more accurate, comparing with scaled flux could be interesting
 ### Reprocessing
+- Clarify that Br87 is the longest-lived DNP that dominates the longest-lived group (1) before using Br removal as an example
 ### Mosden
 - Because of simplifications in the 0D scaled model, Equation 10 simplifies to the identical form as the scaled flux approximation, hence the name 0D scaled model.
+- Mention that MoSDeN can be used to create tabulated DNP group parameters based on neutron energy and fissile nuclide (as well MSR reprocessing)
 ### Least squares
 ### Residual
 - The 2-norm is the square root of the sum of the squares, squaring it makes it faster to calculate and doesn't change the minimized solution
 ### Uncertainty
+- This is the first time you talk about uncertainty, so spend more time on it
 ### MoSDeN group form
-- The orange bit is new, the rest exists in the T,t form of the equation normally derived. The new bit represents the in-core and ex-core regions
+- State that you derived this new form that captures the in-core and ex-core residence times using a square-wave approximation
 ### 0D scaled
 ### 0D scaled limitations
+- Running fast - relative to the cost for full depletion simulations, this approach is simple and rapid for changing the nuclear data and rerunning
 - DNPs have negligible cross sections so this should be okay
 - Equilibrium means no pulse irradiation (challenging for data)
 - Chemical removal misses intermediate elements, such as not capturing I removal for Xe conc
 ### Params
 - Orange highlights show ~4 orders of magnitude larger chemical removal rates in the MSBR
+- Be clear that the MSBR is conceptual reactor. Also, clarify how the removal rate is multiplied by the number of atoms of each nuclide to get the removal rate in atoms per second (the more there is, the more is removed)
 ### Yields
 - Talk about what the yield represents
 - Talk about how Br87 isn't here
@@ -108,6 +120,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Different DNPs from yield
 - Ge86 dominates early, but most delayed neutrons after saturation come from I137
 - Talk about pulse vs saturation irradiation
+- Talk about Ge86 uncertainty (relate to sensitivity analysis), explain these figures more clearly
 ### Long Cycle
 ### Chem bool
 - 0.57\% difference, or 12 pcm, difference in the yield.

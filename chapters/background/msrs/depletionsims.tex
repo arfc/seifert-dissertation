@@ -161,15 +161,15 @@ An example implementation of this approach is given in Appendix \ref{sec:appendi
 Another study has shown how spatial resolution can be investigated using a system of ordinary differential equations to solve the Bateman equation.
 This study showed an approach that for estimating the steady-state concentration of certain nuclides across a flow loop, but the approach did not account for temporal resolution \cite{shahbazi_steady-state_2022}.
 
-Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of Griffin, a deterministic neutron transport code, with Pronghorn, a thermal fluids code, allowing for spatial and temporal resolution of certain nuclides \cite{tanocoupled2023}.
+Alternatively, a more accurate treatment was recently demonstrated through MOOSE-based coupling of Griffin, a deterministic neutron transport code, with Pronghorn, a thermal fluids code, allowing for spatial and temporal resolution of certain nuclides \cite{tano2023coupled}.
 Tano et al.\ presented an approach in which only insoluble, medium-lived, and high-concentration nuclides are tracked with pre-computed spatial distributions, which only need to be updated if the medium-lived isotopes are not in equilibrium after the thermal-hydraulics perturbation.
 
 Spatially and temporally resolved approaches, such as the one used by Tano et al., are more computationally expensive than those that only require solving a system of ordinary differential equations.
-However, Tano et al.\ showed that including circulation of the fuel salt in depletion directly reduces the equilibrium concentration of $^{135}$Xe by 44\% compared to a spatially unresolved approach without flux scaling \cite{tanocoupled2023}.
+However, Tano et al.\ showed that including circulation of the fuel salt in depletion directly reduces the equilibrium concentration of $^{135}$Xe by 44\% compared to a spatially unresolved approach without flux scaling \cite{tano2023coupled}.
 This indicates there may be a need for spatially resolved depletion simulations to get accurate fuel salt compositions.
 
 
-Tano et al.\ and Betzler have both described fully modeling advection in depletion as computationally intractable \cite{tanocoupled2023, betzler_liquid-fueled_2021}.
+Tano et al.\ and Betzler have both described fully modeling advection in depletion as computationally intractable \cite{tano2023coupled, betzler_liquid-fueled_2021}.
 This is because tracking all nuclides over space and time requires far more computational work than handling a traditional time dependent system of ordinary differential equations (ODEs).
 This spatially resolved system of partial differential equations (PDEs) requires accuracy in the short time scale flow effects.
 These small time steps cause multi-year depletion simulations to be exceedingly expensive.
