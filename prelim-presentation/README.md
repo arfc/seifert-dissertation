@@ -62,9 +62,12 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### What are delayed neutron precursors
 - Emission probability contains probability of beta- decay and then probability of that decay emitting a delayed neutron.
 - The number of atoms depends on fission yields, cross-sections, and decay chains.
+- Accurately modeling these is critical for transients. Various perspectives can be used for transient. Safety transients might include looking at reactivity insertion events to make sure the reactor stays operating within safety limits. Security might include sabotage by an insider or attacks by an external force that damage functionality of the reactor, so understanding the reactor response during these events is important. There is also safeguards, as work in the literature has shown that diversion of material can be identified by the change in the kinetic response of the reactor.
 ### What are DNPs groups and parameters
 - The delayed neutron yield contains the concentration and emission probability data
 - There are hundreds of DNPs, but in reality 99% of delayed neutrons come from about 90 of them. 50% come from about 4 DNPs.
+### Moltres
+- Talk about how in MSR (such as MSRE), the DNPs drift and recirculate, and don't just align with the flux profile as in an LWR.
 ### 3SBD
 - Critical for cost savings, timely deployment, and regulatory requirements
 - Security, I am only looking at sabotage for this work.
@@ -139,6 +142,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 - Ge86 is the bright yellow spot, some others can be seen around it
 - Iodine and antimony dominate the upper area
 - These nuclides have large PCCs because they either dominate a group (such as Br87), have large CFYs and emission probabilities, or a combination
+- Cumulative fission yields peak at the two regions 50-60 and 80-90 neutrons
 ### Scaled PCC
 - Ge86 is expected (large values of PCC, and large uncertainties in dataset used)
 - Discuss how Ge86 Pn in ENDFB71 is 5.2% without uncertainty, wheras IAEA uses 45+/-15%
