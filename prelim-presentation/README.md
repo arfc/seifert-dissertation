@@ -115,6 +115,7 @@ The proposed work offers an improvement to existing modeling of MSRs by incorpor
 ### Params
 - Orange highlights show ~4 orders of magnitude larger chemical removal rates in the MSBR
 - Be clear that the MSBR is conceptual reactor. Also, clarify how the removal rate is multiplied by the number of atoms of each nuclide to get the removal rate in atoms per second (the more there is, the more is removed)
+- Important removals are volatile fluoride group (I and Br), as well as small contributions from others
 ### Yields
 - Talk about what the yield represents
 - Talk about how Br87 isn't here
