@@ -1,17 +1,118 @@
-Overview of rest of document
+
+This thesis presents improved \gls{DNP} groups that capture \gls{MSR} fuel salt circulation and chemical removal that improve the accuracy of \gls{MSR} transient simulations.
+The \gls{MSR} is a Generation IV reactor design \cite{kelly_generation_2014}.
+\Glspl{MSR} are advanced reactors intended to improve safety and efficiency over traditional reactor designs.
+Instead of a solid fuel, \glspl{MSR} use a liquid fuel composed of a molten salt in which some fissile nuclide, such as $^{235}$U, is dissolved.
+Molten salt fuels offer many benefits: high operating temperatures, low operating pressure, high thermal conductivity, and high heat capacity.
+Other benefits include a strong, expansion-driven negative temperature coefficient of reactivity, high resource utilization through higher burnup, reduced fabricating and transporting requirements for fuel, and improved neutron economy due to online fission product removal \cite{serp_molten_2014}.
+
+\Glspl{MSR} have several barriers to deployment which must be addressed before they are commercialized.
+Corrosion and material degradation pose an issue, as the high-temperature salts corrode materials.
+Another deployment barrier involves reactor safety, security, and safeguards by design.
+\Glspl{MSR} have distinct designs compared with traditional light water reactors, such as requiring bulk rather than discrete-item \gls{MCA}.
+To properly design \glspl{MSR}, models must be able to simulate them accurately.
+One specific phenomenon of critical importance in \glspl{MSR} is the circulating liquid fuel.
+When fission events occur, \glspl{DNP} are formed and circulate alongside the fuel.
+
+\Glspl{DNP} are nuclides that undergo $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
+Without properly modeling the \glspl{DNP}, reactor simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
+Reactor physics simulations typically do not model \glspl{DNP} explicitly, but instead represent them in an aggregate form using a smaller number of artificial groups, which approximates the delayed neutron emission rate at much lower computational cost.
+
+These artificial groups are referred to as \gls{DNP} groups and are organized into $k$ groups.
+Each group is represented using three parameters: a decay constant $\lambda_k$, a neutron energy spectrum $\chi_{d,k}$, and an average yield of delayed neutrons per fission event $\bar{\nu}_{d,k}$.
+The neutron energy spectrum of each group is necessary only if the energy dependence is of interest for an analysis, otherwise it can be neglected.
+Although the number of groups is arbitrary, the use of six groups is common for capturing the general delayed neutron emission rate from all the \glspl{DNP} present in the system.
+The \gls{DNP} group parameters are intended to provide sufficient data to calculate the rate of delayed neutrons emitted by group $k$ over a given time period.
+
+Table \ref{tab:dnp-timeline} shows a brief historical timeline of \gls{DNP} group parameter advancements.
+Early work, shown from 1946 through 1957, consisted of fissile sample irradiation in reactors to calculate \gls{DNP} group parameters.
+From 1965 onward, investigations started to examine individual \glspl{DNP} and how those \glspl{DNP} could be mapped onto \gls{DNP} group parameters.
+\Gls{DNP} group parameter formulation and modeling advanced rapidly thanks to increased experimental data regarding half-lives and emission probabilities of individual \glspl{DNP}, which enabled more accurate group parameter formulation.
+
+However, these formulations of \gls{DNP} group parameters did not account for how \gls{MSR} fuel movement and chemical removal affects the \gls{DNP} group parameters.
+For example, if an \gls{MSR} chemically removed significant quantities of an element containing important \glspl{DNP}, that removal would need to be captured in the group parameters; these chemical removals are element-dependent, which the artificial group structure does not capture.
+Not capturing these effects biases simulations with chemical removal and fuel recirculation.
+
+There is a gap in the literature, which can be closed by analyzing and quantifying the effects of chemical removal and recirculation on the \gls{DNP} group parameters.
+Researchers have used the \gls{DNP} groups and data discussed in Table \ref{tab:dnp-timeline} to analyze the flow of the traditional \gls{DNP} groups in \gls{MSR} kinetics \cite{zhang2009analysis, zuo2022flow, lee2022transient, shi2021gen, kupriyanov2022effective}.
+However, that work has not investigated the effects of \gls{MSR} phenomena on the \gls{DNP} groups.
+Thus, the next step in group parameter development is \gls{DNP} group parameters that accurately reflect recirculation and chemical removal in \glspl{MSR}.
 
 
-Check group presentation research update for timeline.
+\begin{longtable}[!ht]{>{\raggedright\arraybackslash}p{0.12\linewidth} p{0.8\linewidth}}
+\caption{Timeline of advancements in \gls{DNP} groups.} \label{tab:dnp-timeline} \\
+
+\hline
+Year & Advancement \\
+\hline
+\endfirsthead
+
+\multicolumn{2}{c}{{\tablename\ \thetable{} -- continued from previous page}} \\
+\hline
+Year & Advancement \\
+\hline
+\endhead
+
+\hline \multicolumn{2}{r}{{Continued on next page}} \\
+\endfoot
+
+\hline
+\endlastfoot
+
+1939 & Roberts et al. discovered delayed neutrons \cite{roberts1939further}; Bohr and Wheeler explained delayed neutrons \cite{bohr1939mechanism}. \\
+1946 & Burgy et al. conducted initial spectral measurements \cite{burgy1946energies}. \\
+1947 & Hughes et al. measured six \gls{DNP} groups at Argonne heavy water pile \cite{hughes1948delayed}. \\
+1957 & Keepin et al. generated improved \gls{DNP} group parameters \cite{keepin1957delayed, williams1996choice}. \\
+1965 & Amiel identified seven \glspl{DNP} that account for 80\% of delayed neutrons \cite{amiel1965delayed}. \\
+1969 & Marmol compiled experimental data on emission probability and half-life for 34 \glspl{DNP} \cite{del1969delayed}. \\
+1972 & Tomlinson mapped 38 \glspl{DNP} onto six groups \cite{tomlinson1972theory}. \\
+1977 & Saphier et al. constructed delayed neutron spectra from 20 \glspl{DNP} \cite{saphier1977evaluated}. \\
+1982 & Rudstam generated \gls{DNP} group parameters and spectra using 67 \glspl{DNP} based on half-lives \cite{rudstam1982six}. \\
+1983 & England et al. generated \gls{DNP} group parameters and spectra using 105 \glspl{DNP} based on half-lives \cite{england1983aggregate}. \\
+1988 & Brady generated \gls{DNP} group parameters and spectra using 271 \glspl{DNP} with least squares \cite{brady1988evaluation}. Group parameters included in ENDF/B-VI.8 and remain unchanged through ENDF/B-VIII.0 \cite{wilson2002delayed, Brown20181, endf6, brady1989delayed, england1988status, brady1989validation}. \\
+1999 & Parish et al. stated \gls{DNP} group parameters in \gls{ENDF} are in need of revision \cite{parish1999status}. \\
+2014 & The \gls{IAEA} hosted the \gls{CRP} on Development of a Reference Database for $\beta$-delayed neutron emission data \cite{mills2014calculation}. \\
+2020 & Leconte et al. used more than 400 \glspl{DNP} to combine data with macroscopic experimental measurements \cite{leconte2020new}. \\
+\end{longtable}
 
 
-In 1957, Keepin used a sample of U235 in Godiva to generate \gls{DNP} group parameters.
-In 1989, Brady's thesis used updated data on 271 nuclides identified as \glspl{DNP}.
-This data was used for ENDF-B/VI was released, and since then there have not been any changes to the \gls{DNP} group parameters (cite the different releases of endf).
-In 1999, Parish says "Based on the six-group data reported in the literature, it appears that the ENDF0B-VI six-group constants are in need of revision." \cite{parish1999status}.
+
+This research aims to generate improved \gls{DNP} group parameters that account for \gls{MSR} recirculation and chemical removal, verify the parameters with the literature, validate the parameters by simulating transients and comparing with experimental data, and evaluate the impact of the improved parameters on safety, safeguards, and security by design.
+For example, chemical removal of \glspl{DNP} decreases the number of delayed neutrons emitted per fission event on average.
+This reduces the total delayed neutron yield, decreases the effective delayed neutron fraction, shortens the reactor period, and reduces reactor controllability.
+Current \gls{DNP} group parameters in \gls{MSR} simulations may overestimate the number of delayed neutrons in the system, resulting in non-conservative assessments of controllability.
+
+The recirculation and chemical removal in \glspl{MSR} can be incorporated into \gls{DNP} group parameter calculations at varying levels of fidelity, with associated differences in cost and accuracy.
+The \gls{DNP} group parameter calculations require simulation of fissile sample irradiation.
+This document describes two models, the 0D scaled and 0D flow models, that simulate irradiation of a fissile sample, from which \gls{DNP} group parameters can be calculated.
+Two types of irradiations are considered: saturation irradiations, which irradiate a sample until the \glspl{DNP} concentrations are at equilibrium, and pulse irradiations, which use a short pulse to irradiate the fissile sample.
+These models use different simplifications, but all of them simulate an incident neutron source that irradiates a target fissile sample consisting of a single fissile nuclide.
+After irradiation, the concentrations of the \glspl{DNP} are extracted and used to calculate the delayed neutron count rate of the sample.
+Then, some selected number of \gls{DNP} groups with decay constants $\lambda_k$ and yields $\bar{\nu}_{d, k}$ are used to fit that delayed neutron count rate.
+
+The 0D scaled model is a 0D model of a fissile sample in an \gls{MSR} where the in-core and ex-core regions are approximated by scaling the flux and chemical removal rates.
+The purpose of the 0D scaled model is to rapidly generate longer-lived \gls{DNP} groups while approximately treating the recirculation and chemical removal rates.
+The 0D scaled model has been completed and is discussed in Section \ref{sec:delnu-groupgen}.
+This model neglects time dependence, decay chains, and cross-sections while scaling the flux and chemical removal rates based on the fraction of fuel salt in different regions of the primary loop.
+The 0D flow model is part of the proposed work and is also discussed in Section \ref{sec:delnu-groupgen}.
+This model accounts for time dependence of \gls{DNP} concentrations and decay chains while applying the flux and chemical removal rates only in the relevant parts of the primary loop.
+It is referred to as the 0D flow model because it captures the effects of the fuel salt flow by using residence times.
+The purpose of the 0D flow model is to capture short and long-lived groups at higher computational cost but increased accuracy compared to the 0D scaled model.
+There is also another model discussed in Appendix \ref{sec:appendixE}, the spatially resolved model, which is discussed as potential future work.
+This model would account for time and space dependence of \gls{DNP} concentrations across the entire primary loop.
 
 
-Brady's thesis has a good history (up to 1988).
+The preliminary results, in Section \ref{sec:prelim-results}, cover impactful \glspl{DNP}, \gls{DNP} group parameter sensitivity studies, and 0D scaled model verification.
+The results show the total delayed neutron yield ($\bar{\nu}_d$) and average half-life ($\bar{\tau}$) are within uncertainty bounds between the data used in the model and the improved \gls{DNP} group parameters generated with the model.
+The match between the input data and the group parameters shows the effect of each \gls{DNP} is captured in the \gls{DNP} group parameters.
+Sensitivity studies reveal each \gls{DNP} affects multiple \gls{DNP} group parameters, not only the group with the most similar half-life.
+Verification with the literature shows the 0D scaled model works well for longer-lived groups but poorly for shorter-lived groups.
+The 0D scaled model only simulates saturation irradiations, which, in combination with the fission yield, half-life, and emission probability data used, results in short-lived groups that are not consistent with the literature.
 
+The proposed work, in Section \ref{sec:future-work}, starts with 0D flow model development, followed by a verification stage to ensure improved \gls{DNP} group parameters are correct for a static case.
+The work then proposes 0D flow model validation using a transient simulation of the \gls{MSRE} compared to experimental data to ensure improved \gls{DNP} group parameters are physically accurate.
+The improved group spectra are proposed to be included in \gls{DNP} group parameter formulation and to be verified for a static case.
+Finally, the work proposes simulation of \gls{MSRE} transients for various safety, security, and safeguards scenarios using improved and pre-existing \gls{DNP} group parameters to study their impact.
 
-This document should contain tabulated data for various fissile nuclides, neutron irradiation energies, in-core residence times, ex-core residence times, and mixing rates.
-Additionally, data should be provided on the exact concentrations of each nuclide (up to $99\%$ of the DN yield).
+Section \ref{sec:future-work} presents potential future work.
+Future work includes spatially resolved model development, uncertainty propagation of \gls{MSR} physical phenomena in \gls{DNP} group parameters, and investigation of the effects of varying the incident neutron energy spectrum on \gls{DNP} group parameters.

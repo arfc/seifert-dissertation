@@ -1,356 +1,581 @@
-\subsubsection{Overview}
+In Section \ref{sec:measurementofdnps}, the various methods for experimentally measuring delayed neutron precursors were discussed.
+The next stage in analyzing these precursors, discussed in this section, specifies how they are used in kinetics models, as well as the various ways they are represented.
+The microscopic and macroscopic experimental approaches provide the necessary data in the form of a delayed neutron count rate to create more easily handled forms via groups.
+This section discusses the least squares approach to convert this data into several \gls{DNP} groups.
 
-In Section \ref{sec:measurementofdnps}, the various methods for experimentally understanding delayed neutron precursors are discussed.
-The next stage of understanding these precursors is to understand how they are used in kinetics models, as well as the various ways they are represented.
-The common way of representing the \gls{DNP} groups is in several distinct groups, typically six.
-These groups were developed originally for computational efficiency and due to lacking data for individual precursors.
-Brady and England found that increasing the number of groups for point kinetics calculations caused no significant differences \cite{brady1989delayed}.
-This shows that merely increasing the number of \gls{DNP} groups does not provide an increase in accuracy for point kinetics simulations.
+The \glspl{DNP} are commonly represented in six groups.
+These groups were originally developed for computational efficiency and due to a lack of data for individual precursors.
+Brady and England found that increasing the number of groups from six to nine caused no significant differences in a point kinetics calculation for step changes in reactivity \cite{brady1989delayed}.
+Their study shows that increasing the number of \gls{DNP} groups alone does not provide an increase in accuracy for point kinetics simulations.
 
-The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_i$, and the group abundances, $a_i$.% (or $\beta_i$).
-These group abundances can be converted to group yields, $\beta_i$, by dividing the group abundances by the average number of neutrons emitted per fission event.
-The group abundances represent the number of delayed neutrons produced per fission in group $i$, and when summed yield the total delayed neutron yield per fission.
-The $\beta_i$ and $\lambda_i$ terms are the defining parameters for the \gls{DNP} groups, along with the group spectra, $\chi_g$.
-With this data, the other group parameters can be derived, such as the total delayed neutron yield, $Y$, and delayed neutron fraction $\beta$.
+Representing the \glspl{DNP} in group form also simplifies the calculation of reactor kinetics, as without the groups the hundreds of \glspl{DNP} would each require their own equations.
+Tracking all the \glspl{DNP} becomes more computationally expensive when tracking all their concentrations over both space and time.
 
-Although the groups are useful, there are times when individual \glspl{DNP} nuclides are needed.
-For example, in 1986, Perry et al. demonstrates that kinetics calculations yield different results when using indiviudal nuclides compared to the six group fit data \cite{perry1986application}.
-In 1989, Brady and England also use the individual nuclides to compare with group data \cite{brady1989delayed}, and show that the updated six group parameters offer consistent results with the explicit \glspl{DNP}.
-By updating the six group parameters based on the updated data available, greater consistency between experimental results and simulations was made possible.
+This section provides information on what the kinetics and delayed neutron group parameters physically represent and how they are calculated.
+The \gls{DNP} group parameters directly affect many of the kinetics parameters, and both sets of data are used in kinetics and dynamics problems.
+Table \ref{tab:dnpgandk} presents each of the relevant terms for this section.
 
-With the \glspl{DNP} represented in group form, it also simplifies the calculation of various kinetics parameters.
-Various kinetics parameters are introduced in Section \ref{sec:bg-trans-analysis-methods}, though without detail on the purpose of each variable.
-This section provides more information on what these kinetics and delayed neutron group parameters physically represent, while Sections \ref{ref:calc-group-param} and \ref{ref:calc-kinetic-param} detail how they are calculated.
+\begin{table}[H]
+    \centering
+    \caption{\Gls{DNP} group parameters and kinetics parameters along with their definitions.}
+    \begin{tabular}{l l r}
+        \hline
+        Parameter & Description & Units\\
+        \hline
+        $\lambda_k$ & The decay constant for \gls{DNP} group $k$ & $[s^{-1}]$\\
+        $\lambda_i$ & The decay constant for \gls{DNP} $i$ & $[s^{-1}]$\\
+        $\bar{\nu}_{d, k}$ & The delayed neutron yield for \gls{DNP} group $k$ & [-]\\        
+        $\bar{\nu}_{d, i}$ & The delayed neutron yield for \gls{DNP} $i$ & [-]\\
+        $\chi_k$ & The spectra of \gls{DNP} group $k$& [-]\\
+        $\chi_i$ & The spectra of \gls{DNP} $i$ & [-]\\
+        $P_{n, i}$ & The delayed neutron emission probability for nuclide $i$ & [$\#$]\\
+        $\bar{\tau}$ & The mean half-life & $[s]$\\
+        $\bar{\nu}_d$ & The total delayed neutron yield & [-]\\
+        \hline
+        $\beta_k$ & The delayed neutron fraction of \gls{DNP} group $k$ & [-]\\
+        $\beta_i$ & The delayed neutron fraction of \gls{DNP} $i$ & [-]\\
+        $\beta$ & The total delayed neutron fraction & [-]\\
+        $\beta_{eff}$ & The effective delayed neutron fraction & [-]\\
+        $\Lambda$ & The mean neutron generation time & $[s]$\\
+        $\Lambda_{eff}$ & The effective mean neutron generation time & $[s]$ \\
+        \hline
+    \end{tabular}
+    \label{tab:dnpgandk}
+\end{table}
 
-Arguably the most well known term in nuclear engineering is the effective multiplication factor, $k_{eff}$.
-This term represents the scaling of the number of neutrons over each generation.
-There is also the infinite multiplication factor, $k_{\infty}$, which represents the multiplication without considering leakage terms.
-The trend of the effective form of the term requiring information on the specific reactor geometry continues for the delayed neutron fraction term.
+The \gls{DNP} groups come with associated parameters, such as the group decay constants, $\lambda_k$, the group yields, $\bar{\nu}_{d, k}$, and the group spectra $\chi_k$ for \gls{DNP} group $k$.
+% (or $\beta_i$).
+The group yields are also known as group abundances, and can be found represented using $a_k$, $b_k$, $\nu_{d,k}$, and $\alpha_k$ in the literature \cite{keepin1957delayed, williams1996choice, ott1985introductory, brady1989delayed}.
+These group yields can be converted to group delayed neutron fractions, $\beta_k$, by dividing the group yields by the average number of neutrons emitted per fission event, as shown in Equation \eqref{eq:betai} as:
+\begin{equation}
+    \beta_k = \frac{\bar{\nu}_{d, k}}{\bar{\nu}}.
+    \label{eq:betai}
+\end{equation}
+The group yields represent the number of delayed neutrons produced per fission in group $k$, and when summed yield the total delayed neutron yield per fission.
+With this data, the other terms can be calculated, such as the total delayed neutron yield, $\bar{\nu}_d$, and delayed neutron fraction $\beta$.
 
-The delayed neutron fraction, $\beta$, represents the average number of delayed neutrons emitted per fission event.
-Alternatively, it can be thought of as representing the ratio of delayed neutron production over all neutron production \cite{meulekamp2006calculating}.
-This term is directly related to the \glspl{DNP}, and can be constructed from the \gls{DNP} groups.
+Although the groups are useful, there are times when individual \gls{DNP} data are needed.
+For example, in 1986, Perry et al. demonstrated that kinetics calculations yield different results when using individual nuclides compared to the six-group parameters \cite{perry1986application}.
+In 1989, Brady and England also used the individual nuclides to compare with group data \cite{brady1989delayed}, and updated the six-group parameters based on the explicit \glspl{DNP}.
+The updates to the six-group parameters enabled greater consistency between experimental results and simulations.
 
+%Representing the \glspl{DNP} in group form also simplifies the calculation of various kinetics parameters.
+%Various kinetics parameters are introduced in Section \ref{sec:bg-trans-analysis-methods}, though without detail on the purpose of each variable.
+%This section provides more information on what these kinetics and delayed neutron group parameters physically represent, while Sections \ref{ref:calc-group-param} and \ref{ref:calc-kinetic-param} detail how they are calculated.
+
+Moving from the group parameters to the kinetics parameters, there is a convenient analogy which can be used to better understand some of the kinetics parameters.
+The effective multiplication factor, $k_{eff}$, is an important term in reactor physics.
+This term represents the scaling of the number of neutrons over each generation in a finite reactor system.
+The infinite multiplication factor, $k_{\infty}$, represents the multiplication without considering leakage terms.
+This is analogous to the delayed neutron fraction, $\beta$, for which the effective form requires information on the specific reactor geometry.
+%This is analogous to the delayed neutron fraction, $\beta$, and mean generation time, $\Lambda$, terms, where the effective form of the term requires information on the specific reactor geometry.
+
+The delayed neutron fraction, $\beta$, represents the ratio of delayed neutron production over all neutron production \cite{meulekamp2006calculating}.
 Related to the delayed neutron fraction is the effective delayed neutron fraction, $\beta_{eff}$.
-This term is more sophisticated, as rather than being a physical property of a fissile nuclide, it is dependent on the properties of the reactor core.
-This term represents the ratio between the adjoint neutron flux and spectrum-weighted delayed-neutron induced fission to the total number of fission events \cite{romero2022calculation}.
-Alternatively, it can be thought of as the ratio of the spectrum and adjoint weighted delayed neutron production over all spectrum and adjoint weighted neutron production \cite{meulekamp2006calculating}.
+This term is more sophisticated, as rather than being a physical property of a fissile nuclide, it depends on the composition and geometry of the reactor.
+For \glspl{MSR}, it also accounts for the movement of the \gls{DNP} in different parts of the reactor.
+
+A straightforward way to interpret the effective delayed neutron fraction is that it is the delayed neutron fraction corrected for the actual composition and geometry of the reactor.
+More specifically, the effective delayed neutron fraction represents the ratio between the delayed-neutron induced fission to the total number of fission events weighted by the spectrum and adjoint neutron flux \cite{romero2022calculation}.
+Alternatively, it can be thought of as the ratio of the spectrum weighted and adjoint weighted delayed neutron production over all spectrum weighted and adjoint weighted neutron production \cite{meulekamp2006calculating}.
 For \glspl{MSR}, the movement of the fuel salt also affects the effective delayed neutron fraction, as the integrated adjoint neutron flux is reduced due to movement of the \glspl{DNP} out of the core and into less neutronically-important regions.
 
-Another term that is important for reactor kinetics is the mean neutron generation time, $\Lambda$.
-The mean neutron generation time is the average "...time between the birth of a neutron and the subsequent absorption that induces fission" \cite{romero2022calculation}.
-This term also has an effective form, $\Lambda_{eff}$, which is the adjoint weighted form.
-The effective mean neutron generation time can vary significantly, on the order of hundreds of percent, from the mean neutron generation time \cite{verboomen2006monte}.
-In contrast, the effective delayed neutron fraction varies by on the order of 20\% from the delayed neutron fraction \cite{verboomen2006monte}.
-
-The adjoint flux is important for calculating the effective form of many kinetics parameters.
-The adjoint flux is not a physical quantity, but rather serves as an importance function, describing the importance of the neutron flux in the reactor.
+The adjoint flux, $\phi^\dagger$, is important for calculating the effective form of many kinetics parameters.
+The adjoint flux is not a physical quantity, but rather an importance, or weighting, function, describing the importance of neutrons in different regions of the reactor.
 For example, areas further from the center of the core are less important than those closer to the center, which is reflected by a decrease in the effective delayed neutron fraction in \glspl{MSR} as \glspl{DNP} move away from the center of the core due to fuel salt advection.
+The adjoint flux can be calculated by taking the adjoint of the Boltzmann transport equation, or by using the \gls{IFP} method, which provides an importance term proportional to the adjoint flux \cite{terranova2018adjoint, nauchi2010development, truchet2015computing}.
 
-\subsubsection{Calculation of group parameters}
-\label{ref:calc-group-param}
+The mean neutron generation time, $\Lambda$, is the mean time between generation of a neutron and fission induced by that neutron \cite{romero2022calculation}.
+This term also has an effective form, $\Lambda_{eff}$, which is the adjoint-weighted form, similar to $\beta_{eff}$.
+The effective mean neutron generation time can vary by over 200\% from the mean neutron generation time \cite{verboomen2006monte}.
+The effective delayed neutron fraction generally does not differ from the delayed neutron fraction as significantly, though in an \gls{MSR} the fuel circulation can cause the effective delayed neutron fraction to reduce by approximately 50\% \cite{aufiero2014calculating}.
 
-The calculation of the kinetics parameters depend on the \gls{DNP} group parameters, which themselves are typically formulated based on experimental data as previously discussed.
+\subsubsection{Calculation of DNP Group Parameters}
+\label{sec:calc-group-param}
 
-Equation \eqref{eq:delnu-exact} shows the exact formulation for the delayed neutron counts as a function of time measured by a detector for $I$ individual \glspl{DNP} for any number of fissile nuclides.
-
+The \gls{DNP} group parameters, $\tau_k$ and $\bar{\nu}_{d,k}$, are important for simulating transients.
+The parameters are formulated based on the fitting of the delayed neutron count rate, as discussed in Section \ref{sec:measurementofdnps}.
+Equation \eqref{eq:mdnp-dn} shows the exact formulation for the delayed neutron count rate as a function of time measured by a detector for $I$ individual \glspl{DNP} for any number of fissile nuclides, recreated here as:
 \begin{equation}
-n_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t)
-\label{eq:delnu-exact}
+\dot{n}_d(t) = \epsilon \sum_{i=1}^{I} P_{n, i} \lambda_i N_{i}(t).
+\nonumber
 \end{equation}
-
-Equation \eqref{eq:delnu-fit} instead shows the $n$ group \gls{DNP} fit measured by the same detector for a pulse irradiation.
-For an infinite, or saturation, irradiation, Equation \eqref{eq:delnu-fit-sat} is used \cite{brady1988evaluation}. 
-These equations are specifically for a single fissile nuclide, and the derivation can be found in the work of Wilson and England \cite{wilson2002delayed}.
-To make this equation generic, the $a_i \lambda_i$ term and $a_i$ term can instead be written as $A_i$.
-Additionally, the fission term can be written as $\tilde{F}_s$, to represent either a fission rate or a net number of fissions.
-These equations are simplifications, as they do not account for decay chain daughter products \cite{conant1971measurement}.
-
+Equation \eqref{eq:delnu-fit} instead gives the delayed neutron count rate measured by the same detector for $K$ \gls{DNP} groups from a pulse irradiation as:
 \begin{equation}
-n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}
+\dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \label{eq:delnu-fit}
 \end{equation}
-
+For an infinite, or saturation, irradiation, Equation \eqref{eq:delnu-fit-sat} is used rather than Equation \eqref{eq:delnu-fit}, given as \cite{brady1988evaluation}:
 \begin{equation}
-n_d(t) \approx \epsilon \dot{F}_s \sum_{i=1}^{n}  a_i e^{-\lambda_i t}
+\dot{n}_d(t) \approx \epsilon \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t}.
 \label{eq:delnu-fit-sat}
 \end{equation}
-
-The terms in Equation \eqref{eq:delnu-exact}, \eqref{eq:delnu-fit}, and \eqref{eq:delnu-fit-sat} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $I$ is the total number of \glspl{DNP}
-    \item $n$ is the number of \gls{DNP} groups
-    \item $\epsilon$ is the detector efficiency
-    \item $P_{n, i}$ is the emission probability of \gls{DNP} $i$
-    \item $\lambda_i$ is the decay constant of the $i$th \gls{DNP} or group
-    \item $N_i(t)$ is the time dependent number of atoms of nuclide $i$
-    \item $F_s$ is the total number of fission events in the pulse irradiation
-    \item $\dot{F}_s$ is the fission rate for a saturation irradiation
-    \item $a_i$ is the $i$th group yield, or group abundance
-\end{description}
-
-The pulse irradiation approach gives better statistics on the short lives \glspl{DNP}, while the longer lived \glspl{DNP} are better represented by saturation irradiation.
-Brady discusses this, and uses both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
-Specifically, Brady uses "...determination of four long-period groups from the infinite irradiation data and
-four short-period groups from the prompt [pulse] data, later renormalizing the two sets
-of yields at the second delayed neutron group."
-
-Another benefit of including saturation irradiation data is that it can be used to get the average number of neutrons, prompt and delayed, per fission \cite{conant1971measurement}.
-This is shown in Equation \eqref{eq:delnu-init}.
-
+Equation \eqref{eq:delnu-fit-intermediate} shows the intermediate case, where the irradiation time, $T$, is neither infinite nor a pulse \cite{wilson2002delayed}.
+This equation gives the delayed neutron count rate as:
 \begin{equation}
-n_d(0) = \epsilon \dot{F}_s \bar{\nu}
-\label{eq:delnu-init}
+    \dot{n}_d(t, T) \approx \epsilon \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t} \left( 1-e^{-\lambda_kT} \right).
+    \label{eq:delnu-fit-intermediate}
 \end{equation}
+The terms in Equations \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, and \eqref{eq:delnu-fit-intermediate} are defined as follows:
+\begin{align}
+K &= \mbox{ the number of \gls{DNP} groups [$\#$]} \nonumber \\ 
+\lambda_k &= \mbox{ the decay constant of \gls{DNP} group \textit{k} [$s^{-1}$] } \nonumber \\ 
+F_s &= \mbox{ the total number of fission events in the pulse irradiation [$\#$]} \nonumber \\ 
+\dot{F}_s &= \mbox{ the fission rate for a saturation irradiation [$s^{-1}$]} \nonumber \\ 
+\bar{\nu}_{d, k} &= \mbox{ the group yield for group \textit{k} [-] .} \nonumber
+\end{align}
+%More information on the derivation of these equations can be found in Appendix \ref{ref:appendixA}.
+These equations are specifically for a single fissile nuclide, and the derivation can be found in the work of Wilson and England \cite{wilson2002delayed}.
+%To make this equation generic, the $\bar{\nu}_{d, k} \lambda_k$ term and $\bar{\nu}_{d, k}$ term can instead be written as $A_k$.
+%Additionally, the fission term can be written as $\tilde{F}_s$, to represent either the fission rate or the net number of fissions.
+%These simplified equations do not account for decay chain daughter products \cite{conant1971measurement}.
 
 
-Once the delayed neutron counts are acquired, an over-determined non-linear least squares approach is used to calculate the group abundances and decays.
-For example, Brady used STEPIT to handle the non-linear least-squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation}.
-Waldo et al. also solve the least-squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
-The general form of the solve is given in Equation \eqref{eq:lstsq}.
 
+
+
+
+
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $I$ is the total number of \glspl{DNP}
+%    \item $n$ is the number of \gls{DNP} groups
+%    \item $\epsilon$ is the detector efficiency
+%    \item $P_{n, i}$ is the emission probability of \gls{DNP} $i$
+%    \item $\lambda_i$ is the decay constant of the $i$th \gls{DNP} or group
+%    \item $N_i(t)$ is the time dependent number of atoms of nuclide $i$
+%    \item $F_s$ is the total number of fission events in the pulse irradiation
+%    \item $\dot{F}_s$ is the fission rate for a saturation irradiation
+%    \item $a_i$ is the $i$th group yield, or group abundance
+%\end{description}
+
+The pulse irradiation approach gives better statistics on the short-lived \glspl{DNP}, while the longer-lived \glspl{DNP} are better represented by saturation irradiation.
+Brady discussed this, and used both pulse and saturation irradiation to form groups \cite{brady1988evaluation}.
+Specifically, Brady used the four long-lived groups from the saturation irradiation and the four short-lived groups from the pulse irradiation renormalized at the second \gls{DNP} group, the same method discussed by Keepin et al. \cite{keepin1957delayed}.
+The half-lives for the first two groups and the ratio of the first two group yields come from the saturation irradiation, while the other values come from the pulse irradiation data.
+
+%"...determination of four long-period groups from the infinite irradiation data and
+%four short-period groups from the prompt [pulse] data, later renormalizing the two sets
+%of yields at the second delayed neutron group."
+
+%Another benefit of including saturation irradiation data is that it can be used to get the average number of neutrons, prompt and delayed, per fission \cite{conant1971measurement}.
+%This is shown in Equation \eqref{eq:delnu-init}.
+
+%\begin{equation}
+%\dot{n}_d(0) = \epsilon \dot{F}_s \bar{\nu}
+%\label{eq:delnu-init}
+%\end{equation}
+
+
+Once the delayed neutron count rate is acquired, an over-determined non-linear least squares approach is used to calculate the group yields and decays.
+For example, Brady used STEPIT, an algorithm for finding local minima of a continuous function, to handle the least squares solve with both pulse and infinite irradiation experimental data \cite{brady1988evaluation, chandler1969stepit}.
+Waldo et al. also solved the least squares problem, though the specific approach used is not specified \cite{waldo1981delayed}.
+Using Equation \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, or \eqref{eq:delnu-fit-intermediate}, the general form of the solve is given as:
 \begin{equation}
-A \vec{x} \approx \vec{b}
+A \vec{x} \approx \vec{b}.
 \label{eq:lstsq}
 \end{equation}
+Since the system is overdetermined, no exact solution exists; only a residual minimization, as shown in Equation \eqref{eq:residual}, is possible.
+\begin{comment}
+Equation \eqref{eq:minthis} gives the $\chi^2$ term the non-linear least squares minimizes as:
+\begin{equation}
+    \chi^2 = \sum_{m=0}^{M} \left(\frac{\vec{b}^{(m)} - \left(A\vec{x}\right)^{(m)}}{\vec{\sigma}^{(m)}} \right) ^2,
+    \label{eq:minthis}
+\end{equation}
+where,
+\begin{align}
+    \chi^2 =& \text{ the chi-squared measure of the fit } \nonumber \\
+    M =& \text{ the total number of time steps over which the sample decays } \nonumber \\
+    \sigma =& \text{ the uncertainty at time step $m$, or unity if the uncertainty is not measured.} \nonumber
+\end{align}
+\end{comment}
 
-Within this least squares equation, the solution vector contains only the group abundances, shown in Equation \eqref{eq:lstsq-solvec}.
+Based on the irradiation type used, the coefficient matrix will change, as shown in Equations \eqref{eq:delnu-fit}, \eqref{eq:delnu-fit-sat}, and \eqref{eq:delnu-fit-intermediate}. 
+Equation \eqref{eq:lambda} gives the coefficient matrix for a pulse irradiation as:
 
 \begin{equation}
+A = \epsilon F_s
+\begin{bmatrix}
+\lambda_1 e^{-\lambda_1 t_0} & \lambda_2 e^{-\lambda_2 t_0} & \hdots &  \lambda_K e^{-\lambda_K t_0}\\
+\lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_K e^{-\lambda_K t_1}\\
+\vdots                       & \vdots                       & \ddots &  \vdots                      \\
+\lambda_1 e^{-\lambda_1 t_m} & \lambda_2 e^{-\lambda_2 t_m} &  \hdots  & \lambda_K e^{-\lambda_K t_m}\\
+\end{bmatrix}.
+\label{eq:lambda}
+\end{equation}
+Note that the coefficient matrix changes for a saturation irradiation, removing the $\lambda_i$ term and changing the fission term from net fissions to the fission rate.
+
+Within this least-squares equation, the solution vector contains only the group yields, given in Equation \eqref{eq:lstsq-solvec} as:
+\begin{equation}
 \vec{x} = 
-\begin{Vmatrix}
-a_1\\
-a_2\\
+\begin{bmatrix}
+\bar{\nu}_{d, 1}\\
+\bar{\nu}_{d, 2}\\
 \vdots\\
-a_n\\
-\end{Vmatrix}
+\bar{\nu}_{d, K}\\
+\end{bmatrix}.
 \label{eq:lstsq-solvec}
 \end{equation}
 
-Based on the irradiation type used, the coefficient matrix will change, as shown in Equations \eqref{eq:delnu-fit} and \eqref{eq:delnu-fit-sat}. 
-Equation \eqref{eq:lambda} shows the coefficient matrix for a pulse irradiation, though for a saturation irradiation the only change would be removing the $\lambda_i$ term.
-
-\begin{equation}
-A = 
-\begin{Vmatrix}
-\lambda_1 e^{-\lambda_1 t_0} & \lambda_2 e^{-\lambda_2 t_0} & \hdots &  \lambda_n e^{-\lambda_n t_0}\\
-\lambda_1 e^{-\lambda_1 t_1} & \lambda_2 e^{-\lambda_2 t_1} & \hdots &  \lambda_n e^{-\lambda_n t_1}\\
-\vdots                       & \vdots                       & \ddots &  \vdots                      \\
-\lambda_1 e^{-\lambda_1 t_m} & \lambda_2 e^{-\lambda_2 t_m} &  \hdots  & \lambda_n e^{-\lambda_n t_m}\\
-\end{Vmatrix}
-\label{eq:lambda}
-\end{equation}
-
-The target vector contains the delayed neutron data normalized to the number of fissions, or fission rate, and the detector efficiency, as shown in Equation \eqref{eq:lstsq-target}.
-
+The target vector contains the delayed neutron count rate data, shown in Equation \eqref{eq:lstsq-target} as:
 \begin{equation}
 \vec{b} = 
-\begin{Vmatrix}
-n_d(t_0) (\epsilon F_s)^{-1}\\
-n_d(t_1) (\epsilon F_s)^{-1}\\
+\begin{bmatrix}
+ \dot{n}_d(t_0)  \\
+ \dot{n}_d(t_1) \\
 \vdots\\
-n_d(t_m) (\epsilon F_s)^{-1}\\
-\end{Vmatrix}
+\dot{n}_d(t_m)\\
+\end{bmatrix}.
 \label{eq:lstsq-target}
 \end{equation}
-
-By solving this non-linear system of equations, the group half lives and abundances can be generated.
-Once this group data is generated, and if there are multiple fissioning nuclides, $k$, then Equation \eqref{eq:lami-multinuc} can be used to determine the total group half lives \cite{das1993importance}.
-
+The non-linear least squares solve enables simultaneous solution of both the $\lambda_k$ and $\bar{\nu}_{d,k}$ values.
+Using least squares with a non-relative residual would lead to early time-step count rates dominating due to their larger magnitudes.
+One way to resolve this is to take the natural logarithm of the target vector $\vec{b}$, such that the count rate evolution is linear in time.
+Another way to resolve this is to use minimize a relative residual, given by Equation \eqref{eq:residual} as:
 \begin{equation}
-\lambda_i = \frac{\sum_{k} \lambda_i^{(k)} \beta_{i, eff}^{(k)}}{\sum_k \beta_{i, eff}^{(k)}}
+    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b}} \right| \right|_2^2,
+    \label{eq:residual}
+\end{equation}
+where the Euclidean norm, $||\cdot||_2$, is defined in Equation \ref{eq:euc-norm} as:
+\begin{equation}
+    ||\vec{x}||_2 = \sqrt{x_1^2 + \cdots + x_n^2}.
+    \label{eq:euc-norm}
+\end{equation}
+
+Another approach that accounts for the uncertainty in the target vector $b$, by minimizing $\chi^{2}$, is given in Equation \eqref{eq:chi-square} \cite{Bevington2003Data}:
+\begin{equation}
+    \chi^2 = \sum_i \left( \frac{b_i - (Ax)_i}{\sigma_i} \right)^2,
+    \label{eq:chi-square}
+\end{equation}
+where
+\begin{align}
+    \chi^2 &= \text{the chi-squared statistic [-]} \nonumber \\
+    (Ax)_i &= \text{the \gls{DNP} group delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    b_{i} &= \text{the $i^{th}$ delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    \sigma_{i} &= \text{the standard deviation in the $i^{th}$ delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+\end{align}
+By accounting for the uncertainty, this gives a more informed result that accounts for uncertainties in the data.
+%However, there can be numerical instabilities with this approach if the uncertainties are sufficiently small.
+
+By solving this non-linear system of equations, the group decay constants, $\lambda_k$, and yields, $\bar{\nu}_{d, k}$, can be generated.
+Once this group data is generated, and if there are multiple fissioning nuclides, $F$, then Equation \eqref{eq:lami-multinuc} can be used to determine the $K$ group decay constants using \cite{das1993importance} as:
+\begin{equation}
+\lambda_k = \frac{\sum_{F} \lambda_k^{(F)} \beta_{k, eff}^{(F)}}{\sum_F \beta_{k, eff}^{(F)}},
 \label{eq:lami-multinuc}
 \end{equation}
+where
+\begin{align}
+    \lambda_k^{(F)} =& \text{ the decay constant of \gls{DNP} group $k$ from fission of nuclide $F$ [$s^{-1}$]} \nonumber \\
+    \beta_{k, eff}^{(F)} =& \text{ the effective delayed neutron fraction of \gls{DNP} group $k$ from fission of nuclide $F$ [-]. } \nonumber
+\end{align}
 
-These equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
-Equation \eqref{eq:speceq} shows that including the energy in the delayed neutron count requires the energy spectra, $\chi_i(E)$, of the relevant group to be included.
-This is also the general form of the saturation and pulse irradiation equations, as it includes $A_i$, which can represent $a_i \lambda_i$ or $a_i$ depending on the irradiation type.
-The $\tilde{F}_s$ value also represents that this could be the total number of fissions, for a pulse irradiation, or fission rate, for saturation irradiation.
-
+This approach is effectively a fission weighting, which can be written in a more general manner. 
+The \gls{DNP} group parameters are generated for a given fuel composition, weighted by the volumetric fission rate fraction of each fissile nuclide, $F$, similar to Equation \eqref{eq:lami-multinuc}.
+The fission-weighting term is given as:
+%\begin{equation}
+%    \bar{\nu}_{d, k}^{(FW)} = \left(\sum_F \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right)^{-1}  \sum_F \left( \bar{\nu}^{(F)}_{d, k} \int \Sigma_f^{(F)} \phi \;dE d\vec{r} \right),
+%    \label{eq:nubar-fw}
+%\end{equation}
 \begin{equation}
-n_d(E, t) \approx \epsilon \tilde{F}_s \sum_{i=1}^{n} \chi_i(E) A_i e^{-\lambda_i t}
+w_F = \frac{\displaystyle \int \Sigma_f^{(F)}(\vec{r},E) \, \phi(\vec{r},E) \, dE \, d\vec{r}}
+           {\displaystyle \sum_{F'} \int \Sigma_f^{(F')}(\vec{r},E) \, \phi(\vec{r},E) \, dE \, d\vec{r}},
+\label{eq:fission-weight}
+\end{equation}
+the delayed neutron yield of group $k$ is given as:
+\begin{equation}
+\bar{\nu}_{d,k}^{(FW)} = \sum_F \bar{\nu}_{d,k}^{(F)}  w_F,
+\label{eq:nubar-fw}
+\end{equation}
+and the decay constant of group $k$ is given as:
+\begin{equation}
+    \lambda_{k}^{(FW)} = \sum_F \lambda^{(F)}_{k}  w_F,
+    \label{eq:decayconst-fw}
+\end{equation}
+where
+\begin{align}
+    \bar{\nu}^{(F)}_{d, k} &= \text{the \gls{DNP} group $k$ delayed neutron yield from nuclide $F$ [-]} \nonumber \\
+    \lambda^{(F)}_{k} &= \text{the \gls{DNP} group $k$ decay constant from nuclide $F$ $[s^{-1}]$} \nonumber \\
+    \phi &= \text{the neutron flux $[cm^{-2} \cdot s^{-1}]$} \nonumber \\ 
+    \bar{\nu}^{(FW)}_{d, k} &= \text{the fission-weighted \gls{DNP} group $k$ delayed neutron yield [-]} \nonumber \\
+    \lambda^{(FW)}_{k} &= \text{the fission-weighted \gls{DNP} group $k$ decay constant $[s^{-1}]$} \nonumber\\
+    \Sigma_f^{(F)} &= \text{the macroscopic fission cross section for nuclide $F$ $[cm^{-1}]$}. \nonumber
+\end{align}
+
+The fission-weighted values can also be multiplied by an importance term to account for the difference between the delayed and prompt neutron fission spectra \cite{radaideh2019new}.
+This is used for kinetics simulations that do not explicitly model \glspl{DNP} in the transport solve, such as in \glspl{PRK}.
+Equation \eqref{eq:nubar-fw} becomes:
+\begin{equation}
+    \bar{\nu}_{d, k}^{(AW)} = \bar{\nu}^{(FW)}_{d, k} \frac{\int \chi_{d, k}(E) \phi^\dagger(E) dE}{\int \chi(E) \phi^\dagger(E) dE},
+    \label{eq:yield-fw-import}
+\end{equation}
+and Equation \eqref{eq:decayconst-fw} becomes:
+\begin{equation}
+    \lambda_{k}^{(AW)} = \lambda^{(FW)}_{k} \beta_{eff} \left(\sum_{k=1}^K \frac{\beta_k}{\lambda_k} \right)^{-1},
+    \label{eq:decay-fw-import}
+\end{equation}
+where
+\begin{align}
+    \beta_{eff} &= \text {the effective delayed neutron fraction $[-]$} \nonumber \\
+    \beta_{k} &= \text{ the delayed neutron fraction of group $k$ [-]} \nonumber \\
+    \chi_{d, k} &= \text{ the delayed neutron fission spectrum for \gls{DNP} group $k$ [-]} \nonumber \\
+    \bar{\nu}^{(AW)}_{d, k} &= \text{the adjoint-weighted \gls{DNP} group $k$ delayed neutron yield [-]} \nonumber \\
+    \lambda_{k}^{(AW)} &= \text{the adjoint-weighted \gls{DNP} group $k$ decay constant $[s^{-1}]$} \nonumber \\
+    \chi &= \text{ the total fission spectrum [-]} \nonumber \\
+    \phi^\dagger &= \text{ the adjoint flux $[ \# \cdot cm^{-2} \cdot s^{-1}]$} \nonumber.
+\end{align}
+
+
+
+
+
+\subsubsection{Calculation of DNP Group Spectra and Concentrations}
+\label{sec:groupspectra}
+
+The equations thus far have not included the energy spectra, but instead have focused on the delayed neutron count rate. 
+Including the energy in the delayed neutron count rate requires the energy spectra, $\chi_{d, k}(E)$, of the relevant group to be included, as shown in Equation \eqref{eq:speceq} as:
+\begin{equation}
+\dot{n}_d(E, t) \approx \epsilon \tilde{F}_s \sum_{k=1}^{K} \chi_{d, k} (E) A_k e^{-\lambda_k t},
 \label{eq:speceq}
 \end{equation}
+where
+\begin{align}
+    \tilde{F}_s =& \text{ the generic fission term [$\#$ or $\# \cdot s^{-1}$] } \nonumber \\
+    A_k =& \text{ the generic matrix term [$\# \cdot s^{-1}$ or $\#$]  } \nonumber \\
+    \chi_{d, k}(E) =& \text{ the delayed neutron energy spectrum of \gls{DNP} group $k$ [-]. } \nonumber
+\end{align}
+This is the general form of the saturation and pulse irradiation equations, where $A_k$ represents $\bar{\nu}_{d, k} \lambda_k$ for a pulse irradiation or $\bar{\nu}_{d, k}$ for saturation irradiation.
+$\tilde{F}_s$ is the total number of fissions for a pulse irradiation or the fission rate for saturation irradiation.
 
-A similar procedure as discussed for no energy spectra modeling can be used in order to calculate the \gls{DNP} group energy spectra.
+Another consideration in calculating group parameters is calculating group concentrations from individual nuclide data.
+This is important for situations where reducing the problem from several hundred \glspl{DNP} to a few \gls{DNP} groups reduces computational cost.
+A specific use case for this is explicitly modeling all \glspl{DNP} spatially and then using those spatially resolved concentrations with an existing six-group structure.
+In such a case, the \glspl{DNP} must be combined in such a manner to preserve their contributions to each \gls{DNP} group.
+The reverse is also true, where a given six-group spatially resolved concentration can be separated into individual \glspl{DNP} spatially resolved concentrations.
 
+The methods for calculating the \gls{DNP} group spectra and the group concentrations directly overlap.
+Two different grouping methods are considered for calculation of group spectra and group concentrations: based on half-lives \cite{england1983aggregate, rudstam1982six} and based on fractional contribution to adjacent groups \cite{brady1988evaluation}.
 
-Another consideration in calculating group parameters is constructing group concentrations from individual nuclide data.
-This is less important for group parameters, but is important if there is desire to use the generated group parameters with concentrations which are converted into group concentrations.
-
-Two different methods are considered for the separation and recombination of \gls{DNP} groups into individual nuclides.
-These methods have been used for generation of \gls{DNP} spectral fitting:
- 
-\begin{itemize}
-    \item Grouping based on half lives \cite{england1983aggregate, rudstam1982six}
-    \item Grouping based on fractional contribution to adjacent groups \cite{brady1988evaluation}
-\end{itemize}
-
-The grouping based on half lives is easier to implement and understand, as it simply requires comparing each nuclide's half life to a constant value.
-The groupings based on half lives are given in the top two sets in Table \ref{tab:halfgroup}.
-The bottom set of half lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach.
+The grouping based on half-lives requires comparing each nuclide's half-life to a constant half-life bin structure formulated from analysis of individual \glspl{DNP}.
+The groupings based on half-lives are given in the top two sets in Table \ref{tab:halfgroup}.
+The bottom set of half-lives is from ENDF/B-VIII.0 and is used with the fractional contribution approach \cite{Brown20181}.
 
 \renewcommand{\arraystretch}{1.25}
 \begin{table}[H]
     \centering
     \begin{threeparttable}
-    \caption{Half-lives of \gls{DNP} groups.}
-    \begin{tabular}{c|c|c|c|c|c|c}
-       Source  & $T_1$ $[s]$ &  $T_2$ $[s]$ & $T_3$ $[s]$ & $T_4$ $[s]$ & $T_5$ $[s]$ & $T_6$ $[s]$\\
+    \caption{Half-lives of \gls{DNP} groups from various sources.}
+    \begin{tabular}{ccccccc}
+    \hline
+       Source  & $\tau_1$ $[s]$ &  $\tau_2$ $[s]$ & $\tau_3$ $[s]$ & $\tau_4$ $[s]$ & $\tau_5$ $[s]$ & $\tau_6$ $[s]$\\
        \hline
-       \hline
-        \cite{england1983aggregate} & $T_{1/2} > 31$ & $31 \geq T_{1/2} > 9$ &  $9 \geq T_{1/2} > 3$ & $3 \geq T_{1/2} > 0.8$ & $0.8 \geq T_{1/2} > 0.3$ & $0.3 \geq T_{1/2}$ \\
-        \cite{rudstam1982six}\tnote{*} & $T_{1/2} > 30$ & $30 \geq T_{1/2} > 10$ & $10 \geq T_{1/2} > 4$ & $4 \geq T_{1/2} > 1.4$ & $1.4 \geq T_{1/2} > 0.4$ & $0.4 \geq T_{1/2}$\\
-        \cite{Brown20181} & $T_{1/2} = 51.98$ & $T_{1/2} = 21.17$ & $T_{1/2} = 5.74$ & $T_{1/2} = 2.29$ & $T_{1/2} = 0.82$ & $T_{1/2} = 0.24$\\
+        England et al. \cite{england1983aggregate} & $\tau > 31$ & $31 \geq \tau > 9$ &  $9 \geq \tau > 3$ & $3 \geq \tau > 0.8$ & $0.8 \geq \tau > 0.3$ & $0.3 \geq \tau$ \\
+        Rudstam \cite{rudstam1982six}\tnote{*} & $\tau > 30$ & $30 \geq \tau > 10$ & $10 \geq \tau > 4$ & $4 \geq \tau > 1.4$ & $1.4 \geq \tau > 0.4$ & $0.4 \geq \tau$\\
+        ENDF/B-VI.8 \cite{endf6} & $\tau = 51.98$ & $\tau = 21.17$ & $\tau = 5.74$ & $\tau = 2.29$ & $\tau = 0.82$ & $\tau = 0.24$\\
+
+%        \hline
+%        \cite{Brown20181} & $T_1 = 51.98$\\
+%        \cite{Brown20181} & $T_2 = 21.17$\\
+%        \cite{Brown20181} & $T_3 = 5.74$\\
+%        \cite{Brown20181} & $T_4 = 2.29$\\
+%        \cite{Brown20181} & $T_5 = 0.82$\\
+%        \cite{Brown20181} & $T_6 = 0.24$\\
         \hline
     \end{tabular}
         \begin{tablenotes}
-      \item[*] Rudstam uses $T_1 = 55.6$, but for the sake of completeness, this has been modified.
+      \item[*] Rudstam uses $\tau_1 = 55.6$, but to ensure all \glspl{DNP} are included, this has been modified.
     \end{tablenotes}
     \label{tab:halfgroup}
 \end{threeparttable}
 \end{table}
 \renewcommand{\arraystretch}{1}
 
-The half-life grouping method thus results in a series of comparisons.
-If a nuclide is within a given group's bounds, the concentration of that nuclide is then added to that group.
+England and Wilson chose their half-life bins based on the half-lives given in ENDF/B-V, while specifying that of the reasonable choices for bounding values, ``No one was completely satisfactory" \cite{england1983aggregate}.
+Rudstam selected half-life bins for six groups, although it is clarified that ``...the grouping is somewhat arbitrary" \cite{rudstam1982six}.
+The half-life grouping method thus results in a series of comparisons; if a nuclide is within a given group's bounds, the concentration of that nuclide is added to that group.
 
-The fractional grouping is more complex, but assigns nuclides to groups in a more rigorous manner.
-The method uses two groups for each nuclide $k$, which are groups $i$ and $i+1$.
-These groups are determined via Equation \eqref{eq:fraclam}.
-Nuclides which do not have a $\lambda_{i+1}$ which is larger than $\lambda_k$ will have the entire fractional contribution to group $i$.
+For the fractional grouping, the half-life selection is less arbitrary and is instead based on the \gls{DNP} group parameters.
+The ENDF/B-VI.8 data comes from the $^{235}$U half-lives from the $(n, \nu_d)$ reaction \cite{endf6, brady1989delayed, england1988status, brady1989validation}.
+These delayed neutron data have remained unchanged through ENDF/B-VIII.0 \cite{Brown20181, endf6}\footnote{The ENDF/B-VIII.1 data is also the same as ENDF/B-VI.8, but it is currently unpublished.}.
 
+The fractional grouping is more complex and assigns nuclides to groups in a more rigorous manner.
+The method uses two groups, $k$ and $k+1$, for each nuclide $i$.
+These groups are determined via Equation \eqref{eq:fraclam} as:
 \begin{equation}
-    \lambda_i < \lambda_k < \lambda_{i+1}
+    \lambda_k < \lambda_i < \lambda_{k+1}.
     \label{eq:fraclam}
 \end{equation}
-
-The fractional contribution of nuclide $k$ to each group is represented with $f_{k, i}$ and $f_{k, i+1}$. The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum}.
-
+Nuclides which don't fit in these bounds will have the entire fractional contribution go into the closest group.
+Otherwise, the nuclide will have some fraction of its concentration or spectra go to each \gls{DNP} group.
+The fractional contribution, or weight, of nuclide $i$ to each group is represented with $f_{i, k}$ and $f_{i, k+1}$. 
+The total fraction must be equal to 1 as shown in Equation \eqref{eq:fracsum} as:
 \begin{equation}
-    f_{k, i} + f_{k, i+1} = 1
+    f_{i, k} + f_{i, k+1} = 1.
     \label{eq:fracsum}
 \end{equation}
 
-To solve for the fractions of each group each nuclide contributes to, the least squares minimization problem is solved.
-This is shown in Equation \eqref{eq:fracmin}.
-
+To solve for the fractions, the following least-squares minimization problem is used \cite{brady1988evaluation}:
 \begin{equation}
-    \int_{0}^{\infty} \left( \lambda_k e^{-\lambda_k t} -  f_{k, i} \lambda_i e^{-\lambda_i t} - f_{k, i+1} \lambda_{i+1} e^{-\lambda_{i+1} t}   \right)^2 dt
+    \min_{f_{i,k}, f_{i,k+1}} \int_{0}^{\infty} \left( \lambda_i e^{-\lambda_i t} -  f_{i, k} \lambda_k e^{-\lambda_k t} - f_{i, k+1} \lambda_{k+1} e^{-\lambda_{k+1} t}   \right)^2 dt.
     \label{eq:fracmin}
 \end{equation}
-
-Solving this equation for where the partial derivatives are zero for each group fraction, combined with Equation \eqref{eq:fracsum}, yields the overdetermined system of equations shown in \eqref{eq:fracmats}.
-
+Solving this equation for where the partial derivatives are zero for each fraction, $f_{i, k}$ and $f_{i, k+1}$, combined with Equation \eqref{eq:fracsum}, yields the overdetermined system of equations as:
 \renewcommand{\arraystretch}{2}
 \begin{equation}
 A = \begin{bmatrix}
-    \lambda_i & \frac{2 \lambda_i \lambda_{i+1}}{\lambda_i + \lambda_{i+1}} \\
-    \frac{2 \lambda_i \lambda_{i+1}}{\lambda_i + \lambda_{i+1}} & \lambda_{i+1} \\
+    \lambda_k & \frac{2 \lambda_k \lambda_{k+1}}{\lambda_k + \lambda_{k+1}} \\
+    \frac{2 \lambda_k \lambda_{k+1}}{\lambda_k + \lambda_{k+1}} & \lambda_{k+1} \\
     1 & 1\\
 \end{bmatrix}, \quad
-b = \begin{bmatrix}
-    \frac{2 \lambda_i \lambda_{k}}{\lambda_i + \lambda_k}\\
-    \frac{2 \lambda_k \lambda_{i+1}}{\lambda_k + \lambda_{i+1}} \\
+\vec{b} = \begin{bmatrix}
+    \frac{2 \lambda_k \lambda_{i}}{\lambda_k + \lambda_i}\\
+    \frac{2 \lambda_i \lambda_{k+1}}{\lambda_i + \lambda_{k+1}} \\
     1\\
 \end{bmatrix}, \quad
-x = \begin{bmatrix}
-    f_{k, i} \\
-    f_{k, i+1} \\
-\end{bmatrix}
+\vec{x} = \begin{bmatrix}
+    f_{i, k} \\
+    f_{i, k+1} \\
+\end{bmatrix}.
 \label{eq:fracmats}
 \end{equation}
 \renewcommand{\arraystretch}{1}
 
-This system of equations is then solved using the pseudo-inverse, shown in Equation \eqref{eq:lls}.
-
+Because the number of rows is greater than the number of columns in the matrix, the left inverse is used. This system of equations is then solved as shown in Equation \eqref{eq:lls} as:
 \begin{equation}
-x = (A^T A)^{-1} A^Tb
+\vec{x} = (A^T A)^{-1} A^T\vec{b}.
 \label{eq:lls}
 \end{equation}
+With the fractional contribution terms, $\vec{x}$, the concentration of a given nuclide can then be multiplied by each fraction to show how much it contributes to that group.
+By summing the contributions of each nuclide, the group concentrations can be calculated, and conversely, the nuclide contributions can be calculated from the group concentrations.
+Alternatively, the spectra can be calculated by using the same approach but with individual \gls{DNP} spectra instead of concentrations.
 
-With the fractional contribution vector, the concentration of a given nuclide can then be multiplied by each fraction to show much it contributes to that group.
-With a running summation, the group concentrations can thus be calculated.
-
-
-\subsubsection{Calculation of kinetics parameters}
-\label{ref:calc-kinetic-param}
+\subsubsection{Calculation of Kinetics Parameters}
+\label{sec:calc-kinetic-param}
 
 The other relevant parameters to be calculated are simpler and do not require solving least squares problems.
-Equation \eqref{eq:betai} shows that to calculate the group yield, the group abundances are divided by the average number of neutrons emitted from each fission event.
-
+The $k^{th}$ \gls{DNP} group delayed neutron fraction is calculated in Equation \eqref{eq:betai}, recreated here as:
 \begin{equation}
-    \beta_i = \frac{a_i}{\bar{\nu}}
-    \label{eq:betai}
+    \beta_k = \frac{\bar{\nu}_{d, k}}{\bar{\nu}}.
+    \nonumber
 \end{equation}
 
-Equation \eqref{eq:dnyield} shows how the average number of delayed neutrons per fission event, $\bar{\nu}_d$, can be calculated by summing the group abundances \cite{gremyachkin2015verification}.
-Based on the definition of $\beta_i$ given in Equation \eqref{eq:betai}, it can be seen that the group abundances, $a_i$, could be rewritten as the group average delayed neutrons per fission event, $\bar{\nu}_{d, i}$.
-
+A useful term for comparing \gls{DNP} group parameters is the average half-life \cite{piksaikin2002energy, piksaikin2007relative, leconte2020new}.
+Parish et al. also used the average half-life, but with a non-standard formulation which does not include the natural log of two \cite{parish1999status}.
+Equation \eqref{eq:avg-hl} gives the average half-life as:
 \begin{equation}
-    \bar{\nu}_d = \sum_i a_i
+    \bar{\tau} = \ln (2) \sum_k^{K} \frac{\bar{\nu}_{d, k}}{\lambda_k}.
+    \label{eq:avg-hl}
+\end{equation}
+
+Equation \eqref{eq:dnyield} shows how the total delayed neutron yield, or average number of delayed neutrons per fission event, $\bar{\nu}_d$, can be calculated \cite{gremyachkin2015verification}:
+\begin{equation}
+    \bar{\nu}_d = \sum_k^K \bar{\nu}_{d, k}.
     \label{eq:dnyield}    
 \end{equation}
 
-The delayed neutron fraction can be written using the ratio of the average delayed neutrons per fission over the average neutrons per fission.
-This is shown in Equation \eqref{eq:beta-finalform}.
-
+This yield can also be approximated for an individual nuclide by integrating Equation \eqref{eq:dnpsingleeq} over all time and normalizing to a single fission, where the concentration over time is assumed to be: 
 \begin{equation}
-    \beta = \frac{\bar{\nu}_d}{\bar{\nu}}
+    N_{i}(t) = N_i(0) e^{-\lambda_i t}.
+    \label{eq:conc-time}
+\end{equation}
+This yields Equation \eqref{eq:delnu-net-nuc}, where the total number of delayed neutrons emitted from a single nuclide $i$ is given as:
+\begin{equation}
+    \int_0^{\infty} \dot{n}_{d, i}(t) dt= P_{n, i} N_{i} (0).
+    \label{eq:delnu-net-nuc}
+\end{equation}
+After dividing by the total number of fission events, Equation \eqref{eq:delnu-net-nuc-CFY} shows that the total delayed neutron yield can be written as \cite{huynh2014calculation, mathieu2012new}:
+\begin{equation}
+    \bar{\nu}_d = \sum_{i=1}^I P_{n, i} CFY_i,
+    \label{eq:delnu-net-nuc-CFY}
+\end{equation}
+where
+\begin{align}
+    CFY_i &= \text{the cumulative fission yield of nuclide $i$ [-]}. \nonumber
+\end{align}
+This also means that the delayed neutron yield of each contributing \gls{DNP} can be calculated.
+
+
+The delayed neutron fraction can be written as:
+\begin{equation}
+    \beta = \frac{\bar{\nu}_d}{\bar{\nu}}.
     \label{eq:beta-finalform}
 \end{equation}
-
-The mean neutron generation time can be calculated using Equation \eqref{eq:lambda-sorta}, where $l$ is the prompt neutron lifetime and $k$ is the multiplication factor.
-This can be calculated using a time-dependent version of a Monte Carlo code along with \glspl{PRK} \cite{romero2022calculation}.
-
+The mean neutron generation time can be calculated as:
 \begin{equation}
-    \Lambda = \frac{l}{k}
+    \Lambda = \frac{l}{k},
     \label{eq:lambda-sorta}
 \end{equation}
+where
+\begin{align}
+    l =& \text{ the prompt neutron lifetime [s]} \nonumber \\
+    k =& \text{ the neutron multiplication factor [-].} \nonumber \\
+\end{align}
+This can be calculated using a time-dependent Monte Carlo calculation along with \gls{PRK} equations \cite{romero2022calculation}.
 
-Finally, there are the effective parameters: the effective delayed neutron fraction, $\beta_{eff}$, and the effective mean neutron generation time, $\Lambda_{eff}$.
-$\beta_{eff}$ can be calculated explicitly by its definition, which is "...the ratio between the adjoint neutron flux and spectrum-weighted delayed-neutron induced fission to the total number of fission events."
-This is shown in Equation \eqref{eq:betaeff-exact} \cite{romero2022calculation}.
 
+
+Finally, the effective parameters are introduced: the effective delayed neutron fraction, $\beta_{eff}$, and the effective mean neutron generation time, $\Lambda_{eff}$. The parameter $\beta_{eff}$ is the spectrum- and adjoint-weighted ratio of delayed-neutron-induced fissions to the total induced fissions from all neutrons \cite{romero2022calculation}.
+This is given in Equation \eqref{eq:betaeff-exact} as:
 \begin{equation}
-    \beta_{eff} = \frac{\int \phi^\dagger \chi_d \beta \nu \Sigma_f \phi \; dE d\vec{\Omega} d\vec{r}}{\int \phi^\dagger \chi \nu \Sigma_f \phi \; dE d\vec{\Omega} d\vec{r}}
+    \beta_{eff} = \frac{\int \phi^\dagger(\vec{r}, E, \vec{\Omega})  \chi_d(E) \beta \bar{\nu}(E) \Sigma_f(\vec{r}, E) \phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}}{\int \phi^\dagger(\vec{r}, E, \vec{\Omega}) \chi(E) \bar{\nu}(E) \Sigma_f(\vec{r}, E) \phi (\vec{r}, E, \vec{\Omega}) \; dE d\vec{\Omega} d\vec{r}},
     \label{eq:betaeff-exact}
 \end{equation}
+where
+\begin{align}
+\phi^\dagger &= \mbox{ the adjoint neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$]} \nonumber \\ 
+\chi_d &= \mbox{ the delayed neutron energy spectrum [-]} \nonumber \\ 
+\chi &= \mbox{ the neutron energy spectrum [-]} \nonumber \\ 
+\beta &= \mbox{ the delayed neutron fraction [-]} \nonumber \\ 
+\bar{\nu} &= \mbox{ the average number of neutrons released per fission [-]} \nonumber \\ 
+\Sigma_f &= \mbox{ the macroscopic fission cross section [$cm^{-1}$]} \nonumber \\
+\phi &= \mbox{ the neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$].} \nonumber
+\end{align}
 
-The terms in Equation \eqref{eq:betaeff-exact} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $\phi^\dagger$ is the adjoint neutron flux
-    \item $\chi_d$ is the delayed neutron energy spectrum
-    \item $\chi$ is the fission neutron energy spectrum
-    \item $\beta$ is the delayed neutron fraction
-    \item $\nu$ is the average number of neutrons released per fission
-    \item $\Sigma_f$ is the macroscopic fission cross section
-    \item $\phi$ is the neutron flux
-\end{description}
 
-$\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the "...time between the birth of a neutron and the subsequent absorption that induces fission."
-This is shown in Equation \eqref{eq:lambdaeff-exact} \cite{verboomen2006monte}.
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $\phi^\dagger$ is the adjoint neutron flux
+%    \item $\chi_d$ is the delayed neutron energy spectrum
+%    \item $\chi$ is the fission neutron energy spectrum
+%    \item $\beta$ is the delayed neutron fraction
+%    \item $\nu$ is the average number of neutrons released per fission
+%    \item $\Sigma_f$ is the macroscopic fission cross section
+%    \item $\phi$ is the neutron flux
+%\end{description}
 
+$\Lambda_{eff}$ can also be calculated explicitly by its definition, which is the time between the birth of a neutron and the subsequent absorption that induces fission.
+This is shown in Equation \eqref{eq:lambdaeff-exact} as \cite{verboomen2006monte}:
 \begin{equation}
     \Lambda_{eff} = \frac{\int \phi_0^\dagger \frac{1}{v} \phi_0 \; dE d\vec{\Omega} d\vec{r}}{\int \phi_0^\dagger F_0 \phi_0 \; dE d\vec{\Omega} d\vec{r}}
     \label{eq:lambdaeff-exact}
 \end{equation}
+where
+\begin{align}
+\phi_0^\dagger &= \mbox{ the critical adjoint neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+\phi_0 &= \mbox{ the critical neutron flux [$\# \cdot cm^{-2} \cdot s^{-1}$] } \nonumber \\ 
+v &= \mbox{ the average neutron speed [$cm \cdot s^{-1}$]} \nonumber \\ 
+F_0 &= \mbox{ the total fission operator [$cm^{-1}$].} \nonumber
+\end{align}
+The fission operator is used because only the absorptions that induce fission are of interest.
 
-The terms in Equation \eqref{eq:lambdaeff-exact} are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $\phi_0^\dagger$ is the critical adjoint neutron flux
-    \item $\phi_0$ is the critical neutron flux
-    \item $v$ is the neutron speed
-    \item $F_0$ is the total fission operator
-\end{description}
+%\begin{description}
+%    %\setlength\itemsep{-0.25em}
+%    \item $\phi_0^\dagger$ is the critical adjoint neutron flux
+%    \item $\phi_0$ is the critical neutron flux
+%    \item $v$ is the neutron speed
+%    \item $F_0$ is the total fission operator
+%\end{description}
 
 
 
 There are other methods used to calculate $\beta_{eff}$ and $\Lambda_{eff}$ in the literature \cite{verboomen2006monte}. These include the direct integration, or adjoint
 weighted, method \cite{keepin1965physics}; the eigenvalue, or perturbation, method \cite{henry1958application}; and the iterated fission probability method \cite{bohl1964computation}.
-There is also the pulsed method for calculating $\Lambda_{eff}$, and the prompt method for calculating $\beta_{eff}$ \cite{romero2022calculation}.
-For $\beta_{eff}$, there are also the Meulekamp and Spriggs methods which can be used \cite{meulekamp2006calculating}.
-Aufiero et al. have conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods, which show that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
+$\Lambda_{eff}$ can also be calculated using the pulsed method \cite{romero2022calculation}.
+%There is also the pulsed method for calculating $\Lambda_{eff}$, and the prompt method for calculating $\beta_{eff}$ \cite{romero2022calculation}.
+For $\beta_{eff}$, there are also the prompt, Meulekamp, and Spriggs methods which can be used \cite{romero2022calculation, meulekamp2006calculating}.
+Aufiero et al. conducted a comparison of the Meulekamp, iterated fission probability, and prompt methods.
+Their results showed that the iterated fission probability and prompt methods both yield similar results while the Meulekamp method is 200 pcm higher for the \gls{MSFR} \cite{aufiero2014calculating}.
+
+To account for fuel-salt movement in the effective parameters, there is typically another step required in which the static parameters, calculated with no movement, are multiplied by another term.
+Aufiero et al. used an analytical approach with importance-weighted spatial decay probabilities to account for the movement of the fuel salt, a deterministic approach which includes \gls{CFD} techniques for precursor transport, and a Monte Carlo approach which adjusts the position according to the fuel velocity field and decay constant when the emission of a delayed neutron is sampled \cite{aufiero2014calculating}.
+Another approach is to account for the decay of the \glspl{DNP} outside the core, as shown by Nestor \cite{nestor1960reactor}.
+Generally, an advection term is introduced to account for the circulation of the \glspl{DNP}, after which the spatial distribution is incorporated into the effective parameter calculation.

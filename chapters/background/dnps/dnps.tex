@@ -1,103 +1,59 @@
-An important consideration in nuclear reactors, especially in \glspl{MSR}, are \glspl{DNP}, discovered in 1939, with initial spectral measurements in 1946 \cite{roberts1939further, das1993importance, burgy1946energies}.
-\Glspl{DNP} are nuclides which decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
-In this work, the term \gls{DNP} will be solely used, as the delay of the neutron emission practically is only due to the beta decay \cite{bohr1939mechanism, ott1985introductory}.
-Classifying between the emitter and the \gls{DNP} is not relevant for this work.
+This section discusses what \glspl{DNP} are, how they are measured, how groups are formulated, how they relate to kinetics parameters, and how they are represented in kinetics models.
+Before delving deeper into the \gls{DNP} group parameters, it is useful to first understand \glspl{DNP} conceptually because they are an important consideration in nuclear reactors \cite{das1993importance}.
+\Glspl{DNP} are nuclides produced via fission that decay via $\beta^-$ decay, producing a daughter, called an emitter, which emits a neutron \cite{bank2000jef}.
+%\glspl{DNP} are an important consideration in nuclear reactors \cite{das1993importance}.
+%An important consideration in nuclear reactors, especially in \glspl{MSR}, are \glspl{DNP}, discovered in 1939, with initial spectral measurements in 1946 \cite{roberts1939further, das1993importance, burgy1946energies}.
+In this work, the term \gls{DNP} will be used exclusively rather than referring to emitters.
+Distinguishing between the emitter and the \gls{DNP} is not relevant for this work because the emission time of the neutron is dominated by the $\beta^{-}$ decay \cite{bohr1939mechanism, ott1985introductory}.
 
-This delay in the emission of a neutron has a large effect on the reactor period and transient behavior.
-The time-dependent rate of delayed neutron emission from a single beta-delayed neutron emitting nuclide, or \gls{DNP}, is shown in Equation \eqref{eq:dnpsingleeq}.
 
+Equation \eqref{eq:simple-reactor-period} shows a simplified equation for the reactor period $\tau_e$, calculated using a single effective \gls{DNP} group and without the effect of prompt neutrons \cite{NRC2006EquationsConversions}.
+The delay in neutron emission significantly affects the reactor period, or the time it takes for the reactor power to increase by a factor of $e$, and transient behavior in general.
 \begin{equation}
-    n_{d, i}(t) = P_{n, i} \lambda_i N_i(t)
+    \tau_e \approx \frac{\beta_{eff} - \rho}{\rho \lambda_{eff}}
+    \label{eq:simple-reactor-period}
+\end{equation}
+where
+\begin{align}
+    \beta_{eff} &= \text{the effective delayed neutron fraction [-]} \nonumber \\
+    \rho &= \text{the reactivity [-]} \nonumber \\
+    \tau_e &= \text{the reactor period $[s]$} \nonumber \\
+    \lambda_{eff} &= \text{the effective \gls{DNP} decay constant for all \glspl{DNP} [$s^{-1}$]}. \nonumber
+\end{align}
+The effective delayed neutron fraction is discussed in more detail in Section \ref{sec:gandkparams}.
+The one \gls{DNP} group approximation is not used in this study, so this approximation is not discussed in greater detail.
+However, this simplified equation illustrates that the reactor period depends greatly on the effective delayed neutron fraction, which itself is based on the \glspl{DNP}.
+
+Equation \eqref{eq:dnpsingleeq} shows the time-dependent rate of delayed neutron emission from a single \gls{DNP} as:
+\begin{equation}
+    \dot{n}_{d, i}(t) = P_{n, i} \lambda_i N_i(t),
     \label{eq:dnpsingleeq}
 \end{equation}
+\begin{align}
+\intertext{where}
+\dot{n}_{d, i} &= \mbox{ the delayed neutron activity, or count rate, from \gls{DNP} $i$ $\left[\# \cdot s^{-1}\right]$} \nonumber \\
+P_{n, i} &= \mbox{ the average number of delayed neutrons emitted from} \nonumber\\
+& \;\;\;\;\;\; \mbox{decay of nuclide $i$, or the emission probability [$\#$]} \nonumber \\
+\lambda_i &= \mbox{ the decay constant of \gls{DNP} $i$ $[s^{-1}]$} \nonumber \\
+N_i(t) &= \mbox{ the number of atoms of \gls{DNP} $i$ $\left[\#\right]$.} \nonumber
+\end{align}
 
-The terms in Equation \eqref{eq:dnpsingleeq} is defined as follows:
-\begin{itemize}
-    \setlength\itemsep{-0.25em}
-    \item $n_{d, i}$ is the delayed neutron activity, or count rate, from \gls{DNP} $i$
-    \item $P_{n, i}$ is the average number of delayed neutrons emitted from a single beta decay of nuclide $i$, or the emission probability
-    \item $\lambda_i$ is the decay constant of \gls{DNP} $i$
-    \item $N_i(t)$ is the concentration of \gls{DNP} $i$
-    \end{itemize}
+%\begin{itemize}
+%    \setlength\itemsep{-0.25em}
+%    \item $n_{d, i}$ is the delayed neutron activity, or count rate, from \gls{DNP} $i$
+%    \item $P_{n, i}$ is the average number of delayed neutrons emitted from a single beta decay of nuclide $i$, or the emission probability
+%    \item $\lambda_i$ is the decay constant of \gls{DNP} $i$
+%    \item $N_i(t)$ is the concentration of \gls{DNP} $i$
+%\end{itemize}
 
-A challenging aspect of treating \glspl{DNP} in \glspl{MSR} is the necessary inclusion of a spatial component due to the movement of the fuel salt.
-In a solid fuel reactor, such as an \gls{LWR}, a spatial component is not necessary to properly model the \glspl{DNP}.
-Modeling space and time together causes computational costs to increase significantly, making problems involving \glspl{DNP} in \glspl{MSR} more challenging than handling \glspl{DNP} in stationary fuels.
-Although it is challenging, it is important to properly model the \glspl{DNP} in reactors.
+%A challenging aspect of treating \glspl{DNP} in \glspl{MSR} is the necessary inclusion of spatial resolution due to the movement of the fuel salt.
+%In \glspl{MSR}, the movement of the fuel salt necessitates spatial resolution for depletion, transmutation, and neutron emission.
+In a solid-fueled reactor, such as a \gls{LWR}, spatial resolution is not necessary to properly model the \glspl{DNP}, as the fuel remains stationary.
+In \glspl{MSR}, the movement of the fuel salt necessitates spatial resolution for tracking \gls{DNP} distributions and concentrations.
+Concentrations of nuclides vary spatially as short-lived nuclides decay and longer-lived nuclides are distributed outside the core.
+Modeling space and time together largely increases computational cost, making problems involving \glspl{DNP} in \glspl{MSR} more challenging than handling \glspl{DNP} in stationary fuels.
 
-The \glspl{DNP} are important to model properly for several reasons.
-Material accountancy, reactivity worth, decay heat, and reactor controllability (particularly for \glspl{MSR}) are all key aspects to understand for safe reactor operation \cite{das1993importance, das1977kinetics, dickens1991analysis, lane1958fluid}.
-Without properly modeling \glspl{DNP}, these aspects will not be accurately predicted.
-This leads to over-conservatism in safety systems and increased costs, difficulties in licensing, and increased risk.
-
-\subsection{Measurement}
-\label{sec:measurementofdnps}
-
-\subsubsection{Macro Measurement of Delayed Neutron Precursors}
-
-There are two approaches used for measurement of \glspl{DNP}, referred to as macroscopic, or macro, and microscopic, or micro, measurement approaches \cite{parish1999status}.
-This section covers the macro approach.
-Analysis and collection of macro approach data is very common in the literature, as the data from this method is important for reactors \cite{keepin1957delayed, tuttle1975delayed, manero1972status, benedetti1982delayed, waldo1981delayed, brady1988evaluation, hughes1948delayed, loaiza1998measurements, loaiza2000dominant}.
-The macro approach entails irradiation of a sample containing a single fissile nuclide at or near a given neutron energy.
-Small samples are used in order to minimize neutron multiplication within the sample.
-Two different types of irradiation are used: pulse irradiation, where the irradiation time is shorter than the shortest half-life; and infinite, where the irradiation time is longer than the longest half-life.
-After irradiation, the delayed neutrons from the sample are counted as a function of time.
-Equation \eqref{eq:mdnp-dn} shows the delayed neutron counts as a function of time after irradiation.
-
-\begin{equation}
-    n_d(t) = \epsilon \sum_{i=1}^{I} P_{n_i} \lambda_i N_{i}(t)
-    \label{eq:mdnp-dn}
-\end{equation}
-
-Many of the terms in Equation \eqref{eq:mdnp-dn} are the same as in \eqref{eq:dnpsingleeq}. The terms in Equation \eqref{eq:mdnp-dn} which are different are defined as follows:
-\begin{description}
-    %\setlength\itemsep{-0.25em}
-    \item $I$ is the total number of \glspl{DNP}
-    \item $\epsilon$ is the detector efficiency
-\end{description}
-
-Once this delayed neutron temporal profile is generated, it is common to then use the data to generate group and kinetics parameters for that fissile nuclide and neutron energy.
-The specifics of the methods used to form those parameters is discussed in Section \ref{sec:gandkparams}.
-Figure \ref{fig:keepin-setup} (recreated from \cite{keepin1957delayed}) shows how an experimental setup for collecting delayed neutron counts works.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.80\linewidth]{images/keepin-setup.PNG}
-    \caption{Experimental setup for measuring delayed neutron emission from irradiation of GODIVA on a sample recreated from \cite{keepin1957delayed}.}
-    \label{fig:keepin-setup}
-\end{figure}
-
-There are challenges associated with the collection of this experimental data \cite{bank2000jef}.
-Experimental noise becomes more significant after long periods of time, as the delayed neutron counts decrease.
-Additionally, the short lived groups cannot be measured directly due to moderated neutrons from irradiation.
-This means that both the long and short time-scale measurements have greater uncertainty than the middle time-scale measurements.
-
-Another consideration is measurement of the number of fissions.
-Although the number of fission events can be measured somewhat accurately using a fission chamber after irradiation or other techniques, this does not account for source multiplication within the irradiated sample.
-Keepin et al. suggests a technique to correct for the sample self-multiplication, which can cause differences of up to 3\% in the correction factor to the number of fissions.
-
-\subsubsection{Micro Measurement of Delayed Neutron Precursors}
-
-The other approach used to measure \glspl{DNP} is the micro-measurement approach.
-This approach entails taking a sample of a single \gls{DNP} nuclide and gathering experimental data on its properties.
-Typically this involves some form of rapid chemical extraction or isotope separator and magnetic tape in order to rapidly measure short lived nuclides.
-
-There are many different experimental methods used to study \glspl{DNP}, particularly their spectra: on-line mass spectrometry, helium-3 spectrometry, the proton-recoil technique, the time-of-flight method, and the neutron scintillator \cite{das1993importance}.
-On-line mass spectrometry combined with a helium-3 ionization chamber and the proton-recoil technique allows for measurement of the delayed neutron energy spectrum \cite{shalev1972delayed, beyer2007proton}.
-The time-of-flight method involves measuring the velocity of the delayed neutron by having a known travel distance and time measurement \cite{chulick1971energy, garcia2012monster, chrysochoides1971measurement}. An example of the time-of-flight experimental setup is shown in Figure \ref{fig:micromeasure}.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.80\linewidth]{images/micromeasure.PNG}
-    \caption{A block diagram of the time-of-flight experimental setup for measuring delayed neutrons from bromine-87 and bromine-88, extracted from the “Democritos” reactor via a fast radiochemical technique recreated from  \cite{chrysochoides1971measurement}.}
-    \label{fig:micromeasure}
-\end{figure}
-
-This micro measurement data is exceptionally useful, as it allows for treatment of \glspl{DNP} on a nuclide-by-nuclide basis, rather than macro-scale.
-This is particularly important for \glspl{MSR}, where the spatial concentration of \glspl{DNP} depends on half-lives, yields, thermo-chemistry, and thermal-hydraulics.
-With data on individual nuclides, higher fidelity treatment of \glspl{DNP} becomes possible.
-
-There have been many new measurements in the past several decades on these nuclides.
-Fortunately, the \gls{IAEA} has worked to compile and evaluate this data into a publicly accessible form \cite{DIMITRIOU2021144, dillmann2015summary}.
-This data, when combined with cumulative fission yields and neutronics data, can be used to model the \glspl{DNP} explicitly, rather than using groups.
+Properly modeling the \glspl{DNP} in reactors is important; otherwise simulations may predict incorrect power responses, reactivity feedback, control element worth, and reactor controllability \cite{das1993importance, das1977kinetics, lane1958fluid}.
+Section \ref{sec:bg-trans-analysis-methods} shows how the power response depends on the \glspl{DNP}.
+The reactor controllability varies based on the quantity of delayed neutrons in neutronically-important regions.
+If there are fewer neutronically-important delayed neutrons available due to the movement of the fuel salt, such as in an \gls{MSR}, then the reactor period becomes shorter, making the reactor harder to control.

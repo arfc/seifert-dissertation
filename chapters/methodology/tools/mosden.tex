@@ -1,0 +1,12 @@
+\Gls{MoSDeN} is a Python package designed to enable generation of \gls{DNP} group parameters using the microscopic approach for any given reactor of interest.
+\Gls{MoSDeN} reads in relevant nuclear data, simulates the irradiation of a fissile sample, collects concentrations from the simulated irradiation, calculates a delayed neutron count rate of the measured sample, and uses non-linear least squares to find the best \gls{DNP} group parameters that fit the delayed neutron count rate.
+
+\gls{MoSDeN} allows for varying levels of fidelity in the generation, ranging from using nuclear data and broad assumptions to a simulation with neutronics and a 0D approximation of thermal-hydraulics.
+The \gls{MoSDeN} package relies on the SciPy, NumPy, Matplotlib, pandas, and Uncertainties packages \cite{scipy, numpy, matplotlib, pandas, uncertaintiespackage}.
+Many features of \gls{MoSDeN} also require OpenMC to function properly \cite{romano_openmc_2015}.
+\gls{MoSDeN} automates data collection and processing, simulates pulse and/or saturation irradiations, converts the concentrations into a delayed neutron count rate, and generates group parameters.
+
+\begin{comment}
+The preliminary work on \gls{MoSDeN} uses the 0D scaled model, while the proposed work will make use of the 0D flow model.
+Both models are discussed in more detail in Section \ref{sec:delnu-groupgen}.
+\end{comment}

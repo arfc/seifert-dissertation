@@ -1,0 +1,77 @@
+\begin{frame}
+  \frametitle{Safety-related transients may disrupt safe reactor operation}
+    \begin{block}{Safety-related transients that will be modeled are:}
+        \begin{itemize}
+            \item \Gls{ULOHS}
+            \begin{itemize}
+                \item Loss of cooling in the reactor, potentially due to a heat exchanger failure
+                \item Modeled in Moltres by setting inlet temperature equal to outlet temperature
+            \end{itemize}
+            \item \Gls{ULOF}
+            \begin{itemize}
+                \item Flow rate decreases to zero due to a pump failure
+                \item Modeled in Moltres by changing flow field over time to match \gls{MSRE} pump shut-down
+            \end{itemize}
+            \item \Gls{UTOP}
+            \begin{itemize}
+                \item Reactivity insertion event, which could be caused by poison removal, fissile addition, or temperature change
+                \item Modeled in Moltres by having a step-decrease in the removal cross section, representing control rod withdrawal
+            \end{itemize}
+            \item \Gls{FSOC}
+            \begin{itemize}
+                \item Fuel salt temperature decreases, potentially caused by increased heat removal rate
+                \item Modeled in Moltres by reducing inlet temperature by 25\%
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sabotage may be used as a diversion}
+  This framework assumes a hostile actor and an insider with the objective to disrupt operations \cite{protection2011evaluation}.
+    \begin{block}{Sabotage-initiated transients that will be modeled are:}
+        \begin{itemize}
+            \item All safety-related transients as single events
+            \item Combined \Gls{UTOP} and \gls{ULOHS}
+            \begin{itemize}
+                \item This should cause a temperature increase that propagates due to lack of heat sink; reactivity should then decrease due to temperature increase
+            \end{itemize}
+            \item Combined \Gls{UTOP} and \gls{ULOF}
+            \begin{itemize}
+                \item This should cause a temperature increase with a peak maximum temperature due to the stationary fuel salt; reactivity should then decrease due to temperature increase
+            \end{itemize}
+            \item Combined \Gls{UTOP} and \gls{FSOC}
+            \begin{itemize}
+                \item This should cause a temperature increase that is counteracted by the overcooled inlet fuel salt, leading to the largest reactivity change; temperature is not expected to change dramatically
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{SNM diversion may be detected using reactor kinetics}
+    \begin{block}{\Gls{SNM} diversion scenarios considered are \cite{protection2011evaluation, international2022iaea, bathke2012attractive}:}
+        \begin{itemize}
+            \item One \gls{SQ} of $^{235}$U (75 $kg$) after one year in the \gls{MSRE}
+            \begin{itemize}
+                \item Removing $^{235}$U will decrease the delayed neutron fraction
+            \end{itemize}
+            \item One \gls{SQ} of Pu (8 $kg$) after one year in the \gls{MSRE}
+            \begin{itemize}
+                \item Removing Pu will increase the delayed neutron fraction
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+    The \gls{DNP} group parameters will then be used in a negative reactivity step insertion, and the resulting power responses will be compared \cite{wheeler2021signatures}.
+    \begin{block}{Each scenario will have four sets of \gls{DNP} group parameters to compare:}
+    \begin{itemize}
+        \item Conventional parameters with/without diversion
+        \item Improved parameters with/without diversion
+    \end{itemize}
+    \end{block}
+
+    \textbf{The change in fuel composition and the \gls{MSR} phenomena affect the ability to detect \gls{SNM} diversion.}
+
+\end{frame}

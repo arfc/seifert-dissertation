@@ -1,5 +1,5 @@
 %% Package and Class "uiucthesis2014" for use with LaTeX2e.
-\documentclass[edeposit,fullpage,hidelinks]{uiucthesis2018}
+\documentclass[edeposit,fullpage,hidelinks]{uiucthesis2021}
 
 
 \usepackage[acronym,toc]{glossaries}
@@ -39,6 +39,8 @@
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \usepackage{threeparttable, tablefootnote}
+
+\usepackage{todonotes}
 
 %tikzpicture fit to page width
 \usepackage{environ}
@@ -81,15 +83,19 @@
 \tikzstyle{arrow} = [thick,->,>=stealth]
 
 
-\title{Tabulated Delayed Neutron Group Parameters for Molten Salt Reactors}
+%\title{Tabulated Delayed Neutron Group Parameters for Molten Salt Reactors}
+%\title{Molten Salt Reactor Microscopic Delayed Neutron Precursor Group Formulation and Evaluation}
+\title{Improved Delayed Neutron Group Parameters for Molten Salt Reactors}
 \author{Luke Seifert}
 \department{Nuclear, Plasma, Radiological Engineering}
 %\schools{B.S., University of Illinois - Urbana Champaign, 2017}
 \phdthesis
-\advisor{Kathryn D. Huff}
 \degreeyear{2025}
-\committee{Professor Kathryn D. Huff, Advisor \\ More }
+\committee{Associate Professor Kathryn D. Huff, Co-advisor \\ Assistant Professor Madicken Munk, Co-advisor \\ Professor Tomasz Kozlowski \\ Assistant Professor April Novak \\ Staff Scientist Samuel Walker \\ Research Professor Daniel S. Katz}
 
+
+\newcommand\ytl[2]{
+\parbox[b]{8em}{\hfill{\color{cyan}\bfseries\sffamily #1}~$\cdots\cdots$~}\makebox[0pt][c]{$\bullet$}\vrule\quad \parbox[c]{4.5cm}{\vspace{7pt}\color{red!40!black!80}\raggedright\sffamily #2.\\[7pt]}\\[-3pt]}
 
 \begin{document}
 \maketitle
@@ -102,6 +108,7 @@
 \input{chapters/abstract}
 
 \end{abstract}
+\glsresetall
 
 \chapter*{Acknowledgments}
 
@@ -119,8 +126,8 @@
 %% etc.
 
 \tableofcontents
-\listoftables
-\listoffigures
+%\listoftables
+%\listoffigures
 
 %% Create a List of Abbreviations. The left column
 %% is 1 inch wide and left-justified
@@ -133,217 +140,7 @@
 \mainmatter
 
 
-\chapter{Introduction}
-\input{chapters/introduction}
-
-
-\chapter{Background and Motivation}
-\input{chapters/background/background}
-
-
-\section{Nuclear Safeguards}
-\input{chapters/background/safeguards}
-
-\section{Safety-Related Reactor Transients}
-\input{chapters/background/safety/safety}
-
-\subsection{Transient Analysis Methods}
-\label{sec:bg-trans-analysis-methods}
-\input{chapters/background/safety/transientanalysis}
-
-\section{Delayed Neutron Precursors}
-
-\subsection{Overview}
-\input{chapters/background/dnps/dnps}
-
-\subsection{Group and Kinetics Parameters}
-\label{sec:gandkparams}
-\input{chapters/background/dnps/groupparam}
-
-
-
-\section{Molten Salt Reactor Depletion}
-\subsection{Overview}
-\input{chapters/background/msrs/msrs}
-
-\subsection{Depletion Simulations}
-\input{chapters/background/msrs/depletionsims}
-
-
-
-\chapter{Methodology}
-
-\section{Tools}
-\input{chapters/methodology/tools/tools}
-
-
-%\subsection{Kinetics}
-
-%\subsubsection{PyRK}
-
-\subsection{Python Scripts}
-\input{chapters/methodology/tools/python}
-
-\subsection{OpenMC}
-\input{chapters/methodology/tools/openmc}
-
-
-\subsection{MOOSE Apps}
-\gls{MOOSE} is an open-source, parallel finite element framework for which many applications have been built to handle different physics.
-Coupling of these physics is simplified using \gls{MOOSE}, and there are many pre-built applications available to handle a variety of physical phenomena.
-
-%\subsubsection{Griffin}
-%ISOXML
-
-%\subsubsection{Pronghorn}
-
-\subsubsection{Moltres}
-Moltres is an open-source \gls{MOOSE} application which can be used for simulation of \glspl{MSR}.
-Particularly, this work uses Moltres to simulate the \gls{MSRE} with different \gls{DNP} group parameters.
-Moltres enables a validation study by comparing the results of experimental results with different \gls{DNP} group parameters.
-The validation study demonstrates the efficacy of these updated \gls{DNP} group parameters compared to static group parameters.
-
-\section{Tabulation}
-\input{chapters/methodology/simplification}
-
-\subsection{Simplified Model}
-\label{sec:simple-model}
-\input{chapters/methodology/simplification/gen}
-
-
-\section{Resolved Delayed Neutron Counts}
-\label{sec:delnu-counts}
-\input{chapters/methodology/resdncounts/overview}
-
-
-\subsection{Delayed Neutron Precursor Concentrations}
-\input{chapters/methodology/resdncounts/concs}
-
-\subsection{Concentrations to Counts}
-\input{chapters/methodology/resdncounts/iaeadata}
-
-\section{Delayed Neutron Precursor Group Reconstruction}
-\label{sec:delnu-groups}
-
-\input{chapters/methodology/dnpgrouprecon}
-
-%\subsection{Group Concentrations from Nuclides}
-
-%Fractional fitting (this is for running next Griffin/Pronghorn step)
-
-\section{Simulated Scenarios}
-
-\subsection{Verification}
-Comparison of Griffin/Pronghorn quasi-static to Moltres quasi-static to Moltres with fixed groups (old and new)
-
-\subsection{Validation}
-MSRE coastdown
-
-\subsection{Safeguards}
-Diversion scenario effects
-
-\subsection{Safety}
-Various safety transients
-
-
-
-\chapter{Preliminary Results}
-
-For the preliminary results, the tabulation is not fully resolved.
-Instead, a default approach is utilized, with variations for refining the tabulation.
-Thermal fission of uranium-235 is used with the \gls{MSBR} reprocessing scheme with 10 second in-core and 10-second ex-core residence times at a temperature of 298.15 $K$ and a density of 10 grams per centimeter cubed irradiated over seven minutes with linearly spaced time nodes and decay daughter tracking for the group parameter non-linear least squares fit.
-
-\section{Simplified Model Refinement}
-\label{sec:model-refinement}
-
-\subsection{Temperature}
-
-\subsection{Target Density}
-
-\subsection{Total Irradiation Time}
-
-\section{Tabulation Refinement}
-
-Discuss effect of varying reprocessing; determine what differences arise from inclusion of larger cycle time elements (if any). (might need to adjust methodology section based on these results).
-Scale the reprocessing terms differently to see their effects (see if each can be scaled the same way).
-
-\subsection{Large Cycle Time Analysis}
-\label{sec:large-tcyc}
-
-\subsection{Reprocessing Rate Scaling}
-\label{sec:repr-scale}
-
-\subsection{Residence Time Variation}
-\label{sec:res-time-var}
-
-\section{Parameter Fit Refinement}
-
-\subsection{Time Evaluations}
-\label{sec:time-eval}
-
-\subsection{Delayed Neutron Count Uncertainties}
-
-\subsection{Group Parameter Uncertainties (?)}
-
-\section{Group Parameter Comparisons}
-
-\subsection{Comparison with Documented Results}
-
-\subsection{Comparison of Current Results}
-
-\subsection{Comparison with Decay Chain Daughters}
-\label{sec:decaychaindaughters}
-Use N(t) from SaltProc with linear interpolation.
-
-\section{Spatially Resolved Depletion Effects on Precursors}
-
-Net delayed neutron yield; group abundances; group decays; comparison of most impactful nuclides (?)
-
-\section{Verification}
-
-\subsection{Simplified Model}
-
-\subsection{No Molten Properties Comparisons}
-
-No flow, reprocessing, thermochemistry, spatial depletion should equal expected results.
-
-\subsection{Literature Comparison}
-
-Should match other Griffin/Pronghorn results
-
-\section{INL work}
-
-This work uses Griffin/Pronghorn/Thermochimica to simulate safeguards diversion while tracking all DNPs (but doesn't update DNP groups, only concentrations).
-
-\chapter{Proposed Work}
-
-\section{Resolved Flow}
-
-\subsection{Least-Squares Fission History}
-
-This will probably need numerical evaluation of integral with a polynomial fit afterwards.
-Could also include R(t) using N(t) rather than assuming exponential decay.
-
-\section{Resolve DNP spectra}
-\cite{das1993importance} discusses why it's important in section 6.
-
-\section{Uncertainty Quantification}
-
-\href{https://www.researchgate.net/publication/329403358_A_new_framework_for_sampling-based_uncertainty_quantification_of_the_six-group_reactor_kinetic_parameters}{Kozlowski paper}
-Using sensitivity to flow and reprocessing.
-Uncertainty in half lives and emission probabilities is small.
-Neglect uncertainty in concentrations from OpenMC (cross sections, fission yields, half lives, transmutations, decay yields, etc.).
-
-\section{Other extensions}
-Diffusion effect (not really modelable in time pulses only unless multiple materials are used).
-Photoneutrons - investigate
-Spatially resolved flux - consider, Specific neutron spectra
-Thermochemical effects - different nuclides will have different chemical removal rates, which will affect results
-
-\appendix
-\chapter{Appendix A: Derivation of Simplfied Flowing Irradiation Delayed Neutron Counts for Equal Residence Times}
-\input{chapters/appendices/appendixA}
-
+\input{chapters/body}
 
 
 

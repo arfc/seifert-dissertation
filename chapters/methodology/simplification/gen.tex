@@ -1,55 +1,92 @@
-%For the simplified model discussed in Section \ref{sec:simple-model}, the mixing term is ignored, and only advection is considered in a simplified manner.
-To generate sufficient data for refined tabulation, a simplified model is necessary.
-This simplified model will also provide estimates for the magnitude of variation which can be expected, as well as general trends.
-The fission history function is a square-wave, where the fission rate is some positive constant for the in-core residence time and zero for the ex-core residence time.
-This approximation simplifies the analytical solve required to create the non-linear least-squares problem, as shown in Appendix \ref{ref:appendixA}.
+The 0D flow model enables improved analysis of the general trends in nuclide evolutions.
+It treats the flow in a zero-dimensional manner using in-core and ex-core residence times, and uses OpenMC to track the full depletion matrix.
+Figure \ref{fig:msre1d} shows the 1D in-core and ex-core flow paths, which this 0D model emulates by irradiating the sample for the in-core residence time and letting it decay for the ex-core residence time.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/MSRE_loop_drawing_3.png}
+    \caption{The flow path and bounds for the in-core region of the \gls{MSRE}, overlaid on the \gls{MSRE} loop diagram from \cite{engel1970spray}.}
+    \label{fig:msre1d}
+\end{figure}
+The fission history function is approximated in this work as a square wave, with a constant fission rate during the in-core residence time and no fission during the ex-core residence time.
+This approximation simplifies the analytical form of the fission history when forming the non-linear least squares problem, as shown in Appendix \ref{ref:appendixA}.
+Appendix \ref{ref:appendixA} derives the delayed neutron count rate after $T$ seconds of irradiation in Equation \eqref{eq:msr-group}:
+\begin{equation}
+\dot{n}_{d}(T, t) =F_0 \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_kt} \left( \left(J_{in}-J_{ex}\right) - \frac{e^{-\lambda_kT}}{1-d}  \left( e^{\lambda_k\tau_{in}}d^{J_{ex}+1} - e^{\lambda_k\tau_{in}} + 1 - d^{J_{in}+1} \right) \right),
+    \label{eq:msr-group}
+\end{equation}
+where,
+\begin{align}
+    T &= \text{the total fission history, or net irradiation, time $[s]$} \nonumber \\
+    \tau_{in} &= \text{the in-core residence time $[s]$} \nonumber \\
+    \tau_{ex} &= \text{the ex-core residence time $[s]$} \nonumber \\
+    \tau_{net} &= \tau_{in}+\tau_{ex} \nonumber \\
+    &= \text{the net residence time $[s]$} \nonumber \\
+    J_{in} &= \left\lfloor \frac{T}{\tau_{net}} \right\rfloor \nonumber \\
+    &= \text{the number of times the sample enters the core minus one $[\#]$} \nonumber \\
+    J_{ex} &= \left\lfloor \frac{T-\tau_{in}}{\tau_{net}} \right\rfloor \nonumber \\
+    &= \text{the number of times the sample exits the core minus one $[\#]$} \nonumber \\
+    d &= e^{\lambda_k \tau_{net}}. \nonumber \\
+\end{align}
+The values of $J_{in}$ and $J_{ex}$ use the floor function to ensure the integer number of times is accurately counted.
+This closed-form solution is numerically unstable for very short ex-core irradiation times due to the positive exponential terms.
+Although computationally slower to solve, Equation \eqref{eq:sumform} offers a more stable form, recreated here as:
+\begin{align}
+\frac{\dot{n}_{d, k}(T, t)}{F_0 \bar{\nu}_{d, k}} &= e^{-\lambda_k t} \sum_{j=0}^{J_{ex}} \left( e^{-\lambda_k (T - \tau_{in} - j \cdot \tau_{net})} - e^{-\lambda_k (T - j \cdot \tau_{net})}  \right) \nonumber \\ &+ e^{-\lambda_k t} \sum_{j=J_{ex}+1}^{J_{in}} \left( 1 - e^{-\lambda_k (T - j \cdot \tau_{net})} \right).
+\end{align}
 
-Figure \ref{fig:simplified-model} shows how this fission history is used in OpenMC in order to mimic the irradiation on a control volume of fuel salt due to advection.
-The model takes in eight arguments to pass into OpenMC \cite{romano_openmc_2015}: the in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
-Of these terms, three, shown in green, are not related to tabulation: the temperature, target density, and total irradiation time.
-The other inputs are in yellow and are tabulated parameters.
-More detail on this block is provided in Section \ref{sec:delnu-counts}.
+Figure \ref{fig:simplified-model} shows the flow diagram for the 0D flow model.
+The model provides eight parameters for OpenMC \cite{romano_openmc_2015}: in-core residence time, ex-core residence time, neutron irradiation energy, target fissile nuclide, target density, total irradiation time, temperature, and reprocessing terms.
+The depletion matrix is passed into OpenMC, while the emission probabilities are passed into \gls{MoSDeN}.
+The depletion matrix contains information on half-lives, fission yields, cross-sections, branching ratios, and other useful data needed for OpenMC depletion.
+Section \ref{sec:delnu-counts} provides further details on this process.
 
-After OpenMC finishes the fixed source simulation, the final concentrations of nuclides in the irradiated sample are saved for analysis in custom scripts.
-These scripts take in the concentrations and combine them with the IAEA beta-delayed neutron emission database data to generate a delayed neutron count rate function \cite{DIMITRIOU2021144}.
-A non-linear least squares fitting function from SciPy is then used to generate the half life and group abundances \cite{2020SciPy-NMeth}.
-These results are added to tabulated results for a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and reprocessing scalar.
-More detail on this block is provided in Section \ref{sec:delnu-groups}.
+After OpenMC completes the fixed-source simulation, the final nuclide concentrations in the irradiated sample are saved for analysis in \gls{MoSDeN}.
+\gls{MoSDeN} combines the concentrations with data from the IAEA beta-delayed neutron emission database to generate a delayed neutron count rate \cite{DIMITRIOU2021144}.
+A non-linear least squares fitting function from SciPy then calculates the group half-lives and yields using the Trust Region Reflective algorithm \cite{scipy, branch1999subspace}.
+These group parameters correspond to a specific nuclide, neutron energy, in-core residence time, ex-core residence time, reprocessing scheme, and set of nuclear data.
+Section \ref{sec:delnu-groups} provides further details on this block.
+Some additional factors to consider include self-shielding due to sample density (while avoiding self-multiplication), temperature-induced cross-section variations, and under- or over-irradiation, all of which can affect the results \cite{keepin1957delayed}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth]{images/simplified-model.png}
-    \caption{Flow diagram of simplified model used to generate flow-inclusive precursor group fit parameters.}
+    \includegraphics[width=0.9\linewidth]{images/flow-model.png}
+    \caption{Flow diagram of 0D flow model used to generate improved \gls{DNP} precursor group parameters.}
     \label{fig:simplified-model}
 \end{figure}
 
-There are several considerations required for the OpenMC simulations.
-The non-tabulated input parameters require some amount of consideration, which is discussed in Section \ref{sec:model-refinement}.
-In particular, self-shielding of the sample due to density while avoiding self-multiplication, variations in cross sections due to temperature, and under or over irradiation can all affect the results and must be considered \cite{keepin1957delayed}.
+The 0D flow model will use a three-gram spherical sample with vacuum boundary conditions.
+It will treat the problem as a fixed-source simulation, with a uniform volumetric neutron source.
+This approach is not physical, as a real neutron source would have a spectrum and originate externally.
+However, the neutron spectrum for irradiating samples to generate \gls{DNP} group parameters is not provided in the literature, and is generally provided as "thermal", "fast", or an average energy rather than a fully-defined spectrum.
+%The exact neutron energy spectrum is not needed, as only significant differences in the neutron energy spectrum affect the \gls{DNP} group parameters.
+The spatial distribution of the source has a negligible impact, as the sample is small and exhibits minimal self-multiplication.
+Thus, this approximation does not limit the effectiveness of the 0D flow model.
 
-The general form of the OpenMC model is a three gram spherical sample with vacuum boundary conditions.
-This is treated as a fixed-source problem, with a uniform neutron source distributed evenly throughout the spherical sample.
-This is not physical, as in reality the neutron source would have a spectrum and would be external.
-However, for the simplified model, the desired effects to capture are the differences between the group parameters with flow and reprocessing compared to the static results.
-This means such an approximation does not hinder the effectiveness of this simplified model.
-
-Another consideration for the OpenMC model is having a consistent source particle rate.
-This is not strictly necessary for group parameter generation, as the values are per-fission, but it is convenient for data analysis, as the tallies are based on the source particles.
-Equation \eqref{eq:balancedsdot} shows how the source rate is calculated to maintain the same source rate between different simulations.
-
+\begin{comment}
+Another consideration for the 0D flow model is maintaining a consistent source particle rate.
+While not strictly necessary for group parameter generation since the values are per-fission, it simplifies the data analysis, as the tallies depend on the source particles.
+Equation \eqref{eq:balancedsdot} provides the source rate for the irradiation simulations:
 \begin{equation}
-    \dot{S} = S_{net} \frac{\tau_{in} + \tau_{ex}}{\tau_{in} T}
+    \dot{S} = S_{net} \frac{\tau_{in} + \tau_{ex}}{\tau_{in} T},
     \label{eq:balancedsdot}
 \end{equation}
+where
+\begin{align}
+\dot{S} &= \mbox{ the source particle rate [$\# \cdot s^{-1}$]} \nonumber \\ 
+S_{net} &= \mbox{ the total number of source particles [$\#$]} \nonumber \\ 
+\tau_{in} &= \mbox{ the in-core residence time [$s$]} \nonumber \\ 
+\tau_{ex} &= \mbox{ the ex-core residence time [$s$]} \nonumber \\ 
+T &= \mbox{ the net irradiation time [$s$].} \nonumber
+\end{align}
+\end{comment}
 
-The terms in Equation \eqref{eq:balancedsdot} are defined as follows:
-\begin{description}
-    \item $\dot{S}$ is the source particle rate
-    \item $S_{net}$ is the total number of source particles
-    \item $\tau_{in}$ is the in-core residence time
-    \item $\tau_{ex}$ is the ex-core residence time
-    \item $T$ is the net irradiation time
-\end{description}
+%\begin{description}
+%    \item $\dot{S}$ is the source particle rate
+%    \item $S_{net}$ is the total number of source particles
+%    \item $\tau_{in}$ is the in-core residence time
+%    \item $\tau_{ex}$ is the ex-core residence time
+%    \item $T$ is the net irradiation time
+%\end{description}
 
 \begin{comment}
 After the OpenMC model, the custom scripts handle converting the concentrations into group parameters.

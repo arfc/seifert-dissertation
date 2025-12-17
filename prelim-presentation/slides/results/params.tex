@@ -1,0 +1,52 @@
+\begin{frame}
+    \frametitle{The parameters for the 0D scaled model analyses}
+
+    \begin{table}[]
+    \centering
+    \caption{Default parameters for 0D scaled model simulations.}
+    \begin{tabular}{lrl}
+        \hline
+        Parameter & Value & Units\\
+        \hline
+        \rule{0pt}{2ex}\vspace{0.1 mm}Fissile Nuclide & \vspace{0.1 mm}$^{235}$U & [-]\\
+        Incident Neutron Energy & $0.0253$ &$ [eV]$\\
+        Fission Yield Data & ENDF/B-VII.1 \cite{chadwick2011endf} & [-]\\
+        Half-life Data & IAEA \cite{DIMITRIOU2021144} & [-]\\
+        Emission Probability Data & IAEA \cite{DIMITRIOU2021144} & [-]\\
+        Final Decay Time & $1200$ & $[s]$\\
+        Decay Time Spacing Method & Logarithmic & [-]\\
+        Decay Time Node Count & 300 & [-]\\
+        Sampled Simulation Count & 1000 & [-]\\
+%        $\tau_{in}$ & 9 \cite{hanauer1967neutron} & $[s]$\\
+%        $\tau_{ex}$ & 16 \cite{hanauer1967neutron} & $[s]$\\
+        \hline
+    \end{tabular}
+    \label{tab:default-0dsacled}
+\end{table}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The chemical removal rates for the 0D scaled model analyses}
+\begin{table}[H]
+\renewcommand{\arraystretch}{1.25}
+\caption{MSBR Online Reprocessing Removal Rates from \cite{robertson_conceptual_1971}.}
+\begin{center}
+\begin{tabular}{ l p{\dimexpr 0.3\linewidth-2\tabcolsep} r}
+ \hline
+ Reprocessing Group & Element(s) & Removal Rate $[s^{-1}]$\\
+ \hline
+ Rare Earths & Y, La, Ce, Pr, Nd, Pm, Sm, Gd & $2.32 \times 10^{-7}$\\
+ Rare Earths & Eu & $2.32 \times 10^{-8}$\\
+ \textcolor{orange}{Noble Metals}  & \textcolor{orange}{Se, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Sb, Te} & \textcolor{orange}{$5.00 \times 10^{-2}$}\\
+ Seminoble Metals & Zr, Cd, In, Sn &  $5.79 \times 10^{-8}$\\
+ \textcolor{orange}{Gases} & \textcolor{orange}{Kr, Xe} & \textcolor{orange}{$5.00 \times 10^{-2}$}\\
+ Volatile Fluorides & Br, I & $1.93 \times 10^{-7}$\\
+ Discard & Rb, Sr, Cs, Ba & $3.37 \times 10^{-9}$\\
+ Salt Discard & Th, Li, Be, F & $3.37 \times 10^{-9}$\\
+ Protactinium & Pa & $3.86 \times 10^{-6}$\\
+ Higher Nuclides & Np, Pu & $1.98 \times 10^{-9}$\\
+ \hline
+\end{tabular}
+\end{center}
+\end{table}
+\end{frame}

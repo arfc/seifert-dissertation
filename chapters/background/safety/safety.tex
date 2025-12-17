@@ -1,22 +1,31 @@
-An important part of ensuring safe reactor operation is making sure safety-related transient events do not disrupt safe reactor operations.
-These transients are caused by \glspl{PIE}, which are defined by the \gls{IAEA} in the \gls{IAEA} Safety Standard Series No. NS-R-1 \cite{international2000iaea}.
-Of particular importance are \glspl{PIE} which lead to \glspl{DBA}.
-Although No. SSR-2/1 has superceded No. NS-R-1, the \glspl{PIE} and \glspl{DBA} for \glspl{MSR} have not changed \cite{international2016iaea}.
-Although there is not specific events listed for \glspl{MSR}, guidance is provided on what sort of events are of interest.
+The current work is important for safety-related transients, as the \gls{MSR} specific \gls{DNP} group parameters will impact the results of these transients.
+Depending on the properties of the specific reactor, which affect the group parameters, the static \gls{DNP} group parameter transient simulation may generate overly or insufficiently conservative results.
+This work will use safety-related transients to determine the effects of the improved \gls{DNP} group parameters in the \gls{MSRE}, and under what conditions, if any, the previous \gls{DNP} groups would predict safe operation while the improved groups would predict unsafe conditions.
 
-These events include equipment failures, such as pumps failing or pipes rupturing; human error, such as improper maintenance or faulty operator actions; external events, such as an earthquake; and combinations of events.
+An important part of ensuring safe reactor operation is making sure safety-related transient events do not disrupt safe reactor operations.
+These transients can be caused by \glspl{PIE}, which are defined in the \gls{IAEA} Safety Standard Series No. NS-R-1 \cite{international2000iaea}.
+Of particular importance are \glspl{PIE} that potentially lead to \glspl{DBA}.
+Although No. SSR-2/1 has superseded No. NS-R-1, the \glspl{PIE} and \glspl{DBA} for \glspl{MSR} have not changed \cite{international2016iaea}.
+Although there are not specific events listed for \glspl{MSR}, guidance is provided on categories of events that are of interest..
+
+These events include equipment failures, such as pumps failing or pipes rupturing; human error, such as improper maintenance or faulty operator actions; external events, such as earthquakes; and combinations of events.
 For combinations of events, the \gls{IAEA} specifies that these events should make sense in combination and in the time frame modeled.
 For example, if a particular event lasts a long time or has a long lasting effect, then that event could possibly overlap with another unrelated event.
-Alternatively, events which are not independent of each other could potentially occur at the same time.
+Alternatively, dependent events could potentially occur at the same time.
 
 
+Safety-related transients for \glspl{MSR} include unprotected loss of heat sink (ULOHS), unprotected loss of flow (ULOF), \gls{UTOP}, and \gls{FSOC} \cite{li2015transient, daher2022improvement}.
+A \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, causing a loss of cooling of the reactor.
+This causes higher fuel salt temperatures, which can cause adverse chemical effects and increase thermal stress \cite{belles2020proposed}.
+For the \gls{MSFR}, Brovchenko et al. showed that slow \gls{ULOHS} transients that take place on time scales longer than a minute minimize the increase in fuel salt temperature \cite{brovchenko2013design}.
+A \gls{ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
+The \gls{ULOF} transient can lead to an increase in the fuel salt temperature, similar to the \gls{ULOHS} transient.
+A \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
+This transient also causes an increase in the fuel salt temperature, similar to the \gls{ULOHS} and \gls{ULOF} transients.
+An \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger \cite{belles2020proposed}.
+Overcooling the fuel salt can lead to flow blockages from the salt freezing as well as a reactivity insertion from the decrease in fuel salt temperature.
 
-Safety-related transients, for \glspl{MSR} include \gls{ULOHS}, \gls{ULOF}, \gls{UTOP}, and \gls{FSOC} \cite{li2015transient, daher2022improvement}.
-An \gls{ULOHS} transient is when the heat exchanger experiences a failure, possibly caused by a pump failure in the intermediate loop, which causes a loss of cooling of the reactor.
-For the \gls{MSFR}, Brovchenko et al. have shown that slow \gls{ULOHS} transients that take place over a minute or longer minimize the increase in fuel salt temperature \cite{brovchenko2013design}.
-An {ULOF} transient is when the flow rate in the primary loop becomes zero, caused by pump failure in the primary loop.
-An \gls{UTOP} transient is a reactivity insertion event, which could be caused by various means, such as removing poisons, adding fissile material, or temperature changes.
-A \gls{FSOC} transient is when the fuel salt temperature decreases, which could be caused by an increased heat removal rate from the heat exchanger.
 
-These safety-related transients are important for the current work, as the tabulated \gls{DNP} group parameters can be used to more rapidly simulated these transients.
-Additionally, due to the coupling of the neutronics and thermal-hydraulics in calculation of the tabulated effective group parameters, the results are more accurate than they would be using more traditional transient analysis methods.
+%These safety-related transients are important for the current work, as the tabulated \gls{DNP} group parameters can be used to more rapidly simulated these transients.
+%Additionally, due to the coupling of the neutronics and thermal-hydraulics in calculation of the tabulated effective group parameters, the results are more accurate than they would be using more traditional transient analysis methods.
+%The method used to simulate the transient is also an important consideration.

@@ -1,57 +1,62 @@
-Once the delayed neutron counts as a function of time are generated, they can be converted into \gls{DNP} group parameters.
-The process of fitting the group parameters requires a non-linear least squares method, as both the group half lives and group abundances must be determined.
-The equation describing the problem is given in Equation \eqref{eq:delnu-fit}, recreated here.
-
+Once the delayed neutron count rate is generated, it is used to generate the improved \gls{DNP} group parameters, $\bar{\nu}_{d, k}$ and $\lambda_k$.
+Fitting the \gls{DNP} group parameters to the delayed neutron count rate curve employs a non-linear least squares method, as both the group half-lives and yields must be determined.
+The equation describing the problem appears in Equation \eqref{eq:delnu-fit}, recreated here:
 \begin{equation}
-n_d(t) \approx \epsilon F_s \sum_{i=1}^{n}  a_i \lambda_i e^{-\lambda_i t}
-\label{eq:delnu-fit-2}
+\dot{n}_d(t) \approx \epsilon F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}.
 \nonumber
 \end{equation}
 
-An important consideration for this process is the time values used when generating the group fits.
-An increased number of times means increased computational cost, but too few times results in a poorer fit \cite{parish1999status}.
-Additionally, the times can be spaced in differing manners, such as linearly or geometrically.
-This is investigated in Section \ref{sec:time-eval}.
+An important consideration for this process is the selection of time values for generating the \gls{DNP} group parameters.
+Increasing the number of time nodes raises computational costs, but too few nodes result in a poorer fit \cite{parish1999status}.
+Section \ref{sec:time-eval} shows the sensitivity study for both the node spacing and the maximum time to measure delayed neutrons.
 
-Another consideration for the non-linear least squares solve is the covariance, which is larger for the pulse irradiation fit than it is for the saturation irradiation fit.
-This is due to the multiplication of the group yield by the group decay constant.
-Unfortunately, attempts to replace the multiplication of these two values with a new, independent term results in a poor fit.
-This is because the multiplication of the terms is not independent and is necessary to properly model the fit.
+Another consideration for the non-linear least squares solution is the covariance, which is larger for the pulse irradiation than for the saturation irradiation.
+This results from multiplying the group yield by the group decay constant.
+Replacing this multiplication with an independent term produces worse fits, as the multiplication is not independent and is necessary for accurate modeling.
 
-There is also linearization and normalization of the data in the non-linear least squares.
-The normalization is handled by taking the delayed neutron counts, dividing by the fission term \footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and then taking the natural logarithm.
-These normalized counts are then passed into the non-linear least squares fitting.
-The linearization is handled by taking the natural logarithm of the entire delayed neutron count fit function.
-This treatment reduces both the covariance and the $\chi^2$ of the resulting non-linear least squares fit.
-Bounds are also set from zero to 1000 for each term to speed up the process, while the tolerances for convergence are set to $2.23 \times 10^{16}$ to ensure the converged solution is well-refined.
-
-The sample self-multiplication, mentioned in Section \ref{sec:measurementofdnps}, is also a possible factor.
-However, since the number of fissions in the sample are taken directly from the OpenMC tallies, this does not become an issue which must be addressed.
-
-Uncertainties are tracked in this work using the uncertainties package \cite{uncertaintiespackage}.
-Uncertainties in the concentrations generated from OpenMC are not accounted for, but uncertainties in the experimentally measured emission probabilities and half lives are.
-These uncertainties are used in the minimization of $\chi^2$, shown in Equation \eqref{eq:chisq-nnls}.
-
+\begin{comment}
+The non-linear least squares process also involves linearization and normalization of the data.
+The normalization is handled by taking the delayed neutron count rate, dividing by the fission term\footnote{The fission term is either the net number of fissions or the fission rate, depending on the irradiation type.}, and taking the natural logarithm.
+The normalized count rate is then passed into the non-linear least squares fitting.
+The linearization is handled by taking the natural logarithm of the delayed neutron count rate.
+This treatment reduces both the covariance and the $\chi^2$ of the fit.
+\end{comment}
+The residual to minimize with in the solution process is given in Equation \eqref{eq:residual}, recreated here as:
 \begin{equation}
-    \chi^2 = \sum_{t=0}^{t_f} \left(  \frac{b_t - A_t x_t}{\sigma_t}  \right)
-    \label{eq:chisq-nnls}
+    r = \min_x \left| \left| \frac{\vec{b} - A\vec{x}}{\vec{b}} \right| \right|_2^2,
 \end{equation}
+with bounds of:
+\begin{align}
+    \tau_k &\in [1\; ms, 1000 \;s] \nonumber \\
+    \bar{\nu}_{d,k} & \in [0, 1] \nonumber.
+\end{align}
+Absolute convergence tolerances for the cost function, change in independent variables, and gradient norm are all set to $1\times10^{-12}$ to ensure tight convergence.
+The Trust Region Reflective method, which allows for bounds to be included for the parameters, is used to solve this least squares problem \cite{branch1999subspace}.
+Another least squares fitting technique is the Levenberg-Marquardt method, though the bounds cannot be set with this method \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
 
-The terms in Equation \eqref{eq:chisq-nnls} are defined as follows:
+The final consideration in \gls{DNP} group reconstruction is uncertainty.
+This work tracks uncertainties using the uncertainties package \cite{uncertaintiespackage}.
+These uncertainties are in the cumulative fission yields $CFY$, half-lives $\tau$, and emission probabilities $P_n$ for the 0D scaled model.
+For the 0D flow model, only uncertainties in the emission probabilities and half-lives for the delayed neutron count rate calculation will be propagated.
+OpenMC does not propagate concentration uncertainties through depletion, and developing this extension is out of scope for this work.
 
-\begin{description}
-    \item $t_f$ is the final time after irradiation, starting at $t=0$ immediately following irradiation
-    \item $b_t$ is the delayed neutron count vector at the row where the time value is $t$
-    \item $A_t$ is the coefficient matrix at the row where the time value is $t$
-    \item $x_t$ is the solution vector at the row where the time value is $t$
-\end{description}
+The uncertainties are propagated through the count rate calculation, but for the non-linear least squares solve, Monte Carlo sampling is used.
+Each count rate is generated using randomly sampled fission yields, half-lives, and emission probabilities within their uncertainty bounds per \gls{DNP}.
+This enables formation of a normal distribution of group parameters, from which the mean and standard deviation of the mean can be extracted.
 
 
-Once the group fits and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
-The saturation irradiation provides better statistics for longer-lived groups, while the pulse irradiation is better for shorter-lived groups.
-Brady combines the irradiation results by using four long-period groups for saturation irradiation and four short-period groups for pulse irradiation.
-The groups are renormalized at the second group, where the two longest lived group half-lives and the ratio of yields use the saturation results \cite{brady1988evaluation}.
-The remainder of the groups use the pulse irradiation results.
+%\begin{description}
+%    \item $t_f$ is the final time after irradiation, starting at $t=0$ immediately following irradiation
+%    \item $b_t$ is the delayed neutron count vector at the row where the time value is $t$
+%    \item $A_t$ is the coefficient matrix at the row where the time value is $t$
+%    \item $x_t$ is the solution vector at the row where the time value is $t$
+%\end{description}
 
-For this work, a similar approach is used, though slightly simplified.
-The group parameters are calculated for pulse and saturation irradiation, after which the two longest lived groups use the saturation irradiation results while the four shortest lived groups use the pulse irradiation results.
+Once the \gls{DNP} group parameters and their uncertainties are generated, the final step to obtain the finalized group parameters is to combine the saturation and pulse irradiation results.
+In macroscopic measurements, saturation irradiation provides better statistics for longer-lived groups, while pulse irradiation is better for shorter-lived groups.
+Brady combines the results to create a six-\gls{DNP} group structure by using four long-period groups from saturation irradiation and four short-period groups from pulse irradiation.
+The groups are normalized at the second group, where the two longest-lived group half-lives and yield ratios use the saturation results \cite{brady1988evaluation}.
+The remaining groups use the pulse irradiation results.
+
+The 0D scaled model uses only saturation irradiation data for the least squares solve.
+However, the 0D flow model will enable pulse irradiations to be simulated, so the proposed work includes analysis of how inclusion of pulse irradiation data changes the \gls{DNP} group parameters.

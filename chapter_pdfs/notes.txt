@@ -1,0 +1,2 @@
+Generate chapters using:
+pdftk main.pdf cat 1-99 output name.pdf

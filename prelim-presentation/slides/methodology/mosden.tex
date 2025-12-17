@@ -1,0 +1,26 @@
+\begin{frame}
+	\frametitle{MoSDeN generates improved \gls{DNP} group parameters}
+	\Gls{MoSDeN} is an open-source Python package in development that will enable users to generate improved \gls{DNP} group parameters.
+	\begin{block}{MoSDeN currently enables:}
+		\begin{itemize}
+			\item Use of various data inputs for half-lives ($\tau$), emission probabilities ($P_n$), and cumulative fission yields (CFY)
+			\begin{itemize}
+				\item ENDF-6 formatted data
+				\item OpenMC chain data
+				\item Custom data
+			\end{itemize}
+			\item The microscopic approach using the 0D scaled model
+			\begin{itemize}
+				\item Equilibrium approximated
+				\item Scaled flux method
+				\item Non-linear least squares
+				\item Generic fissile nuclide
+				\item Generic neutron irradiation energy
+			\end{itemize}
+		\end{itemize}
+	\end{block}
+
+	\textbf{\Gls{MoSDeN} currently offers the 0D scaled model, which only enables saturation irradiations to be modeled.} 
+
+	%\textbf{The MoSDeN package is in development and offers improved \gls{DNP} group generation for \glspl{MSR} on a per-problem basis.}
+\end{frame}

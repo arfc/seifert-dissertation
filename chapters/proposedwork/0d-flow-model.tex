@@ -1,0 +1,138 @@
+The next model developed beyond the 0D scaled model is the 0D flow model.
+The 0D scaled model generates saturation irradiation results and scales the flux and chemical removal based on the fraction of salt in-core and ex-core.
+It also does not track nuclide decays into \glspl{DNP} during post-irradiation decay.
+Because the 0D scaled model uses cumulative fission yields to calculate concentrations, it cannot capture non-equilibrium behavior and is unable to accurately capture residence time effects.
+The chemical removal results are smaller than expected in the 0D scaled model since intermediate nuclides cannot be removed.
+Despite these limitations, the 0D scaled model runs quickly and enables rapid testing of many parameter combinations.
+
+The 0D flow model will improve on the fidelity offered by the 0D scaled model by providing both saturation and pulse irradiation results, handling in-core and ex-core regions in time rather than simply scaling the flux, and modeling decay chains.
+Modeling the decay chains improves the accuracy of the formulated concentrations when they are not at equilibrium, which is especially important for pulse irradiations.
+Additionally, having separate regions rather than scaling the flux with the time dependence of the decay chains means that nuclides with larger cross-sections will have the correct amount of time to decay between irradiations, rather than experiencing a constant scaled irradiation.
+
+This section outlines the proposed work for the 0D flow model, the combined use of pulse and saturation data in the least-squares solve, the use of multiple data sources, and the model’s verification and validation.
+
+%There is also the option of using the 0D scaled model with the scaled flux approximation but with the decay chain modeled.
+%This improved fidelity comes at an increased computational cost, but it is still not exceedingly expensive and can be run on a desktop.
+%The neutron transport solve is relatively inexpensive, as the model only requires a fixed-source irradiation of the sample.
+
+\subsection{Least Squares Treatment}
+\label{sec:irrad-combine}
+
+The 0D scaled model did not account for pulse irradiation data, and instead only used saturation irradiation data.
+The work will compare different methods for combining pulse and saturation irradiation data.
+This comparison will provide insight into if and when the pulse irradiation data is necessary, as well as insight into the differences in results based on the $l^2$-norm of the residual.
+
+The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
+The group parameters will be evaluated by calculating the relative residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.
+
+There are different methodologies for combining pulse and saturation irradiation \gls{DNP} group parameters that will be compared.
+One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
+Brady used the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
+Keepin et al. fit four groups with each irradiation, and then renormalized at the second group \cite{keepin1957delayed}.
+Another approach to combining the pulse and saturation irradiation data is combining the data to formulate the relative residual to minimize, as shown in Equation \eqref{eq:combresid} as:
+\begin{equation}
+    r = \min_x \left| \left| \frac{\vec{b_p} - A_p\vec{x}}{\vec{b_p}} \right| \right|_2^2 + \left| \left| \frac{\vec{b_s} - A_s\vec{x}}{\vec{b_s}} \right| \right|_2^2,
+    \label{eq:combresid}
+\end{equation}
+where
+\begin{align}
+    r &= \text{the minimization function of the problem [-]} \nonumber \\
+    A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_{p} &= \text{the pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    %\sigma_{p,i} &= \text{the standard deviation in the $i^{th}$ pulse irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_{s} &= \text{the saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    %\sigma_{s,i} &= \text{the standard deviation in the $i^{th}$ saturation irradiation delayed neutron count rate $[\# \cdot s^{-1}]$} \nonumber \\
+    x &= \text{the solution vector containing group yields [-].} \nonumber
+\end{align}
+This formulation fits both pulse and saturation data simultaneously to generate improved \gls{DNP} group parameters.
+
+\subsection{Data Source Analysis}
+As shown in Section \ref{sec:verification}, experimental results for delayed neutron yields vary non-negligibly.
+This proposed analysis will use different data sources to generate the improved \gls{DNP} group parameters.
+The purpose of this analysis is to provide a more robust understanding of the uncertainties and what differences can be expected due to the data source used.
+Huynh et al. compare the effects of cumulative fission yields and emission probabilities from \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
+A similar comparison can also be found in the \gls{JEFF} report 17 \cite{bank2000jef}.
+Mathieu et al. investigated the \gls{NNDC} website, which sources data from \gls{ENSDF}, and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+
+These comparisons can be expanded to include the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and other data compilations for emission probabilities (delayed neutron branching ratios), half-lives, fission yields, and cross sections.
+Comparing these sources will clarify the differences that arise from nuclear data discrepancies across datasets.
+Table \ref{tab:datasources} shows the data sources used in the comparison.
+The "Concentration" column refers to data including fission yields and cross-sections that affect the \gls{DNP} concentration term.
+Although half-lives also influence concentration, data sources without a concentration contribution provide only half-life and emission probability data.
+Audi et al., Pfeiffer and Kratz, and Rudstam et al. presented data from the literature rather than official databases.
+Audi et al. used \gls{ENSDF}, \gls{AME}, experimental data from the literature, and trends in neighboring nuclides.
+Pfeiffer and Kratz presented experimental data, an update to the \gls{KHF}, and data from a unified macroscopic-microscopic model within the \gls{QRPA}.
+Rudstam et al. presented experimental data.
+
+\begin{table}[H]
+    \centering
+    \caption{Various data sources as well as the data which they contain.}
+    \begin{tabular}{lccccc}
+    \hline
+    Data name & Year & Source & Half-life & Emission probability & Concentration\\
+    \hline
+      \gls{IAEA} database & 2018 & \cite{DIMITRIOU2021144} & Yes & Yes & No\\
+      \gls{JEFF} 3.3 & 2017 & \cite{plompen2020joint} & Yes & Yes & Yes\\
+      \gls{ENDF}/B-VII.1 & 2011 & \cite{chadwick2011endf} & Yes & Yes & Yes\\
+      \gls{ENDF}/B-VIII.0 & 2018 & \cite{Brown20181} & Yes & Yes & Yes\\
+      \gls{JENDL}-5 & 2021 & \cite{iwamoto2023japanese} & Yes & Yes & Yes\\
+      \gls{ENSDF} & 2025 & \cite{ensdf} & Yes & Yes & No\\
+      Audi et al. & 2003 & \cite{audi2003nubase} & Yes & Yes & No\\
+      Pfeiffer and Kratz & 2002 & \cite{pfeiffer2002status} & Yes & Yes & No\\
+      Rudstam et al. & 1993& \cite{rudstam1993delayed} & Yes & Yes & No\\
+    \hline
+    \end{tabular}
+    \label{tab:datasources}
+\end{table}
+
+Recently updated datasets and official databases are expected to be more accurate due to improved measurement techniques and broader validation.
+Official databases are expected to be more reliable, as they have many users reporting errors and have undergone extensive development over time.
+Investigating these data sources and comparing the \gls{DNP} group parameters generated from each will be useful when analyzing uncertainty.
+If the differences are large, understanding the uncertainty propagation will be important.
+If the differences are negligible, this will simplify further uncertainty analysis.
+
+\begin{comment}
+\subsection{Fission Yield Time Resolution}
+The time resolution for formation of \glspl{DNP} is irrelevant for stationary, saturation irradiation \gls{DNP} group parameter formulations, allowing the use of cumulative fission yields instead of full depletion simulations.
+However, the time resolution of \gls{DNP} formation needs to be considered for group parameter calculations including circulation.
+%However, for group parameter calculations incorporating circulation, the time resolution of \glspl{DNP} formation plays a role.
+This is an important consideration, as if using the cumulative fission yield generates the same group parameters as the full depletion simulation, then the computational cost would be greatly reduced.
+It is also useful because the spatially resolved method using the cumulative fission yield is significantly cheaper than full spatially resolved depletion.
+
+Before comparing the methods for a circulating system, the methods are first compared using a stationary system.
+The \gls{DNP} group parameters should align for both methods in a stationary system.
+This approach is common in the literature, so if the results do not align, this indicates an issue with the implementation.
+%If they do not, this indicates either a fault in the implementation or that the common approach in the literature may inaccurately treat the \glspl{DNP}.
+
+To evaluate the efficacy of using cumulative fission yields compared to depletion, a direct comparison will be made between the group parameters generated by each method.
+The same dataset, \gls{ENDF}/B-VIII.0, will be used for both to eliminate differences from data.
+The \gls{DNP} group parameters will be generated using each method for various residence times to capture time-dependent effects at higher resolution.
+
+If the \gls{DNP} group parameters are identical for all residence times, this will significantly reduce computational costs, and the simpler method will be implemented.
+If non-negligible differences exist, the more costly full depletion method will continue to be used.
+\end{comment}
+
+\subsection{Verification and Validation}
+Verifying and validating the \gls{DNP} group parameters is essential to ensure their practical utility.
+Verification against the literature ensures that the fundamental approach behaves correctly.
+Since the literature does not contain \gls{DNP} group parameters that include \gls{MSR} physical phenomena, this thesis will include a verification with the literature only for the stationary solve.
+
+After this, although the group parameters will be verified with the literature, that does not necessarily mean they capture all physical phenomena of interest.
+Validation identifies potential weaknesses in the approach by highlighting discrepancies between predicted and experimental results.
+
+Verification of the \gls{DNP} group parameters will be of the same form as in Section \ref{sec:verification}.
+It has already been shown that these results should have a percent difference of 9\% for thermal fission in $^{235}$U for \gls{JEFF}-3.1.1 data, so a similar percent difference can be expected for other datasets \cite{mathieu2012new}.
+Results will vary based on the source of the data, but the \gls{DNP} group parameters should closely match the results from the literature.
+
+Validation of the \gls{DNP} group parameters will be conducted through the \gls{MSRE} pump start-up and coast-down experimental data.
+This data assesses the accuracy of the group parameters in modeling reactivity changes from \glspl{DNP} \cite{prince1968zero}.
+The validation requires modeling the \gls{MSRE} core and upper and lower plena in Moltres \cite{fratoni2020molten}.
+The reactivity effects of the \glspl{DNP} will be calculated for both transients using static and improved \gls{DNP} group parameters.
+The improved group parameters are expected to predict reactivity more accurately as they account for more physical phenomena in the \gls{MSRE}.
+If neither set of reactivity responses aligns with the experimental results, then that will indicate an issue in the kinetics simulation, as Moltres has previously demonstrated the ability to model these transients \cite{reynolds2023analysis, park_advancements_2025}.
+These transients have also been evaluated using other tools, providing additional comparison \cite{fei2021msre, delpech2003benchmark}.
+If the static group parameters predict reactivity more accurately than the improved group parameters, this will suggest an issue with the improved group parameter formulation.
+The issue must be resolved before proceeding, as the improved \gls{DNP} group parameters should provide higher accuracy in \gls{MSR} modeling.
+
+%Potential challenges associated with the data are discussed in Section \ref{sec:dataeval}.

@@ -1,0 +1,43 @@
+\begin{frame}
+  \frametitle{There is a general equation for sample irradiation}
+  The $I$ \glspl{DNP} are approximated by $K$ groups.
+  \begin{block}{Intermediate Irradiation}
+    \begin{align}
+\dot{n}_{d}(T, t) \approx \dot{F}_s \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} \right)
+\end{align}
+\begin{align}
+	\dot{F}_s &= \text{The fission rate in the sample $[\# \cdot s^{-1}]$} \nonumber \\
+	{F}_s &= \text{The number of fissions in the sample $[\#]$} \nonumber \\
+	T &= \text{The time over which the sample is irradiated $[s]$} \nonumber
+\end{align}
+\end{block}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{There are two common irradiation types used to generate groups}
+  \begin{block}{Intermediate Irradiation}
+    \begin{align}
+\dot{n}_{d}(T, t) \approx \dot{F}_s \sum_{k=1}^K \bar{\nu}_{d, k} e^{-\lambda_k t} \left(1 - e^{-\lambda_k T} \right)
+\end{align}
+  \end{block}
+    \begin{columns}
+            \column[t]{0.45\textwidth}
+            \begin{block}{Pulse irradiation ($T \rightarrow 0$)}
+                \begin{equation}
+                \dot{n}_d(t) \approx F_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} \lambda_k e^{-\lambda_k t}
+                \label{eq:delnu-fit}
+                \end{equation}
+            \end{block}
+            \column[t]{0.45\textwidth}
+            \begin{block}{Saturation irradiation ($T \rightarrow \infty$)}
+                \begin{equation}
+                \dot{n}_d(t) \approx \dot{F}_s \sum_{k=1}^{K}  \bar{\nu}_{d, k} e^{-\lambda_k t}
+                \label{eq:delnu-fit-sat}
+                \end{equation}
+            \end{block}
+    \end{columns}
+    \vspace{2mm}
+    \textbf{The \gls{DNP} parameters $\bar{\nu}_{d,k}$ and $\lambda_k$ make $\dot{n}_d(t)$ match using exponential peeling \cite{brunson1955measurement, keepin1955delayed}, least squares \cite{brady1988evaluation, keepin1957delayed}, or half-lives of specific \glspl{DNP} \cite{saphier1977evaluated}.}
+\end{frame}

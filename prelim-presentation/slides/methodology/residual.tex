@@ -1,0 +1,15 @@
+\begin{frame}
+  \frametitle{The residual best fits the delayed neutron count rate}
+  The relative residual provides a better fit for longer-lived \glspl{DNP} \cite{keepin1957delayed}.
+  \begin{equation}
+    r = \min_x \left| \left| \frac{\textcolor{blue}{\vec{b}} - \textcolor{orange}{A} \textcolor{olive}{\vec{x}}}{\textcolor{blue}{\vec{b}}} \right| \right|_2^2,
+  \end{equation}
+  where
+  \begin{align}
+    \tau_k &\in [1\; ms, 1000 \;s] \nonumber \\
+    \bar{\nu}_{d,k} & \in [0, 1] \nonumber.
+  \end{align}
+
+  \textbf{\gls{MoSDeN} uses the SciPy package's optimize module to solve this non-linear least squares problem \cite{scipy}.}
+
+\end{frame}

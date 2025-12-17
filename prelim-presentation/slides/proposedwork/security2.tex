@@ -1,0 +1,29 @@
+\begin{frame}
+  \frametitle{Sabotage that disrupts operation is a security concern}
+  This framework assumes a hostile actor and an insider with the objective to disrupt operations \cite{protection2011evaluation}.
+    \begin{block}{Sabotage-initiated transients that will be modeled are:}
+        \begin{itemize}
+            %\item All safety-related transients as single events
+            \item Combined \Gls{UTOP} and \gls{ULOHS}
+            \item Combined \Gls{UTOP} and \gls{ULOF}
+            \item Combined \Gls{UTOP} and \gls{FSOC}
+        \end{itemize}
+    \end{block}
+\begin{table}[!ht]
+    \caption{Implementation of transients using temperature, reactivity, and velocity changes}
+    \centering
+    \begin{tabular}{lccc}
+    \hline
+	    Transient & $T$ & $\rho$ & $v$\\
+       \hline
+	    \gls{ULOHS} & $T_{in} = T_{out}$ & - & -\\
+	    \gls{ULOF} & - & - & $v \approx e^{-t}$\\
+	    \gls{UTOP} & - & $\rho_{max} = 0.1\$ $ & -\\
+	    \gls{FSOC} & $T_{in} = 0.9 T_{in, 0}$ & - & -\\
+        \hline
+    \end{tabular}
+    \label{tab:total-delnu-compare}
+\end{table}
+\textbf{The security transients will have different temperature and power responses between the improved and conventional \gls{DNP} group parameters.}
+\end{frame}
+

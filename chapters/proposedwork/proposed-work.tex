@@ -1,0 +1,42 @@
+Completion of the proposed work will result in a comprehensive analysis of improved \gls{DNP} group parameters for thermal fission of $^{235}$U in the \gls{MSRE} and the effects of these improved parameters on transient simulations.
+\Gls{MoSDeN} will serve as a tool to investigate the effects of \gls{DNP} group parameters with \gls{MSR} physical phenomena included and will have an initial release as part of this work.
+The proposed work will focus on thermal fission of $^{235}$U specifically to mitigate scope creep.
+It will provide a foundation for broader analyses, such as those described in Section \ref{sec:future-work}.
+
+The preliminary results have shown that the current 0D scaled model can capture long-lived group behavior but fails to represent residence time, chemical removal, and short-lived \gls{DNP} groups.
+Additionally, the preliminary work has analyzed time node distributions, the number of nodes, the length of the decay time, and the node density; all of which will be useful in the 0D flow model.
+Sensitivities of the \gls{DNP} group parameters due to the nuclear data were also presented, which can be replicated using the 0D flow model to provide more accurate results.
+Because the 0D scaled model runs much faster than the 0D flow model is expected to run, it will be useful to compare their results and determine for what use cases the 0D scaled model can provide acceptable accuracy.
+
+The proposed work includes developing the 0D flow model, validating and verifying it, generating improved group spectra and \gls{DNP} group parameters, and applying the parameters in transient simulations.
+The development of the 0D flow model will provide more complete time-dependent data, enabling non-equilibrium irradiations and residence time analyses.
+Validation and verification of the 0D flow model is critical to ensure the results align with experiments and the literature.
+The improved \gls{DNP} group spectra are used for calculation of the effective delayed neutron fraction, so developing functionality for \gls{MoSDeN} to generate the improved group spectra is useful.
+The transient simulations will provide insight into the impact of the improved \gls{DNP} groups and clarify the conditions under which the modified groups significantly influence reactor behavior.
+
+Potential future work includes development of the spatially resolved model, uncertainty tracking of \gls{MSR} physical phenomena in the \gls{DNP} group parameters, and investigation into the effects of varying the incident neutron energy spectrum on the \gls{DNP} group parameters.
+The spatially resolved model could be used for modeling chemical removal or diversion within the reactor or for more accurately modeling vortices and other thermal-hydraulic effects.
+Uncertainty tracking could extend beyond nuclear data to include chemical removal and thermal-hydraulic uncertainties.
+Investigating the incident neutron energy's effect on the \gls{DNP} groups would be useful because the literature presents the groups for broad classes of energy spectra, such as thermal or fast.
+Sensitivity studies could be conducted to see how much the \gls{DNP} group parameters can vary while changing the energy spectrum, such as emulating the spectral changes due to fuel depletion over the reactor lifetime.
+
+Figure \ref{fig:gantt-prelim} shows the project timeline, divided into development, simulation, writing, and review categories.
+%The categories which require more focus are development and writing, whereas simulation and review are generally a more passive process.
+Most tasks take one month, but four are assumed to take two months: verifying the 0D flow model, setting up the transient simulations, running the various \gls{MSRE} transients, and writing the results and conclusions chapters.
+
+Verifying the 0D flow model is expected to take two months because the simulation time will be slower than the 0D scaled model, and will include analysis of multiple datasets as well as different combinations of pulse and saturation irradiation data.
+Setting up the transient simulations is expected to take two months because it will require depletion simulations for the safeguards diversion scenarios as well as multiple OpenMC solves of the \gls{MSRE} for cross-section data to pass into Moltres.
+Development of the Moltres model is expected to take longer because there may be unexpected issues with the meshing of the upper and lower plena, data collection, or model development itself.
+The \gls{MSRE} transient simulations are given two months of simulation time because there are two transient simulations for validation (\gls{MSRE} pump start-up and coast-down), four for safety (\gls{ULOF}, \gls{UTOP}, \gls{ULOHS}, and \gls{FSOC}), three for security (\gls{UTOP} combined with each of the others), and two for safeguards (one \gls{SQ} diversion of plutonium and a diversion of $^{235}$U), as discussed in Section \ref{sec:transimpact}.
+As will be discussed, these transient simulations also require nine transport solves: three for fresh fuel salt in the \gls{MSRE} prior to a transient with higher and lower temperatures, three with one \gls{SQ} removal of $^{235}$U over one year, and three with one \gls{SQ} removal of plutonium over one year.
+The diversion scenarios both require a depletion simulation, which also slightly increases the cost of the simulations.
+The results chapter is given two months because there will be many new results to discuss, whereas the other chapters will not have significant changes.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/gantt-phd.png}
+    \caption{A Gantt chart of the proposed work.}
+    \label{fig:gantt-prelim}
+\end{figure}
+
+\FloatBarrier

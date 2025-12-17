@@ -1,0 +1,53 @@
+\renewcommand{\theequation}{D\thechapter.\arabic{equation}}
+\label{sec:appendixD}
+
+The effects of using pulse or saturation irradiation data can be demonstrated through an illustrative toy problem.
+Instead of using several hundred \glspl{DNP}, only four will be considered: $A, B, C,$ and $D$.
+Each of these \glspl{DNP} will have an emission probability $P_n$ of unity and will only be formed via fission, having an equivalent cumulative fission yield $CFY$ and independent fission yield $IFY$ of 0.25.
+The only difference between these \glspl{DNP} will be in their half-lives, given as: $\lambda_A=0.001$, $\lambda_B=0.01$, $\lambda_C=0.1$, and $\lambda_D=1$ $s^{-1}$.
+
+The concentration of each nuclide can be calculated using Equation \eqref{eq:cfy-conc}, recreated here:
+\begin{equation}
+    N_i = \frac{CFY_i}{\lambda_i}.
+    \nonumber
+\end{equation}
+This gives concentrations of $N_A = 250$, $N_B = 25$, $N_C = 2.5$, and $N_D = 0.25$ atoms.
+
+Because all of the \glspl{DNP} come directly from fission, the independent fission yield can be used to calculate the concentration after a single normalized fission event.
+This gives concentrations of $N_A = N_B =N_C =N_D=0.25$ atoms.
+
+Next, to complete the comparison, these four \glspl{DNP} can be fit into two \gls{DNP} groups to determine what parameters best fit the delayed neutron count rates produced.
+The total delayed neutron yield should be one because one delayed neutron is released per fission event, and the average half-life is calculated to be approximately 192.5 seconds.
+Discussion on how these values are calculated is given in Section \ref{sec:gandkparams}.
+The results comparing the data of these four \glspl{DNP} to the different group fits are given in Table \ref{tab:pulse-sat-compare}.
+
+\begin{table}[!ht]
+    \centering
+    \caption{A comparison of the raw \gls{DNP} data to the different irradiation methods and the corresponding yields and average half-lives.}
+    \begin{tabular}{ccc}
+    \hline
+       Method  & Delayed Yield [-] & Average Half-life [$s$] \\
+       \hline
+        Data & 1.00 & 192.5 \\
+        4 Group Saturation & 1.00 & 192.5 \\
+        3 Group Saturation & 0.98 & 188.9 \\
+        2 Group Saturation & 0.92 & 182.3 \\
+        1 Group Saturation & 0.62 & 223.8 \\
+        4 Group Pulse & 1.00 & 192.5 \\
+        3 Group Pulse & 0.91 & 91.65 \\
+        2 Group Pulse & 0.80 & 61.0 \\
+        1 Group Pulse & 0.42 & 1.3 \\
+        \hline
+    \end{tabular}
+    \label{tab:pulse-sat-compare}
+\end{table}
+
+Because each \gls{DNP} is equally important, the 3 group structure captures 75\% of the total delayed neutrons, while the 2 group structure is only able to capture 50\% of the total delayed neutrons.
+The delayed neutron results show that both the pulse and saturation irradiations generally capture the delayed neutrons, provided there are sufficiently many groups available.
+As the number of groups decreases, the delayed yield decreases.
+
+The average half-life shows that the saturation irradiation tends to over-estimate the average half-life as the number of groups becomes too few, though until that point it has more accurate values for the yield and average half-life.
+The pulse irradiation tends to under-estimate the average half-life noticeably, and the yield decreases faster than the saturation irradiation results.
+
+Although this example does not exactly represent reality, it provides a useful understanding of the effects of both the pulse and saturation irradiations on the \gls{DNP} group parameters.
+The results here provide further motivation to investigate combining the pulse and saturation irradiation data in the \gls{DNP} group parameter formulation, as discussed in Section \ref{sec:proposed-0d-flow}.

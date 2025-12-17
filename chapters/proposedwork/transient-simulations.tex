@@ -1,0 +1,15 @@
+Transient simulations will apply the improved \gls{DNP} group parameters in the \gls{MSRE} to demonstrate how they affect power and temperature responses.
+They are critical for validating the \gls{DNP} group parameters using \gls{MSRE} transients and for investigating transients affecting safety, security, and safeguards design decisions.
+Section \ref{sec:transimpact} discusses the proposed simulations in detail.
+These simulations will use OpenMC to generate multigroup cross sections at three temperatures: a higher than nominal, a lower than nominal, and the nominal \gls{MSRE} temperature.
+
+For safety design, the \gls{ULOF}, \gls{UTOP}, \gls{ULOHS}, and \gls{FSOC} will be investigated for various reactor parameters to assess the impact of the improved \gls{DNP} group parameters.
+For security design, sabotage-initiated transients will build on those studied for safety design.
+For safeguards design, comparisons are made between diversion scenarios.
+The diversion scenarios alter the fuel composition, affecting the effective delayed neutron fraction and reactor behavior during transients \cite{wheeler2021signatures}.
+The improved \gls{DNP} group parameters will be used to investigate the extent of \gls{SNM} removal which could remain undetected while using previous \gls{DNP} group parameters.
+
+The kinetics simulations will use Moltres models of the \gls{MSRE} to evaluate how the group parameters affect reactivity and temperature responses.
+These results can be compared with other analyses from the literature \cite{ho2023exploring, singh2018nonlinear}.
+The results will identify which transients are more sensitive to the improved data and highlight potential concerns.
+%A \gls{PRK} model can also be used for simple reactivity insertion tests with uncertainty tracking to more straightforwardly demonstrate differences between the \gls{DNP} group parameters.

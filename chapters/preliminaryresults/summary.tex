@@ -1,0 +1,28 @@
+This chapter presented results of the 0D scaled model on thermal fission of $^{235}$U, which demonstrated generation of improved \gls{DNP} group parameters that account for chemical removal in the \gls{MSBR}.
+These results consist of analysis of individual \glspl{DNP}' yields, concentrations, and count rates; various sensitivities; and verification of \gls{DNP} group parameters with results in the literature.
+The 0D scaled model results show good agreement with the literature for the longer-lived groups, but have poor agreement for the shorter-lived groups.
+This indicates the need for improvements to the model and analysis of \gls{DNP} data, as discussed in Chapter \ref{sec:proposed-work}.
+The sensitivities include analysis of chemical removal rates, time nodes, and nuclear data uncertainties.
+These sensitivities are useful for understanding how the chemical removal affects the \gls{DNP} group parameters and analyzing how each group responds to changes in nuclear data based on its uncertainty.
+
+Of the \gls{MSR} physical phenomena considered, only chemical removal is accounted for in the 0D scaled model.
+The 0D scaled model does not account for decay chains, removing residence time dependence and causing the fission rate scaling to be identical to the \gls{DNP} generation rate scaling.
+This causes the in-core and ex-core residence times to not have any effect in the 0D scaled model.
+The proposed 0D flow model will be able to model the effects of residence time, as it accounts for time-dependent decays and parasitic absorptions.
+Although the 0D scaled model is rapid and enables more simulations, it does not incorporate fuel salt circulation into improved \gls{DNP} group parameter generation and fails to properly model short-lived \gls{DNP} groups.
+
+The failure to model short-lived \gls{DNP} groups may be due to a combination of issues in the fission yields, half-lives, or emission probabilities, as well as the lack of pulse irradiation data.
+The proposed work will investigate both of these possibilities, as described in Chapter \ref{sec:proposed-work}.
+Whether combined via simultaneous solution of a larger matrix or solved separately and then combined, the macroscopic approach indicates pulse irradiation results improve \gls{DNP} group parameters for shorter-lived groups \cite{keepin1957delayed}.
+The proposed work will indicate if this holds true for the microscopic approach as well.
+A simple investigation into the effects of pulse and saturation data is given in Appendix \ref{sec:appendixD}. 
+The investigation shows that the saturation irradiation generally captures more \glspl{DNP} than the pulse irradiation, though as fewer \gls{DNP} groups are used, the saturation irradiation has a larger average half-life while the pulse irradiation's is shorter.
+This is reflected in the 0D scaled model results, which show greater yields in the short-lived \gls{DNP} groups, leading to a shorter average half-life.
+This may be from the lack of pulse irradiation data as well as the \gls{DNP} nuclear data.
+The 0D scaled model cannot model pulse irradiations because the cumulative fission yields do not provide accurate concentrations for non-equilibrium concentrations.
+Section \ref{sec:irrad-combine} discusses this further.
+
+These preliminary results showed the importance of nuclear data and uncertainties, highlighting $^{86}$Ge as the \gls{DNP} which has both the greatest impact on \gls{DNP} group parameters and the largest uncertainty-weighted sensitivity.
+The sensitivity analysis showed the importance of the short-lived \glspl{DNP} on the \gls{DNP} group parameters, which also provides further motivation to use a model better able to capture these short-lived \glspl{DNP}.
+The importance of the short-lived \gls{DNP} also motivates a more detailed investigation into the different sensitivities and uncertainty-weighted sensitivities in other datasets.
+The 0D flow model will capture these short-lived \glspl{DNP} more effectively and calculate improved \gls{DNP} group parameters that account for both the recirculation and chemical removal in \glspl{MSR}.

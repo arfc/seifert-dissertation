@@ -1,0 +1,100 @@
+\renewcommand{\theequation}{B\thechapter.\arabic{equation}}
+\label{sec:appendixB}
+This derivation shows how the equilibrium concentration for a given nuclide can be calculated, particularly for \glspl{DNP}.
+This is used for the 0D scaled model which is intended to study only the long-lived \gls{DNP}.
+This derivation begins with the Bateman equation, given in Equation \eqref{eq:Bateman_default} and recreated here as:
+\begin{equation} \hfill
+\begin{split}
+%\frac{dN}{dt} = \sum_j \lambda_j N_j + \gamma \Sigma_f \phi + \Sigma_k \phi - \lambda N - \Sigma \phi - C
+\frac{dN_j}{dt} =& \sum_{i \neq j}  \left [ \overbrace{\left( \gamma_{i \rightarrow j} \sigma_{f, i} \phi + \lambda _{i \rightarrow j} + \sigma_{i \rightarrow j} \phi \right)}^\text{Source} N_i \right ]\\
+ & - \overbrace{\left ( \lambda_j + \sigma_j \phi + \lambda_{r, j} \right)}^\text{Loss} N_j + \dot{N}_{f, j},
+\end{split}
+\hfill \nonumber
+\end{equation}
+where
+\begin{align}
+N_j &= \mbox{ the atomic density of isotope $j$ $\left[\frac{\#}{cm^3}\right]$ } \nonumber \\ 
+\gamma_{i \rightarrow j} &= \mbox{ the fractional fission product yield of $j$ from the fission of isotope $i$ [-]} \nonumber \\ 
+\sigma_{f, i} &= \mbox{ the microscopic fission cross-section of isotope $i$ $\left[cm^2\right]$ } \nonumber \\ 
+\phi &= \mbox{ the spectrum-averaged scalar flux in the fuel region $\left[\frac{\#}{cm^2 s}\right]$ } \nonumber \\ 
+\lambda _{i \rightarrow j} &= \mbox{ the decay constant of decay $i \rightarrow j$ $\left[s^{-1}\right]$ } \nonumber \\ 
+\sigma_{i \rightarrow j} &= \mbox{ the microscopic transmutation cross-section of reaction $i \rightarrow j$ $\left[cm^2\right]$ } \nonumber \\ 
+N_i &= \mbox{ the atomic density of isotope $i$ $\left[\frac{\#}{cm^3}\right]$ } \nonumber \\ 
+\lambda_j &= \mbox{ the decay constant of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
+\lambda_{r, j} &= \mbox{ the removal constant for removal of isotope $j$ $\left[s^{-1}\right]$ } \nonumber \\ 
+\sigma_j &= \mbox{ the microscopic total transmutation cross-section of isotope $j$ $\left[cm^2\right]$ } \nonumber \\ 
+\dot{N}_{f, j} &= \mbox{ the feed rate for isotope $j$ $\left[\frac{\#}{cm^3 \cdot s}\right]$ .} \nonumber
+\end{align}
+
+This can be rewritten to the simplified form given in Equation \eqref{eq:bate-flow-simple} by collapsing the source and loss terms and assuming a feed rate of zero, recreated here as:
+\begin{equation}
+    \frac{dN_j}{dt} = S_j(t) - \lambda_{net, j} N_j(t), \nonumber
+\end{equation}
+where
+\begin{align}
+S_j &= \mbox{ the source term for nuclide $j$, } \nonumber\\
+& \;\;\;\;\; \mbox{ containing fission, decay, and transmutation sources [$\frac{\#}{cm^3 s}$]} \nonumber \\
+\lambda_{net, j} &= \mbox{ the loss term for nuclide $j$,} \nonumber\\
+& \;\;\;\;\; \mbox{ containing decay and transmutation losses [$s^{-1}$] .} \nonumber
+\end{align}
+
+This can be rewritten using the scaled flux method, which is useful for flowing fuel reactors as it scales the flux term by the fraction of fuel salt in the core.
+Additionally, the transmutation term is small for \glspl{DNP}, and is assumed to be negligible.
+This changes Equation \eqref{eq:bate-flow-simple} to Equation \eqref{eq:simple-scaled}, assuming chemical removal only in the ex-core region, given as:
+\begin{equation}
+    \frac{dN_j}{dt} = f_{in} S_j(t) - \lambda_{j} N_j(t) - f_{ex} \lambda_{r, j}N_j(t),
+    \label{eq:simple-scaled}
+\end{equation}
+where
+\begin{align}
+    f_{in} &= \text{the fraction of fuel salt in the core [-]} \nonumber \\
+    f_{ex} &= \text{the fraction of fuel salt not in the core [-]} \nonumber \\
+    \lambda_{r, j} &= \text{the chemical removal rate of $j$ [$s^{-1}$].} \nonumber
+\end{align}
+
+The source term, $S_j$, can then be written using the cumulative fission yield as shown in Equation \eqref{eq:source-rewrite}.
+The cumulative fission yield is the total number of some nuclide formed per fission event, including decay chains that lead to that nuclide.
+Because the cumulative fission yield captures decays into the nuclide $j$, the $\lambda_{i \rightarrow j}$ term is not included.
+Additionally, parasitic absorption is neglected in this derivation, which leads to:
+\begin{equation}
+    S_j(t) = CFY_j \phi \Sigma_f,
+    \label{eq:source-rewrite}
+\end{equation}
+where
+\begin{align}
+    \phi &= \text{ the neutron flux $[\# \cdot cm^{-2} \cdot s^{-1}]$} \nonumber \\
+    \Sigma_f &= \text{ the macroscopic fission cross section $[cm^{-1}]$} \nonumber \\
+    CFY_i &= \text{the cumulative fission yield of nuclide $i$ [-]}. \nonumber
+\end{align}
+
+Finally, the fission reaction rate term, $\phi \Sigma_f$, is assumed to be equal to 1.
+Equation \eqref{eq:ode-cfy-1} can be used to calculate the concentration as a function of time using cumulative fission yields, given as:
+\begin{equation}
+    \frac{dN_j}{dt} = f_{in} CFY_i - \lambda_{j} N_j(t) - f_{ex} \lambda_{r, j}N_j(t)
+    \label{eq:ode-cfy-1}
+\end{equation}
+
+Assuming a stationary fuel with no recirculation or chemical removal, the equation simplifies greatly.
+The solution to that equation, assuming no initial concentration of nuclide $j$, is given as:
+\begin{equation}
+    N_j(t) = \frac{CFY_j}{\lambda_j} \left( 1 - e^{-\lambda_j t}\right)
+    \label{eq:cfy-solved-ode}
+\end{equation}
+
+As previously mentioned, the cumulative fission yield gives the total amount of the nuclide generated including from decay chains, so the time dependent result is non-physical.
+For a saturation irradiation however, the sample is irradiated for a sufficiently long time such that all \glspl{DNP} reach equilibrium.
+This means that the equation should be taken as time approaches infinity, which leads to the form \cite{huynh2014calculation}:
+\begin{equation}
+    N_j(\infty) = \frac{CFY_j}{\lambda_j}.
+\end{equation}
+
+For the case of a nuclide in a circulating fuel reactor with a non-zero chemical removal rate, the concentration as a function of time comes out as:
+\begin{equation}
+    N_j(t) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j} \left( 1 - e^{-f_{ex} \lambda_{r, j} t -\lambda_j t}\right)
+    \label{eq:cfy-solved-ode-repr}
+\end{equation}
+
+Equation \eqref{eq:cfy-solved-ode-repr} can also be taken as time goes to infinity, resulting in:
+\begin{equation}
+    N_j(\infty) = \frac{f_{in} CFY_j}{f_{ex}\lambda_{r, j} + \lambda_j}
+\end{equation}

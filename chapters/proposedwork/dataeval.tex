@@ -1,0 +1,155 @@
+The use and handling of various data directly impact the \gls{DNP} group parameters.
+These impacts arise from the data source, time resolution of fission yields, number of \glspl{DNP} included, and incident neutron energy used to irradiate the sample.
+The data source includes cross-section data, fission yields, emission probabilities, half-lives, and other associated data used to generate the \gls{DNP} group parameters.
+The time resolution of fission yields refers to the difference between using cumulative fission yields and time-resolved depletion chains to evaluate \gls{DNP} concentrations.
+The number of \glspl{DNP} is critical, as modeling more \glspl{DNP} increases computational cost for the spatially resolved model, so minimizing this term without affecting group generation is desirable.
+Finally, the incident neutron energy spectra will be investigated to determine the most effective way to organize the \gls{DNP} group parameters by energy.
+
+\subsection{Data Sources}
+Huynh et al. compare the effects of cumulative fission yields and emission probabilities from \gls{JEFF}, \gls{ENDF}, and \gls{JENDL} on the total delayed neutron yield \cite{huynh2014calculation}.
+A similar comparison can also be found in the \gls{JEFF} report 17 \cite{bank2000jef}.
+Mathieu et al. investigate additional datasets, including the \gls{NNDC} website (which sources data from \gls{ENSDF}) and various data compilations \cite{mathieu2012new, pfeiffer2002status, audi2003nubase, rudstam1993delayed}.
+These comparisons can be expanded to include the \gls{IAEA} database, \gls{NNDC} website, \gls{JEFF}, \gls{ENDF}, \gls{JENDL}, \gls{ENSDF}, and other data compilations for emission probabilities (delayed neutron branching ratios), half-lives, fission yields, and cross sections.
+Comparing these data sources clarifies the uncertainty caused by differences in the data.
+Table \ref{tab:datasources} shows the data sources used in the comparison.
+The "Concentration" column refers to data including fission yields and cross-sections that affect the \gls{DNP} concentration term.
+Although half-lives also influence concentration, data sources without a concentration contribution provide only half-life and emission probability data.
+Audi et al., Pfeiffer and Kratz, and Rudstam et al. present data from the literature rather than official databases.
+Audi et al. use \gls{ENSDF}, \gls{AME}, experimental data from the literature, and trends in neighboring nuclides.
+Pfeiffer and Kratz present experimental data, an update to the \gls{KHF}, and data from a unified macroscopic-microscopic model within the \gls{QRPA}.
+Rudstam et al. present experimental data.
+
+\begin{table}[H]
+    \centering
+    \caption{Various data sources as well as the data which they contain.}
+    \begin{tabular}{lccccc}
+    \hline
+    Data name & Year & Source & Half-life & Emission probability & Concentration\\
+    \hline
+      \gls{IAEA} database & 2018 & \cite{DIMITRIOU2021144} & Yes & Yes & No\\
+      \gls{JEFF} 3.3 & 2017 & \cite{plompen2020joint} & Yes & Yes & Yes\\
+      \gls{ENDF}/B-VIII.0 & 2018 & \cite{Brown20181} & Yes & Yes & Yes\\
+      \gls{JENDL}-5 & 2021 & \cite{iwamoto2023japanese} & Yes & Yes & Yes\\
+      \gls{ENSDF} & 2025 & \cite{ensdf} & Yes & Yes & No\\
+      Audi et al. & 2003 & \cite{audi2003nubase} & Yes & Yes & No\\
+      Pfeiffer and Kratz & 2002 & \cite{pfeiffer2002status} & Yes & Yes & No\\
+      Rudstam et al. & 1993& \cite{rudstam1993delayed} & Yes & Yes & No\\
+    \hline
+    \end{tabular}
+    \label{tab:datasources}
+\end{table}
+
+The expected outcome is that recently updated data and official databases will be more accurate than collections from the literature.
+Recent data should be more accurate due to improved equipment and measurement techniques.
+Official databases are expected to be more reliable, as they have many users reporting errors and have undergone extensive development over time.
+Investigating these data sources and comparing the \gls{DNP} group parameters generated from each will be useful when analyzing uncertainty.
+If the differences are large, understanding the uncertainty propagation will be important.
+If the differences are negligible, this will simplify further uncertainty analysis.
+
+\begin{comment}
+\subsection{Fission Yield Time Resolution}
+The time resolution for formation of \glspl{DNP} is irrelevant for stationary, saturation irradiation \gls{DNP} group parameter formulations, allowing the use of cumulative fission yields instead of full depletion simulations.
+However, the time resolution of \gls{DNP} formation needs to be considered for group parameter calculations including circulation.
+%However, for group parameter calculations incorporating circulation, the time resolution of \glspl{DNP} formation plays a role.
+This is an important consideration, as if using the cumulative fission yield generates the same group parameters as the full depletion simulation, then the computational cost would be greatly reduced.
+It is also useful because the spatially resolved method using the cumulative fission yield is significantly cheaper than full spatially resolved depletion.
+
+Before comparing the methods for a circulating system, the methods are first compared using a stationary system.
+The \gls{DNP} group parameters should align for both methods in a stationary system.
+This approach is common in the literature, so if the results do not align, this indicates an issue with the implementation.
+%If they do not, this indicates either a fault in the implementation or that the common approach in the literature may inaccurately treat the \glspl{DNP}.
+
+To evaluate the efficacy of using cumulative fission yields compared to depletion, a direct comparison will be made between the group parameters generated by each method.
+The same dataset, \gls{ENDF}/B-VIII.0, will be used for both to eliminate differences from data.
+The \gls{DNP} group parameters will be generated using each method for various residence times to capture time-dependent effects at higher resolution.
+
+If the \gls{DNP} group parameters are identical for all residence times, this will significantly reduce computational costs, and the simpler method will be implemented.
+If non-negligible differences exist, the more costly full depletion method will continue to be used.
+\end{comment}
+
+\subsection{Number of DNP}
+The number of \glspl{DNP} to track is of particular interest for the spatially resolved flow model.
+The 0D flow model's computational cost increases negligibly with more \glspl{DNP}, while the spatially resolved flow model requires significantly more memory and operations to track each \gls{DNP} over space and time.
+To improve computational efficiency, minimizing the number of \glspl{DNP} is desirable.
+If the 0D flow model generates \gls{DNP} group parameters with negligible differences compared to the spatially resolved flow model, minimizing the number of \glspl{DNP} becomes less critical.
+However, it is of interest to optimize the spatially resolved flow model for potential future analyses which could include spatially resolved reprocessing and other effects.
+%For potential future analyses which could include spatially resolved reprocessing and other effects, it is still of interest to optimize the spatially resolved flow model.
+
+The impact of each \gls{DNP} is given in Equation \eqref{eq:delnu-net-nuc}, replicated here:
+\begin{equation}
+    \bar{\nu}_{d, i} = P_{n, i} \lambda_i N_{i, 0}.
+    \nonumber
+\end{equation}
+Dividing $\bar{\nu}_{d, i}$ by the total delayed neutron yield, $\bar{\nu}_d$, provides the relative contribution of each \gls{DNP} to the total delayed neutron yield.
+The \glspl{DNP} with the most impact can be modeled preferentially to determine the minimum number of \glspl{DNP} to model with negligible changes to the \gls{DNP} group parameters.
+A full sensitivity study will be conducted to determine a reasonable number of \glspl{DNP} to include in the spatially resolved flow model.
+%Comparisons will be made between group parameters generated with varying numbers of the most important \glspl{DNP}.
+
+
+
+\subsection{Incident Neutron Energy Spectra}
+\label{sec:indidentspectra}
+The incident neutron energy spectrum directly affects the \gls{DNP} group parameters \cite{brady1989delayed}.
+However, it would be computationally expensive to generate new \gls{DNP} group parameters for every unique incident neutron energy spectrum.
+Some coarser resolution is required, so it is of interest to determine a reasonable categorization of the \gls{DNP} group parameters for different energy spectra.
+
+This sensitivity study will investigate different levels of fidelity for organizing the energy spectra: fine, middling, coarse, and single-value spectra.
+The approach uses the 0D flow model, with changes only to the neutron source energy spectra.
+The fine, middling, and coarse spectra include the full incident neutron energy spectra but with different bin sizes.
+The single-value spectra include several categories: neutron energy classification, mean energy, and median energy.
+The neutron energy classification is provided in Table \ref{tab:neutronenergyspectra}, recreated from \cite{l2003nuclear}.
+The study will also examine hand-crafted spectra where the mean and median remain unchanged, but the spectrum itself varies.
+
+\begin{table}[H]
+    \centering
+    \caption{Classification of neutron energy categories by energy range from \cite{l2003nuclear}.}
+    \begin{tabular}{cc}
+    \hline
+        Category & Energy Range $[MeV]$ \\
+    \hline
+      Cold   & $< 3 \times 10^9$ \\
+      Thermal & $3 \times 10^9 - 4 \times 10^7$ \\
+      Epithermal & $4 \times 10^7 - 1 \times 10^4$ \\
+      Intermediate & $1 \times 10^4 - 2 \times 10^{-1}$ \\
+      Fast & $2 \times 10^{-1} - 1 \times 10^1$ \\
+      Relativistic & $> 1 \times 10^1$ \\
+    \hline
+    \end{tabular}
+    \label{tab:neutronenergyspectra}
+\end{table}
+
+This sensitivity study will determine the necessary level of detail in the incident neutron energy spectrum for generating \gls{DNP} group parameters.
+Organizing by category or mean energy is expected to suffice for most cases.
+For cases where this approach is inadequate, a more robust method can be selectively applied.
+
+\subsection{Irradiation Combination}
+\label{sec:irrad-combine}
+A key aspect of the methodology is combining pulse and saturation irradiation \gls{DNP} group parameters.
+One approach, used by Brady and Keepin et al., is combining two different fits after they have been generated.
+Brady uses the group 5 and 6 parameters from the pulse irradiation with the remaining parameters from the saturation irradiation to form the six \gls{DNP} group parameters \cite{brady1988evaluation}.
+Keepin et al. fit four groups with each irradiation, and then renormalize at the second group \cite{keepin1957delayed}.
+
+Another approach is the Levenberg-Marquardt method, which combines pulse and saturation irradiation data \cite{levenberg1944method, marquardt1963algorithm, mills2014calculation}.
+This method of fitting \gls{DNP} group parameters to both datasets simultaneously may yield more accurate results.
+This can also be accomplished using the \gls{TRF} approach, which allows for bounds to be included for the parameters \cite{branch1999subspace}.
+
+The proposed methods to compare are the current method, the Levenberg-Marquardt method, and the \gls{TRF} method.
+The new methods minimize the residual of the form:
+\begin{align}
+    r &= min_x \left| \left| \frac{A_px - b_p}{b_p + \epsilon} +  \frac{A_sx - b_s}{b_s + \epsilon}  \right| \right|^2_2,
+\end{align}
+where,
+\begin{align}
+    r &= \text{the residual of the problem [-]} \nonumber \\
+    A_p &= \text{the pulse irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_p &= \text{the pulse irradiation delayed neutron count rate $[n \cdot s^{-1}]$} \nonumber \\
+    A_s &= \text{the saturation irradiation coefficient matrix $[s^{-1}]$} \nonumber \\
+    b_s &= \text{the saturation irradiation delayed neutron count rate $[n \cdot s^{-1}]$} \nonumber \\
+    x &= \text{the solution vector containing group yields [-]} \nonumber \\
+    \epsilon &= \text{a small value to avoid division by zero} \nonumber \\
+    &= 1\times10^{-12}. \nonumber
+\end{align}
+This formulation simultaneously treats the pulse and saturation irradiation data, generating improved \gls{DNP} group parameters which fit both sets of delayed neutron count rates.
+
+The results of this analysis will be used to evaluate which method can provide a solution with the least computational cost while also generating accurate group parameters.
+The group parameters will be evaluated by calculating the \textit{l}$^2$-norm of the residual for the least squares problem using the improved \gls{DNP} group parameters over all times for both pulse and saturation irradiations.

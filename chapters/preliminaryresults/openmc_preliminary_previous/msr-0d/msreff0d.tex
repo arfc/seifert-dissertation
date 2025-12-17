@@ -1,0 +1,114 @@
+These sensitivity studies are used to analyze the effects of the parameters that represent \gls{MSR} physical phenomena. 
+Polynomial fits of group parameters.
+Using \gls{MSRE} temperature and salt density \cite{robertson1965msre}.
+No reprocessing unless specified.
+
+The in-core residence time is defined as a minimum, as based on the net residence times, the cycle may not complete.
+For example, Figure \ref{fig:br-irrad} shows the irradiation of a sample for various combinations of in-core and ex-core residence times.
+The net irradiation time is 420 seconds, for which 10, 20, and 30 are all multiples.
+However, 40 is not, which leads to a situation where the concentrations from the 20 second in-core and ex-core irradiation are from the incorrect cycle.
+To account for this, the irradiation time is instead treated as a minimum irradiation time, and the actual irradiation time will be increased to allot for the full cycle to complete.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{images/concs_Br87-timecompare.png}
+    \caption{A comparison of various in-core and ex-core residence times on the concentration of $^{87}Br$ during irradiation of the sample over 420 seconds.}
+    \label{fig:br-irrad}
+\end{figure}
+
+
+%Additionally, the assumed sample starting position is changed from the core inlet to the center of the core.
+%Starting from the core inlet means the sample is irradiated for the full in-core residence time, then decays for the full ex-core residence time.
+%Starting from the center of the core means the sample is irradiated for half the in-core residence time, then decays for the full ex-core residence time, then is again irradiated for half the in-core residence time.
+%This approach should reduce discrepancies in the results due to measuring the sample after a full ex-core residence time while maintaining the effects of the circulation of the fuel salt on the irradiated sample.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lll}
+        \hline
+       Parameter  & Value & Units \\
+       \hline
+        OpenMC Batches & 10 & - \\
+        OpenMC Particles & 50000 & - \\
+        OpenMC Depletion Chain & ENDF/B-VIII.0 & - \\
+        OpenMC Cross Sections & ENDF/B-VIII.0 & - \\
+        OpenMC Source Particles & $4.2\times 10^{16}$ & -\\
+        Temperature & 920 & $K$\\
+        Neutron Energy & $0.0253$ & $eV$\\
+        Sample Nuclide & $^{235}U$ & -\\
+        Sample Density & 2.3275 & $\frac{g}{cm^3}$\\
+        In-core Residence Time & - & $s$\\
+        Ex-core Residence Time & - & $s$\\
+        Minimum Irradiation Time & 600 & $s$\\
+        Decay Time & 600 & $s$\\
+        Decay Time Step & 1 & $s$\\
+        \hline
+    \end{tabular}
+    \caption{Default parameters used for study on \gls{MSR} phenomena in 0D flow \gls{DNP} group parameter formulation OpenMC simulations.}
+    \label{tab:params-msr}
+\end{table}
+
+\subsubsection{Removal Rates}
+\label{sec:repr-scale}
+
+\subsubsection{In and Ex-core Residence Times}
+\label{sec:res-time-var}
+Before studying the effects of varying the in-core and ex-core residence times, it is useful to first study a test case with a predictable result.
+Specifically, a static problem is studied, where only the in-core residence time varies while the ex-core residence time is 0 seconds.
+The predicted result is that adjusting the in-core residence time only affects the frequency of transport simulations in OpenMC, which should have a minimal impact on the \gls{DNP} group parameters.
+This is shown in Figure \ref{fig:static-restime}, where the results generally agree, with total delayed neutron yields within 2 $pcm$.
+However, the 25 second in-core residence time has group yields which are noticeably smaller, resulting in a total delayed neutron yield approximately 10 $pcm$ smaller than the other fits.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/yields-csvs-static.png}
+    \caption{Group yields for a static irradiation in OpenMC with varying in-core residence times.}
+    \label{fig:static-restime}
+\end{figure}
+
+\todo{explain why the 25 second fits are smaller.}
+
+
+\gls{MSRE} is approximately 10 seconds in-core and 15 seconds ex-core \cite{robertson1965msre}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/surf-times.png}
+    \caption{Total delayed neutron yield for various residence times during irradiation in OpenMC.}
+    \label{fig:totyields-restimestudy}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/yields-csvs-restimestudy.png}
+    \caption{Group yields for various residence times during irradiation in OpenMC.}
+    \label{fig:yields-restimestudy}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{llcc}
+    \hline
+$\tau_{in}$ $[s]$ & $\tau_{ex}$ $[s]$  & $\bar{\nu}_d$ & $\bar{T}$ $[s]$ \\
+\hline
+5$s$ & 5$s$ & 0.015940 & 8.101997\\
+5$s$ & 10$s$ & 0.015165 & 8.030291 \\
+5$s$ & 15$s$ & 0.014179 & 8.293764 \\
+5$s$ & 20$s$ & 0.013929 & 7.770002 \\
+10$s$ & 5$s$ & 0.015851 & 8.113214 \\
+10$s$ & 10$s$ & 0.014790 & 8.234031 \\
+10$s$ & 15$s$ & 0.014109 & 8.304067 \\
+10$s$ & 20$s$ & 0.013845 & 7.819340 \\
+15$s$ & 5$s$ & 0.016220 & 7.869896 \\
+15$s$ & 10$s$ & 0.014718 & 8.240623 \\
+15$s$ & 15$s$ & 0.014051 & 8.310107 \\
+15$s$ & 20$s$ & 0.013693 & 8.191821 \\
+20$s$ & 5$s$ & 0.019775 & 7.537696 \\
+20$s$ & 10$s$ & 0.014672 & 8.244369 \\
+20$s$ & 15$s$ & 0.013996 & 8.313858 \\
+20$s$ & 20$s$ & 0.022849 & 7.536158 \\
+\hline
+    \end{tabular}
+    \caption{Effect of residence times on the total delayed neutron yield and average half-life.}
+    \label{tab:omc-restimestudy}
+\end{table}

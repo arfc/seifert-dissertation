@@ -1,11 +1,13 @@
-OpenMC is an open-source Monte Carlo neutron and photon transport code.
-For the purposes of this work, OpenMC offers many benefits.
-The Python \gls{API} provides useful functionality which makes interfacing with the in-house Python scripts straightforward.
-Irradiation of the sample is also simple and can be easily configured, adjusting various parameters by altering the Python script inputs.
-OpenMC also offers useful functionality in depletion, where a zero-power depletion step is rapidly calculated since only depletion is tracked.
-The transfer-rates functionality in OpenMC can also be used during depletion, which enables simulation of chemical removal that would occur in an \gls{MSR}.
+OpenMC is an open-source Monte Carlo neutral particle transport code.
+The preliminary work on the 0D scaled model uses OpenMC only for accessing nuclear data, but the 0D flow model will rely more heavily on OpenMC to simulate a fixed-source simulation.
+OpenMC offers many useful features that are particularly helpful for the use cases presented in this work.
 
-For this work, the scripts use the ENDF/B-VIII.0 based depletion chains provided by OpenMC.
-The thermal spectrum chain is used for neutron irradiation less than $300 \; eV$, while the fast spectrum is used for higher energy neutron irradiations.
-For the simplified model, monoenergetic neutrons are used.
-This is because the purpose of the irradiation is to generate group parameters for a given neutron irradiation energy rather than for a particular spectrum.
+Its Python \gls{API} offers functionality that simplifies interfacing with \gls{MoSDeN}.
+OpenMC also offers configurable options in depletion, such as a zero-power depletion step which rapidly calculates nuclide concentrations since only decay is tracked.
+This feature allows resolving ex-core residence time depletion steps quickly.
+Additionally, transport-independent depletion can be used to further speed up the irradiation simulation.
+OpenMC’s transfer rate functionality during depletion enables simulation of chemical removal in an \gls{MSR}.
+
+For this work, \gls{MoSDeN} by default uses the \gls{ENDF}/B-VII.1 based depletion chains provided by OpenMC and \gls{ENDF}/B-VII.1 cross section data.
+The thermal spectrum chain applies to neutron irradiation below $1 \; eV$, the fast spectrum chain applies to neutron irradiation above thermal and below $5 \; MeV$, and anything above that is not treated in this work \cite{Spriggs2000Summary}.
+The models by default assume monoenergetic neutrons at thermal energy, $0.0253 \; eV$, irradiate the sample.

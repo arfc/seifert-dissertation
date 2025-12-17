@@ -1,0 +1,184 @@
+%        File: arfc-beamer.tex
+%     Created: Sun May 5 10:00 PM 2013 C
+%
+
+
+%\documentclass[11pt,handout]{beamer}
+\documentclass[9pt]{beamer}
+\usetheme[white]{Illinois}
+%\title[short title]{long title}
+\title[Short Title]{Improved Delayed Neutron Group Parameters for Molten Salt Reactors}
+%\subtitle[short subtitle]{long subtitle}
+%\subtitle[Short SubTitle]{Improved MSR DNP Groups}
+%\author[short name]{long name}
+\author[Your Name]{Luke Seifert\\Advanced Reactors and Fuel Cycles Group}
+%\date[short date]{long date}
+\date[12.15.2025]{December 15, 2025}
+%\institution[short name]{long name}
+\institute[UIUC]{University of Illinois at Urbana-Champaign}
+
+%\usepackage{bbding}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % nice rules for tables
+\usepackage{microtype} % if using PDF
+\usepackage{bigints}
+\usepackage{progressbar}
+\usepackage{mathtools}
+\usepackage{appendixnumberbeamer}
+%\usepackage{minted}
+
+\newcommand{\units}[1] {\:\text{#1}}%
+\newcommand{\SN}{S$_N$}%{S$_\text{N}$}%{$S_N$}%
+\DeclareMathOperator{\erf}{erf}
+%I need some complimentary error functions...
+\DeclareMathOperator{\erfc}{erfc}
+%Those icons in the references are terrible looking
+\setbeamertemplate{bibliography item}[text]
+
+%%%% Acronym support
+
+\usepackage[acronym,toc]{glossaries}
+\include{acros}
+
+%\makeglossaries
+
+%try to get rid of header on title page\dots
+\makeatletter
+    \newenvironment{withoutheadline}{
+        \setbeamertemplate{headline}[default]
+        \def\beamer@entrycode{\vspace*{-\headheight}}
+    }{}
+\makeatother
+
+\makeatother
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+    \rightline{\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}}
+  }%
+  \vskip0pt%
+}
+\makeatletter
+% This will add figure numbers to captions.
+\setbeamertemplate{caption}[numbered]
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% From uw-beamer Here's a handy bit of code to place at
+%% the beginning of your presentation (after \begin{document}):
+\newcommand*{\alphabet}{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz}
+\newlength{\highlightheight}
+\newlength{\highlightdepth}
+\newlength{\highlightmargin}
+\setlength{\highlightmargin}{2pt}
+\settoheight{\highlightheight}{\alphabet}
+\settodepth{\highlightdepth}{\alphabet}
+\addtolength{\highlightheight}{\highlightmargin}
+\addtolength{\highlightdepth}{\highlightmargin}
+\addtolength{\highlightheight}{\highlightdepth}
+\newcommand*{\Highlight}{\rlap{\textcolor{HighlightBackground}{\rule[-\highlightdepth]{\linewidth}{\highlightheight}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%--------------------------------%%
+\begin{withoutheadline}
+\frame{
+  \titlepage
+}
+\end{withoutheadline}
+
+%%--------------------------------%%
+\AtBeginSection[]{
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+}
+
+\input{slides/acks}
+\section{Introduction}
+\subsection{Defining Terms}
+\input{slides/introduction/whatarednps2}
+\input{slides/introduction/whatarednps}
+\input{slides/introduction/whataredngroups}
+\input{slides/introduction/moltres}
+%\input{slides/introduction/sss}
+\subsection{Motivation}
+\input{slides/introduction/msreffects}
+\subsection{Objectives}
+\input{slides/introduction/objectives}
+\section{Background}
+\subsection{DNP Groups}
+\input{slides/background/dnpgroupcalc}
+\input{slides/background/macroscopic}
+\input{slides/background/microscopic}
+\input{slides/background/fitting}
+\subsection{MSR Phenomena}
+\input{slides/background/recirculation}
+%\input{slides/background/scaledflux}
+\input{slides/background/reprocessing}
+%\subsection{Safety, Security, and Safeguards}
+\section{Methodology}
+\subsection{MoSDeN Overview}
+\input{slides/methodology/mosden}
+\input{slides/methodology/leastsquares}
+\input{slides/methodology/residual}
+\input{slides/methodology/uncertainty}
+\input{slides/methodology/mosdengroup}
+\subsection{0D Scaled Model}
+\input{slides/methodology/0dscaledoverview}
+\input{slides/methodology/0dscaledlimitations}
+\section{Preliminary Results}
+\input{slides/results/params}
+\subsection{Analysis of Yields and Counts}
+\input{slides/results/yields}
+\input{slides/results/counts}
+\subsection{Sensitivity Studies}
+\input{slides/results/barchartcollapse}
+\input{slides/results/pccs}
+\input{slides/results/senschart}
+\input{slides/results/senschart-U}
+\subsection{Verification}
+\input{slides/results/verify}
+\input{slides/results/verify-mod}
+\section{Proposed Work}
+\input{slides/introduction/objectives}
+\input{slides/proposedwork/overview}
+\subsection{0D Flow Model}
+\input{slides/proposedwork/0dflow}
+\subsection{Validation}
+\input{slides/proposedwork/validation}
+\input{slides/proposedwork/msre}
+\subsection{Transient Analyses}
+\input{slides/proposedwork/safety2}
+\input{slides/proposedwork/security2}
+\input{slides/proposedwork/safeguards}
+\subsection{Summary}
+\input{slides/proposedwork/summary}
+
+
+%%--------------------------------%%
+%%--------------------------------%%
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \bibliographystyle{plain}
+  {\footnotesize \bibliography{../bibliography.bib} }
+\end{frame}
+
+%%--------------------------------%%
+\appendix
+\input{slides/methodology/mosdengroup-longeq}
+\input{slides/results/longcycletime}
+\input{slides/results/removalratebool}
+\input{slides/results/timespacing}
+\input{slides/results/numbernodes}
+\input{slides/results/decaytime}
+\input{slides/results/timedensity}
+\input{slides/proposedwork/safety}
+\input{slides/proposedwork/security}
+
+
+\end{document}

@@ -1,0 +1,29 @@
+\begin{frame}
+  \frametitle{Safety-related transients may disrupt safe reactor operation}
+    \begin{block}{Safety-related transients that will be modeled are:}
+        \begin{itemize}
+            \item \Gls{ULOHS}
+            \item \Gls{ULOF}
+            \item \Gls{UTOP}
+            \item \Gls{FSOC}
+        \end{itemize}
+    \end{block}
+\begin{table}[!ht]
+    \caption{Implementation of transients using temperature, reactivity, and velocity changes}
+    \centering
+    \begin{tabular}{lccc}
+    \hline
+	    Transient & $T$ & $\rho$ & $v$\\
+       \hline
+	    \gls{ULOHS} & $T_{in} = T_{out}$ & - & -\\
+	    \gls{ULOF} & - & - & $v \approx e^{-t}$\\
+	    \gls{UTOP} & - & $\rho_{max} = 0.1\$ $ & -\\
+	    \gls{FSOC} & $T_{in} = 0.9 T_{in,0}$ & - & -\\
+        \hline
+    \end{tabular}
+    \label{tab:total-delnu-compare}
+\end{table}
+\textbf{The safety transients will have different temperature and power responses between the improved and conventional \gls{DNP} group parameters.}
+\end{frame}
+
+

@@ -1,0 +1,20 @@
+\begin{frame}
+  \frametitle{\Gls{MoSDeN} uses a newly-derived form of the group fit for \glspl{MSR}}
+  Assuming the sample experiences a square-wave power history during in-core and ex-core times, an \gls{MSR} specific group fit equation can be derived.
+
+
+
+\begin{align}
+\frac{F(\tau)}{F_0} =& \sum_{j=0}^{J} H(\tau - j\cdot \tau_{net}) - H(\tau - j \cdot\tau_{net} -\tau_{in})
+\intertext{where}
+F(\tau) =& \mbox{ the fission rate history [$\frac{\#}{s}$].} \nonumber \\
+H =& \text{ the Heaviside function [-]} \nonumber \\
+\tau_{net} =& \;\tau_{in} + \tau_{ex} \nonumber \\
+=& \text{ the total time per circulation [$s$]} \nonumber \\
+J =& \left\lfloor \frac{T}{\tau_{net}} \right\rfloor \nonumber \\
+  =& \text{ the number of recirculations [$\#$]} \nonumber \\
+F_0 =& \text{ the magnitude of the constant fission rate [$\frac{\#}{s}$].} \nonumber
+\end{align}
+
+\end{frame}
+
